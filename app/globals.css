@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Font CSS variables — fonts loaded via Google Fonts in layout.tsx <head> */
+:root {
+  --font-playfair: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+:root {
+  --color-emerald: #1B4D3E;
+  --color-gold: #C9A84C;
+  --color-ivory: #FAF7F2;
+  --color-charcoal: #2C2C2C;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory text-charcoal font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-emerald text-ivory px-6 py-3 font-inter font-medium tracking-wide
+           hover:bg-emerald-light transition-all duration-300 uppercase text-sm inline-block
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+  }
+
+  .btn-gold {
+    @apply px-6 py-3 font-inter font-semibold tracking-wide
+           hover:opacity-90 transition-all duration-300 uppercase text-sm inline-block
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+    background: linear-gradient(135deg, #C9A84C 0%, #D9BC74 50%, #A8882E 100%);
+    color: #2C2C2C;
+  }
+
+  .btn-outline {
+    @apply border-2 border-emerald text-emerald px-6 py-3 font-inter font-medium tracking-wide
+           hover:bg-emerald hover:text-ivory transition-all duration-300 uppercase text-sm inline-block
+           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+  }
+
+  .section-title {
+    @apply font-playfair text-3xl md:text-4xl font-bold text-charcoal;
+  }
+
+  .product-card {
+    @apply bg-white overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500;
+  }
+
+  .nav-link {
+    @apply font-inter text-charcoal hover:text-emerald transition-colors duration-200
+           text-sm tracking-wide uppercase;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ornamental-border {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #C9A84C 0px,
+    #C9A84C 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  height: 2px;
+}

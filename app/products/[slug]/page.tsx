@@ -1,0 +1,168 @@
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import Breadcrumb from "@/components/ui/Breadcrumb";
+import ImageGallery from "@/components/product/ImageGallery";
+import AddToCart from "@/components/product/AddToCart";
+import ProductTabs from "@/components/product/ProductTabs";
+import ProductCard from "@/components/ui/ProductCard";
+import { getProductBySlug, getRelatedProducts, products } from "@/data/products";
+import { formatPrice, calculateDiscount } from "@/lib/utils";
+import { Truck, Shield, RotateCcw, Star } from "lucide-react";
+
+interface ProductPageProps {
+  params: { slug: string };
+}
+
+export async function generateStaticParams() {
+  return products.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const product = getProductBySlug(params.slug);
+  if (!product) return { title: "Product Not Found" };
+
+  return {
+    title: product.name,
+    description: product.description,
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      images: [{ url: product.images[0] }],
+    },
+  };
+}
+
+export default function ProductPage({ params }: ProductPageProps) {
+  const product = getProductBySlug(params.slug);
+  if (!product) notFound();
+
+  const related = getRelatedProducts(product);
+  const discount = product.originalPrice
+    ? calculateDiscount(product.originalPrice, product.price)
+    : 0;
+
+  return (
+    <div className="pt-28 md:pt-32 bg-ivory min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Breadcrumb */}
+        <div className="mb-8">
+          <Breadcrumb
+            items={[
+              { label: "Collections", href: "/collections/women" },
+              { label: product.category, href: `/collections/${product.categorySlug}` },
+              { label: product.name },
+            ]}
+          />
+        </div>
+
+        {/* Product layout */}
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 mb-20">
+          {/* Image gallery */}
+          <ImageGallery images={product.images} productName={product.name} />
+
+          {/* Product details */}
+          <div className="sticky top-28 h-fit">
+            {/* Badges */}
+            <div className="flex gap-2 mb-3">
+              {product.isNew && (
+                <span className="bg-emerald text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+                  New
+                </span>
+              )}
+              {product.isBestSeller && (
+                <span className="bg-gold text-charcoal text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+                  Best Seller
+                </span>
+              )}
+              {discount > 0 && (
+                <span className="bg-red-600 text-white text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+                  Save {discount}%
+                </span>
+              )}
+            </div>
+
+            {/* Fabric tag */}
+            <p className="font-inter text-xs text-charcoal/50 uppercase tracking-wider mb-2">
+              {product.fabric} • SKU: {product.sku}
+            </p>
+
+            {/* Title */}
+            <h1 className="font-playfair text-2xl md:text-3xl font-bold text-charcoal mb-3">
+              {product.name}
+            </h1>
+
+            {/* Rating placeholder */}
+            <div className="flex items-center gap-2 mb-4">
+              <div className="flex">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <Star key={s} size={14} className="text-gold fill-gold" />
+                ))}
+              </div>
+              <span className="font-inter text-xs text-charcoal/50">(47 reviews)</span>
+            </div>
+
+            {/* Price */}
+            <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-ivory-dark">
+              <span className="font-playfair text-3xl font-bold text-emerald">
+                {formatPrice(product.price)}
+              </span>
+              {product.originalPrice && (
+                <span className="font-inter text-lg text-charcoal/40 line-through">
+                  {formatPrice(product.originalPrice)}
+                </span>
+              )}
+              {discount > 0 && (
+                <span className="font-inter text-sm font-semibold text-red-600">
+                  {discount}% OFF
+                </span>
+              )}
+            </div>
+
+            {/* Add to cart component (client) */}
+            <AddToCart product={product} />
+
+            {/* Trust badges */}
+            <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-ivory-dark">
+              {[
+                { icon: Truck, text: "Free USA Shipping" },
+                { icon: Shield, text: "Secure Payment" },
+                { icon: RotateCcw, text: "30-Day Returns" },
+              ].map((badge) => (
+                <div key={badge.text} className="flex flex-col items-center gap-1.5 text-center">
+                  <badge.icon size={18} className="text-emerald" />
+                  <span className="font-inter text-[10px] text-charcoal/50 uppercase tracking-wide">
+                    {badge.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Product tabs */}
+        <ProductTabs product={product} />
+
+        {/* Related products */}
+
+        {related.length > 0 && (
+          <div className="mt-20">
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-4 mb-3">
+                <span className="w-12 h-px bg-gold" />
+                <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">You May Also Love</span>
+                <span className="w-12 h-px bg-gold" />
+              </div>
+              <h2 className="section-title">Related Products</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
