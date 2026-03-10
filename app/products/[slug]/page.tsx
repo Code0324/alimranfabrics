@@ -65,7 +65,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             {/* Badges */}
             <div className="flex gap-2 mb-3">
               {product.isNew && (
-                <span className="bg-emerald text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+                <span className="bg-navy text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
                   New
                 </span>
               )}
@@ -103,7 +103,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* Price */}
             <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-ivory-dark">
-              <span className="font-playfair text-3xl font-bold text-emerald">
+              <span className="font-playfair text-3xl font-bold text-navy">
                 {formatPrice(product.price)}
               </span>
               {product.originalPrice && (
@@ -129,7 +129,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 { icon: RotateCcw, text: "30-Day Returns" },
               ].map((badge) => (
                 <div key={badge.text} className="flex flex-col items-center gap-1.5 text-center">
-                  <badge.icon size={18} className="text-emerald" />
+                  <badge.icon size={18} style={{ color: "#C9A84C" }} />
                   <span className="font-inter text-[10px] text-charcoal/50 uppercase tracking-wide">
                     {badge.text}
                   </span>

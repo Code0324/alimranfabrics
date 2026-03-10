@@ -86,7 +86,7 @@ export default function CartItem({ item }: CartItemProps) {
               <Plus size={12} />
             </button>
           </div>
-          <span className="font-inter font-semibold text-emerald text-sm">
+          <span className="font-inter font-semibold text-navy text-sm">
             {formatPrice(item.product.price * item.quantity)}
           </span>
         </div>

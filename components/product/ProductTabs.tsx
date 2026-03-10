@@ -19,7 +19,7 @@ export default function ProductTabs({ product }: { product: Product }) {
             onClick={() => setActiveTab(tab)}
             className={`font-inter text-sm font-medium pb-4 uppercase tracking-wide whitespace-nowrap border-b-2 transition-colors ${
               activeTab === tab
-                ? "border-emerald text-emerald"
+                ? "border-gold text-gold"
                 : "border-transparent text-charcoal/50 hover:text-charcoal"
             }`}
           >
@@ -97,9 +97,9 @@ export default function ProductTabs({ product }: { product: Product }) {
             ].map((item) => (
               <div
                 key={item.title}
-                className={`flex gap-4 ${item.highlight ? "bg-emerald/5 border border-emerald/20 p-4" : ""}`}
+                className={`flex gap-4 ${item.highlight ? "bg-navy/5 border border-navy/20 p-4" : ""}`}
               >
-                <div className={`w-1.5 flex-shrink-0 mt-1 ${item.highlight ? "bg-emerald" : "bg-gold/40"}`} />
+                <div className={`w-1.5 flex-shrink-0 mt-1 ${item.highlight ? "bg-navy" : "bg-gold/40"}`} />
                 <div>
                   <h4 className="font-playfair font-semibold text-charcoal mb-1">{item.title}</h4>
                   <p className="font-inter text-sm text-charcoal/60">{item.desc}</p>
@@ -108,7 +108,7 @@ export default function ProductTabs({ product }: { product: Product }) {
             ))}
             <Link
               href="/contact"
-              className="inline-block text-emerald font-inter text-sm hover:underline underline-offset-2"
+              className="inline-block text-gold font-inter text-sm hover:underline underline-offset-2"
             >
               Questions? Contact our support team →
             </Link>

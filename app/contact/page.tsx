@@ -11,7 +11,7 @@ export default function ContactPage() {
   return (
     <div className="pt-28 md:pt-32">
       {/* Header */}
-      <section className="py-14 px-4 bg-emerald text-center">
+      <section className="py-14 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
         <div className="flex items-center justify-center gap-4 mb-3">
           <span className="w-12 h-px bg-gold/60" />
           <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Get in Touch</span>
@@ -42,8 +42,8 @@ export default function ContactPage() {
                   { icon: Clock, label: "Hours", value: "Mon–Sat: 9 AM – 8 PM PKT", href: null },
                 ].map((item) => (
                   <div key={item.label} className="flex gap-4">
-                    <div className="w-10 h-10 bg-emerald/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon size={18} className="text-emerald" />
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-navy/10">
+                      <item.icon size={18} style={{ color: "#C9A84C" }} />
                     </div>
                     <div>
                       <p className="font-inter text-xs text-charcoal/50 uppercase tracking-wide mb-0.5">
@@ -52,7 +52,7 @@ export default function ContactPage() {
                       {item.href ? (
                         <a
                           href={item.href}
-                          className="font-inter text-sm text-charcoal hover:text-emerald transition-colors"
+                          className="font-inter text-sm text-charcoal hover:text-gold transition-colors"
                         >
                           {item.value}
                         </a>
@@ -104,7 +104,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="w-10 h-10 bg-charcoal text-ivory hover:bg-emerald flex items-center justify-center transition-colors"
+                    className="w-10 h-10 bg-charcoal text-ivory hover:bg-navy flex items-center justify-center transition-colors"
                   >
                     <s.icon size={16} />
                   </a>

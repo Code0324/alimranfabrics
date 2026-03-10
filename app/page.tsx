@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import HeroCarousel from "@/components/home/HeroCarousel";
-import RamadanSaleCard from "@/components/home/RamadanSaleCard";
 import NewArrivals from "@/components/home/NewArrivals";
 import LovedCollections from "@/components/home/LovedCollections";
 import NewsletterBanner from "@/components/home/NewsletterBanner";
@@ -44,9 +43,6 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <HeroCarousel />
-
-      {/* Ramadan Festive Sale */}
-      <RamadanSaleCard />
 
       {/* Trust strip */}
       <div className="bg-white border-y border-ivory-dark py-6 px-4">

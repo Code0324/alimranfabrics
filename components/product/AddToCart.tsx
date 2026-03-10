@@ -31,7 +31,7 @@ export default function AddToCart({ product }: AddToCartProps) {
       {/* Color selector */}
       <div>
         <span className="font-inter text-sm font-medium text-charcoal uppercase tracking-wide block mb-3">
-          Color: <span className="text-emerald font-semibold">{selectedColor.name}</span>
+          Color: <span className="text-navy font-semibold">{selectedColor.name}</span>
         </span>
         <div className="flex gap-2.5">
           {product.colors.map((color) => (
@@ -41,7 +41,7 @@ export default function AddToCart({ product }: AddToCartProps) {
               onClick={() => setSelectedColor(color)}
               className={`w-8 h-8 rounded-full transition-all duration-200 ${
                 selectedColor.name === color.name
-                  ? "ring-2 ring-offset-2 ring-emerald scale-110"
+                  ? "ring-2 ring-offset-2 ring-navy scale-110"
                   : "hover:scale-105 ring-1 ring-charcoal/20"
               }`}
               style={{ backgroundColor: color.hex }}
@@ -64,7 +64,7 @@ export default function AddToCart({ product }: AddToCartProps) {
           className={`w-full flex items-center justify-center gap-2.5 py-4 font-inter font-semibold text-sm uppercase tracking-wide transition-all duration-300
             ${addedFeedback
               ? "bg-gold text-charcoal"
-              : "bg-emerald text-ivory hover:bg-emerald-light"
+              : "bg-navy text-ivory hover:bg-navy"
             }`}
         >
           <ShoppingBag size={18} />

@@ -56,7 +56,7 @@ export default function CartDrawer() {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-ivory-dark">
           <div className="flex items-center gap-3">
-            <ShoppingBag size={20} className="text-emerald" />
+            <ShoppingBag size={20} style={{ color: "#C9A84C" }} />
             <h2 className="font-playfair text-lg font-semibold text-charcoal">
               Your Cart
               {count > 0 && (
@@ -76,9 +76,9 @@ export default function CartDrawer() {
         </div>
 
         {/* Free shipping banner */}
-        <div className="bg-emerald/10 border-b border-emerald/20 px-6 py-2.5 flex items-center gap-2">
-          <Truck size={14} className="text-emerald flex-shrink-0" />
-          <p className="font-inter text-xs text-emerald font-medium">
+        <div className="bg-navy/10 border-b border-navy/20 px-6 py-2.5 flex items-center gap-2">
+          <Truck size={14} className="text-gold flex-shrink-0" />
+          <p className="font-inter text-xs text-navy font-medium">
             Free shipping on all USA orders
           </p>
         </div>
@@ -128,11 +128,11 @@ export default function CartDrawer() {
               </div>
               <div className="flex justify-between font-inter text-sm">
                 <span className="text-charcoal/60">Shipping</span>
-                <span className="font-medium text-emerald">Free</span>
+                <span className="font-medium text-navy">Free</span>
               </div>
               <div className="flex justify-between font-inter font-bold text-base pt-2 border-t border-ivory-dark">
                 <span>Total</span>
-                <span className="text-emerald">{formatPrice(total)}</span>
+                <span style={{ color: "#C9A84C" }}>{formatPrice(total)}</span>
               </div>
             </div>
 

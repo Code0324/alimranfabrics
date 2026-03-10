@@ -150,8 +150,8 @@ export default function AboutPage() {
                 key={value.title}
                 className="group p-6 border border-ivory-dark hover:border-gold/40 transition-all duration-300 hover:shadow-gold"
               >
-                <div className="w-12 h-12 bg-emerald/10 flex items-center justify-center mb-5 group-hover:bg-emerald/20 transition-colors">
-                  <value.icon size={22} className="text-emerald" />
+                <div className="w-12 h-12 flex items-center justify-center mb-5 transition-colors bg-navy/10 group-hover:bg-navy/20">
+                  <value.icon size={22} style={{ color: "#C9A84C" }} />
                 </div>
                 <h3 className="font-playfair font-semibold text-lg text-charcoal mb-2">
                   {value.title}
@@ -234,7 +234,7 @@ export default function AboutPage() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-emerald/0 group-hover:bg-emerald/20 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors duration-300" />
               </div>
             ))}
           </div>
@@ -242,7 +242,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-emerald py-16 px-4 text-center">
+      <section className="py-16 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
         <h2 className="font-playfair text-3xl font-bold text-ivory mb-4">
           Ready to Explore?
         </h2>

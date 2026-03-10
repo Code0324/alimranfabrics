@@ -32,7 +32,7 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
             onClick={() => setActiveIndex(i)}
             className={`relative flex-shrink-0 w-16 h-20 md:w-20 md:h-24 overflow-hidden border-2 transition-all duration-200 ${
               i === activeIndex
-                ? "border-emerald"
+                ? "border-navy"
                 : "border-transparent hover:border-gold/60"
             }`}
           >

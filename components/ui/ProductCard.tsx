@@ -58,7 +58,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {product.isNew && (
-            <span className="bg-emerald text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+            <span className="bg-navy text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
               New
             </span>
           )}
@@ -104,7 +104,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           </Link>
           <button
             onClick={handleQuickAdd}
-            className="flex-1 bg-emerald hover:bg-emerald-light text-ivory py-3 text-xs font-inter font-medium
+            className="flex-1 bg-navy hover:bg-navy-deep text-ivory py-3 text-xs font-inter font-medium
                        uppercase tracking-wide flex items-center justify-center gap-1.5 transition-colors"
           >
             <ShoppingBag size={13} />
@@ -133,12 +133,12 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           {product.fabric}
         </p>
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-playfair text-base font-semibold text-charcoal hover:text-emerald transition-colors leading-snug mb-2 line-clamp-2">
+          <h3 className="font-playfair text-base font-semibold text-charcoal hover:text-gold transition-colors leading-snug mb-2 line-clamp-2">
             {product.name}
           </h3>
         </Link>
         <div className="flex items-center gap-2">
-          <span className="font-inter font-semibold text-emerald text-base">
+          <span className="font-inter font-semibold text-navy text-base">
             {formatPrice(product.price)}
           </span>
           {product.originalPrice && (

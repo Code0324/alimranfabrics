@@ -24,8 +24,8 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="text-center py-12">
-        <div className="w-16 h-16 bg-emerald/10 flex items-center justify-center mx-auto mb-4">
-          <Send size={24} className="text-emerald" />
+        <div className="w-16 h-16 bg-navy/10 flex items-center justify-center mx-auto mb-4">
+          <Send size={24} style={{ color: "#C9A84C" }} />
         </div>
         <h3 className="font-playfair text-xl font-semibold text-charcoal mb-2">
           Message Sent!
@@ -60,7 +60,7 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             placeholder="Fatima Malik"
-            className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-emerald transition-colors bg-ivory"
+            className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory"
           />
         </div>
         <div>
@@ -74,7 +74,7 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             placeholder="fatima@example.com"
-            className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-emerald transition-colors bg-ivory"
+            className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory"
           />
         </div>
       </div>
@@ -90,7 +90,7 @@ export default function ContactForm() {
           value={formData.orderNumber}
           onChange={handleChange}
           placeholder="AIF-2025-XXXXX"
-          className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-emerald transition-colors bg-ivory"
+          className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory"
         />
       </div>
 
@@ -105,7 +105,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us how we can help you..."
-          className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-emerald transition-colors bg-ivory resize-none"
+          className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory resize-none"
         />
       </div>
 

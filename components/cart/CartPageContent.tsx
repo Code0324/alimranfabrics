@@ -23,7 +23,7 @@ export default function CartPageContent() {
       <div className="flex items-center gap-4 mb-8">
         <Link
           href="/"
-          className="text-charcoal/50 hover:text-emerald transition-colors flex items-center gap-1.5 font-inter text-sm"
+          className="text-charcoal/50 hover:text-gold transition-colors flex items-center gap-1.5 font-inter text-sm"
         >
           <ArrowLeft size={16} />
           Continue Shopping
@@ -58,9 +58,9 @@ export default function CartPageContent() {
         <div className="grid lg:grid-cols-3 gap-10">
           {/* Cart items */}
           <div className="lg:col-span-2">
-            <div className="bg-emerald/10 border border-emerald/20 flex items-center gap-3 px-5 py-3 mb-6">
-              <Truck size={16} className="text-emerald flex-shrink-0" />
-              <p className="font-inter text-sm text-emerald">
+            <div className="bg-navy/10 border border-navy/20 flex items-center gap-3 px-5 py-3 mb-6">
+              <Truck size={16} className="text-gold flex-shrink-0" />
+              <p className="font-inter text-sm text-navy">
                 <span className="font-semibold">Free shipping</span> on all USA orders — no duty, no extra charges.
               </p>
             </div>
@@ -91,17 +91,17 @@ export default function CartPageContent() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-charcoal/60">Shipping</span>
-                  <span className="font-medium text-emerald">Free</span>
+                  <span className="font-medium text-navy">Free</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-charcoal/60">Duties & Taxes</span>
-                  <span className="font-medium text-emerald">$0.00</span>
+                  <span className="font-medium text-navy">$0.00</span>
                 </div>
               </div>
 
               <div className="flex justify-between font-inter font-bold text-base py-4 border-t border-ivory-dark mb-5">
                 <span>Total</span>
-                <span className="text-emerald text-lg">{formatPrice(total)}</span>
+                <span className="text-navy text-lg">{formatPrice(total)}</span>
               </div>
 
               <div className="space-y-3">
@@ -120,9 +120,9 @@ export default function CartPageContent() {
                   <input
                     type="text"
                     placeholder="Enter code"
-                    className="flex-1 px-3 py-2 border border-charcoal/20 font-inter text-xs focus:outline-none focus:border-emerald transition-colors"
+                    className="flex-1 px-3 py-2 border border-charcoal/20 font-inter text-xs focus:outline-none focus:border-gold transition-colors"
                   />
-                  <button className="px-4 py-2 bg-charcoal text-ivory font-inter text-xs font-medium hover:bg-emerald transition-colors">
+                  <button className="px-4 py-2 bg-charcoal text-ivory font-inter text-xs font-medium hover:bg-navy transition-colors">
                     Apply
                   </button>
                 </div>

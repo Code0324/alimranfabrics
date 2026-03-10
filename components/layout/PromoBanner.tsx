@@ -9,7 +9,7 @@ export default function PromoBanner() {
   if (!isVisible) return null;
 
   return (
-    <div className="bg-emerald text-ivory py-2.5 px-4 relative">
+    <div className="bg-navy text-ivory py-2.5 px-4 relative">
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 text-sm">
         <Truck size={16} className="text-gold flex-shrink-0" />
         <span className="font-inter tracking-wide text-center">

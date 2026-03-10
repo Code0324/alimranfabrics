@@ -58,24 +58,23 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
 
   const clearAll = () => onChange({ sizes: [], colors: [], priceRange: [0, 1000], fabricTypes: [] });
 
-  const SidebarContent = () => (
+  const activeCount = filters.sizes.length + filters.colors.length + filters.fabricTypes.length;
+
+  const PanelContent = () => (
     <div className="p-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal size={16} className="text-emerald" />
+          <SlidersHorizontal size={16} style={{ color: "#C9A84C" }} />
           <span className="font-playfair font-semibold text-charcoal">Filters</span>
           {hasActiveFilters && (
-            <span className="w-5 h-5 bg-emerald text-ivory text-[10px] flex items-center justify-center rounded-full font-bold">
-              {filters.sizes.length + filters.colors.length + filters.fabricTypes.length}
+            <span className="w-5 h-5 bg-navy text-ivory text-[10px] flex items-center justify-center rounded-full font-bold">
+              {activeCount}
             </span>
           )}
         </div>
         {hasActiveFilters && (
-          <button
-            onClick={clearAll}
-            className="font-inter text-xs text-charcoal/50 hover:text-red-500 transition-colors"
-          >
+          <button onClick={clearAll} className="font-inter text-xs text-charcoal/50 hover:text-red-500 transition-colors">
             Clear all
           </button>
         )}
@@ -90,8 +89,8 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
               onClick={() => toggleSize(size)}
               className={`px-3 py-1.5 font-inter text-xs border transition-all ${
                 filters.sizes.includes(size)
-                  ? "bg-emerald border-emerald text-ivory"
-                  : "border-charcoal/20 text-charcoal hover:border-emerald"
+                  ? "bg-navy border-navy text-ivory"
+                  : "border-charcoal/20 text-charcoal hover:border-gold"
               }`}
             >
               {size}
@@ -109,8 +108,8 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
               onClick={() => toggleColor(color)}
               className={`px-3 py-1.5 font-inter text-xs border transition-all ${
                 filters.colors.includes(color)
-                  ? "bg-emerald border-emerald text-ivory"
-                  : "border-charcoal/20 text-charcoal hover:border-emerald"
+                  ? "bg-navy border-navy text-ivory"
+                  : "border-charcoal/20 text-charcoal hover:border-gold"
               }`}
             >
               {color}
@@ -121,30 +120,28 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
 
       {/* Price Range */}
       <FilterSection title="Price Range (USD)">
-        <div className="space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="flex-1">
-              <label className="font-inter text-[10px] text-charcoal/50 uppercase block mb-1">Min</label>
-              <input
-                type="number"
-                value={filters.priceRange[0]}
-                onChange={(e) => onChange({ ...filters, priceRange: [Number(e.target.value), filters.priceRange[1]] })}
-                className="w-full border border-charcoal/20 px-3 py-2 font-inter text-sm focus:outline-none focus:border-emerald"
-                min={0}
-                max={filters.priceRange[1]}
-              />
-            </div>
-            <span className="text-charcoal/30 mt-5">—</span>
-            <div className="flex-1">
-              <label className="font-inter text-[10px] text-charcoal/50 uppercase block mb-1">Max</label>
-              <input
-                type="number"
-                value={filters.priceRange[1]}
-                onChange={(e) => onChange({ ...filters, priceRange: [filters.priceRange[0], Number(e.target.value)] })}
-                className="w-full border border-charcoal/20 px-3 py-2 font-inter text-sm focus:outline-none focus:border-emerald"
-                min={filters.priceRange[0]}
-              />
-            </div>
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <label className="font-inter text-[10px] text-charcoal/50 uppercase block mb-1">Min</label>
+            <input
+              type="number"
+              value={filters.priceRange[0]}
+              onChange={(e) => onChange({ ...filters, priceRange: [Number(e.target.value), filters.priceRange[1]] })}
+              className="w-full border border-charcoal/20 px-3 py-2 font-inter text-sm focus:outline-none focus:border-gold"
+              min={0}
+              max={filters.priceRange[1]}
+            />
+          </div>
+          <span className="text-charcoal/30 mt-5">—</span>
+          <div className="flex-1">
+            <label className="font-inter text-[10px] text-charcoal/50 uppercase block mb-1">Max</label>
+            <input
+              type="number"
+              value={filters.priceRange[1]}
+              onChange={(e) => onChange({ ...filters, priceRange: [filters.priceRange[0], Number(e.target.value)] })}
+              className="w-full border border-charcoal/20 px-3 py-2 font-inter text-sm focus:outline-none focus:border-gold"
+              min={filters.priceRange[0]}
+            />
           </div>
         </div>
       </FilterSection>
@@ -158,9 +155,9 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
                 type="checkbox"
                 checked={filters.fabricTypes.includes(fabric)}
                 onChange={() => toggleFabric(fabric)}
-                className="w-3.5 h-3.5 accent-emerald"
+                className="w-3.5 h-3.5 accent-gold"
               />
-              <span className="font-inter text-sm text-charcoal group-hover:text-emerald transition-colors">
+              <span className="font-inter text-sm text-charcoal group-hover:text-gold transition-colors">
                 {fabric}
               </span>
             </label>
@@ -172,42 +169,42 @@ export default function FilterSidebar({ filters, onChange }: FilterSidebarProps)
 
   return (
     <>
-      {/* Mobile filter toggle */}
+      {/* ── Desktop sidebar (md and above only) ── */}
+      <aside className="hidden md:block w-60 flex-shrink-0">
+        <div className="bg-white shadow-card sticky top-28">
+          <PanelContent />
+        </div>
+      </aside>
+
+      {/* ── Mobile: trigger button (below md only) ── */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="md:hidden flex items-center gap-2 border border-charcoal/20 px-4 py-2.5 font-inter text-sm text-charcoal hover:border-emerald transition-colors"
+        className="md:hidden inline-flex items-center gap-2 border border-charcoal/20 px-4 py-2.5 font-inter text-sm text-charcoal hover:border-gold transition-colors"
       >
         <SlidersHorizontal size={16} />
         Filters
         {hasActiveFilters && (
-          <span className="w-5 h-5 bg-emerald text-ivory text-[10px] flex items-center justify-center rounded-full font-bold">
-            {filters.sizes.length + filters.colors.length + filters.fabricTypes.length}
+          <span className="w-5 h-5 bg-navy text-ivory text-[10px] flex items-center justify-center rounded-full font-bold">
+            {activeCount}
           </span>
         )}
       </button>
 
-      {/* Desktop sidebar */}
-      <div className="hidden md:block w-60 flex-shrink-0">
-        <div className="bg-white shadow-card">
-          <SidebarContent />
-        </div>
-      </div>
-
-      {/* Mobile drawer */}
+      {/* ── Mobile drawer (fixed, below md only) ── */}
       {mobileOpen && (
         <>
           <div
-            className="fixed inset-0 bg-charcoal/40 z-40 md:hidden"
+            className="fixed inset-0 bg-charcoal/40 z-40"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="fixed bottom-0 left-0 right-0 bg-white z-50 md:hidden rounded-t-2xl max-h-[85vh] overflow-y-auto animate-slide-up">
+          <div className="fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-2xl max-h-[85vh] overflow-y-auto animate-slide-up">
             <div className="flex items-center justify-between p-4 border-b border-ivory-dark">
               <span className="font-playfair font-semibold text-charcoal">Filters</span>
               <button onClick={() => setMobileOpen(false)} className="p-1">
                 <X size={18} />
               </button>
             </div>
-            <SidebarContent />
+            <PanelContent />
             <div className="p-4 border-t border-ivory-dark">
               <button onClick={() => setMobileOpen(false)} className="btn-primary w-full">
                 Apply Filters

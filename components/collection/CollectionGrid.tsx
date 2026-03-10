@@ -56,18 +56,19 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
 
   return (
     <div className="flex flex-col md:flex-row gap-8">
-      {/* Desktop sidebar */}
+
+      {/* ── Desktop sidebar — rendered once, hidden on mobile via CSS inside FilterSidebar ── */}
       <FilterSidebar filters={filters} onChange={setFilters} />
 
-      {/* Main content */}
-      <div className="flex-1">
+      {/* ── Main content ── */}
+      <div className="flex-1 min-w-0">
+
         {/* Toolbar */}
         <div className="flex items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
-            {/* Mobile filter trigger */}
-            <FilterSidebar filters={filters} onChange={setFilters} />
+            {/* Mobile filter trigger lives inside FilterSidebar (md:hidden) — no duplicate here */}
             <span className="font-inter text-xs text-charcoal/50">
-              {displayProducts.length} products
+              {displayProducts.length} product{displayProducts.length !== 1 ? "s" : ""}
             </span>
           </div>
 
@@ -79,7 +80,7 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortOption)}
                 className="appearance-none border border-charcoal/20 bg-white pl-3 pr-8 py-2 font-inter text-sm
-                           focus:outline-none focus:border-emerald transition-colors cursor-pointer"
+                           focus:outline-none focus:border-gold transition-colors cursor-pointer"
               >
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -105,7 +106,7 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {displayProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -120,8 +121,8 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
                 key={page}
                 className={`w-10 h-10 font-inter text-sm font-medium border transition-colors ${
                   page === 1
-                    ? "bg-emerald border-emerald text-ivory"
-                    : "border-charcoal/20 text-charcoal hover:border-emerald"
+                    ? "bg-navy border-navy text-ivory"
+                    : "border-charcoal/20 text-charcoal hover:border-gold"
                 }`}
               >
                 {page}
