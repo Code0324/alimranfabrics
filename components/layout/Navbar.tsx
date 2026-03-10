@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, ShoppingBag, Heart, Menu, X, ChevronDown, Globe } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X, ChevronDown, Globe, Facebook, Instagram, Youtube } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlist } from "@/store/wishlistContext";
 
@@ -104,12 +104,24 @@ export default function Navbar() {
         style={{ backgroundColor: "#070D38", borderColor: "rgba(255,230,0,0.15)" }}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
-          <div className="flex items-center gap-4 text-xs font-inter" style={{ color: "rgba(255,255,255,0.55)" }}>
-            <span>Free Shipping on USA Orders</span>
-            <span style={{ color: "#FFE600" }}>|</span>
-            <Link href="/about" className="hover:text-[#FFE600] transition-colors">Our Story</Link>
-            <span style={{ color: "#FFE600" }}>|</span>
-            <Link href="/contact" className="hover:text-[#FFE600] transition-colors">Contact</Link>
+          <div className="flex items-center gap-3">
+            {[
+              { href: "https://facebook.com",  Icon: Facebook,  label: "Facebook" },
+              { href: "https://instagram.com", Icon: Instagram, label: "Instagram" },
+              { href: "https://youtube.com",   Icon: Youtube,   label: "YouTube" },
+            ].map(({ href, Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="transition-colors hover:text-[#FFE600]"
+                style={{ color: "rgba(255,255,255,0.65)" }}
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
           <div className="flex items-center gap-2">
             <Globe size={14} style={{ color: "rgba(255,255,255,0.4)" }} />
@@ -148,16 +160,21 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-3 group">
               {/* Circular gold ring wrapping logo image */}
               <div
-                className="relative w-11 h-11 md:w-13 md:h-13 rounded-full flex-shrink-0 flex items-center justify-center
-                           border-2 overflow-hidden transition-shadow duration-300 group-hover:shadow-bright-gold"
-                style={{ borderColor: "#FFE600", backgroundColor: "#0C1350" }}
+                className="relative w-11 h-11 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center
+                           border-2 transition-shadow duration-300 group-hover:shadow-bright-gold"
+                style={{
+                  borderColor: "#FFE600",
+                  backgroundColor: "#0C1350",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                }}
               >
                 <Image
                   src="/image/logo.png"
                   alt="Al Imran Fabrics"
                   fill
                   sizes="52px"
-                  className="object-contain p-1"
+                  className="object-cover rounded-full"
                   priority
                 />
               </div>

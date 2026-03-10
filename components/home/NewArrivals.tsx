@@ -15,7 +15,7 @@ export default function NewArrivals() {
             <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Just In</span>
             <span className="w-12 h-px bg-gold" />
           </div>
-          <h2 className="section-title mb-3">New Arrivals</h2>
+          <h2 className="section-title mb-3 bg-transparent">New Arrivals</h2>
           <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm">
             Fresh from our ateliers — discover the latest pieces that blend tradition with contemporary style.
           </p>

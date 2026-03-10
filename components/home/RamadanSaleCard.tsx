@@ -96,7 +96,7 @@ export default function RamadanSaleCard({
             {/* "Ramadan Festive" — Cormorant Garamond Italic */}
             <h2
               className="font-cormorant font-light italic leading-none mb-1 text-5xl md:text-6xl"
-              style={{ color: "#FFE600" }}
+              style={{ color: "#FFE600", background: "transparent" }}
             >
               Ramadan Festive
             </h2>

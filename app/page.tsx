@@ -5,6 +5,7 @@ import HeroCarousel from "@/components/home/HeroCarousel";
 import RamadanSaleCard from "@/components/home/RamadanSaleCard";
 import NewArrivals from "@/components/home/NewArrivals";
 import LovedCollections from "@/components/home/LovedCollections";
+import NewsletterBanner from "@/components/home/NewsletterBanner";
 import CategoryCard from "@/components/ui/CategoryCard";
 import { categories } from "@/data/categories";
 import { Truck, Shield, RefreshCw, Star } from "lucide-react";
@@ -73,7 +74,7 @@ export default function HomePage() {
               <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Browse</span>
               <span className="w-12 h-px bg-gold" />
             </div>
-            <h2 className="section-title">Popular Categories</h2>
+            <h2 className="section-title bg-transparent">Popular Categories</h2>
           </div>
 
           <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4">
@@ -113,7 +114,7 @@ export default function HomePage() {
             <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Exclusive Offer</span>
             <span className="w-16 h-px bg-gold/60" />
           </div>
-          <h2 className="font-playfair text-ivory text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="font-playfair text-ivory text-4xl md:text-5xl font-bold mb-4 bg-transparent">
             Free Shipping.<br />No Duty. No Drama.
           </h2>
           <p className="font-inter text-ivory/80 text-lg mb-3">For All USA Orders</p>
@@ -158,7 +159,7 @@ export default function HomePage() {
               <span className="w-8 h-px bg-gold" />
               <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Our Heritage</span>
             </div>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-5">
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-5 bg-transparent">
               Crafted with Generations of Artistry
             </h2>
             <p className="font-inter text-charcoal/60 text-sm leading-relaxed mb-4">
@@ -177,33 +178,7 @@ export default function HomePage() {
       </section>
 
       {/* Newsletter */}
-      <section className="bg-ivory-dark py-16 px-4 border-y border-gold/20">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <span className="w-12 h-px bg-gold" />
-            <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Stay Connected</span>
-            <span className="w-12 h-px bg-gold" />
-          </div>
-          <h2 className="font-playfair text-3xl font-bold text-charcoal mb-3">
-            Never Miss a New Collection
-          </h2>
-          <p className="font-inter text-charcoal/60 text-sm mb-8">
-            Subscribe for exclusive offers, Eid specials, and first access to new arrivals.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="flex-1 px-4 py-3 border border-charcoal/20 bg-white font-inter text-sm
-                         focus:outline-none focus:border-emerald transition-colors"
-            />
-            <button className="btn-primary whitespace-nowrap">Subscribe</button>
-          </div>
-          <p className="font-inter text-xs text-charcoal/40 mt-4">
-            Join 12,000+ subscribers. Unsubscribe anytime.
-          </p>
-        </div>
-      </section>
+      <NewsletterBanner />
 
       {/* WhatsApp floating button */}
       <div className="fixed bottom-6 right-6 z-30">
