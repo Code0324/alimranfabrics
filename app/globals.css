@@ -6,13 +6,22 @@
 :root {
   --font-playfair: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-cormorant: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-tenor: 'Tenor Sans', 'Gill Sans', system-ui, sans-serif;
 }
 
 :root {
+  /* Legacy tokens */
   --color-emerald: #1B4D3E;
   --color-gold: #C9A84C;
   --color-ivory: #FAF7F2;
   --color-charcoal: #2C2C2C;
+  /* Al Imran Design System */
+  --color-navy: #0C1350;
+  --color-navy-deep: #070D38;
+  --color-bright-gold: #FFE600;
+  --color-crimson: #B71C1C;
+  --color-cream: #FDFCF7;
 }
 
 @layer base {
@@ -31,27 +40,48 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair;
   }
+
+  h1 {
+    color: #0C1350;
+  }
+
+  h2 {
+    color: #B71C1C;
+    background-color: #FFE600;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-emerald text-ivory px-6 py-3 font-inter font-medium tracking-wide
-           hover:bg-emerald-light transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+    @apply px-6 py-3 font-inter font-semibold tracking-wide
+           transition-all duration-300 uppercase text-sm inline-block
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: #FFE600;
+    color: #0C1350;
+    focus-ring-color: #FFE600;
+  }
+  .btn-primary:hover {
+    background-color: #f0d800;
   }
 
   .btn-gold {
     @apply px-6 py-3 font-inter font-semibold tracking-wide
            hover:opacity-90 transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
-    background: linear-gradient(135deg, #C9A84C 0%, #D9BC74 50%, #A8882E 100%);
-    color: #2C2C2C;
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background-color: #FFE600;
+    color: #0C1350;
   }
 
   .btn-outline {
-    @apply border-2 border-emerald text-emerald px-6 py-3 font-inter font-medium tracking-wide
-           hover:bg-emerald hover:text-ivory transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+    @apply border-2 px-6 py-3 font-inter font-medium tracking-wide
+           transition-all duration-300 uppercase text-sm inline-block
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    border-color: #FFE600;
+    color: #FFE600;
+  }
+  .btn-outline:hover {
+    background-color: #FFE600;
+    color: #0C1350;
   }
 
   .section-title {
@@ -63,8 +93,15 @@
   }
 
   .nav-link {
-    @apply font-inter text-charcoal hover:text-emerald transition-colors duration-200
-           text-sm tracking-wide uppercase;
+    @apply font-inter transition-colors duration-200 text-sm tracking-wide uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .nav-link:hover {
+    color: #FFE600;
+  }
+
+  .linen-card {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23FFFFFF'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23f0ece2' opacity='0.5'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23f0ece2' opacity='0.5'/%3E%3C/svg%3E");
   }
 }
 

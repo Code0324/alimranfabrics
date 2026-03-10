@@ -46,6 +46,9 @@ const navItems = [
   },
 ];
 
+const TICKER_TEXT =
+  "Global Shipping Available\u2002\u2022\u2002New Ramadan Collection Out Now\u2002\u2022\u2002Free USA Shipping — No Duties\u2002\u2022\u2002Global Shipping Available\u2002\u2022\u2002New Ramadan Collection Out Now\u2002\u2022\u2002Free USA Shipping — No Duties\u2002\u2022\u2002";
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -76,28 +79,44 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || mobileOpen
-          ? "bg-white shadow-md"
-          : "bg-white/95 backdrop-blur-sm"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50"
       style={{ top: "var(--promo-height, 0)" }}
     >
-      {/* Top utility bar */}
-      <div className="border-b border-ivory-dark hidden md:block">
+      {/* ── Announcement ticker ── */}
+      <div className="overflow-hidden bg-[#FFE600] py-1.5">
+        <div
+          className="flex whitespace-nowrap animate-ticker"
+          aria-label="Announcements"
+        >
+          {/* Duplicate to create seamless loop */}
+          <span className="font-inter text-[#0C1350] text-xs font-semibold tracking-wide px-4">
+            {TICKER_TEXT}
+          </span>
+          <span className="font-inter text-[#0C1350] text-xs font-semibold tracking-wide px-4" aria-hidden>
+            {TICKER_TEXT}
+          </span>
+        </div>
+      </div>
+
+      {/* ── Top utility bar ── */}
+      <div
+        className="hidden md:block border-b transition-all duration-300"
+        style={{ backgroundColor: "#070D38", borderColor: "rgba(255,230,0,0.15)" }}
+      >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
-          <div className="flex items-center gap-4 text-xs text-charcoal/60 font-inter">
+          <div className="flex items-center gap-4 text-xs font-inter" style={{ color: "rgba(255,255,255,0.55)" }}>
             <span>Free Shipping on USA Orders</span>
-            <span className="text-gold">|</span>
-            <Link href="/about" className="hover:text-emerald transition-colors">Our Story</Link>
-            <span className="text-gold">|</span>
-            <Link href="/contact" className="hover:text-emerald transition-colors">Contact</Link>
+            <span style={{ color: "#FFE600" }}>|</span>
+            <Link href="/about" className="hover:text-[#FFE600] transition-colors">Our Story</Link>
+            <span style={{ color: "#FFE600" }}>|</span>
+            <Link href="/contact" className="hover:text-[#FFE600] transition-colors">Contact</Link>
           </div>
           <div className="flex items-center gap-2">
-            <Globe size={14} className="text-charcoal/50" />
+            <Globe size={14} style={{ color: "rgba(255,255,255,0.4)" }} />
             <button
               onClick={() => setCurrency(currency === "USD" ? "CAD" : "USD")}
-              className="text-xs font-inter font-medium text-charcoal/70 hover:text-emerald transition-colors"
+              className="text-xs font-inter font-medium transition-colors hover:text-[#FFE600]"
+              style={{ color: "rgba(255,255,255,0.7)" }}
             >
               {currency} ▾
             </button>
@@ -105,185 +124,259 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Main navbar */}
-      <nav ref={menuRef} className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Mobile menu toggle */}
-          <button
-            className="md:hidden text-charcoal p-1"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+      {/* ── Main navbar ── */}
+      <nav
+        ref={menuRef}
+        className={`max-w-none transition-all duration-300 ${
+          isScrolled || mobileOpen ? "shadow-navy" : ""
+        }`}
+        style={{ backgroundColor: "#070D38" }}
+      >
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Mobile menu toggle */}
+            <button
+              className="md:hidden p-1 transition-colors hover:text-[#FFE600]"
+              style={{ color: "rgba(255,255,255,0.85)" }}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
 
-          {/* Logo */}
-          <Link href="/" className="flex flex-col items-center group">
-            <span className="font-playfair font-bold text-emerald text-xl md:text-2xl leading-none tracking-tight">
-              Al Imran
-            </span>
-            <span className="font-playfair text-gold text-xs md:text-sm tracking-[0.2em] uppercase">
-              Fabrics
-            </span>
-          </Link>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <div key={item.label} className="relative">
-                <button
-                  className="nav-link flex items-center gap-1 py-6"
-                  onMouseEnter={() => setActiveMenu(item.label)}
-                  onMouseLeave={() => setActiveMenu(null)}
-                  onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
+            {/* ── Logo ── */}
+            <Link href="/" className="flex items-center gap-3 group">
+              {/* Circular gold ring wrapping logo image */}
+              <div
+                className="relative w-11 h-11 md:w-13 md:h-13 rounded-full flex-shrink-0 flex items-center justify-center
+                           border-2 overflow-hidden transition-shadow duration-300 group-hover:shadow-bright-gold"
+                style={{ borderColor: "#FFE600", backgroundColor: "#0C1350" }}
+              >
+                <Image
+                  src="/image/logo.png"
+                  alt="Al Imran Fabrics"
+                  fill
+                  sizes="52px"
+                  className="object-contain p-1"
+                  priority
+                />
+              </div>
+              {/* Brand wordmark */}
+              <div className="hidden sm:flex flex-col leading-none">
+                <span
+                  className="font-cormorant font-semibold text-xl md:text-2xl tracking-tight"
+                  style={{ color: "#FFE600" }}
                 >
-                  {item.label}
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-200 ${
-                      activeMenu === item.label ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                  Al Imran
+                </span>
+                <span
+                  className="font-tenor text-[10px] md:text-xs tracking-[0.25em] uppercase"
+                  style={{ color: "rgba(255,255,255,0.7)" }}
+                >
+                  Fabrics
+                </span>
+              </div>
+            </Link>
 
-                {/* Mega Menu */}
-                {activeMenu === item.label && (
-                  <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-xl border-t-2 border-gold z-50 min-w-[560px] p-6 animate-fade-in"
+            {/* ── Desktop nav links ── */}
+            <div className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <div key={item.label} className="relative">
+                  <button
+                    className="nav-link flex items-center gap-1 py-6"
                     onMouseEnter={() => setActiveMenu(item.label)}
                     onMouseLeave={() => setActiveMenu(null)}
+                    onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
                   >
-                    <div className="grid grid-cols-3 gap-4">
+                    {item.label}
+                    <ChevronDown
+                      size={14}
+                      className={`transition-transform duration-200 ${
+                        activeMenu === item.label ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {/* Mega Menu */}
+                  {activeMenu === item.label && (
+                    <div
+                      className="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-xl z-50 min-w-[560px] p-6 animate-fade-in"
+                      style={{ borderTop: "2px solid #FFE600" }}
+                      onMouseEnter={() => setActiveMenu(item.label)}
+                      onMouseLeave={() => setActiveMenu(null)}
+                    >
+                      <div className="grid grid-cols-3 gap-4">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.label}
+                            href={child.href}
+                            onClick={() => setActiveMenu(null)}
+                            className="group flex flex-col gap-2"
+                          >
+                            <div className="relative h-32 overflow-hidden bg-cream">
+                              <Image
+                                src={child.img}
+                                alt={child.label}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                            <span
+                              className="text-xs font-inter font-medium uppercase tracking-wide transition-colors"
+                              style={{ color: "#2C2C2C" }}
+                            >
+                              {child.label}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                      <div
+                        className="mt-4 pt-4 flex items-center justify-between"
+                        style={{ borderTop: "1px solid #F0EBE1" }}
+                      >
+                        <span className="text-xs font-inter" style={{ color: "rgba(44,44,44,0.5)" }}>
+                          View all {item.label}
+                        </span>
+                        <Link
+                          href={item.href}
+                          onClick={() => setActiveMenu(null)}
+                          className="text-xs font-semibold uppercase tracking-wide transition-colors hover:text-[#C9A84C]"
+                          style={{ color: "#0C1350" }}
+                        >
+                          Shop All →
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+              <Link href="/collections/new-arrivals" className="nav-link">
+                <span style={{ color: "#FFE600" }} className="font-semibold">New Arrivals</span>
+              </Link>
+            </div>
+
+            {/* ── Icon actions ── */}
+            <div className="flex items-center gap-3 md:gap-4">
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="p-1 transition-colors hover:text-[#FFE600]"
+                style={{ color: "rgba(255,255,255,0.85)" }}
+                aria-label="Search"
+              >
+                <Search size={20} />
+              </button>
+              <Link
+                href="/wishlist"
+                className="relative p-1 transition-colors hover:text-[#FFE600]"
+                style={{ color: "rgba(255,255,255,0.85)" }}
+                aria-label="Wishlist"
+              >
+                <Heart size={20} />
+                {wishlist.length > 0 && (
+                  <span
+                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
+                    style={{ backgroundColor: "#FFE600", color: "#0C1350" }}
+                  >
+                    {wishlist.length}
+                  </span>
+                )}
+              </Link>
+              <button
+                onClick={openCart}
+                className="relative p-1 transition-colors hover:text-[#FFE600]"
+                style={{ color: "rgba(255,255,255,0.85)" }}
+                aria-label="Shopping cart"
+              >
+                <ShoppingBag size={20} />
+                {itemCount > 0 && (
+                  <span
+                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
+                    style={{ backgroundColor: "#FFE600", color: "#0C1350" }}
+                  >
+                    {itemCount}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* ── Search bar ── */}
+          {searchOpen && (
+            <div
+              className="py-3 animate-fade-in"
+              style={{ borderTop: "1px solid rgba(255,230,0,0.15)" }}
+            >
+              <div className="relative max-w-md mx-auto">
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "rgba(255,255,255,0.35)" }} />
+                <input
+                  type="text"
+                  placeholder="Search for kurtas, suits, sherwanis..."
+                  autoFocus
+                  className="w-full pl-9 pr-4 py-2.5 text-sm font-inter focus:outline-none transition-colors"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.07)",
+                    border: "1px solid rgba(255,230,0,0.3)",
+                    color: "#ffffff",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* ── Mobile menu ── */}
+          {mobileOpen && (
+            <div
+              className="md:hidden pb-4 animate-fade-in"
+              style={{ borderTop: "1px solid rgba(255,230,0,0.15)" }}
+            >
+              {navItems.map((item) => (
+                <div key={item.label}>
+                  <button
+                    className="w-full flex items-center justify-between py-3 text-sm font-inter font-medium uppercase tracking-wide"
+                    style={{
+                      color: "rgba(255,255,255,0.85)",
+                      borderBottom: "1px solid rgba(255,230,0,0.1)",
+                    }}
+                    onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform ${activeMenu === item.label ? "rotate-180" : ""}`}
+                      style={{ color: "#FFE600" }}
+                    />
+                  </button>
+                  {activeMenu === item.label && (
+                    <div style={{ backgroundColor: "rgba(12,19,80,0.6)" }} className="pl-4">
                       {item.children.map((child) => (
                         <Link
                           key={child.label}
                           href={child.href}
-                          onClick={() => setActiveMenu(null)}
-                          className="group flex flex-col gap-2"
+                          onClick={() => { setActiveMenu(null); setMobileOpen(false); }}
+                          className="block py-2.5 text-sm font-inter transition-colors hover:text-[#FFE600]"
+                          style={{
+                            color: "rgba(255,255,255,0.6)",
+                            borderBottom: "1px solid rgba(255,230,0,0.07)",
+                          }}
                         >
-                          <div className="relative h-32 overflow-hidden bg-ivory-dark">
-                            <Image
-                              src={child.img}
-                              alt={child.label}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                          </div>
-                          <span className="text-xs font-inter font-medium text-charcoal uppercase tracking-wide group-hover:text-emerald transition-colors">
-                            {child.label}
-                          </span>
+                          {child.label}
                         </Link>
                       ))}
                     </div>
-                    <div className="mt-4 pt-4 border-t border-ivory-dark flex items-center justify-between">
-                      <span className="text-xs text-charcoal/50 font-inter">
-                        View all {item.label}
-                      </span>
-                      <Link
-                        href={item.href}
-                        onClick={() => setActiveMenu(null)}
-                        className="text-xs font-semibold text-emerald hover:text-gold transition-colors uppercase tracking-wide"
-                      >
-                        Shop All →
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-            <Link href="/collections/new-arrivals" className="nav-link">
-              <span className="text-gold font-semibold">New Arrivals</span>
-            </Link>
-          </div>
-
-          {/* Icons */}
-          <div className="flex items-center gap-3 md:gap-4">
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="text-charcoal hover:text-emerald transition-colors p-1"
-              aria-label="Search"
-            >
-              <Search size={20} />
-            </button>
-            <Link href="/wishlist" className="relative text-charcoal hover:text-emerald transition-colors p-1" aria-label="Wishlist">
-              <Heart size={20} />
-              {wishlist.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-gold text-charcoal text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                  {wishlist.length}
-                </span>
-              )}
-            </Link>
-            <button
-              onClick={openCart}
-              className="relative text-charcoal hover:text-emerald transition-colors p-1"
-              aria-label="Shopping cart"
-            >
-              <ShoppingBag size={20} />
-              {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-emerald text-ivory text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
-                  {itemCount}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Search bar */}
-        {searchOpen && (
-          <div className="border-t border-ivory-dark py-3 animate-fade-in">
-            <div className="relative max-w-md mx-auto">
-              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal/40" />
-              <input
-                type="text"
-                placeholder="Search for kurtas, suits, sherwanis..."
-                autoFocus
-                className="w-full pl-9 pr-4 py-2.5 border border-ivory-dark bg-ivory text-sm font-inter
-                           focus:outline-none focus:border-emerald transition-colors"
-              />
+                  )}
+                </div>
+              ))}
+              <Link
+                href="/collections/new-arrivals"
+                onClick={() => setMobileOpen(false)}
+                className="block py-3 text-sm font-semibold uppercase tracking-wide"
+                style={{ color: "#FFE600" }}
+              >
+                New Arrivals
+              </Link>
             </div>
-          </div>
-        )}
-
-        {/* Mobile menu */}
-        {mobileOpen && (
-          <div className="md:hidden border-t border-ivory-dark pb-4 animate-fade-in">
-            {navItems.map((item) => (
-              <div key={item.label}>
-                <button
-                  className="w-full flex items-center justify-between py-3 text-sm font-inter font-medium uppercase tracking-wide text-charcoal border-b border-ivory-dark"
-                  onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
-                >
-                  {item.label}
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform ${activeMenu === item.label ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {activeMenu === item.label && (
-                  <div className="bg-ivory pl-4">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.label}
-                        href={child.href}
-                        onClick={() => { setActiveMenu(null); setMobileOpen(false); }}
-                        className="block py-2.5 text-sm text-charcoal/70 hover:text-emerald transition-colors border-b border-ivory-dark/50"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-            <Link
-              href="/collections/new-arrivals"
-              onClick={() => setMobileOpen(false)}
-              className="block py-3 text-sm font-semibold text-gold uppercase tracking-wide"
-            >
-              New Arrivals
-            </Link>
-          </div>
-        )}
+          )}
+        </div>
       </nav>
     </header>
   );

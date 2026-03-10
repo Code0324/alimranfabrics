@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import HeroCarousel from "@/components/home/HeroCarousel";
+import RamadanSaleCard from "@/components/home/RamadanSaleCard";
 import NewArrivals from "@/components/home/NewArrivals";
 import LovedCollections from "@/components/home/LovedCollections";
 import CategoryCard from "@/components/ui/CategoryCard";
@@ -43,12 +44,15 @@ export default function HomePage() {
       {/* Hero */}
       <HeroCarousel />
 
+      {/* Ramadan Festive Sale */}
+      <RamadanSaleCard />
+
       {/* Trust strip */}
       <div className="bg-white border-y border-ivory-dark py-6 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {trustFeatures.map((f) => (
             <div key={f.title} className="flex items-start gap-3">
-              <f.icon size={20} className="text-gold flex-shrink-0 mt-0.5" />
+              <f.icon size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#FFE600" }} />
               <div>
                 <p className="font-inter text-xs font-semibold text-charcoal uppercase tracking-wide">
                   {f.title}
@@ -92,7 +96,7 @@ export default function HomePage() {
             fill
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-emerald/85" />
+          <div className="absolute inset-0" style={{ backgroundColor: "rgba(7,13,56,0.88)" }} />
         </div>
 
         <div
