@@ -5,6 +5,7 @@ import PromoBanner from "@/components/layout/PromoBanner";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 
 export const metadata: Metadata = {
   title: {
@@ -34,13 +35,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-ivory text-charcoal font-inter antialiased">
+      <body className="bg-ivory text-charcoal font-inter antialiased pb-16 md:pb-0">
         <WishlistProvider>
           <PromoBanner />
           <Navbar />
           <main>{children}</main>
           <Footer />
           <CartDrawer />
+          <MobileBottomNav />
         </WishlistProvider>
       </body>
     </html>

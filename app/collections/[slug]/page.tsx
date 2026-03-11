@@ -1,54 +1,31 @@
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import CollectionGrid from "@/components/collection/CollectionGrid";
-import { products } from "@/data/products";
-import { categories, getCategoryBySlug } from "@/data/categories";
+import CollectionGridApi from "@/components/collection/CollectionGridApi";
+import { fetchProducts, fetchCategories } from "@/lib/api";
 
 interface CollectionPageProps {
   params: { slug: string };
 }
 
-const VALID_SLUGS = [
-  ...categories.map((c) => c.slug),
-  "new-arrivals", "sale", "women", "men", "kids",
-  "formal", "casual", "unstitched", "khaddar", "embroidered",
-  "lawn", "cotton", "sherwani", "waistcoat", "girls", "boys",
-  "jacquard", "printed", "solid", "ready-to-wear", "bridal",
-  "shalwar-kameez",
-];
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
-  return VALID_SLUGS.map((slug) => ({ slug }));
+  try {
+    const cats = await fetchCategories();
+    return cats.map((c) => ({ slug: c.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: CollectionPageProps): Promise<Metadata> {
-  const { slug } = params;
-  const category = getCategoryBySlug(slug);
-  const title = category?.name || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const title = params.slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   return {
     title,
-    description: category?.description || `Explore Al Imran Fabrics ${title} collection`,
+    description: `Explore Al Imran Fabrics ${title} collection`,
   };
 }
 
-function getProductsForSlug(slug: string) {
-  if (slug === "new-arrivals") return products.filter((p) => p.isNew);
-  if (slug === "sale") return products.filter((p) => p.originalPrice);
-  const byCategory = products.filter((p) => p.categorySlug === slug);
-  if (byCategory.length > 0) return byCategory;
-  const byCollection = products.filter(
-    (p) => p.collection?.toLowerCase().replace(/\s+/g, "-") === slug
-  );
-  if (byCollection.length > 0) return byCollection;
-  const byFabric = products.filter(
-    (p) => p.fabric.toLowerCase() === slug
-  );
-  if (byFabric.length > 0) return byFabric;
-  return products;
-}
-
-// Eyebrow label for special slugs
 function getEyebrow(slug: string): string {
   if (slug === "sale") return "Limited Time";
   if (slug === "new-arrivals") return "Just In";
@@ -58,61 +35,74 @@ function getEyebrow(slug: string): string {
   return "Al Imran Fabrics";
 }
 
-export default function CollectionPage({ params }: CollectionPageProps) {
+export default async function CollectionPage({ params }: CollectionPageProps) {
   const { slug } = params;
+  const title = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const eyebrow = getEyebrow(slug);
 
-  if (!VALID_SLUGS.includes(slug)) {
-    notFound();
+  // Fetch products from backend
+  let collectionProducts: import("@/lib/api").BackendProduct[] = [];
+  try {
+    if (slug === "new-arrivals") {
+      collectionProducts = await fetchProducts({ new_arrival: true, limit: 50 });
+    } else if (slug === "sale") {
+      // sale = products with discount
+      collectionProducts = await fetchProducts({ limit: 50 });
+      collectionProducts = collectionProducts.filter((p) => p.discountPercentage > 0 || p.originalPrice);
+    } else {
+      collectionProducts = await fetchProducts({ category_slug: slug, limit: 50 });
+      if (collectionProducts.length === 0) {
+        collectionProducts = await fetchProducts({ limit: 50 });
+      }
+    }
+  } catch {
+    collectionProducts = [];
   }
 
-  const category = getCategoryBySlug(slug);
-  const collectionProducts = getProductsForSlug(slug);
-  const title = category?.name || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  const description = category?.description || `Explore our ${title} collection`;
-  const eyebrow = getEyebrow(slug);
+  const description = `Explore our ${title} collection — ${collectionProducts.length} products`;
 
   return (
     <div className="min-h-screen bg-ivory">
       {/* ── Yellow branded header — same for all collections ── */}
       <section
         className="relative overflow-hidden pt-28 md:pt-32"
-        style={{ background: "linear-gradient(135deg, #C9A84C 0%, #D9BC74 50%, #A8882E 100%)" }}
+        style={{ background: "#CC0000" }}
       >
-        {/* Subtle linen texture overlay */}
+        {/* Subtle dot texture */}
         <div
           className="absolute inset-0 opacity-10 pointer-events-none"
           style={{
-            backgroundImage: "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
-            backgroundSize: "6px 6px",
+            backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
           }}
           aria-hidden
         />
-        {/* Art-deco corner brackets */}
-        <span className="pointer-events-none absolute top-5 left-5 w-8 h-8 md:w-10 md:h-10" style={{ borderTop: "1.5px solid rgba(255,255,255,0.5)", borderLeft: "1.5px solid rgba(255,255,255,0.5)" }} aria-hidden />
-        <span className="pointer-events-none absolute top-5 right-5 w-8 h-8 md:w-10 md:h-10" style={{ borderTop: "1.5px solid rgba(255,255,255,0.5)", borderRight: "1.5px solid rgba(255,255,255,0.5)" }} aria-hidden />
-        <span className="pointer-events-none absolute bottom-5 left-5 w-8 h-8 md:w-10 md:h-10" style={{ borderBottom: "1.5px solid rgba(255,255,255,0.5)", borderLeft: "1.5px solid rgba(255,255,255,0.5)" }} aria-hidden />
-        <span className="pointer-events-none absolute bottom-5 right-5 w-8 h-8 md:w-10 md:h-10" style={{ borderBottom: "1.5px solid rgba(255,255,255,0.5)", borderRight: "1.5px solid rgba(255,255,255,0.5)" }} aria-hidden />
+        {/* Corner brackets in yellow */}
+        <span className="pointer-events-none absolute top-5 left-5 w-8 h-8 md:w-10 md:h-10" style={{ borderTop: "2px solid rgba(255,253,130,0.6)", borderLeft: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
+        <span className="pointer-events-none absolute top-5 right-5 w-8 h-8 md:w-10 md:h-10" style={{ borderTop: "2px solid rgba(255,253,130,0.6)", borderRight: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
+        <span className="pointer-events-none absolute bottom-5 left-5 w-8 h-8 md:w-10 md:h-10" style={{ borderBottom: "2px solid rgba(255,253,130,0.6)", borderLeft: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
+        <span className="pointer-events-none absolute bottom-5 right-5 w-8 h-8 md:w-10 md:h-10" style={{ borderBottom: "2px solid rgba(255,253,130,0.6)", borderRight: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
 
         <div className="relative py-12 md:py-16 px-4 text-center">
           {/* Eyebrow */}
           <div className="flex items-center justify-center gap-4 mb-3">
-            <span className="w-10 h-px" style={{ backgroundColor: "rgba(255,255,255,0.5)" }} />
-            <span className="font-inter text-[10px] uppercase tracking-[0.35em]" style={{ color: "rgba(255,255,255,0.85)" }}>
+            <span className="w-10 h-px" style={{ backgroundColor: "#FFFD82" }} />
+            <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFFD82" }}>
               {eyebrow}
             </span>
-            <span className="w-10 h-px" style={{ backgroundColor: "rgba(255,255,255,0.5)" }} />
+            <span className="w-10 h-px" style={{ backgroundColor: "#FFFD82" }} />
           </div>
 
           {/* Title */}
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-2" style={{ color: "#070D38" }}>
+          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-2" style={{ color: "#FFFD82" }}>
             {title}
           </h1>
 
-          {/* Thin white divider */}
-          <div className="mx-auto my-3 w-14" style={{ height: "1.5px", backgroundColor: "rgba(255,255,255,0.6)" }} />
+          {/* Divider */}
+          <div className="mx-auto my-3 w-14" style={{ height: "2px", backgroundColor: "rgba(255,253,130,0.5)" }} />
 
           {/* Description */}
-          <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(7,13,56,0.75)" }}>
+          <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(255,255,255,0.9)" }}>
             {description}
           </p>
         </div>
@@ -135,7 +125,7 @@ export default function CollectionPage({ params }: CollectionPageProps) {
 
       {/* ── Grid ── */}
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <CollectionGrid allProducts={collectionProducts} />
+        <CollectionGridApi allProducts={collectionProducts} />
       </div>
     </div>
   );

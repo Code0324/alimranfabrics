@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import HeroCarousel from "@/components/home/HeroCarousel";
+import QuickCategoryNav from "@/components/home/QuickCategoryNav";
 import NewArrivals from "@/components/home/NewArrivals";
 import LovedCollections from "@/components/home/LovedCollections";
 import NewsletterBanner from "@/components/home/NewsletterBanner";
@@ -44,12 +45,15 @@ export default function HomePage() {
       {/* Hero */}
       <HeroCarousel />
 
+      {/* Quick Category Navigation — Saya-style circular icons */}
+      <QuickCategoryNav />
+
       {/* Trust strip */}
       <div className="bg-white border-y border-ivory-dark py-6 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
           {trustFeatures.map((f) => (
             <div key={f.title} className="flex items-start gap-3">
-              <f.icon size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#FFE600" }} />
+              <f.icon size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#CC0000" }} />
               <div>
                 <p className="font-inter text-xs font-semibold text-charcoal uppercase tracking-wide">
                   {f.title}
@@ -84,47 +88,51 @@ export default function HomePage() {
       {/* New Arrivals */}
       <NewArrivals />
 
-      {/* Promotional Banner */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1400&q=80"
-            alt="Promotional banner"
-            fill
-            className="object-cover object-center"
-          />
-          <div className="absolute inset-0" style={{ backgroundColor: "rgba(7,13,56,0.88)" }} />
-        </div>
-
+      {/* Promotional Banner — Red high-conversion section */}
+      <section className="relative py-20 px-4 overflow-hidden" style={{ backgroundColor: "#CC0000" }}>
+        {/* Subtle dot pattern */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-10 pointer-events-none"
           style={{
-            backgroundImage: `repeating-linear-gradient(45deg, #C9A84C 0, #C9A84C 1px, transparent 0, transparent 50%)`,
-            backgroundSize: "20px 20px",
+            backgroundImage: `radial-gradient(circle, #ffffff 1px, transparent 1px)`,
+            backgroundSize: "24px 24px",
           }}
+          aria-hidden
         />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-16 h-px bg-gold/60" />
-            <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Exclusive Offer</span>
-            <span className="w-16 h-px bg-gold/60" />
+            <span className="w-16 h-px" style={{ backgroundColor: "#FFFD82" }} />
+            <span className="font-inter text-xs uppercase tracking-[0.3em] font-bold" style={{ color: "#FFFD82" }}>
+              Exclusive Offer
+            </span>
+            <span className="w-16 h-px" style={{ backgroundColor: "#FFFD82" }} />
           </div>
-          <h2 className="font-playfair text-ivory text-4xl md:text-5xl font-bold mb-4 bg-transparent">
-            Free Shipping.<br />No Duty. No Drama.
+          <h2
+            className="font-playfair text-4xl md:text-6xl font-bold mb-4 bg-transparent leading-tight"
+            style={{ color: "#ffffff" }}
+          >
+            Free Shipping.<br />
+            <span style={{ color: "#FFFD82" }}>No Duty.</span> No Drama.
           </h2>
-          <p className="font-inter text-ivory/80 text-lg mb-3">For All USA Orders</p>
-          <p className="font-inter text-ivory/60 text-sm mb-8 max-w-lg mx-auto">
+          <p className="font-inter text-lg mb-3 font-semibold" style={{ color: "#FFFD82" }}>
+            For All USA Orders
+          </p>
+          <p className="font-inter text-sm mb-8 max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.85)" }}>
             We handle everything — customs, duties, and delivery. Your premium Pakistani clothing arrives at your door, worry-free.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/collections/women" className="btn-gold px-8 py-4">
+            <Link
+              href="/collections/women"
+              className="inline-block font-inter font-bold text-sm uppercase tracking-widest px-10 py-4 transition-all duration-300 hover:opacity-90"
+              style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+            >
               Shop Women
             </Link>
             <Link
               href="/collections/men"
-              className="inline-flex items-center gap-2 font-inter text-sm font-medium uppercase tracking-wide
-                         text-ivory border border-ivory/50 px-8 py-4 hover:border-gold hover:text-gold transition-all duration-300"
+              className="inline-flex items-center gap-2 font-inter text-sm font-bold uppercase tracking-wide px-8 py-4 border-2 transition-all duration-300 hover:bg-white/10"
+              style={{ borderColor: "#ffffff", color: "#ffffff" }}
             >
               Shop Men
             </Link>

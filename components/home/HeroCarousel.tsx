@@ -238,15 +238,15 @@ export default function HeroCarousel() {
               <div className="flex items-center justify-center gap-4 flex-wrap">
                 <Link
                   href={slide.ctaHref}
-                  className="inline-block font-inter font-semibold text-xs uppercase tracking-widest px-10 py-3.5 transition-all duration-300 hover:opacity-90"
-                  style={{ backgroundColor: "#C9A84C", color: "#070D38" }}
+                  className="inline-block font-inter font-bold text-xs uppercase tracking-widest px-10 py-3.5 transition-all duration-300 hover:opacity-90"
+                  style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
                 >
                   {slide.cta}
                 </Link>
                 <Link
                   href={slide.secondaryHref}
                   className="inline-flex items-center font-inter text-xs font-medium uppercase tracking-widest px-8 py-3.5 border transition-all duration-300 hover:bg-white/10"
-                  style={{ borderColor: "rgba(201,168,76,0.5)", color: "rgba(250,247,242,0.85)" }}
+                  style={{ borderColor: "rgba(255,255,255,0.5)", color: "rgba(250,247,242,0.85)" }}
                 >
                   {slide.secondaryCta}
                 </Link>

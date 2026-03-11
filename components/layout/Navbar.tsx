@@ -83,17 +83,35 @@ export default function Navbar() {
       style={{ top: "var(--promo-height, 0)" }}
     >
       {/* ── Announcement ticker ── */}
-      <div className="overflow-hidden bg-[#FFE600] py-1.5">
+      <div className="overflow-hidden py-1.5" style={{ backgroundColor: "#0C1350" }}>
         <div
           className="flex whitespace-nowrap animate-ticker"
           aria-label="Announcements"
         >
           {/* Duplicate to create seamless loop */}
-          <span className="font-inter text-[#0C1350] text-xs font-semibold tracking-wide px-4">
-            {TICKER_TEXT}
+          <span className="font-inter text-xs font-semibold tracking-wide px-4" style={{ color: "#ffffff" }}>
+            <span style={{ color: "#FFFD82" }}>Free Shipping</span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> — No Duty. No Drama. </span>
+            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> New Ramadan Collection Out Now </span>
+            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "#FFFD82" }}> Free USA Shipping </span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> — Save up to </span>
+            <span style={{ color: "#FF4444" }}>50% OFF </span>
+            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> Global Shipping Available </span>
           </span>
-          <span className="font-inter text-[#0C1350] text-xs font-semibold tracking-wide px-4" aria-hidden>
-            {TICKER_TEXT}
+          <span className="font-inter text-xs font-semibold tracking-wide px-4" aria-hidden style={{ color: "#ffffff" }}>
+            <span style={{ color: "#FFFD82" }}>Free Shipping</span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> — No Duty. No Drama. </span>
+            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> New Ramadan Collection Out Now </span>
+            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "#FFFD82" }}> Free USA Shipping </span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> — Save up to </span>
+            <span style={{ color: "#FF4444" }}>50% OFF </span>
+            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "rgba(255,255,255,0.6)" }}> Global Shipping Available </span>
           </span>
         </div>
       </div>
@@ -101,7 +119,7 @@ export default function Navbar() {
       {/* ── Top utility bar ── */}
       <div
         className="hidden md:block border-b transition-all duration-300"
-        style={{ backgroundColor: "#070D38", borderColor: "rgba(255,230,0,0.15)" }}
+        style={{ backgroundColor: "#FFFD82", borderColor: "rgba(12,19,80,0.15)" }}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
           <div className="flex items-center gap-3">
@@ -116,19 +134,23 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="transition-colors hover:text-[#FFE600]"
-                style={{ color: "rgba(255,255,255,0.65)" }}
+                className="transition-colors"
+                style={{ color: "#0C1350" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
               >
                 <Icon size={16} />
               </a>
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <Globe size={14} style={{ color: "rgba(255,255,255,0.4)" }} />
+            <Globe size={14} style={{ color: "#0C1350" }} />
             <button
               onClick={() => setCurrency(currency === "USD" ? "CAD" : "USD")}
-              className="text-xs font-inter font-medium transition-colors hover:text-[#FFE600]"
-              style={{ color: "rgba(255,255,255,0.7)" }}
+              className="text-xs font-inter font-bold transition-colors"
+              style={{ color: "#0C1350" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
             >
               {currency} ▾
             </button>
@@ -140,16 +162,18 @@ export default function Navbar() {
       <nav
         ref={menuRef}
         className={`max-w-none transition-all duration-300 ${
-          isScrolled || mobileOpen ? "shadow-navy" : ""
+          isScrolled || mobileOpen ? "shadow-lg" : ""
         }`}
-        style={{ backgroundColor: "#070D38" }}
+        style={{ backgroundColor: "#FFFD82", borderBottom: "2px solid rgba(12,19,80,0.12)" }}
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Mobile menu toggle */}
             <button
-              className="md:hidden p-1 transition-colors hover:text-[#FFE600]"
-              style={{ color: "rgba(255,255,255,0.85)" }}
+              className="md:hidden p-1 transition-colors"
+              style={{ color: "#0C1350" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -158,15 +182,16 @@ export default function Navbar() {
 
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center gap-3 group">
-              {/* Circular gold ring wrapping logo image */}
+              {/* Circular ring wrapping logo image */}
               <div
                 className="relative w-11 h-11 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center
-                           border-2 transition-shadow duration-300 group-hover:shadow-bright-gold"
+                           border-2 transition-shadow duration-300"
                 style={{
-                  borderColor: "#FFE600",
-                  backgroundColor: "#0C1350",
+                  borderColor: "#CC0000",
+                  backgroundColor: "#ffffff",
                   borderRadius: "50%",
                   overflow: "hidden",
+                  boxShadow: "0 2px 8px rgba(204,0,0,0.25)",
                 }}
               >
                 <Image
@@ -182,13 +207,13 @@ export default function Navbar() {
               <div className="hidden sm:flex flex-col leading-none">
                 <span
                   className="font-cormorant font-semibold text-xl md:text-2xl tracking-tight"
-                  style={{ color: "#FFE600" }}
+                  style={{ color: "#CC0000" }}
                 >
                   Al Imran
                 </span>
                 <span
-                  className="font-tenor text-[10px] md:text-xs tracking-[0.25em] uppercase"
-                  style={{ color: "rgba(255,255,255,0.7)" }}
+                  className="font-tenor text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
+                  style={{ color: "#0C1350" }}
                 >
                   Fabrics
                 </span>
@@ -218,7 +243,7 @@ export default function Navbar() {
                   {activeMenu === item.label && (
                     <div
                       className="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-xl z-50 min-w-[560px] p-6 animate-fade-in"
-                      style={{ borderTop: "2px solid #FFE600" }}
+                      style={{ borderTop: "3px solid #CC0000" }}
                       onMouseEnter={() => setActiveMenu(item.label)}
                       onMouseLeave={() => setActiveMenu(null)}
                     >
@@ -268,7 +293,7 @@ export default function Navbar() {
                 </div>
               ))}
               <Link href="/collections/new-arrivals" className="nav-link">
-                <span style={{ color: "#FFE600" }} className="font-semibold">New Arrivals</span>
+                <span style={{ color: "#CC0000" }} className="font-bold">New Arrivals ✦</span>
               </Link>
             </div>
 
@@ -276,23 +301,25 @@ export default function Navbar() {
             <div className="flex items-center gap-3 md:gap-4">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-1 transition-colors hover:text-[#FFE600]"
-                style={{ color: "rgba(255,255,255,0.85)" }}
+                className="p-1 transition-colors"
+                style={{ color: "#0C1350" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
                 aria-label="Search"
               >
                 <Search size={20} />
               </button>
               <Link
                 href="/wishlist"
-                className="relative p-1 transition-colors hover:text-[#FFE600]"
-                style={{ color: "rgba(255,255,255,0.85)" }}
+                className="relative p-1 transition-colors"
+                style={{ color: "#0C1350" }}
                 aria-label="Wishlist"
               >
                 <Heart size={20} />
                 {wishlist.length > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "#FFE600", color: "#0C1350" }}
+                    style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
                   >
                     {wishlist.length}
                   </span>
@@ -300,15 +327,17 @@ export default function Navbar() {
               </Link>
               <button
                 onClick={openCart}
-                className="relative p-1 transition-colors hover:text-[#FFE600]"
-                style={{ color: "rgba(255,255,255,0.85)" }}
+                className="relative p-1 transition-colors"
+                style={{ color: "#0C1350" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
                 aria-label="Shopping cart"
               >
                 <ShoppingBag size={20} />
                 {itemCount > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "#FFE600", color: "#0C1350" }}
+                    style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
                   >
                     {itemCount}
                   </span>
@@ -321,19 +350,19 @@ export default function Navbar() {
           {searchOpen && (
             <div
               className="py-3 animate-fade-in"
-              style={{ borderTop: "1px solid rgba(255,230,0,0.15)" }}
+              style={{ borderTop: "1px solid rgba(12,19,80,0.15)" }}
             >
               <div className="relative max-w-md mx-auto">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "rgba(255,255,255,0.35)" }} />
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#0C1350" }} />
                 <input
                   type="text"
                   placeholder="Search for kurtas, suits, sherwanis..."
                   autoFocus
                   className="w-full pl-9 pr-4 py-2.5 text-sm font-inter focus:outline-none transition-colors"
                   style={{
-                    backgroundColor: "rgba(255,255,255,0.07)",
-                    border: "1px solid rgba(255,230,0,0.3)",
-                    color: "#ffffff",
+                    backgroundColor: "#ffffff",
+                    border: "2px solid #0C1350",
+                    color: "#0C1350",
                   }}
                 />
               </div>
@@ -344,15 +373,15 @@ export default function Navbar() {
           {mobileOpen && (
             <div
               className="md:hidden pb-4 animate-fade-in"
-              style={{ borderTop: "1px solid rgba(255,230,0,0.15)" }}
+              style={{ borderTop: "2px solid rgba(12,19,80,0.2)" }}
             >
               {navItems.map((item) => (
                 <div key={item.label}>
                   <button
-                    className="w-full flex items-center justify-between py-3 text-sm font-inter font-medium uppercase tracking-wide"
+                    className="w-full flex items-center justify-between py-3 text-sm font-inter font-bold uppercase tracking-wide"
                     style={{
-                      color: "rgba(255,255,255,0.85)",
-                      borderBottom: "1px solid rgba(255,230,0,0.1)",
+                      color: "#0C1350",
+                      borderBottom: "1px solid rgba(12,19,80,0.12)",
                     }}
                     onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
                   >
@@ -360,21 +389,23 @@ export default function Navbar() {
                     <ChevronDown
                       size={16}
                       className={`transition-transform ${activeMenu === item.label ? "rotate-180" : ""}`}
-                      style={{ color: "#FFE600" }}
+                      style={{ color: "#CC0000" }}
                     />
                   </button>
                   {activeMenu === item.label && (
-                    <div style={{ backgroundColor: "rgba(12,19,80,0.6)" }} className="pl-4">
+                    <div style={{ backgroundColor: "rgba(255,255,255,0.6)" }} className="pl-4">
                       {item.children.map((child) => (
                         <Link
                           key={child.label}
                           href={child.href}
                           onClick={() => { setActiveMenu(null); setMobileOpen(false); }}
-                          className="block py-2.5 text-sm font-inter transition-colors hover:text-[#FFE600]"
+                          className="block py-2.5 text-sm font-inter font-medium transition-colors"
                           style={{
-                            color: "rgba(255,255,255,0.6)",
-                            borderBottom: "1px solid rgba(255,230,0,0.07)",
+                            color: "#0C1350",
+                            borderBottom: "1px solid rgba(12,19,80,0.08)",
                           }}
+                          onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
+                          onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
                         >
                           {child.label}
                         </Link>
@@ -386,10 +417,10 @@ export default function Navbar() {
               <Link
                 href="/collections/new-arrivals"
                 onClick={() => setMobileOpen(false)}
-                className="block py-3 text-sm font-semibold uppercase tracking-wide"
-                style={{ color: "#FFE600" }}
+                className="block py-3 text-sm font-bold uppercase tracking-wide"
+                style={{ color: "#CC0000" }}
               >
-                New Arrivals
+                New Arrivals ✦
               </Link>
             </div>
           )}

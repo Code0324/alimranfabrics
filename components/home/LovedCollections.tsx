@@ -6,7 +6,7 @@ export default function LovedCollections() {
   return (
     <section
       className="py-16 md:py-24"
-      style={{ backgroundColor: "#C9A84C" }}
+      style={{ backgroundColor: "#FFFD82" }}
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
@@ -29,7 +29,7 @@ export default function LovedCollections() {
           </h2>
           <p
             className="font-inter max-w-md mx-auto text-sm leading-relaxed"
-            style={{ color: "#ffffff" }}
+            style={{ color: "#0C1350" }}
           >
             Thoughtfully curated categories that celebrate the richness of Pakistani textile heritage.
           </p>

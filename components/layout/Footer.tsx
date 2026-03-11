@@ -29,7 +29,7 @@ const footerLinks = {
 };
 
 // Brand colours derived from logo
-const YELLOW = "#FFE600";
+const YELLOW = "#FFFD82";
 const BLUE   = "#000080";
 const RED    = "#B71C1C";
 
@@ -45,15 +45,18 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <div className="mb-4">
-              <span className="font-playfair font-bold text-2xl block" style={{ color: BLUE }}>
-                Al Imran
-              </span>
-              <span
-                className="font-playfair text-sm tracking-[0.2em] uppercase"
-                style={{ color: RED }}
-              >
-                Fabrics
-              </span>
+            <span
+                  className="font-cormorant font-semibold text-xl md:text-2xl tracking-tight"
+                  style={{ color: "#CC0000" }}
+                >
+                  Al Imran
+                </span>
+                <span
+                  className="font-tenor text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
+                  style={{ color: "#0C1350" }}
+                >
+                  Fabrics
+                </span>
             </div>
             <p className="font-inter text-sm leading-relaxed mb-6 max-w-xs" style={{ color: BLUE }}>
               Bringing the timeless elegance of Pakistani craftsmanship to homes around the world. Each piece tells a story of heritage, artistry, and love.
@@ -63,15 +66,15 @@ export default function Footer() {
             <div className="space-y-2 mb-6">
               <div className="flex items-center gap-2 text-xs" style={{ color: BLUE }}>
                 <Mail size={13} className="flex-shrink-0" style={{ color: RED }} />
-                <span>support@alimranfabrics.com</span>
+                <span>alimranfabrics786@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 text-xs" style={{ color: BLUE }}>
                 <Phone size={13} className="flex-shrink-0" style={{ color: RED }} />
-                <span>+1 (555) 000-0000 (USA)</span>
+                <span>+92 314 5690329 (PAK)</span>
               </div>
               <div className="flex items-center gap-2 text-xs" style={{ color: BLUE }}>
                 <MapPin size={13} className="flex-shrink-0" style={{ color: RED }} />
-                <span>Lahore, Pakistan</span>
+                <span>Karachi, Pakistan</span>
               </div>
             </div>
 
@@ -79,8 +82,8 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               {[
                 { href: "https://facebook.com", label: "Facebook", Icon: Facebook },
-                { href: "https://instagram.com", label: "Instagram", Icon: Instagram },
-                { href: "https://youtube.com", label: "YouTube", Icon: Youtube },
+                { href: "https://www.instagram.com/alimranfabricsonline/", label: "Instagram", Icon: Instagram },
+                { href: "https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34", label: "YouTube", Icon: Youtube },
               ].map(({ href, label, Icon }) => (
                 <a
                   key={label}
@@ -88,11 +91,11 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center transition-colors"
+                  className="w-9 h-9 flex items-center justify-center transition-colors hover:opacity-80"
                   style={{
-                    backgroundColor: BLUE,
-                    color: YELLOW,
-                    border: `1px solid ${BLUE}`,
+                    backgroundColor: RED,
+                    color: "#ffffff",
+                    border: `1px solid ${RED}`,
                   }}
                 >
                   <Icon size={16} />
@@ -133,7 +136,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Trust badges */}
             <div className="flex flex-wrap items-center gap-6">
-              {["Secure Payment", "Free USA Shipping", "Authentic Craftsmanship", "Easy Returns"].map((badge) => (
+              {["Secure Payment", "Authentic Craftsmanship", "Easy Returns"].map((badge) => (
                 <div key={badge} className="flex items-center gap-1.5 text-xs font-inter" style={{ color: BLUE }}>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: RED }} />
                   {badge}

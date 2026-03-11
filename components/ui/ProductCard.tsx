@@ -56,20 +56,27 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
         </Link>
 
         {/* Badges */}
-        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-          {product.isNew && (
+        <div className="absolute top-0 left-0 flex flex-col gap-1">
+          {discount > 0 && (
+            <span
+              className="font-inter font-black text-white uppercase leading-none px-3 py-1.5"
+              style={{ backgroundColor: "#CC0000", fontSize: "13px", letterSpacing: "0.02em" }}
+            >
+              -{discount}%<br />
+              <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
+            </span>
+          )}
+          {product.isNew && !discount && (
             <span className="bg-navy text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
               New
             </span>
           )}
-          {product.isBestSeller && (
-            <span className="bg-gold text-charcoal text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+          {product.isBestSeller && !discount && !product.isNew && (
+            <span
+              className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
+              style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+            >
               Best Seller
-            </span>
-          )}
-          {discount > 0 && (
-            <span className="bg-red-600 text-white text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
-              -{discount}%
             </span>
           )}
         </div>
@@ -104,8 +111,9 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           </Link>
           <button
             onClick={handleQuickAdd}
-            className="flex-1 bg-navy hover:bg-navy-deep text-ivory py-3 text-xs font-inter font-medium
-                       uppercase tracking-wide flex items-center justify-center gap-1.5 transition-colors"
+            className="flex-1 py-3 text-xs font-inter font-medium
+                       uppercase tracking-wide flex items-center justify-center gap-1.5 transition-colors hover:opacity-90"
+            style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
           >
             <ShoppingBag size={13} />
             Add to Cart

@@ -67,9 +67,17 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
         <div className="flex items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
             {/* Mobile filter trigger lives inside FilterSidebar (md:hidden) — no duplicate here */}
-            <span className="font-inter text-xs text-charcoal/50">
-              {displayProducts.length} product{displayProducts.length !== 1 ? "s" : ""}
-            </span>
+            <div className="flex items-center gap-2">
+              <span
+                className="font-inter font-bold text-sm px-3 py-1 rounded-sm"
+                style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+              >
+                {displayProducts.length}
+              </span>
+              <span className="font-inter text-xs font-medium" style={{ color: "#0C1350" }}>
+                Product{displayProducts.length !== 1 ? "s" : ""} Found
+              </span>
+            </div>
           </div>
 
           {/* Sort dropdown */}
@@ -119,11 +127,12 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
             {[1, 2, 3].map((page) => (
               <button
                 key={page}
-                className={`w-10 h-10 font-inter text-sm font-medium border transition-colors ${
+                className="w-10 h-10 font-inter text-sm font-medium border transition-colors"
+                style={
                   page === 1
-                    ? "bg-navy border-navy text-ivory"
-                    : "border-charcoal/20 text-charcoal hover:border-gold"
-                }`}
+                    ? { backgroundColor: "#CC0000", borderColor: "#CC0000", color: "#ffffff" }
+                    : { borderColor: "rgba(44,44,44,0.2)", color: "#2C2C2C" }
+                }
               >
                 {page}
               </button>
