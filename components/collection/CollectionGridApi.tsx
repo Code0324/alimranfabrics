@@ -31,7 +31,7 @@ export default function CollectionGridApi({ allProducts }: CollectionGridApiProp
         <div className="flex items-center gap-2">
           <span
             className="font-inter font-bold text-sm px-3 py-1 rounded-sm"
-            style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
           >
             {sorted.length}
           </span>

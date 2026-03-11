@@ -161,18 +161,16 @@ export default function HomePage() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="w-8 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Our Heritage</span>
+              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Who We Are</span>
             </div>
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-5 bg-transparent">
-              Crafted with Generations of Artistry
+              Pakistan's Premier Fashion Distributors
             </h2>
             <p className="font-inter text-charcoal/60 text-sm leading-relaxed mb-4">
-              At Al Imran Fabrics, we believe every thread carries a story. Born in the heart of Lahore,
-              we&apos;ve been curating Pakistan&apos;s finest textiles for discerning customers around the world.
+              Al Imran Fabrics is your trusted destination for Pakistan&apos;s most celebrated clothing brands — all under one roof. We bring you the best of Khaadi, Gul Ahmed, Sana Safinaz, Maria B, Sapphire, and many more, delivered right to your doorstep.
             </p>
             <p className="font-inter text-charcoal/60 text-sm leading-relaxed mb-8">
-              Our master craftsmen bring centuries of embroidery traditions into every piece — from
-              hand-stitched Zardozi work to intricate Resham embroidery — making each garment a wearable work of art.
+              As an authorised multi-brand distributor, we handpick the finest collections each season — so you get authentic, original garments from Pakistan&apos;s top designers without the hassle of searching across multiple stores.
             </p>
             <Link href="/about" className="btn-outline">
               Discover Our Story

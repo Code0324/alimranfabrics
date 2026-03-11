@@ -70,7 +70,7 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
             <div className="flex items-center gap-2">
               <span
                 className="font-inter font-bold text-sm px-3 py-1 rounded-sm"
-                style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+                style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
               >
                 {displayProducts.length}
               </span>
@@ -130,7 +130,7 @@ export default function CollectionGrid({ allProducts }: CollectionGridProps) {
                 className="w-10 h-10 font-inter text-sm font-medium border transition-colors"
                 style={
                   page === 1
-                    ? { backgroundColor: "#CC0000", borderColor: "#CC0000", color: "#ffffff" }
+                    ? { backgroundColor: "#FFFD82", borderColor: "#FFFD82", color: "#CC0000" }
                     : { borderColor: "rgba(44,44,44,0.2)", color: "#2C2C2C" }
                 }
               >

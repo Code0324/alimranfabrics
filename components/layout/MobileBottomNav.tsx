@@ -9,7 +9,7 @@ const navItems = [
   { label: "Home", href: "/", Icon: Home },
   { label: "Search", href: "/collections/women", Icon: Search },
   { label: "Cart", href: "#cart", Icon: ShoppingBag, isCart: true },
-  { label: "Account", href: "/about", Icon: User },
+  { label: "Account", href: "/login", Icon: User },
 ];
 
 export default function MobileBottomNav() {
@@ -43,7 +43,7 @@ export default function MobileBottomNav() {
                   {itemCount > 0 && (
                     <span
                       className="absolute -top-1.5 -right-1.5 text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                      style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+                      style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
                     >
                       {itemCount}
                     </span>

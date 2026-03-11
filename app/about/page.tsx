@@ -1,130 +1,150 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Scissors, Globe, Heart, Award, Users, Leaf } from "lucide-react";
+import { ShoppingBag, Globe, Shield, Star, Zap, HeartHandshake } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Al Imran Fabrics — our heritage, values, and mission to bring authentic Pakistani fashion to the world.",
+    "Al Imran Fabrics — Pakistan's trusted multi-brand fashion distributor. Shop Khaadi, Gul Ahmed, Sana Safinaz, Maria B, and more, all in one place.",
 };
 
 const values = [
   {
-    icon: Award,
-    title: "Uncompromising Quality",
-    desc: "Every garment undergoes rigorous quality checks before it reaches your hands. We use only premium, hand-selected fabrics.",
+    icon: Shield,
+    title: "100% Authentic",
+    desc: "Every product we sell is sourced directly from official brand channels. No replicas, no imitations — ever.",
   },
   {
-    icon: Scissors,
-    title: "Heritage Craftsmanship",
-    desc: "Our artisans have inherited embroidery techniques passed down through generations of Pakistani textile masters.",
+    icon: Star,
+    title: "Top Pakistani Brands",
+    desc: "We carry collections from Khaadi, Gul Ahmed, Sana Safinaz, Maria B, Sapphire, Asim Jofa, and many more.",
   },
   {
     icon: Globe,
-    title: "Global Delivery",
-    desc: "From Lahore to Los Angeles — we ship worldwide with full customs handling so your order arrives without any hassle.",
+    title: "Worldwide Delivery",
+    desc: "From Lahore to London, Toronto to Toronto — we ship worldwide with full customs handling.",
   },
   {
-    icon: Heart,
-    title: "Made with Love",
-    desc: "Each piece is crafted with genuine care and passion. We don't mass-produce — we create with intention.",
+    icon: Zap,
+    title: "New Arrivals Every Week",
+    desc: "We stay ahead of every season — the latest drops from your favourite Pakistani brands land here first.",
   },
   {
-    icon: Users,
-    title: "Supporting Artisans",
-    desc: "We directly employ over 200 skilled craftspeople in Pakistan, ensuring fair wages and sustainable livelihoods.",
+    icon: ShoppingBag,
+    title: "One-Stop Shop",
+    desc: "No need to browse dozens of websites. Find all your favourite brands together, with easy comparison and checkout.",
   },
   {
-    icon: Leaf,
-    title: "Sustainable Practices",
-    desc: "We're committed to eco-friendly dyes, responsible sourcing, and minimal packaging waste.",
+    icon: HeartHandshake,
+    title: "Customer First",
+    desc: "Our team is always here to help you find the perfect outfit for Eid, weddings, or everyday elegance.",
   },
 ];
 
+const brands = [
+  "Khaadi", "Gul Ahmed", "Sana Safinaz", "Maria B",
+  "Sapphire", "Asim Jofa", "Zara Shahjahan", "Cross Stitch",
+  "Rang Rasiya", "Bonanza Satrangi", "Zellbury", "Limelight",
+];
+
 const milestones = [
-  { year: "2008", title: "Founded in Lahore", desc: "Al Imran Fabrics opens its first atelier in Lahore's Model Town." },
-  { year: "2014", title: "First International Order", desc: "We shipped our first collection to the Pakistani diaspora in the United States." },
-  { year: "2018", title: "Online Expansion", desc: "Launched our e-commerce platform to serve customers across 15 countries." },
-  { year: "2022", title: "USA Free Shipping", desc: "Introduced our signature free shipping program for all USA customers." },
-  { year: "2025", title: "15,000+ Happy Customers", desc: "Celebrating our growing family of customers across 3 continents." },
+  { year: "2010", title: "Founded in Lahore", desc: "Al Imran Fabrics opens its first multi-brand store in Lahore, carrying collections from Pakistan's top designers." },
+  { year: "2015", title: "First International Orders", desc: "We began shipping to the Pakistani diaspora in the United States, UK, and Canada." },
+  { year: "2019", title: "Online Store Launch", desc: "Launched our e-commerce platform to serve customers across 20+ countries worldwide." },
+  { year: "2022", title: "Free Shipping — USA", desc: "Introduced free shipping on all orders to the United States." },
+  { year: "2025", title: "15,000+ Happy Customers", desc: "Proud to serve a growing family of fashion lovers across 3 continents." },
 ];
 
 export default function AboutPage() {
   return (
     <div className="pt-28 md:pt-32">
       {/* Hero */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1400&q=80"
-            alt="About Al Imran Fabrics"
-            fill
-            className="object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-charcoal/75" />
-        </div>
+      <section className="relative py-20 px-4 overflow-hidden" style={{ backgroundColor: "#CC0000" }}>
+        <div
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{ backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)", backgroundSize: "20px 20px" }}
+        />
         <div className="relative max-w-3xl mx-auto text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-12 h-px bg-gold/60" />
-            <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Our Story</span>
-            <span className="w-12 h-px bg-gold/60" />
+            <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
+            <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFFD82" }}>Our Story</span>
+            <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
           </div>
-          <h1 className="font-playfair text-4xl md:text-6xl font-bold text-ivory mb-5">
-            Timeless Elegance,<br />Global Reach
+          <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-5" style={{ color: "#FFFD82" }}>
+            Pakistan&apos;s Best Brands,<br />All in One Place
           </h1>
-          <p className="font-inter text-ivory/70 text-base md:text-lg leading-relaxed">
-            A story woven with threads of tradition, passion, and the desire to share Pakistan&apos;s
-            breathtaking textile heritage with the world.
+          <p className="font-inter text-white/80 text-base md:text-lg leading-relaxed">
+            Al Imran Fabrics is your trusted multi-brand distributor for Pakistan&apos;s most celebrated fashion labels —
+            bringing authentic collections straight to your door, wherever you are in the world.
           </p>
         </div>
       </section>
 
-      {/* Brand Story */}
+      {/* Who We Are */}
       <section className="py-16 md:py-24 px-4 bg-ivory">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="w-8 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Who We Are</span>
+              <span className="w-8 h-px" style={{ backgroundColor: "#CC0000" }} />
+              <span className="font-inter text-xs uppercase tracking-[0.3em] font-bold" style={{ color: "#CC0000" }}>Who We Are</span>
             </div>
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-6">
-              Born in Lahore, Loved Worldwide
+              Your Trusted Multi-Brand Distributor
             </h2>
             <div className="space-y-4 font-inter text-charcoal/70 text-sm leading-relaxed">
               <p>
-                Al Imran Fabrics was born from a simple belief: that the extraordinary craftsmanship of Pakistani artisans deserves to be celebrated globally. Founded in 2008 in the heart of Lahore, we started as a small boutique serving local families for Eid and wedding occasions.
+                Al Imran Fabrics is not a manufacturer — we are proud distributors of Pakistan&apos;s finest fashion brands.
+                Founded in Lahore, we bring together the very best collections from Khaadi, Gul Ahmed, Sana Safinaz, Maria B,
+                Sapphire, Asim Jofa, and many more under one roof.
               </p>
               <p>
-                Today, we are a bridge between Pakistan&apos;s centuries-old textile tradition and homes across North America, Europe, and beyond. Each collection we curate is a love letter to the artisans who pour their hearts into every stitch.
+                Whether you&apos;re looking for lawn for summer, khaddar for winter, bridal formals, or casual everyday wear —
+                we have it all. Our team carefully curates each season&apos;s launches so you never miss the hottest drops.
               </p>
               <p>
-                We work directly with master embroiderers, weavers, and tailors across Punjab — ensuring both exceptional quality and fair compensation. When you wear Al Imran, you wear the hands, the stories, and the heritage of Pakistan&apos;s finest craftspeople.
+                With customers across Pakistan, the USA, UK, Canada, and beyond, we make it easy to shop your favourite
+                Pakistani brands no matter where you live — with fast delivery, easy returns, and dedicated support.
               </p>
             </div>
           </div>
           <div className="relative">
             <div className="grid grid-cols-2 gap-3">
               <div className="relative h-64 overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80"
-                  alt="Craftsmanship"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80" alt="Pakistani fashion" fill className="object-cover" />
               </div>
               <div className="relative h-64 mt-6 overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80"
-                  alt="Embroidery"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80" alt="Pakistani fabric" fill className="object-cover" />
               </div>
             </div>
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gold text-charcoal px-6 py-3 font-playfair font-bold text-center text-sm whitespace-nowrap">
-              15+ Years of Excellence
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 font-playfair font-bold text-center text-sm whitespace-nowrap"
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}>
+              15+ Years Serving Customers
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Brands We Carry */}
+      <section className="py-16 px-4" style={{ backgroundColor: "#FFFD82" }}>
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-4 mb-3">
+            <span className="w-12 h-px" style={{ backgroundColor: "#CC0000" }} />
+            <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#CC0000" }}>What We Carry</span>
+            <span className="w-12 h-px" style={{ backgroundColor: "#CC0000" }} />
+          </div>
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold mb-3" style={{ color: "#CC0000" }}>Brands We Distribute</h2>
+          <p className="font-inter text-sm mb-10 max-w-md mx-auto" style={{ color: "#0C1350" }}>
+            We are authorised distributors for Pakistan&apos;s most loved clothing labels.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {brands.map((brand) => (
+              <span key={brand}
+                className="font-inter font-semibold text-sm px-5 py-2.5 border-2 transition-all duration-200 hover:scale-105"
+                style={{ borderColor: "#CC0000", color: "#CC0000", backgroundColor: "rgba(255,255,255,0.6)" }}>
+                {brand}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -134,31 +154,20 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Why Choose Us</span>
-              <span className="w-12 h-px bg-gold" />
+              <span className="w-12 h-px" style={{ backgroundColor: "#CC0000" }} />
+              <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#CC0000" }}>Why Choose Us</span>
+              <span className="w-12 h-px" style={{ backgroundColor: "#CC0000" }} />
             </div>
             <h2 className="section-title mb-3">Why Al Imran Fabrics</h2>
-            <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm">
-              Six pillars that define our commitment to you and our artisan community.
-            </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((value) => (
-              <div
-                key={value.title}
-                className="group p-6 border border-ivory-dark hover:border-gold/40 transition-all duration-300 hover:shadow-gold"
-              >
-                <div className="w-12 h-12 flex items-center justify-center mb-5 transition-colors bg-navy/10 group-hover:bg-navy/20">
-                  <value.icon size={22} style={{ color: "#C9A84C" }} />
+              <div key={value.title} className="group p-6 border-2 border-[#FFFD82] hover:border-[#CC0000] transition-all duration-300">
+                <div className="w-12 h-12 flex items-center justify-center mb-5 transition-colors" style={{ backgroundColor: "#FFFD82" }}>
+                  <value.icon size={22} style={{ color: "#CC0000" }} />
                 </div>
-                <h3 className="font-playfair font-semibold text-lg text-charcoal mb-2">
-                  {value.title}
-                </h3>
-                <p className="font-inter text-sm text-charcoal/60 leading-relaxed">
-                  {value.desc}
-                </p>
+                <h3 className="font-playfair font-semibold text-lg text-charcoal mb-2">{value.title}</h3>
+                <p className="font-inter text-sm text-charcoal/60 leading-relaxed">{value.desc}</p>
               </div>
             ))}
           </div>
@@ -166,75 +175,24 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 md:py-24 px-4 bg-charcoal">
+      <section className="py-16 md:py-24 px-4" style={{ backgroundColor: "#0C1350" }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px bg-gold/60" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Our Journey</span>
-              <span className="w-12 h-px bg-gold/60" />
+              <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
+              <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFFD82" }}>Our Journey</span>
+              <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
             </div>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-ivory">
-              Milestones That Define Us
-            </h2>
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white">Our Milestones</h2>
           </div>
-
-          <div className="relative">
-            <div className="absolute left-1/2 -translate-x-0.5 top-0 bottom-0 w-px bg-gold/30 hidden md:block" />
-            <div className="space-y-8">
-              {milestones.map((m, i) => (
-                <div
-                  key={m.year}
-                  className={`flex gap-6 md:gap-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-                >
-                  <div className={`md:w-1/2 ${i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                    <div className="bg-white/5 border border-ivory/10 p-5 hover:border-gold/30 transition-colors">
-                      <span className="font-playfair text-gold text-xl font-bold block mb-1">{m.year}</span>
-                      <h3 className="font-playfair text-ivory font-semibold mb-1">{m.title}</h3>
-                      <p className="font-inter text-ivory/50 text-sm">{m.desc}</p>
-                    </div>
-                  </div>
-                  <div className="md:w-0 flex-shrink-0 hidden md:flex items-start justify-center relative">
-                    <div className="w-3 h-3 bg-gold rounded-full mt-5 -translate-x-1.5" />
-                  </div>
-                  <div className="md:w-1/2" />
+          <div className="space-y-6">
+            {milestones.map((m) => (
+              <div key={m.year} className="flex gap-6 items-start border border-white/10 p-5 hover:border-[#FFFD82]/40 transition-colors">
+                <div className="flex-shrink-0 font-playfair font-bold text-2xl" style={{ color: "#FFFD82" }}>{m.year}</div>
+                <div>
+                  <h3 className="font-playfair font-semibold text-white mb-1">{m.title}</h3>
+                  <p className="font-inter text-white/50 text-sm">{m.desc}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team placeholder */}
-      <section className="py-16 md:py-24 px-4 bg-ivory">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">The People</span>
-              <span className="w-12 h-px bg-gold" />
-            </div>
-            <h2 className="section-title mb-3">Our Artisan Community</h2>
-            <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm">
-              Behind every garment is a skilled craftsperson whose expertise has been refined over decades.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80",
-              "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80",
-              "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=400&q=80",
-              "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=80",
-            ].map((img, i) => (
-              <div key={i} className="relative aspect-square overflow-hidden group">
-                <Image
-                  src={img}
-                  alt={`Artisan ${i + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors duration-300" />
               </div>
             ))}
           </div>
@@ -242,22 +200,18 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
-        <h2 className="font-playfair text-3xl font-bold text-ivory mb-4">
-          Ready to Explore?
+      <section className="py-16 px-4 text-center" style={{ backgroundColor: "#FFFD82" }}>
+        <h2 className="font-playfair text-3xl font-bold mb-4" style={{ color: "#CC0000" }}>
+          Ready to Shop?
         </h2>
-        <p className="font-inter text-ivory/70 text-sm mb-8 max-w-md mx-auto">
-          Discover our latest collections and bring the elegance of Pakistani heritage into your wardrobe.
+        <p className="font-inter text-sm mb-8 max-w-md mx-auto" style={{ color: "#0C1350" }}>
+          Discover the latest collections from Pakistan&apos;s top brands — all in one place.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
-          <Link href="/collections/women" className="btn-gold">
-            Shop Women
+          <Link href="/collections/new-arrivals" className="btn-primary">
+            Shop New Arrivals
           </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center font-inter text-sm font-medium uppercase tracking-wide
-                       text-ivory border border-ivory/50 px-6 py-3 hover:border-gold hover:text-gold transition-all duration-300"
-          >
+          <Link href="/contact" className="btn-outline">
             Contact Us
           </Link>
         </div>

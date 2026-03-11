@@ -317,7 +317,7 @@ export default function Navbar() {
                 {wishlist.length > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+                    style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
                   >
                     {wishlist.length}
                   </span>
@@ -335,7 +335,7 @@ export default function Navbar() {
                 {itemCount > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+                    style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
                   >
                     {itemCount}
                   </span>

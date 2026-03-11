@@ -121,7 +121,7 @@ export default function ProductCardApi({ product }: Props) {
             onClick={() => addItem(cartProduct, "M", { name: "Default", hex: "#888888" })}
             className="flex-1 py-3 text-xs font-inter font-medium uppercase tracking-wide
                        flex items-center justify-center gap-1.5 transition-colors hover:opacity-90"
-            style={{ backgroundColor: "#CC0000", color: "#ffffff" }}
+            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
           >
             <ShoppingBag size={13} />
             Add to Cart

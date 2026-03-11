@@ -314,8 +314,8 @@ export default function CheckoutContent() {
                             onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
                           />
                           <span
-                            className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center text-white"
-                            style={{ backgroundColor: "#CC0000" }}
+                            className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center"
+                            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
                           >
                             {item.quantity}
                           </span>
@@ -375,8 +375,8 @@ export default function CheckoutContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full mt-5 py-3.5 font-inter font-semibold text-sm uppercase tracking-wide text-white transition disabled:opacity-60 flex items-center justify-center gap-2"
-                style={{ backgroundColor: "#CC0000" }}
+                className="w-full mt-5 py-3.5 font-inter font-semibold text-sm uppercase tracking-wide transition disabled:opacity-60 flex items-center justify-center gap-2"
+                style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
               >
                 <Lock className="w-4 h-4" />
                 {loading ? (

@@ -20,8 +20,8 @@ export default function NotFound() {
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <Link
             href="/"
-            className="font-inter font-semibold text-sm uppercase tracking-wide px-6 py-3 text-white transition hover:opacity-90"
-            style={{ backgroundColor: "#CC0000" }}
+            className="font-inter font-semibold text-sm uppercase tracking-wide px-6 py-3 transition hover:opacity-90"
+            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
           >
             Back to Home
           </Link>
