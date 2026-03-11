@@ -21,7 +21,6 @@ export default function ProductCardApi({ product }: Props) {
   const { toggleWishlist, isWishlisted } = useWishlist();
   const wishlisted = isWishlisted(product.id);
 
-  // Map backend product → local Product shape for cart compatibility
   const cartProduct = {
     id: product.id,
     name: product.name,
@@ -73,12 +72,12 @@ export default function ProductCardApi({ product }: Props) {
           />
         </Link>
 
-        {/* Sale badge — top left */}
+        {/* Badges — top left */}
         <div className="absolute top-0 left-0 flex flex-col gap-1">
           {discount > 0 && (
             <span
-              className="font-inter font-black text-white uppercase leading-none px-3 py-1.5"
-              style={{ backgroundColor: "#CC0000", fontSize: "13px" }}
+              className="font-inter font-black uppercase leading-none px-3 py-1.5"
+              style={{ backgroundColor: "#FFFD82", color: "#0C1350", fontSize: "13px" }}
             >
               -{discount}%<br />
               <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
@@ -90,8 +89,10 @@ export default function ProductCardApi({ product }: Props) {
             </span>
           )}
           {product.isBestSeller && !discount && !product.isNew && (
-            <span className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#CC0000", color: "#ffffff" }}>
+            <span
+              className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
+              style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+            >
               Best Seller
             </span>
           )}

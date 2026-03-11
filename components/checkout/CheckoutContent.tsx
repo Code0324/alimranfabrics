@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -22,6 +22,10 @@ export default function CheckoutContent() {
   const { items, getTotal, clearCart } = useCartStore();
   const { token, user } = useAuthStore();
 
+  // Prevent hydration mismatch — Zustand persist loads from localStorage only on client
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   const [form, setForm] = useState({
     name: user?.name ?? "",
     phone: "",
@@ -35,7 +39,7 @@ export default function CheckoutContent() {
   const [success, setSuccess] = useState(false);
   const [orderId, setOrderId] = useState("");
 
-  const subtotal = getTotal();
+  const subtotal = mounted ? getTotal() : 0;
   const shipping = subtotal >= 3000 ? 0 : 200;
   const total = subtotal + shipping;
 
@@ -108,17 +112,15 @@ export default function CheckoutContent() {
             <span>Our team will call you at <strong>{form.phone}</strong> to confirm delivery.</span>
           </div>
         </div>
-        <div className="flex gap-3 justify-center">
-          <Link href="/" className="btn-outline text-sm px-6 py-2.5">
-            Continue Shopping
-          </Link>
-        </div>
+        <Link href="/" className="btn-outline text-sm px-6 py-2.5">
+          Continue Shopping
+        </Link>
       </div>
     );
   }
 
-  // ── Empty cart guard ───────────────────────────────────────────────────────
-  if (items.length === 0) {
+  // ── Empty cart guard (only after mount so localStorage is read) ────────────
+  if (mounted && items.length === 0) {
     return (
       <div className="max-w-lg mx-auto px-4 py-20 text-center">
         <ShoppingBag className="w-16 h-16 text-charcoal/20 mx-auto mb-4" />
@@ -131,7 +133,7 @@ export default function CheckoutContent() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Header */}
+      {/* Breadcrumb */}
       <div className="flex items-center gap-2 font-inter text-xs text-charcoal/40 mb-6 uppercase tracking-wide">
         <Link href="/cart" className="hover:text-charcoal transition">Cart</Link>
         <ChevronRight className="w-3 h-3" />
@@ -142,12 +144,13 @@ export default function CheckoutContent() {
 
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
           {/* ── Left: Form ── */}
           <div className="lg:col-span-3 space-y-6">
 
             {/* Login prompt */}
-            {!token && (
-              <div className="bg-white border border-[#E0D8CC] rounded p-4 flex items-center justify-between gap-4">
+            {mounted && !token && (
+              <div className="bg-white border border-[#E0D8CC] rounded p-4">
                 <p className="font-inter text-sm text-charcoal/70">
                   Already have an account?{" "}
                   <Link href="/login?redirect=/checkout" className="font-semibold underline" style={{ color: "#CC0000" }}>
@@ -250,9 +253,9 @@ export default function CheckoutContent() {
               </h2>
               <div className="space-y-3">
                 {([
-                  { value: "cod",       label: "Cash on Delivery",  sub: "Pay when your order arrives",      icon: Truck },
-                  { value: "jazzcash",  label: "JazzCash",          sub: "Mobile wallet payment",             icon: Smartphone },
-                  { value: "easypaisa", label: "Easypaisa",         sub: "Mobile wallet payment",             icon: Smartphone },
+                  { value: "cod",       label: "Cash on Delivery", sub: "Pay when your order arrives", icon: Truck },
+                  { value: "jazzcash",  label: "JazzCash",         sub: "Mobile wallet payment",        icon: Smartphone },
+                  { value: "easypaisa", label: "Easypaisa",        sub: "Mobile wallet payment",        icon: Smartphone },
                 ] as const).map(({ value, label, sub, icon: Icon }) => (
                   <label
                     key={value}
@@ -291,58 +294,60 @@ export default function CheckoutContent() {
                 Order Summary
               </h2>
 
-              {/* Items */}
-              <div className="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
-                {items.map((item, i) => {
-                  const img = item.product.images?.[0];
-                  const imgSrc = img
-                    ? img.startsWith("/")
-                      ? `http://localhost:8000${img}`
-                      : img
-                    : FALLBACK_IMAGE;
-                  return (
-                    <div key={i} className="flex gap-3">
-                      <div className="relative w-14 h-14 flex-shrink-0 bg-ivory-dark overflow-hidden">
-                        <Image
-                          src={imgSrc}
-                          alt={item.product.name}
-                          fill
-                          className="object-cover"
-                          unoptimized={imgSrc.startsWith("http://localhost")}
-                          onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
-                        />
-                        <span className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center text-white"
-                          style={{ backgroundColor: "#CC0000" }}>
-                          {item.quantity}
-                        </span>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-inter text-sm font-medium text-charcoal leading-tight truncate">
-                          {item.product.name}
+              {/* Items — only render after mount */}
+              {mounted && (
+                <div className="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
+                  {items.map((item, i) => {
+                    const img = item.product.images?.[0];
+                    const imgSrc = img
+                      ? img.startsWith("/") ? `http://localhost:8000${img}` : img
+                      : FALLBACK_IMAGE;
+                    return (
+                      <div key={i} className="flex gap-3">
+                        <div className="relative w-14 h-14 flex-shrink-0 bg-ivory-dark overflow-hidden">
+                          <Image
+                            src={imgSrc}
+                            alt={item.product.name}
+                            fill
+                            className="object-cover"
+                            unoptimized={imgSrc.startsWith("http://localhost")}
+                            onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
+                          />
+                          <span
+                            className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center text-white"
+                            style={{ backgroundColor: "#CC0000" }}
+                          >
+                            {item.quantity}
+                          </span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-inter text-sm font-medium text-charcoal leading-tight truncate">
+                            {item.product.name}
+                          </p>
+                          <p className="font-inter text-xs text-charcoal/40 mt-0.5">
+                            {item.selectedSize && `Size: ${item.selectedSize}`}
+                            {item.selectedSize && item.selectedColor?.name && " · "}
+                            {item.selectedColor?.name && `${item.selectedColor.name}`}
+                          </p>
+                        </div>
+                        <p className="font-inter text-sm font-semibold text-charcoal flex-shrink-0">
+                          {formatPrice(item.product.price * item.quantity, "PKR")}
                         </p>
-                        <p className="font-inter text-xs text-charcoal/40 mt-0.5">
-                          {item.selectedSize && `Size: ${item.selectedSize}`}
-                          {item.selectedSize && item.selectedColor?.name && " · "}
-                          {item.selectedColor?.name && `${item.selectedColor.name}`}
-                        </p>
                       </div>
-                      <p className="font-inter text-sm font-semibold text-charcoal flex-shrink-0">
-                        {formatPrice(item.product.price * item.quantity, "PKR")}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Totals */}
               <div className="border-t border-[#E0D8CC] pt-4 space-y-2">
                 <div className="flex justify-between font-inter text-sm text-charcoal/60">
                   <span>Subtotal</span>
-                  <span>{formatPrice(subtotal, "PKR")}</span>
+                  <span suppressHydrationWarning>{formatPrice(subtotal, "PKR")}</span>
                 </div>
                 <div className="flex justify-between font-inter text-sm text-charcoal/60">
                   <span>Shipping</span>
-                  <span className={shipping === 0 ? "text-green-600 font-semibold" : ""}>
+                  <span suppressHydrationWarning className={shipping === 0 ? "text-green-600 font-semibold" : ""}>
                     {shipping === 0 ? "Free" : formatPrice(shipping, "PKR")}
                   </span>
                 </div>
@@ -353,7 +358,9 @@ export default function CheckoutContent() {
                 )}
                 <div className="flex justify-between font-inter font-bold text-base text-charcoal border-t border-[#E0D8CC] pt-2 mt-2">
                   <span>Total</span>
-                  <span style={{ color: "#CC0000" }}>{formatPrice(total, "PKR")}</span>
+                  <span suppressHydrationWarning style={{ color: "#CC0000" }}>
+                    {formatPrice(total, "PKR")}
+                  </span>
                 </div>
               </div>
 
@@ -371,32 +378,29 @@ export default function CheckoutContent() {
                 className="w-full mt-5 py-3.5 font-inter font-semibold text-sm uppercase tracking-wide text-white transition disabled:opacity-60 flex items-center justify-center gap-2"
                 style={{ backgroundColor: "#CC0000" }}
               >
+                <Lock className="w-4 h-4" />
                 {loading ? (
-                  <>
+                  <span className="flex items-center gap-2">
                     <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     Placing Order…
-                  </>
+                  </span>
                 ) : (
-                  <>
-                    <Lock className="w-4 h-4" />
+                  <span suppressHydrationWarning>
                     Place Order · {formatPrice(total, "PKR")}
-                  </>
+                  </span>
                 )}
               </button>
 
               {/* Trust badges */}
               <div className="mt-4 flex items-center justify-center gap-4 text-charcoal/30">
                 <div className="flex items-center gap-1 font-inter text-xs">
-                  <Lock className="w-3 h-3" />
-                  Secure
+                  <Lock className="w-3 h-3" /> Secure
                 </div>
                 <div className="flex items-center gap-1 font-inter text-xs">
-                  <Truck className="w-3 h-3" />
-                  Fast Delivery
+                  <Truck className="w-3 h-3" /> Fast Delivery
                 </div>
                 <div className="flex items-center gap-1 font-inter text-xs">
-                  <CheckCircle className="w-3 h-3" />
-                  Verified
+                  <CheckCircle className="w-3 h-3" /> Verified
                 </div>
               </div>
             </div>
