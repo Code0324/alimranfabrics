@@ -46,8 +46,6 @@ const navItems = [
   },
 ];
 
-const TICKER_TEXT =
-  "Global Shipping Available\u2002\u2022\u2002New Ramadan Collection Out Now\u2002\u2022\u2002Free USA Shipping — No Duties\u2002\u2022\u2002Global Shipping Available\u2002\u2022\u2002New Ramadan Collection Out Now\u2002\u2022\u2002Free USA Shipping — No Duties\u2002\u2022\u2002";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
