@@ -53,11 +53,14 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [currency, setCurrency] = useState("USD");
+  const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const itemCount = useCartStore((s) => s.getItemCount());
   const openCart = useCartStore((s) => s.openCart);
   const { wishlist } = useWishlist();
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -314,7 +317,7 @@ export default function Navbar() {
                 aria-label="Wishlist"
               >
                 <Heart size={20} />
-                {wishlist.length > 0 && (
+                {mounted && wishlist.length > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
                     style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
@@ -332,7 +335,7 @@ export default function Navbar() {
                 aria-label="Shopping cart"
               >
                 <ShoppingBag size={20} />
-                {itemCount > 0 && (
+                {mounted && itemCount > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
                     style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}

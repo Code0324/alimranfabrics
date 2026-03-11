@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X, ShoppingBag, Truck } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
@@ -10,8 +10,12 @@ import { formatPrice } from "@/lib/utils";
 export default function CartDrawer() {
   const { items, isOpen, closeCart, getTotal, getItemCount } = useCartStore();
   const drawerRef = useRef<HTMLDivElement>(null);
-  const total = getTotal();
-  const count = getItemCount();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  const total = mounted ? getTotal() : 0;
+  const count = mounted ? getItemCount() : 0;
 
   // ESC to close
   useEffect(() => {
@@ -85,7 +89,7 @@ export default function CartDrawer() {
 
         {/* Cart items */}
         <div className="flex-1 overflow-y-auto px-6">
-          {items.length === 0 ? (
+          {!mounted || items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 py-12">
               <div className="w-20 h-20 bg-ivory-dark rounded-full flex items-center justify-center">
                 <ShoppingBag size={32} className="text-charcoal/30" />
@@ -118,7 +122,7 @@ export default function CartDrawer() {
         </div>
 
         {/* Footer / Summary */}
-        {items.length > 0 && (
+        {mounted && items.length > 0 && (
           <div className="border-t border-ivory-dark px-6 py-5 space-y-4">
             {/* Subtotal */}
             <div className="space-y-2">

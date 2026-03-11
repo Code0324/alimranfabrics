@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Home, Search, ShoppingBag, User } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { usePathname } from "next/navigation";
@@ -16,6 +17,8 @@ export default function MobileBottomNav() {
   const pathname = usePathname();
   const itemCount = useCartStore((s) => s.getItemCount());
   const openCart = useCartStore((s) => s.openCart);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   return (
     <nav
@@ -40,7 +43,7 @@ export default function MobileBottomNav() {
                     size={22}
                     style={{ color: "#CC0000" }}
                   />
-                  {itemCount > 0 && (
+                  {mounted && itemCount > 0 && (
                     <span
                       className="absolute -top-1.5 -right-1.5 text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
                       style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}

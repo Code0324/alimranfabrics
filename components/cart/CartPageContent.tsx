@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ShoppingBag, ArrowLeft, Truck } from "lucide-react";
 import CartItem from "@/components/cart/CartItem";
@@ -10,8 +11,10 @@ import { products } from "@/data/products";
 
 export default function CartPageContent() {
   const { items, getTotal, getItemCount } = useCartStore();
-  const total = getTotal();
-  const count = getItemCount();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  const total = mounted ? getTotal() : 0;
+  const count = mounted ? getItemCount() : 0;
 
   const upsellProducts = products
     .filter((p) => !items.find((i) => i.product.id === p.id))
@@ -39,7 +42,7 @@ export default function CartPageContent() {
         )}
       </h1>
 
-      {items.length === 0 ? (
+      {!mounted || items.length === 0 ? (
         <div className="text-center py-20">
           <div className="w-24 h-24 bg-ivory-dark flex items-center justify-center mx-auto mb-6">
             <ShoppingBag size={36} className="text-charcoal/30" />
