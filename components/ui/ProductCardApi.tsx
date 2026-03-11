@@ -77,7 +77,7 @@ export default function ProductCardApi({ product }: Props) {
           {discount > 0 && (
             <span
               className="font-inter font-black uppercase leading-none px-3 py-1.5"
-              style={{ backgroundColor: "#FFFD82", color: "#0C1350", fontSize: "13px" }}
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000", fontSize: "13px" }}
             >
               -{discount}%<br />
               <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
@@ -91,7 +91,7 @@ export default function ProductCardApi({ product }: Props) {
           {product.isBestSeller && !discount && !product.isNew && (
             <span
               className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
             >
               Best Seller
             </span>

@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
+import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
 
 export const metadata: Metadata = {
   title: {
@@ -43,6 +44,7 @@ export default function RootLayout({
           <Footer />
           <CartDrawer />
           <MobileBottomNav />
+          <WhatsAppFloat />
         </WishlistProvider>
       </body>
     </html>

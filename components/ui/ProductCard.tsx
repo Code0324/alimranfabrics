@@ -60,7 +60,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           {discount > 0 && (
             <span
               className="font-inter font-black uppercase leading-none px-3 py-1.5"
-              style={{ backgroundColor: "#FFFD82", color: "#0C1350", fontSize: "13px", letterSpacing: "0.02em" }}
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000", fontSize: "13px", letterSpacing: "0.02em" }}
             >
               -{discount}%<br />
               <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
@@ -74,7 +74,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           {product.isBestSeller && !discount && !product.isNew && (
             <span
               className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
             >
               Best Seller
             </span>
@@ -113,7 +113,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
             onClick={handleQuickAdd}
             className="flex-1 py-3 text-xs font-inter font-medium
                        uppercase tracking-wide flex items-center justify-center gap-1.5 transition-colors hover:opacity-90"
-            style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
           >
             <ShoppingBag size={13} />
             Add to Cart
