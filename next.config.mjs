@@ -7,6 +7,12 @@ const nextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      {
+        // Railway backend — allow product images served from backend
+        protocol: "https",
+        hostname: "*.up.railway.app",
+        pathname: "/**",
+      },
     ],
   },
 };
