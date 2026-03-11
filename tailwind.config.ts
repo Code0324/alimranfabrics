@@ -36,6 +36,10 @@ const config: Config = {
         brightGold: "#FFE600",
         crimson: "#B71C1C",
         cream: "#FDFCF7",
+        // Admin panel tokens
+        surface: "#FFFFFF",
+        muted: "#6B6560",
+        border: { DEFAULT: "#E0D8CC", dark: "#CCC4B4" },
       },
       fontFamily: {
         playfair: ["var(--font-playfair)", "Georgia", "serif"],
@@ -55,6 +59,7 @@ const config: Config = {
         "slide-in-right": "slideInRight 0.3s ease-out",
         "slide-up": "slideUp 0.4s ease-out",
         "ticker": "ticker 28s linear infinite",
+        "slide-in": "slideIn 0.3s ease-out",
       },
       keyframes: {
         fadeIn: {
@@ -67,6 +72,10 @@ const config: Config = {
         },
         slideUp: {
           "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        slideIn: {
+          "0%": { transform: "translateY(10px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
         ticker: {
