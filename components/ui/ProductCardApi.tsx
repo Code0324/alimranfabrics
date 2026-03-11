@@ -44,7 +44,7 @@ export default function ProductCardApi({ product }: Props) {
 
   const imageUrl =
     product.images[0]?.startsWith("/")
-      ? `http://localhost:8000${product.images[0]}`
+      ? `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:8000'}${product.images[0]}`
       : product.images[0] || FALLBACK_IMAGE;
 
   const discount = product.discountPercentage ||

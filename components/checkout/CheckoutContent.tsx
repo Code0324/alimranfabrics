@@ -300,7 +300,7 @@ export default function CheckoutContent() {
                   {items.map((item, i) => {
                     const img = item.product.images?.[0];
                     const imgSrc = img
-                      ? img.startsWith("/") ? `http://localhost:8000${img}` : img
+                      ? img.startsWith("/") ? `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:8000'}${img}` : img
                       : FALLBACK_IMAGE;
                     return (
                       <div key={i} className="flex gap-3">

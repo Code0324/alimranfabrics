@@ -1,6 +1,6 @@
 /**
- * API client — connects to the FastAPI backend at /mnt/d/aidd/ecommerce
- * Backend runs on http://localhost:8000
+ * API client — connects to Railway backend in production,
+ * falls back to localhost:8000 for local development.
  */
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
