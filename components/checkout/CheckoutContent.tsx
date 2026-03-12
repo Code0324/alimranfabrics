@@ -145,8 +145,8 @@ export default function CheckoutContent() {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
-          {/* ── Left: Form ── */}
-          <div className="lg:col-span-3 space-y-6">
+          {/* ── Left: Form ── (order-2 on mobile so summary shows first) */}
+          <div className="lg:col-span-3 space-y-6 order-2 lg:order-1">
 
             {/* Login prompt */}
             {mounted && !token && (
@@ -287,9 +287,9 @@ export default function CheckoutContent() {
             </div>
           </div>
 
-          {/* ── Right: Order Summary ── */}
-          <div className="lg:col-span-2">
-            <div className="bg-white border border-[#E0D8CC] rounded p-6 sticky top-32">
+          {/* ── Right: Order Summary ── (order-1 on mobile so it shows first) */}
+          <div className="lg:col-span-2 order-1 lg:order-2">
+            <div className="bg-white border border-[#E0D8CC] rounded p-6 lg:sticky lg:top-32">
               <h2 className="font-playfair text-lg font-semibold text-charcoal mb-4">
                 Order Summary
               </h2>

@@ -38,7 +38,7 @@ export default function CartDrawer() {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-charcoal/40 backdrop-blur-sm z-40 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-charcoal/40 backdrop-blur-sm z-[59] transition-opacity duration-300 ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={closeCart}
@@ -52,7 +52,7 @@ export default function CartDrawer() {
         aria-modal="true"
         aria-label="Shopping cart"
         tabIndex={-1}
-        className={`fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 flex flex-col
+        className={`fixed top-0 right-0 h-[100dvh] w-full max-w-md bg-white z-[60] flex flex-col
                     transition-transform duration-300 ease-out shadow-2xl
                     focus:outline-none
                     ${isOpen ? "translate-x-0" : "translate-x-full"}`}
