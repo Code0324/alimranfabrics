@@ -177,6 +177,7 @@ export default function Navbar() {
                   fill
                   sizes="80px"
                   className="object-contain"
+                  style={{ mixBlendMode: "multiply" }}
                   priority
                 />
               </div>

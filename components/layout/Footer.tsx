@@ -54,6 +54,7 @@ export default function Footer() {
                     fill
                     sizes="80px"
                     className="object-contain"
+                    style={{ mixBlendMode: "multiply" }}
                   />
                 </div>
               </Link>
