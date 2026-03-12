@@ -110,8 +110,8 @@ export default function ProductCardApi({ product }: Props) {
           <Heart size={14} fill={wishlisted ? "currentColor" : "none"} />
         </button>
 
-        {/* Hover actions — always visible on mobile, hover-only on desktop */}
-        <div className={`absolute bottom-0 left-0 right-0 flex transition-all duration-300 ${hovered ? "md:translate-y-0 md:opacity-100" : "md:translate-y-full md:opacity-0"}`}>
+        {/* Hover actions */}
+        <div className={`absolute bottom-0 left-0 right-0 flex transition-all duration-300 ${hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
           <Link
             href={`/products/${product.slug}`}
             className="flex-1 bg-white/90 hover:bg-ivory text-charcoal py-3 text-xs font-inter font-medium

@@ -101,7 +101,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
         {/* Hover actions */}
         <div
           className={`absolute bottom-0 left-0 right-0 flex transition-all duration-300 ${
-            isHovered ? "md:translate-y-0 md:opacity-100" : "md:translate-y-full md:opacity-0"
+            isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
           }`}
         >
           <Link
