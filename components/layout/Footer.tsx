@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Phone } from "lucide-react";
 
 const footerLinks = {
   Shop: [
@@ -38,11 +37,80 @@ const embossText: React.CSSProperties = {
   textShadow: "-1px -1px 1px rgba(255,255,255,0.80), 1px 1px 1px rgba(0,0,0,0.14)",
 };
 
-// 3D drop-shadow for logo
-const logo3D: React.CSSProperties = {
-  filter: "drop-shadow(2px 4px 8px rgba(0,0,0,0.28)) drop-shadow(-1px -2px 3px rgba(255,255,255,0.55))",
-};
+/* ── Branded contact icons ── */
+function GmailIcon() {
+  return (
+    <svg width="20" height="15" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gm-s" x="-15%" y="-15%" width="130%" height="130%">
+          <feDropShadow dx="0" dy="2" stdDeviation="1.5" floodColor="#EA4335" floodOpacity="0.45"/>
+        </filter>
+      </defs>
+      {/* White envelope base */}
+      <rect x="0.5" y="0.5" width="39" height="29" rx="3" fill="white" filter="url(#gm-s)"/>
+      {/* Blue left panel */}
+      <path d="M0.5 4 Q0.5 0.5 4 0.5 L7 0.5 L7 24 L0.5 29.5Z" fill="#4285F4"/>
+      {/* Green right panel */}
+      <path d="M39.5 4 Q39.5 0.5 36 0.5 L33 0.5 L33 24 L39.5 29.5Z" fill="#34A853"/>
+      {/* Yellow bottom-left */}
+      <path d="M0.5 29.5 L7 24 L20 16 Z" fill="#FBBC04"/>
+      {/* Red bottom-right */}
+      <path d="M39.5 29.5 L33 24 L20 16 Z" fill="#EA4335"/>
+      {/* Red M-fold at top */}
+      <path d="M0.5 0.5 L20 15 L39.5 0.5 Z" fill="#EA4335"/>
+    </svg>
+  );
+}
 
+function PhoneIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ph-g" cx="35%" cy="25%" r="75%">
+          <stop offset="0%" stopColor="#4CAF50"/>
+          <stop offset="100%" stopColor="#1B5E20"/>
+        </radialGradient>
+        <filter id="ph-s" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="1.5" floodColor="#1B5E20" floodOpacity="0.5"/>
+          <feDropShadow dx="0" dy="-1" stdDeviation="1" floodColor="rgba(255,255,255,0.4)" floodOpacity="1"/>
+        </filter>
+      </defs>
+      <rect x="1" y="1" width="30" height="30" rx="8" fill="url(#ph-g)" filter="url(#ph-s)"/>
+      {/* Shine highlight */}
+      <ellipse cx="12" cy="7" rx="8" ry="2.5" fill="rgba(255,255,255,0.22)"/>
+      {/* Phone handset */}
+      <path d="M10 8C10.5 8 10.9 8.2 11 8.5C11.5 9.3 12.1 10.6 12.3 11.1C12.5 11.6 12.3 12.1 12 12.5L11 13.4C11.7 14.8 12.8 15.8 14.1 16.5L15.2 15.5C15.5 15.2 16 15 16.5 15.2C17 15.4 18.2 16 19 16.5C19.3 16.7 19.5 17 19.5 17.5C19.5 19 18.4 21 16.8 21.3C14.1 21.8 9.5 19.4 7.7 15.2C7 13.6 5.8 10.3 9.4 8.1C9.6 8 9.8 8 10 8Z" fill="white"/>
+    </svg>
+  );
+}
+
+function MapPinIcon() {
+  return (
+    <svg width="14" height="18" viewBox="0 0 28 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="pin-g" cx="35%" cy="22%" r="72%">
+          <stop offset="0%" stopColor="#EF5350"/>
+          <stop offset="100%" stopColor="#B71C1C"/>
+        </radialGradient>
+        <filter id="pin-s" x="-35%" y="-10%" width="170%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="2.5" floodColor="#7F0000" floodOpacity="0.55"/>
+          <feDropShadow dx="-1" dy="-1" stdDeviation="1" floodColor="rgba(255,255,255,0.4)" floodOpacity="1"/>
+        </filter>
+      </defs>
+      {/* Pin body */}
+      <path d="M14 1C6.8 1 1 6.8 1 14C1 23 14 37 14 37C14 37 27 23 27 14C27 6.8 21.2 1 14 1Z"
+        fill="url(#pin-g)" filter="url(#pin-s)"/>
+      {/* Specular highlight */}
+      <ellipse cx="10" cy="9" rx="4.5" ry="3" fill="rgba(255,255,255,0.35)"/>
+      {/* Inner white dot */}
+      <circle cx="14" cy="14" r="5" fill="white" opacity="0.92"/>
+      {/* Red center */}
+      <circle cx="14" cy="14" r="2.5" fill="#B71C1C" opacity="0.7"/>
+    </svg>
+  );
+}
+
+/* ── 3D Social icons ── */
 function FacebookIcon() {
   return (
     <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -116,6 +184,30 @@ function YouTubeIcon() {
   );
 }
 
+function WhatsAppIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="wa-g" cx="35%" cy="20%" r="80%">
+          <stop offset="0%" stopColor="#6ee17f"/>
+          <stop offset="55%" stopColor="#25D366"/>
+          <stop offset="100%" stopColor="#128C7E"/>
+        </radialGradient>
+        <filter id="wa-f" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="3" floodColor="#075E54" floodOpacity="0.65"/>
+          <feDropShadow dx="0" dy="-1" stdDeviation="1.5" floodColor="rgba(255,255,255,0.5)" floodOpacity="1"/>
+        </filter>
+      </defs>
+      <circle cx="18" cy="18" r="17" fill="url(#wa-g)" filter="url(#wa-f)"/>
+      {/* Shine highlight */}
+      <ellipse cx="14" cy="10" rx="8" ry="3" fill="rgba(255,255,255,0.22)"/>
+      {/* WhatsApp speech bubble + phone */}
+      <path d="M18 8.5C12.75 8.5 8.5 12.75 8.5 18C8.5 19.77 9.01 21.42 9.87 22.82L8.5 27.5L13.37 26.16C14.73 26.97 16.31 27.5 18 27.5C23.25 27.5 27.5 23.25 27.5 18C27.5 12.75 23.25 8.5 18 8.5Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.7)" strokeWidth="0.8"/>
+      <path d="M22.3 20.6C22.1 21.2 21.1 21.7 20.6 21.8C20.1 21.9 19.5 21.9 17.2 21C14.3 19.9 12.4 17 12.3 16.8C12.2 16.6 11.3 15.4 11.3 14.2C11.3 13 11.9 12.4 12.2 12.1C12.5 11.8 12.8 11.7 13 11.7H13.5C13.7 11.7 14 11.7 14.2 12.2C14.4 12.7 15 14 15.1 14.2C15.2 14.4 15.3 14.7 15.1 14.9C15 15.1 14.8 15.3 14.6 15.6C14.5 15.8 14.3 15.9 14.4 16.1C14.9 17 15.7 17.8 16.6 18.3C16.8 18.5 17.1 18.4 17.3 18.2C17.5 18 17.9 17.5 18.1 17.3C18.3 17.1 18.6 17.1 18.8 17.2C19 17.3 20.2 17.9 20.4 18C20.6 18.1 20.8 18.2 20.9 18.4C21.1 18.8 21.1 19.8 22.3 20.6Z" fill="white"/>
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
     <footer style={{ backgroundColor: YELLOW }}>
@@ -127,17 +219,20 @@ export default function Footer() {
           {/* ── Brand column ── */}
           <div className="lg:col-span-2">
 
-            {/* Logo — yellow BG blends via multiply, 3D drop-shadow lifts it */}
+            {/* Logo — transparent PNG, emboss filter on text only */}
             <div className="mb-5">
               <Link href="/">
-                <div className="relative w-24 h-16 inline-block" style={logo3D}>
+                <div className="relative w-24 h-16 inline-block">
                   <Image
-                    src="/image/logo.jpeg"
+                    src="/image/logo.png"
                     alt="Al Imran Fabrics"
                     fill
                     sizes="96px"
                     className="object-contain"
-                    style={{ mixBlendMode: "multiply" }}
+                    style={{
+                      filter:
+                        "drop-shadow(1px 2px 3px rgba(0,0,0,0.32)) drop-shadow(-0.5px -0.5px 1px rgba(255,255,255,0.55))",
+                    }}
                     priority
                   />
                 </div>
@@ -148,30 +243,24 @@ export default function Footer() {
               Bringing the timeless elegance of Pakistani craftsmanship to homes around the world. Each piece tells a story of heritage, artistry, and love.
             </p>
 
-            {/* Contact info — brand-coloured icons with 3D drop-shadow */}
+            {/* Contact info — original branded icons */}
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2.5 text-xs" style={{ color: BLUE, ...embossText }}>
-                <span style={{ filter: "drop-shadow(0 1px 3px rgba(21,101,192,0.55))" }}>
-                  <Mail size={15} className="flex-shrink-0" style={{ color: "#1565C0" }} />
-                </span>
+                <span className="flex-shrink-0"><GmailIcon /></span>
                 <span>alimranfabrics786@gmail.com</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs" style={{ color: BLUE, ...embossText }}>
-                <span style={{ filter: "drop-shadow(0 1px 3px rgba(46,125,50,0.55))" }}>
-                  <Phone size={15} className="flex-shrink-0" style={{ color: "#2E7D32" }} />
-                </span>
+                <span className="flex-shrink-0"><PhoneIcon /></span>
                 <span>+92 314 5690329 (PAK)</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs" style={{ color: BLUE, ...embossText }}>
-                <span style={{ filter: "drop-shadow(0 1px 3px rgba(198,40,40,0.55))" }}>
-                  <MapPin size={15} className="flex-shrink-0" style={{ color: "#C62828" }} />
-                </span>
+                <span className="flex-shrink-0"><MapPinIcon /></span>
                 <span>Karachi, Pakistan</span>
               </div>
             </div>
 
             {/* 3D Social icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
                 className="transition-transform hover:scale-110 hover:-translate-y-1">
                 <FacebookIcon />
@@ -183,6 +272,10 @@ export default function Footer() {
               <a href="https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
                 className="transition-transform hover:scale-110 hover:-translate-y-1">
                 <YouTubeIcon />
+              </a>
+              <a href="https://wa.me/923145690329" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                className="transition-transform hover:scale-110 hover:-translate-y-1">
+                <WhatsAppIcon />
               </a>
             </div>
           </div>

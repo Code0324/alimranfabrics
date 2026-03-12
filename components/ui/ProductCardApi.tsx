@@ -70,7 +70,7 @@ export default function ProductCardApi({ product }: Props) {
             className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
-            unoptimized={imageUrl.startsWith("http://localhost")}
+            unoptimized={!imageUrl.includes("unsplash.com")}
           />
         </Link>
 
