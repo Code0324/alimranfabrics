@@ -60,21 +60,24 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           {discount > 0 && (
             <span
               className="font-inter font-black uppercase leading-none px-3 py-1.5"
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000", fontSize: "13px", letterSpacing: "0.02em" }}
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000", fontSize: "13px", letterSpacing: "0.02em", borderRadius: "6px" }}
             >
               -{discount}%<br />
               <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
             </span>
           )}
           {product.isNew && !discount && (
-            <span className="bg-navy text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
+            <span
+              className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000", borderRadius: "6px" }}
+            >
               New
             </span>
           )}
           {product.isBestSeller && !discount && !product.isNew && (
             <span
               className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+              style={{ backgroundColor: "#FFFD82", color: "#CC0000", borderRadius: "6px" }}
             >
               Best Seller
             </span>

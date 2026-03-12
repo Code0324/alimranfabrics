@@ -53,7 +53,7 @@ export default function NewsletterBanner() {
           />
           <button
             className="px-7 py-3 whitespace-nowrap font-inter font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:opacity-90 active:scale-95"
-            style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+            style={{ backgroundColor: "#FFFD82", color: "#0C1350", borderRadius: "8px" }}
           >
             Subscribe
           </button>

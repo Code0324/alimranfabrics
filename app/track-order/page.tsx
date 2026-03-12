@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Package, Search } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 
 export default function TrackOrderPage() {
   const [orderNumber, setOrderNumber] = useState("");
@@ -17,23 +18,14 @@ export default function TrackOrderPage() {
   }
 
   return (
-    <div className="pt-28 md:pt-32 min-h-screen bg-ivory">
-      {/* Hero */}
-      <section className="py-14 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
-        <div className="flex items-center justify-center gap-4 mb-3">
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-          <span className="font-inter text-xs uppercase tracking-[0.3em]" style={{ color: "#C9A84C" }}>
-            Order Status
-          </span>
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-        </div>
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-3" style={{ color: "#FAF7F2" }}>
-          Track Your Order
-        </h1>
-        <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(250,247,242,0.7)" }}>
-          Enter your order number and email to get real-time updates on your delivery.
-        </p>
-      </section>
+    <div className="min-h-screen bg-ivory">
+      <PageHero
+        eyebrow="Order Status"
+        title="Track Your Order"
+        description="Enter your order number and email to get real-time updates on your delivery."
+        backgroundImage="/image/women-banner-silk.png"
+        breadcrumbItems={[{ label: "Track Order" }]}
+      />
 
       <div className="max-w-xl mx-auto px-4 py-16">
         {!submitted ? (

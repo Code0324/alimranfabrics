@@ -7,8 +7,18 @@ import NewArrivals from "@/components/home/NewArrivals";
 import LovedCollections from "@/components/home/LovedCollections";
 import NewsletterBanner from "@/components/home/NewsletterBanner";
 import CategoryCard from "@/components/ui/CategoryCard";
-import { categories } from "@/data/categories";
 import { Truck, Shield, RefreshCw, Star } from "lucide-react";
+
+const brands = [
+  { id: "mtj",       name: "MTJ",       slug: "men",        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",  productCount: 20, description: "Men's traditional wear" },
+  { id: "bin-saeed", name: "Bin Saeed", slug: "unstitched", image: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=400&q=80",  productCount: 20, description: "Premium unstitched fabric" },
+  { id: "khaadi",    name: "Khaadi",    slug: "women",      image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80",  productCount: 20, description: "Women's fashion" },
+  { id: "salina",    name: "Salina",    slug: "lawn",       image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&q=80",  productCount: 20, description: "Lawn collection" },
+  { id: "nishat",    name: "Nishat",    slug: "embroidered",image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80",  productCount: 20, description: "Embroidered designs" },
+  { id: "j-junaid",  name: "J.",        slug: "men",        image: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=400&q=80",  productCount: 20, description: "J. Junaid Jamshed" },
+  { id: "sapphire",  name: "Sapphire",  slug: "women",      image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=80",  productCount: 20, description: "Women's fashion" },
+  { id: "tawakkal",  name: "Tawakkal",  slug: "formal",     image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80",  productCount: 20, description: "Formal wear" },
+];
 
 export const metadata: Metadata = {
   title: "Al Imran Fabrics — Timeless Elegance, Global Reach",
@@ -19,13 +29,12 @@ export const metadata: Metadata = {
 const trustFeatures = [
   {
     icon: Truck,
-    title: "Free USA Shipping",
-    desc: "No duties, no hidden charges on all US orders",
+    title: "World wide Shipping",
   },
   {
     icon: Shield,
     title: "Authentic Craftsmanship",
-    desc: "Every piece is handcrafted by skilled Pakistani artisans",
+    desc: "Curated from Pakistan's most trusted brands and distributors",
   },
   {
     icon: RefreshCw,
@@ -35,7 +44,7 @@ const trustFeatures = [
   {
     icon: Star,
     title: "Premium Quality",
-    desc: "Finest fabrics sourced from across Pakistan",
+    desc: "Sourcing premium products from leading brands across Pakistan",
   },
 ];
 
@@ -65,21 +74,21 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Popular Categories */}
+      {/* Popular Brands */}
       <section className="py-16 md:py-20 bg-ivory overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center gap-4 mb-3">
               <span className="w-12 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Browse</span>
+              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Shop by Brand</span>
               <span className="w-12 h-px bg-gold" />
             </div>
-            <h2 className="section-title bg-transparent">Popular Categories</h2>
+            <h2 className="section-title bg-transparent">Popular Brands</h2>
           </div>
 
           <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4">
-            {categories.map((cat) => (
-              <CategoryCard key={cat.id} category={cat} />
+            {brands.map((brand) => (
+              <CategoryCard key={brand.id} category={brand} />
             ))}
           </div>
         </div>

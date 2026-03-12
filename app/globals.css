@@ -52,38 +52,78 @@
 }
 
 @layer components {
+  /* ── Glossy rounded buttons ── */
   .btn-primary {
-    @apply px-6 py-3 font-inter font-semibold tracking-wide
+    @apply px-7 py-3 font-inter font-semibold tracking-wide
            transition-all duration-300 uppercase text-sm inline-block
            focus:outline-none focus:ring-2 focus:ring-offset-2;
-    background-color: #FFFD82;
+    background: linear-gradient(160deg, #ffffcc 0%, #FFFD82 35%, #f0eb50 68%, #fffcaa 100%);
     color: #CC0000;
+    border-radius: 8px;
+    box-shadow:
+      0 2px 14px rgba(255,253,130,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.90),
+      inset 0 -1px 0 rgba(0,0,0,0.08);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
   }
   .btn-primary:hover {
-    background-color: #f5f060;
+    background: linear-gradient(160deg, #ffffd8 0%, #f5f060 35%, #e0d830 68%, #ffffc0 100%);
+    box-shadow:
+      0 4px 22px rgba(255,253,130,0.70),
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(0,0,0,0.10);
+    transform: translateY(-1px);
   }
+  .btn-primary:active { transform: translateY(0); }
 
   .btn-gold {
-    @apply px-6 py-3 font-inter font-semibold tracking-wide
-           hover:opacity-90 transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-offset-2;
-    background-color: #FFFD82;
-    color: #CC0000;
-  }
-
-  .btn-outline {
-    @apply border-2 px-6 py-3 font-inter font-medium tracking-wide
+    @apply px-7 py-3 font-inter font-semibold tracking-wide
            transition-all duration-300 uppercase text-sm inline-block
            focus:outline-none focus:ring-2 focus:ring-offset-2;
-    border-color: #FFFD82;
+    background: linear-gradient(160deg, #ffffcc 0%, #FFFD82 35%, #f0eb50 68%, #fffcaa 100%);
     color: #CC0000;
-    background-color: #FFFD82;
+    border-radius: 8px;
+    box-shadow:
+      0 2px 14px rgba(255,253,130,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.90),
+      inset 0 -1px 0 rgba(0,0,0,0.08);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+  }
+  .btn-gold:hover {
+    background: linear-gradient(160deg, #ffffd8 0%, #f5f060 35%, #e0d830 68%, #ffffc0 100%);
+    box-shadow:
+      0 4px 22px rgba(255,253,130,0.70),
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(0,0,0,0.10);
+    transform: translateY(-1px);
+  }
+  .btn-gold:active { transform: translateY(0); }
+
+  .btn-outline {
+    @apply border-2 px-7 py-3 font-inter font-medium tracking-wide
+           transition-all duration-300 uppercase text-sm inline-block
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    border-color: #e8e050;
+    color: #CC0000;
+    background: linear-gradient(160deg, #ffffcc 0%, #FFFD82 35%, #f0eb50 68%, #fffcaa 100%);
+    border-radius: 8px;
+    box-shadow:
+      0 2px 14px rgba(255,253,130,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.90),
+      inset 0 -1px 0 rgba(0,0,0,0.08);
+    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
   }
   .btn-outline:hover {
-    background-color: #f5f060;
-    border-color: #f5f060;
-    color: #CC0000;
+    background: linear-gradient(160deg, #ffffd8 0%, #f5f060 35%, #e0d830 68%, #ffffc0 100%);
+    border-color: #d4cc30;
+    color: #AA0000;
+    box-shadow:
+      0 4px 22px rgba(255,253,130,0.70),
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(0,0,0,0.10);
+    transform: translateY(-1px);
   }
+  .btn-outline:active { transform: translateY(0); }
 
   .section-title {
     @apply font-playfair text-3xl md:text-4xl font-bold text-charcoal;
@@ -95,10 +135,10 @@
 
   .nav-link {
     @apply font-inter transition-colors duration-200 text-sm tracking-wide uppercase font-semibold;
-    color: #0C1350;
+    color: #CC0000;
   }
   .nav-link:hover {
-    color: #CC0000;
+    color: #1a56db;
   }
 
   .linen-card {

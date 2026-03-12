@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -9,21 +10,14 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="pt-28 md:pt-32">
-      {/* Header */}
-      <section className="py-14 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
-        <div className="flex items-center justify-center gap-4 mb-3">
-          <span className="w-12 h-px bg-gold/60" />
-          <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Get in Touch</span>
-          <span className="w-12 h-px bg-gold/60" />
-        </div>
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold text-ivory mb-3">
-          We&apos;d Love to Hear From You
-        </h1>
-        <p className="font-inter text-ivory/70 text-sm max-w-md mx-auto">
-          Have a question about sizing, shipping, or a custom order? Our team is here to help.
-        </p>
-      </section>
+    <div>
+      <PageHero
+        eyebrow="Get in Touch"
+        title="We'd Love to Hear From You"
+        description="Have a question about sizing, shipping, or a custom order? Our team is here to help."
+        backgroundImage="/image/women-banner-silk.png"
+        breadcrumbItems={[{ label: "Contact" }]}
+      />
 
       <section className="py-16 px-4 bg-ivory">
         <div className="max-w-6xl mx-auto grid md:grid-cols-5 gap-12">

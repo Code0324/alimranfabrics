@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from "lucide-react";
 
 const footerLinks = {
@@ -45,18 +46,17 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <div className="mb-4">
-            <span
-                  className="font-cormorant font-semibold text-xl md:text-2xl tracking-tight"
-                  style={{ color: "#CC0000" }}
-                >
-                  Al Imran
-                </span>
-                <span
-                  className="font-tenor text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
-                  style={{ color: "#0C1350" }}
-                >
-                  Fabrics
-                </span>
+              <Link href="/">
+                <div className="relative w-20 h-14">
+                  <Image
+                    src="/image/logo.jpeg"
+                    alt="Al Imran Fabrics"
+                    fill
+                    sizes="80px"
+                    className="object-contain"
+                  />
+                </div>
+              </Link>
             </div>
             <p className="font-inter text-sm leading-relaxed mb-6 max-w-xs" style={{ color: BLUE }}>
               Bringing the timeless elegance of Pakistani craftsmanship to homes around the world. Each piece tells a story of heritage, artistry, and love.
@@ -96,6 +96,7 @@ export default function Footer() {
                     backgroundColor: RED,
                     color: "#ffffff",
                     border: `1px solid ${RED}`,
+                    borderRadius: "50%",
                   }}
                 >
                   <Icon size={16} />

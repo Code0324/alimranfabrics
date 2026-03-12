@@ -30,8 +30,8 @@ export default function CollectionGridApi({ allProducts }: CollectionGridApiProp
       <div className="flex items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-2">
           <span
-            className="font-inter font-bold text-sm px-3 py-1 rounded-sm"
-            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+            className="font-inter font-bold text-sm px-3 py-1"
+            style={{ backgroundColor: "#FFFD82", color: "#CC0000", borderRadius: "6px" }}
           >
             {sorted.length}
           </span>

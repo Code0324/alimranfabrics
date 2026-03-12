@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import PageHero from "@/components/ui/PageHero";
 import CollectionGridApi from "@/components/collection/CollectionGridApi";
 import { fetchProducts, fetchCategories } from "@/lib/api";
+import { getLocalProducts } from "@/data/collectionProducts";
 
 interface CollectionPageProps {
   params: { slug: string };
@@ -35,6 +37,38 @@ function getEyebrow(slug: string): string {
   return "Al Imran Fabrics";
 }
 
+function getBgImage(slug: string): string {
+  const map: Record<string, string> = {
+    "women":          "/image/women-banner-new.webp",
+    "men":            "/image/men-banner-new.png",
+    "kids":           "/image/categories/cat-stitched.jpg",
+    "embroidered":    "/image/categories/cat-embroidered.jpg",
+    "printed":        "/image/categories/cat-printed.jpg",
+    "stitched":       "/image/categories/cat-stitched.jpg",
+    "unstitched":     "/image/categories/cat-unstitched.jpg",
+    "lawn":           "/image/categories/cat-lawn.jpg",
+    "khaddar":        "/image/categories/cat-winter.jpg",
+    "formal":         "/image/categories/cat-luxury.jpg",
+    "luxury":         "/image/categories/cat-luxury.jpg",
+    "bridal":         "/image/categories/cat-bridal.jpg",
+    "new-arrivals":   "/image/women-banner-silk.png",
+    "sale":           "/image/women-banner-silk.png",
+    "men-formal":     "/image/categories/cat-men-formal.jpg",
+    "shalwar-kameez": "/image/categories/cat-men-stitched.jpg",
+    "sherwani":       "/image/categories/cat-men-formal.jpg",
+    "waistcoat":      "/image/categories/cat-men-stitched.jpg",
+    "ready-to-wear":  "/image/categories/cat-stitched.jpg",
+    "jacquard":       "/image/categories/cat-luxury.jpg",
+    "casual":         "/image/categories/cat-printed.jpg",
+    "girls":          "/image/categories/cat-stitched.jpg",
+    "boys":           "/image/categories/cat-men-kurta.jpg",
+    "cotton":         "/image/categories/cat-unstitched.jpg",
+    "chickenkar":     "/image/categories/chickenkar.jpg",
+    "chiffon":        "/image/categories/chiffon.jpg",
+  };
+  return map[slug] ?? "/image/women-banner-silk.png";
+}
+
 export default async function CollectionPage({ params }: CollectionPageProps) {
   const { slug } = params;
   const title = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
@@ -51,62 +85,34 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
       collectionProducts = collectionProducts.filter((p) => p.discountPercentage > 0 || p.originalPrice);
     } else {
       collectionProducts = await fetchProducts({ category_slug: slug, limit: 50 });
-      if (collectionProducts.length === 0) {
-        collectionProducts = await fetchProducts({ limit: 50 });
-      }
+    }
+
+    // Fall back to local catalogue when the backend has nothing for this slug
+    if (collectionProducts.length === 0) {
+      collectionProducts = getLocalProducts(slug);
+    }
+    // Last resort: all backend products
+    if (collectionProducts.length === 0) {
+      collectionProducts = await fetchProducts({ limit: 50 });
     }
   } catch {
-    collectionProducts = [];
+    collectionProducts = getLocalProducts(slug);
   }
 
   const description = `Explore our ${title} collection — ${collectionProducts.length} products`;
 
   return (
     <div className="min-h-screen bg-ivory">
-      {/* ── Yellow branded header — same for all collections ── */}
-      <section
-        className="relative overflow-hidden pt-28 md:pt-32"
-        style={{ background: "#CC0000" }}
-      >
-        {/* Subtle dot texture */}
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
-            backgroundSize: "20px 20px",
-          }}
-          aria-hidden
-        />
-        {/* Corner brackets in yellow */}
-        <span className="pointer-events-none absolute top-5 left-5 w-8 h-8 md:w-10 md:h-10" style={{ borderTop: "2px solid rgba(255,253,130,0.6)", borderLeft: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
-        <span className="pointer-events-none absolute top-5 right-5 w-8 h-8 md:w-10 md:h-10" style={{ borderTop: "2px solid rgba(255,253,130,0.6)", borderRight: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
-        <span className="pointer-events-none absolute bottom-5 left-5 w-8 h-8 md:w-10 md:h-10" style={{ borderBottom: "2px solid rgba(255,253,130,0.6)", borderLeft: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
-        <span className="pointer-events-none absolute bottom-5 right-5 w-8 h-8 md:w-10 md:h-10" style={{ borderBottom: "2px solid rgba(255,253,130,0.6)", borderRight: "2px solid rgba(255,253,130,0.6)" }} aria-hidden />
-
-        <div className="relative py-12 md:py-16 px-4 text-center">
-          {/* Eyebrow */}
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <span className="w-10 h-px" style={{ backgroundColor: "#FFFD82" }} />
-            <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFFD82" }}>
-              {eyebrow}
-            </span>
-            <span className="w-10 h-px" style={{ backgroundColor: "#FFFD82" }} />
-          </div>
-
-          {/* Title */}
-          <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-2" style={{ color: "#FFFD82" }}>
-            {title}
-          </h1>
-
-          {/* Divider */}
-          <div className="mx-auto my-3 w-14" style={{ height: "2px", backgroundColor: "rgba(255,253,130,0.5)" }} />
-
-          {/* Description */}
-          <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(255,255,255,0.9)" }}>
-            {description}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        backgroundImage={getBgImage(slug)}
+        breadcrumbItems={[
+          { label: "Collections", href: "/collections" },
+          { label: title },
+        ]}
+      />
 
       {/* ── Product count strip ── */}
       <div className="border-b border-ivory-dark bg-white">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RotateCcw, CheckCircle, XCircle, Clock } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Returns & Exchanges",
@@ -9,23 +10,14 @@ export const metadata: Metadata = {
 
 export default function ReturnsPage() {
   return (
-    <div className="pt-28 md:pt-32 min-h-screen bg-ivory">
-      {/* Hero */}
-      <section className="py-14 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
-        <div className="flex items-center justify-center gap-4 mb-3">
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-          <span className="font-inter text-xs uppercase tracking-[0.3em]" style={{ color: "#C9A84C" }}>
-            Our Policy
-          </span>
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-        </div>
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-3" style={{ color: "#FAF7F2" }}>
-          Returns &amp; Exchanges
-        </h1>
-        <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(250,247,242,0.7)" }}>
-          We want you to love your purchase. If something isn&apos;t right, we make it easy to return or exchange.
-        </p>
-      </section>
+    <div className="min-h-screen bg-ivory">
+      <PageHero
+        eyebrow="Our Policy"
+        title="Returns & Exchanges"
+        description="We want you to love your purchase. If something isn't right, we make it easy to return or exchange."
+        backgroundImage="/image/women-banner-silk.png"
+        breadcrumbItems={[{ label: "Returns & Exchanges" }]}
+      />
 
       <div className="max-w-4xl mx-auto px-4 py-16 space-y-14">
         {/* Key points */}

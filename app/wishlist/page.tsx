@@ -5,31 +5,25 @@ import { Heart } from "lucide-react";
 import { useWishlist } from "@/store/wishlistContext";
 import { products } from "@/data/products";
 import ProductCard from "@/components/ui/ProductCard";
+import PageHero from "@/components/ui/PageHero";
 
 export default function WishlistPage() {
   const { wishlist } = useWishlist();
   const wishlisted = products.filter((p) => wishlist.includes(p.id));
 
   return (
-    <div className="pt-28 md:pt-32 min-h-screen bg-ivory">
-      {/* Hero */}
-      <section className="py-12 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
-        <div className="flex items-center justify-center gap-4 mb-3">
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-          <span className="font-inter text-xs uppercase tracking-[0.3em]" style={{ color: "#C9A84C" }}>
-            My Collection
-          </span>
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-        </div>
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-3" style={{ color: "#FAF7F2" }}>
-          My Wishlist
-        </h1>
-        <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(250,247,242,0.7)" }}>
-          {wishlisted.length > 0
+    <div className="min-h-screen bg-ivory">
+      <PageHero
+        eyebrow="My Collection"
+        title="My Wishlist"
+        description={
+          wishlisted.length > 0
             ? `You have ${wishlisted.length} saved item${wishlisted.length > 1 ? "s" : ""}`
-            : "Save pieces you love to come back to them later"}
-        </p>
-      </section>
+            : "Save pieces you love to come back to them later"
+        }
+        backgroundImage="/image/women-banner-silk.png"
+        breadcrumbItems={[{ label: "Wishlist" }]}
+      />
 
       <div className="max-w-7xl mx-auto px-4 py-12">
         {wishlisted.length === 0 ? (

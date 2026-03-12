@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Truck, Clock, Globe, Shield } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Shipping Info",
@@ -40,23 +41,14 @@ const shippingZones = [
 
 export default function ShippingPage() {
   return (
-    <div className="pt-28 md:pt-32 min-h-screen bg-ivory">
-      {/* Hero */}
-      <section className="py-14 px-4 text-center" style={{ backgroundColor: "#070D38" }}>
-        <div className="flex items-center justify-center gap-4 mb-3">
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-          <span className="font-inter text-xs uppercase tracking-[0.3em]" style={{ color: "#C9A84C" }}>
-            Delivery
-          </span>
-          <span className="w-12 h-px" style={{ backgroundColor: "rgba(201,168,76,0.6)" }} />
-        </div>
-        <h1 className="font-playfair text-4xl md:text-5xl font-bold mb-3" style={{ color: "#FAF7F2" }}>
-          Shipping Information
-        </h1>
-        <p className="font-inter text-sm max-w-md mx-auto" style={{ color: "rgba(250,247,242,0.7)" }}>
-          We ship worldwide. USA orders are always free — no hidden duties, no surprises.
-        </p>
-      </section>
+    <div className="min-h-screen bg-ivory">
+      <PageHero
+        eyebrow="Delivery"
+        title="Shipping Information"
+        description="We ship worldwide. USA orders are always free — no hidden duties, no surprises."
+        backgroundImage="/image/women-banner-silk.png"
+        breadcrumbItems={[{ label: "Shipping" }]}
+      />
 
       <div className="max-w-5xl mx-auto px-4 py-16 space-y-14">
         {/* Highlights */}

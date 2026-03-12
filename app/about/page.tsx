@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingBag, Globe, Shield, Star, Zap, HeartHandshake } from "lucide-react";
+import PageHero from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -58,28 +59,14 @@ const milestones = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-28 md:pt-32">
-      {/* Hero */}
-      <section className="relative py-20 px-4 overflow-hidden" style={{ backgroundColor: "#CC0000" }}>
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{ backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)", backgroundSize: "20px 20px" }}
-        />
-        <div className="relative max-w-3xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
-            <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFFD82" }}>Our Story</span>
-            <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
-          </div>
-          <h1 className="font-playfair text-4xl md:text-6xl font-bold mb-5" style={{ color: "#FFFD82" }}>
-            Pakistan&apos;s Best Brands,<br />All in One Place
-          </h1>
-          <p className="font-inter text-white/80 text-base md:text-lg leading-relaxed">
-            Al Imran Fabrics is your trusted multi-brand distributor for Pakistan&apos;s most celebrated fashion labels —
-            bringing authentic collections straight to your door, wherever you are in the world.
-          </p>
-        </div>
-      </section>
+    <div>
+      <PageHero
+        eyebrow="Our Story"
+        title={<>Pakistan&apos;s Best Brands,<br />All in One Place</>}
+        description="Al Imran Fabrics is your trusted multi-brand distributor for Pakistan's most celebrated fashion labels — bringing authentic collections straight to your door, wherever you are in the world."
+        backgroundImage="/image/women-banner-silk.png"
+        breadcrumbItems={[{ label: "About Us" }]}
+      />
 
       {/* Who We Are */}
       <section className="py-16 md:py-24 px-4 bg-ivory">

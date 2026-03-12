@@ -2,7 +2,7 @@ export function cn(...inputs: (string | undefined | null | false)[]): string {
   return inputs.filter(Boolean).join(" ");
 }
 
-export function formatPrice(amount: number, currency = "USD"): string {
+export function formatPrice(amount: number, currency = "PKR"): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,

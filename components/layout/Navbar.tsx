@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, ShoppingBag, Heart, Menu, X, ChevronDown, Globe, Facebook, Instagram, Youtube } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X, ChevronDown, Facebook, Instagram, Youtube } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlist } from "@/store/wishlistContext";
 
@@ -52,7 +52,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [currency, setCurrency] = useState("USD");
   const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -84,35 +83,34 @@ export default function Navbar() {
       style={{ top: "var(--promo-height, 0)" }}
     >
       {/* ── Announcement ticker ── */}
-      <div className="overflow-hidden py-1.5" style={{ backgroundColor: "#0C1350" }}>
+      <div className="overflow-hidden py-1.5" style={{ backgroundColor: "#CC0000" }}>
         <div
           className="flex whitespace-nowrap animate-ticker"
           aria-label="Announcements"
         >
-          {/* Duplicate to create seamless loop */}
-          <span className="font-inter text-xs font-semibold tracking-wide px-4" style={{ color: "#ffffff" }}>
+          <span className="font-inter text-xs font-semibold tracking-wide px-4" style={{ color: "#FFFD82" }}>
             <span style={{ color: "#FFFD82" }}>Free Shipping</span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> — No Duty. No Drama. </span>
-            <span style={{ color: "#FF4444" }}>●</span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> New Ramadan Collection Out Now </span>
-            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> — No Duty. No Drama. </span>
+            <span style={{ color: "#ffffff" }}>●</span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> New Ramadan Collection Out Now </span>
+            <span style={{ color: "#ffffff" }}>●</span>
             <span style={{ color: "#FFFD82" }}> Free USA Shipping </span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> — Save up to </span>
-            <span style={{ color: "#FF4444" }}>50% OFF </span>
-            <span style={{ color: "#FF4444" }}>●</span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> Global Shipping Available </span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> — Save up to </span>
+            <span style={{ color: "#FFFD82" }}>50% OFF </span>
+            <span style={{ color: "#ffffff" }}>●</span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> Global Shipping Available </span>
           </span>
-          <span className="font-inter text-xs font-semibold tracking-wide px-4" aria-hidden style={{ color: "#ffffff" }}>
+          <span className="font-inter text-xs font-semibold tracking-wide px-4" aria-hidden style={{ color: "#FFFD82" }}>
             <span style={{ color: "#FFFD82" }}>Free Shipping</span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> — No Duty. No Drama. </span>
-            <span style={{ color: "#FF4444" }}>●</span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> New Ramadan Collection Out Now </span>
-            <span style={{ color: "#FF4444" }}>●</span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> — No Duty. No Drama. </span>
+            <span style={{ color: "#ffffff" }}>●</span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> New Ramadan Collection Out Now </span>
+            <span style={{ color: "#ffffff" }}>●</span>
             <span style={{ color: "#FFFD82" }}> Free USA Shipping </span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> — Save up to </span>
-            <span style={{ color: "#FF4444" }}>50% OFF </span>
-            <span style={{ color: "#FF4444" }}>●</span>
-            <span style={{ color: "rgba(255,255,255,0.6)" }}> Global Shipping Available </span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> — Save up to </span>
+            <span style={{ color: "#FFFD82" }}>50% OFF </span>
+            <span style={{ color: "#ffffff" }}>●</span>
+            <span style={{ color: "rgba(255,253,130,0.75)" }}> Global Shipping Available </span>
           </span>
         </div>
       </div>
@@ -120,14 +118,14 @@ export default function Navbar() {
       {/* ── Top utility bar ── */}
       <div
         className="hidden md:block border-b transition-all duration-300"
-        style={{ backgroundColor: "#FFFD82", borderColor: "rgba(12,19,80,0.15)" }}
+        style={{ backgroundColor: "#CC0000", borderColor: "rgba(255,0,0,0.3)" }}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
           <div className="flex items-center gap-3">
             {[
-              { href: "https://facebook.com",  Icon: Facebook,  label: "Facebook" },
-              { href: "https://instagram.com", Icon: Instagram, label: "Instagram" },
-              { href: "https://youtube.com",   Icon: Youtube,   label: "YouTube" },
+              { href: "https://facebook.com",                                          Icon: Facebook,  label: "Facebook" },
+              { href: "https://www.instagram.com/alimranfabricsonline/",               Icon: Instagram, label: "Instagram" },
+              { href: "https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34",      Icon: Youtube,   label: "YouTube" },
             ].map(({ href, Icon, label }) => (
               <a
                 key={label}
@@ -135,27 +133,16 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="transition-colors"
-                style={{ color: "#0C1350" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
+                className="transition-opacity hover:opacity-70"
+                style={{ color: "#FFFD82" }}
               >
                 <Icon size={16} />
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-2">
-            <Globe size={14} style={{ color: "#0C1350" }} />
-            <button
-              onClick={() => setCurrency(currency === "USD" ? "CAD" : "USD")}
-              className="text-xs font-inter font-bold transition-colors"
-              style={{ color: "#0C1350" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
-            >
-              {currency} ▾
-            </button>
-          </div>
+          <span className="font-inter text-xs font-semibold" style={{ color: "#FFFD82" }}>
+            PKR — Pakistan Rupee
+          </span>
         </div>
       </div>
 
@@ -165,7 +152,7 @@ export default function Navbar() {
         className={`max-w-none transition-all duration-300 ${
           isScrolled || mobileOpen ? "shadow-lg" : ""
         }`}
-        style={{ backgroundColor: "#FFFD82", borderBottom: "2px solid rgba(12,19,80,0.12)" }}
+        style={{ background: "linear-gradient(180deg,#ffffcc 0%,#FFFD82 45%,#f0eb60 100%)", borderBottom: "2px solid rgba(12,19,80,0.12)", boxShadow: "0 2px 12px rgba(255,253,130,0.4)" }}
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -182,42 +169,16 @@ export default function Navbar() {
             </button>
 
             {/* ── Logo ── */}
-            <Link href="/" className="flex items-center gap-3 group">
-              {/* Circular ring wrapping logo image */}
-              <div
-                className="relative w-11 h-11 md:w-12 md:h-12 flex-shrink-0 flex items-center justify-center
-                           border-2 transition-shadow duration-300"
-                style={{
-                  borderColor: "#CC0000",
-                  backgroundColor: "#ffffff",
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  boxShadow: "0 2px 8px rgba(204,0,0,0.25)",
-                }}
-              >
+            <Link href="/" className="flex items-center group">
+              <div className="relative w-16 h-12 md:w-20 md:h-14 flex-shrink-0">
                 <Image
-                  src="/image/logo.png"
+                  src="/image/logo.jpeg"
                   alt="Al Imran Fabrics"
                   fill
-                  sizes="52px"
-                  className="object-cover rounded-full"
+                  sizes="80px"
+                  className="object-contain"
                   priority
                 />
-              </div>
-              {/* Brand wordmark */}
-              <div className="hidden sm:flex flex-col leading-none">
-                <span
-                  className="font-cormorant font-semibold text-xl md:text-2xl tracking-tight"
-                  style={{ color: "#CC0000" }}
-                >
-                  Al Imran
-                </span>
-                <span
-                  className="font-tenor text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold"
-                  style={{ color: "#0C1350" }}
-                >
-                  Fabrics
-                </span>
               </div>
             </Link>
 
@@ -319,8 +280,8 @@ export default function Navbar() {
                 <Heart size={20} />
                 {mounted && wishlist.length > 0 && (
                   <span
-                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
+                    style={{ borderRadius: "4px", backgroundColor: "#FFFD82", color: "#CC0000" }}
                   >
                     {wishlist.length}
                   </span>
@@ -337,8 +298,8 @@ export default function Navbar() {
                 <ShoppingBag size={20} />
                 {mounted && itemCount > 0 && (
                   <span
-                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                    style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
+                    style={{ borderRadius: "4px", backgroundColor: "#FFFD82", color: "#CC0000" }}
                   >
                     {itemCount}
                   </span>
