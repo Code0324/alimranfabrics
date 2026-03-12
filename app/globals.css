@@ -136,9 +136,12 @@
   .nav-link {
     @apply font-inter transition-colors duration-200 text-sm tracking-wide uppercase font-semibold;
     color: #CC0000;
+    /* Embossed — raised text on yellow navbar */
+    text-shadow: -1px -1px 0px rgba(255,255,255,0.75), 1px 1px 0px rgba(0,0,0,0.12);
   }
   .nav-link:hover {
-    color: #1a56db;
+    color: #000080;
+    text-shadow: -1px -1px 0px rgba(255,255,255,0.8), 1px 1px 1px rgba(0,0,60,0.18);
   }
 
   .linen-card {

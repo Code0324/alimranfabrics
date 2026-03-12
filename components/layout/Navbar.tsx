@@ -12,36 +12,36 @@ const navItems = [
     label: "Ready to Wear",
     href: "/collections/ready-to-wear",
     children: [
-      { label: "Women's Formal", href: "/collections/formal", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=200&q=70" },
-      { label: "Women's Casual", href: "/collections/casual", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=200&q=70" },
-      { label: "Embroidered", href: "/collections/embroidered", img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=200&q=70" },
-      { label: "Jacquard", href: "/collections/jacquard", img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&q=70" },
+      { label: "Women's Formal", href: "/collections/formal", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Women's Casual", href: "/collections/casual", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Embroidered", href: "/collections/embroidered", img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Jacquard", href: "/collections/jacquard", img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&q=65&fm=webp&auto=compress" },
     ],
   },
   {
     label: "Unstitched",
     href: "/collections/unstitched",
     children: [
-      { label: "Lawn", href: "/collections/lawn", img: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=200&q=70" },
-      { label: "Khaddar", href: "/collections/khaddar", img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=200&q=70" },
-      { label: "Cotton", href: "/collections/cotton", img: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=200&q=70" },
+      { label: "Lawn", href: "/collections/lawn", img: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Khaddar", href: "/collections/khaddar", img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Cotton", href: "/collections/cotton", img: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=200&q=65&fm=webp&auto=compress" },
     ],
   },
   {
     label: "Men",
     href: "/collections/men",
     children: [
-      { label: "Shalwar Kameez", href: "/collections/shalwar-kameez", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=70" },
-      { label: "Sherwani", href: "/collections/sherwani", img: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=200&q=70" },
-      { label: "Waistcoat Sets", href: "/collections/waistcoat", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=70" },
+      { label: "Shalwar Kameez", href: "/collections/shalwar-kameez", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Sherwani", href: "/collections/sherwani", img: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Waistcoat Sets", href: "/collections/waistcoat", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=65&fm=webp&auto=compress" },
     ],
   },
   {
     label: "Kids",
     href: "/collections/kids",
     children: [
-      { label: "Girls", href: "/collections/girls", img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=200&q=70" },
-      { label: "Boys", href: "/collections/boys", img: "https://images.unsplash.com/photo-1533483595632-c5f0e57a1936?w=200&q=70" },
+      { label: "Girls", href: "/collections/girls", img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Boys", href: "/collections/boys", img: "https://images.unsplash.com/photo-1533483595632-c5f0e57a1936?w=200&q=65&fm=webp&auto=compress" },
     ],
   },
 ];
@@ -88,28 +88,20 @@ export default function Navbar() {
           className="flex whitespace-nowrap animate-ticker"
           aria-label="Announcements"
         >
-          <span className="font-inter text-xs font-semibold tracking-wide px-4" style={{ color: "#FFE500" }}>
-            <span style={{ color: "#FFE500" }}>Worldwide Shipping</span>
-            <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,229,0,0.85)" }}> New Ramadan Collection Out Now </span>
-            <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "#FFE500" }}> Worldwide Shipping </span>
-            <span style={{ color: "rgba(255,229,0,0.85)" }}> — Save up to </span>
-            <span style={{ color: "#FFE500" }}>50% OFF </span>
-            <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,229,0,0.85)" }}> Global Delivery Available </span>
-          </span>
-          <span className="font-inter text-xs font-semibold tracking-wide px-4" aria-hidden style={{ color: "#FFE500" }}>
-            <span style={{ color: "#FFE500" }}>Worldwide Shipping</span>
-            <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,229,0,0.85)" }}> New Ramadan Collection Out Now </span>
-            <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "#FFE500" }}> Worldwide Shipping </span>
-            <span style={{ color: "rgba(255,229,0,0.85)" }}> — Save up to </span>
-            <span style={{ color: "#FFE500" }}>50% OFF </span>
-            <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,229,0,0.85)" }}> Global Delivery Available </span>
-          </span>
+          {[0, 1].map((i) => (
+            <span key={i} aria-hidden={i === 1 || undefined}
+              className="font-inter text-xs font-semibold tracking-wide px-4"
+              style={{ color: "#FFE500", textShadow: "-1px -1px 0px rgba(160,0,0,0.5), 1px 1px 0px rgba(255,255,200,0.18)" }}>
+              <span>Worldwide Shipping</span>
+              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
+              <span style={{ color: "rgba(255,229,0,0.9)" }}>New Ramadan Collection Out Now</span>
+              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
+              <span>50% OFF Selected Pieces</span>
+              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
+              <span style={{ color: "rgba(255,229,0,0.9)" }}>Global Delivery Available</span>
+              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
+            </span>
+          ))}
         </div>
       </div>
 
@@ -151,7 +143,8 @@ export default function Navbar() {
               </svg>
             </a>
           </div>
-          <span className="font-inter text-xs font-semibold" style={{ color: "#FFE500" }}>
+          <span className="font-inter text-xs font-semibold"
+            style={{ color: "#FFE500", textShadow: "-1px -1px 0px rgba(160,0,0,0.5), 1px 1px 0px rgba(255,255,200,0.18)" }}>
             PKR — Pakistan Rupee
           </span>
         </div>
@@ -181,7 +174,8 @@ export default function Navbar() {
 
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center group">
-              <div className="relative w-16 h-12 md:w-20 md:h-14 flex-shrink-0">
+              <div className="relative w-16 h-12 md:w-20 md:h-14 flex-shrink-0"
+                style={{ filter: "drop-shadow(2px 4px 8px rgba(0,0,0,0.28)) drop-shadow(-1px -2px 3px rgba(255,255,255,0.55))" }}>
                 <Image
                   src="/image/logo.jpeg"
                   alt="Al Imran Fabrics"
@@ -234,6 +228,9 @@ export default function Navbar() {
                                 src={child.img}
                                 alt={child.label}
                                 fill
+                                loading="lazy"
+                                sizes="180px"
+                                quality={75}
                                 className="object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                             </div>
