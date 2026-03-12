@@ -6,6 +6,16 @@ import { CartItem as CartItemType } from "@/types";
 import { useCartStore } from "@/store/cartStore";
 import { formatPrice } from "@/lib/utils";
 
+const FALLBACK_IMG = "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=300&q=80";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") || "";
+
+function resolveImage(src: string | undefined): string {
+  if (!src) return FALLBACK_IMG;
+  if (src.startsWith("http")) return src;
+  if (src.startsWith("/") && API_BASE) return `${API_BASE}${src}`;
+  return FALLBACK_IMG;
+}
+
 interface CartItemProps {
   item: CartItemType;
 }
@@ -27,11 +37,12 @@ export default function CartItem({ item }: CartItemProps) {
       {/* Image */}
       <div className="relative w-20 h-24 flex-shrink-0 bg-ivory-dark overflow-hidden">
         <Image
-          src={item.product.images[0]}
+          src={resolveImage(item.product.images?.[0])}
           alt={item.product.name}
           fill
           className="object-cover"
           sizes="80px"
+          onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
         />
       </div>
 
