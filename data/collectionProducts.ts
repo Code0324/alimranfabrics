@@ -349,6 +349,15 @@ const catalogMap: Record<string, BackendProduct[]> = {
   waistcoat:      menProducts,
   girls:          kidsProducts,
   boys:           kidsProducts,
+  // brand slugs
+  mtj:            menProducts,
+  "bin-saeed":    unstitchedProducts,
+  khaadi:         womenProducts,
+  salina:         lawnProducts,
+  nishat:         embroideredProducts,
+  "j-junaid":     menProducts,
+  sapphire:       womenProducts,
+  tawakkal:       formalProducts,
 };
 
 /** Return local products for a slug, or [] if slug not covered. */

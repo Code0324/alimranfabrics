@@ -10,14 +10,14 @@ import CategoryCard from "@/components/ui/CategoryCard";
 import { Truck, Shield, RefreshCw, Star } from "lucide-react";
 
 const brands = [
-  { id: "mtj",       name: "MTJ",       slug: "men",        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",  productCount: 20, description: "Men's traditional wear" },
-  { id: "bin-saeed", name: "Bin Saeed", slug: "unstitched", image: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=400&q=80",  productCount: 20, description: "Premium unstitched fabric" },
-  { id: "khaadi",    name: "Khaadi",    slug: "women",      image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80",  productCount: 20, description: "Women's fashion" },
-  { id: "salina",    name: "Salina",    slug: "lawn",       image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&q=80",  productCount: 20, description: "Lawn collection" },
-  { id: "nishat",    name: "Nishat",    slug: "embroidered",image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80",  productCount: 20, description: "Embroidered designs" },
-  { id: "j-junaid",  name: "J.",        slug: "men",        image: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=400&q=80",  productCount: 20, description: "J. Junaid Jamshed" },
-  { id: "sapphire",  name: "Sapphire",  slug: "women",      image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=80",  productCount: 20, description: "Women's fashion" },
-  { id: "tawakkal",  name: "Tawakkal",  slug: "formal",     image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80",  productCount: 20, description: "Formal wear" },
+  { id: "mtj",       name: "MTJ",       slug: "mtj",       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",  productCount: 20, description: "Men's traditional wear" },
+  { id: "bin-saeed", name: "Bin Saeed", slug: "bin-saeed", image: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=400&q=80",  productCount: 20, description: "Premium unstitched fabric" },
+  { id: "khaadi",    name: "Khaadi",    slug: "khaadi",    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80",  productCount: 20, description: "Women's fashion" },
+  { id: "salina",    name: "Salina",    slug: "salina",    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&q=80",  productCount: 20, description: "Lawn collection" },
+  { id: "nishat",    name: "Nishat",    slug: "nishat",    image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80",  productCount: 20, description: "Embroidered designs" },
+  { id: "j-junaid",  name: "J.",        slug: "j-junaid",  image: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=400&q=80",  productCount: 20, description: "J. Junaid Jamshed" },
+  { id: "sapphire",  name: "Sapphire",  slug: "sapphire",  image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=80",  productCount: 20, description: "Women's fashion" },
+  { id: "tawakkal",  name: "Tawakkal",  slug: "tawakkal",  image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80",  productCount: 20, description: "Formal wear" },
 ];
 
 export const metadata: Metadata = {
