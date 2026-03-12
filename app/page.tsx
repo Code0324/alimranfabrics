@@ -173,7 +173,7 @@ export default function HomePage() {
               <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Who We Are</span>
             </div>
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-5 bg-transparent">
-              Pakistan's Premier Fashion Distributors
+              Pakistan&apos;s Premier Fashion Distributors
             </h2>
             <p className="font-inter text-charcoal/60 text-sm leading-relaxed mb-4">
               Al Imran Fabrics is your trusted destination for Pakistan&apos;s most celebrated clothing brands — all under one roof. We bring you the best of Khaadi, Gul Ahmed, Sana Safinaz, Maria B, Sapphire, and many more, delivered right to your doorstep.
