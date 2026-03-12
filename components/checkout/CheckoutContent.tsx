@@ -23,7 +23,6 @@ function generateTrackingNumber(): string {
 }
 
 export default function CheckoutContent() {
-  const router = useRouter();
   const { items, getTotal, clearCart } = useCartStore();
   const { token, user } = useAuthStore();
 
