@@ -47,7 +47,7 @@ function RegisterForm() {
       <div className="bg-white border border-[#E0D8CC] w-full max-w-md p-8">
         <div className="text-center mb-7">
           <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
-            style={{ backgroundColor: "#FFFD82" }}>
+            style={{ backgroundColor: "#FFE500" }}>
             <User className="w-5 h-5" style={{ color: "#CC0000" }} />
           </div>
           <h1 className="font-playfair text-2xl font-bold text-charcoal">Create Account</h1>
@@ -131,7 +131,7 @@ function RegisterForm() {
             type="submit"
             disabled={isLoading}
             className="w-full py-3 font-inter font-semibold text-sm uppercase tracking-wide transition disabled:opacity-60 mt-2"
-            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+            style={{ backgroundColor: "#FFE500", color: "#CC0000" }}
           >
             {isLoading ? "Creating Account…" : "Create Account"}
           </button>

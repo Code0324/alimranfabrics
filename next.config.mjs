@@ -16,7 +16,15 @@ const nextConfig = {
         hostname: "*.up.railway.app",
         pathname: "/**",
       },
+      {
+        // Local development backend
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/**",
+      },
     ],
+    minimumCacheTTL: 86400,
   },
 };
 

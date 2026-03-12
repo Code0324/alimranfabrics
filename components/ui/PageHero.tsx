@@ -84,7 +84,7 @@ export default function PageHero({
               />
               <span
                 className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold"
-                style={{ color: "#FFFD82" }}
+                style={{ color: "#FFE500" }}
               >
                 {eyebrow}
               </span>

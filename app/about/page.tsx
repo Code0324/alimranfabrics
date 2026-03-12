@@ -105,7 +105,7 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 font-playfair font-bold text-center text-sm whitespace-nowrap"
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}>
+              style={{ backgroundColor: "#FFE500", color: "#CC0000" }}>
               15+ Years Serving Customers
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function AboutPage() {
       </section>
 
       {/* Brands We Carry */}
-      <section className="py-16 px-4" style={{ backgroundColor: "#FFFD82" }}>
+      <section className="py-16 px-4" style={{ backgroundColor: "#FFE500" }}>
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center gap-4 mb-3">
             <span className="w-12 h-px" style={{ backgroundColor: "#CC0000" }} />
@@ -149,8 +149,8 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((value) => (
-              <div key={value.title} className="group p-6 border-2 border-[#FFFD82] hover:border-[#CC0000] transition-all duration-300">
-                <div className="w-12 h-12 flex items-center justify-center mb-5 transition-colors" style={{ backgroundColor: "#FFFD82" }}>
+              <div key={value.title} className="group p-6 border-2 border-[#FFE500] hover:border-[#CC0000] transition-all duration-300">
+                <div className="w-12 h-12 flex items-center justify-center mb-5 transition-colors" style={{ backgroundColor: "#FFE500" }}>
                   <value.icon size={22} style={{ color: "#CC0000" }} />
                 </div>
                 <h3 className="font-playfair font-semibold text-lg text-charcoal mb-2">{value.title}</h3>
@@ -166,16 +166,16 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
-              <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFFD82" }}>Our Journey</span>
-              <span className="w-12 h-px" style={{ backgroundColor: "#FFFD82" }} />
+              <span className="w-12 h-px" style={{ backgroundColor: "#FFE500" }} />
+              <span className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold" style={{ color: "#FFE500" }}>Our Journey</span>
+              <span className="w-12 h-px" style={{ backgroundColor: "#FFE500" }} />
             </div>
             <h2 className="font-playfair text-3xl md:text-4xl font-bold text-white">Our Milestones</h2>
           </div>
           <div className="space-y-6">
             {milestones.map((m) => (
-              <div key={m.year} className="flex gap-6 items-start border border-white/10 p-5 hover:border-[#FFFD82]/40 transition-colors">
-                <div className="flex-shrink-0 font-playfair font-bold text-2xl" style={{ color: "#FFFD82" }}>{m.year}</div>
+              <div key={m.year} className="flex gap-6 items-start border border-white/10 p-5 hover:border-[#FFE500]/40 transition-colors">
+                <div className="flex-shrink-0 font-playfair font-bold text-2xl" style={{ color: "#FFE500" }}>{m.year}</div>
                 <div>
                   <h3 className="font-playfair font-semibold text-white mb-1">{m.title}</h3>
                   <p className="font-inter text-white/50 text-sm">{m.desc}</p>
@@ -187,7 +187,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-4 text-center" style={{ backgroundColor: "#FFFD82" }}>
+      <section className="py-16 px-4 text-center" style={{ backgroundColor: "#FFE500" }}>
         <h2 className="font-playfair text-3xl font-bold mb-4" style={{ color: "#CC0000" }}>
           Ready to Shop?
         </h2>

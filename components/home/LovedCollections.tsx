@@ -6,7 +6,7 @@ export default function LovedCollections() {
   return (
     <section
       className="py-16 md:py-24"
-      style={{ backgroundColor: "#FFFD82" }}
+      style={{ backgroundColor: "#FFE500" }}
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
@@ -48,6 +48,7 @@ export default function LovedCollections() {
                   src={collection.image}
                   alt={collection.name}
                   fill
+                  priority={index < 2}
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />

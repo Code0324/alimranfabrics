@@ -21,7 +21,7 @@ export default function CollectionError({
         <h2 className="font-playfair text-3xl font-bold text-charcoal mb-4">Something went wrong</h2>
         <p className="font-inter text-charcoal/60 mb-8">Unable to load this collection. Please try again.</p>
         <div className="flex gap-3 justify-center">
-          <button onClick={reset} className="font-inter font-semibold text-sm uppercase tracking-wide px-6 py-3" style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}>
+          <button onClick={reset} className="font-inter font-semibold text-sm uppercase tracking-wide px-6 py-3" style={{ backgroundColor: "#FFE500", color: "#CC0000" }}>
             Try Again
           </button>
           <Link href="/" className="font-inter font-semibold text-sm uppercase tracking-wide px-6 py-3 border border-charcoal text-charcoal hover:border-[#CC0000] hover:text-[#CC0000] transition">

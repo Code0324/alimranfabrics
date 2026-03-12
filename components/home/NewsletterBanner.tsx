@@ -11,14 +11,14 @@ export default function NewsletterBanner() {
 
         {/* Eyebrow */}
         <div className="flex items-center justify-center gap-4 mb-4">
-          <span className="w-10 h-px" style={{ backgroundColor: "#FFFD82" }} />
+          <span className="w-10 h-px" style={{ backgroundColor: "#FFE500" }} />
           <span
             className="font-inter text-[10px] uppercase tracking-[0.35em] font-bold"
-            style={{ color: "#FFFD82" }}
+            style={{ color: "#FFE500" }}
           >
             Exclusive Members
           </span>
-          <span className="w-10 h-px" style={{ backgroundColor: "#FFFD82" }} />
+          <span className="w-10 h-px" style={{ backgroundColor: "#FFE500" }} />
         </div>
 
         {/* Heading */}
@@ -26,7 +26,7 @@ export default function NewsletterBanner() {
           className="font-playfair text-3xl md:text-4xl font-bold mb-3 bg-transparent"
           style={{ color: "#ffffff" }}
         >
-          Join the <span style={{ color: "#FFFD82" }}>Al Imran</span> Family
+          Join the <span style={{ color: "#FFE500" }}>Al Imran</span> Family
         </h2>
 
         {/* Subtext */}
@@ -47,13 +47,13 @@ export default function NewsletterBanner() {
             className="flex-1 px-4 py-3 font-inter text-sm focus:outline-none transition-colors"
             style={{
               backgroundColor: "#ffffff",
-              border: "2px solid #FFFD82",
+              border: "2px solid #FFE500",
               color: "#0C1350",
             }}
           />
           <button
             className="px-7 py-3 whitespace-nowrap font-inter font-bold text-sm uppercase tracking-widest transition-all duration-300 hover:opacity-90 active:scale-95"
-            style={{ backgroundColor: "#FFFD82", color: "#0C1350", borderRadius: "8px" }}
+            style={{ backgroundColor: "#FFE500", color: "#0C1350", borderRadius: "8px" }}
           >
             Subscribe
           </button>

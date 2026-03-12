@@ -239,7 +239,7 @@ export default function HeroCarousel() {
                 <Link
                   href={slide.ctaHref}
                   className="inline-block font-inter font-bold text-xs uppercase tracking-widest px-10 py-3.5 transition-all duration-300 hover:opacity-90"
-                  style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+                  style={{ backgroundColor: "#FFE500", color: "#CC0000" }}
                 >
                   {slide.cta}
                 </Link>

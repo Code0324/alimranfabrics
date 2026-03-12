@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, ShoppingBag, Heart, Menu, X, ChevronDown, Facebook, Instagram, Youtube } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlist } from "@/store/wishlistContext";
 
@@ -88,29 +88,27 @@ export default function Navbar() {
           className="flex whitespace-nowrap animate-ticker"
           aria-label="Announcements"
         >
-          <span className="font-inter text-xs font-semibold tracking-wide px-4" style={{ color: "#FFFD82" }}>
-            <span style={{ color: "#FFFD82" }}>Free Shipping</span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> — No Duty. No Drama. </span>
+          <span className="font-inter text-xs font-semibold tracking-wide px-4" style={{ color: "#FFE500" }}>
+            <span style={{ color: "#FFE500" }}>Worldwide Shipping</span>
             <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> New Ramadan Collection Out Now </span>
+            <span style={{ color: "rgba(255,229,0,0.85)" }}> New Ramadan Collection Out Now </span>
             <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "#FFFD82" }}> Free USA Shipping </span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> — Save up to </span>
-            <span style={{ color: "#FFFD82" }}>50% OFF </span>
+            <span style={{ color: "#FFE500" }}> Worldwide Shipping </span>
+            <span style={{ color: "rgba(255,229,0,0.85)" }}> — Save up to </span>
+            <span style={{ color: "#FFE500" }}>50% OFF </span>
             <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> Global Shipping Available </span>
+            <span style={{ color: "rgba(255,229,0,0.85)" }}> Global Delivery Available </span>
           </span>
-          <span className="font-inter text-xs font-semibold tracking-wide px-4" aria-hidden style={{ color: "#FFFD82" }}>
-            <span style={{ color: "#FFFD82" }}>Free Shipping</span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> — No Duty. No Drama. </span>
+          <span className="font-inter text-xs font-semibold tracking-wide px-4" aria-hidden style={{ color: "#FFE500" }}>
+            <span style={{ color: "#FFE500" }}>Worldwide Shipping</span>
             <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> New Ramadan Collection Out Now </span>
+            <span style={{ color: "rgba(255,229,0,0.85)" }}> New Ramadan Collection Out Now </span>
             <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "#FFFD82" }}> Free USA Shipping </span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> — Save up to </span>
-            <span style={{ color: "#FFFD82" }}>50% OFF </span>
+            <span style={{ color: "#FFE500" }}> Worldwide Shipping </span>
+            <span style={{ color: "rgba(255,229,0,0.85)" }}> — Save up to </span>
+            <span style={{ color: "#FFE500" }}>50% OFF </span>
             <span style={{ color: "#ffffff" }}>●</span>
-            <span style={{ color: "rgba(255,253,130,0.75)" }}> Global Shipping Available </span>
+            <span style={{ color: "rgba(255,229,0,0.85)" }}> Global Delivery Available </span>
           </span>
         </div>
       </div>
@@ -121,26 +119,39 @@ export default function Navbar() {
         style={{ backgroundColor: "#CC0000", borderColor: "rgba(255,0,0,0.3)" }}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
-          <div className="flex items-center gap-3">
-            {[
-              { href: "https://facebook.com",                                          Icon: Facebook,  label: "Facebook" },
-              { href: "https://www.instagram.com/alimranfabricsonline/",               Icon: Instagram, label: "Instagram" },
-              { href: "https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34",      Icon: Youtube,   label: "YouTube" },
-            ].map(({ href, Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="transition-opacity hover:opacity-70"
-                style={{ color: "#FFFD82" }}
-              >
-                <Icon size={16} />
-              </a>
-            ))}
+          <div className="flex items-center gap-2.5">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-transform hover:scale-110">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="nfb" cx="38%" cy="18%" r="80%"><stop offset="0%" stopColor="#60a8f7"/><stop offset="100%" stopColor="#0866ff"/></radialGradient>
+                </defs>
+                <circle cx="18" cy="18" r="17" fill="url(#nfb)"/>
+                <path d="M19.5 12.5H21.5V9.5H19.5C17.567 9.5 16 11.067 16 13V14.5H14V17.5H16V26.5H19V17.5H21.5L22 14.5H19V13C19 12.776 19.224 12.5 19.5 12.5Z" fill="white"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/alimranfabricsonline/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="nig" cx="30%" cy="105%" r="130%"><stop offset="0%" stopColor="#fdf497"/><stop offset="35%" stopColor="#fd5949"/><stop offset="55%" stopColor="#d6249f"/><stop offset="100%" stopColor="#285AEB"/></radialGradient>
+                </defs>
+                <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#nig)"/>
+                <rect x="10" y="10" width="16" height="16" rx="5" fill="none" stroke="white" strokeWidth="1.8"/>
+                <circle cx="18" cy="18" r="4" fill="none" stroke="white" strokeWidth="1.8"/>
+                <circle cx="24.5" cy="11.5" r="1.3" fill="white"/>
+              </svg>
+            </a>
+            <a href="https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-transform hover:scale-110">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="nyt" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#ff5a5a"/><stop offset="100%" stopColor="#cc0000"/></linearGradient>
+                </defs>
+                <rect x="1" y="1" width="34" height="34" rx="9" fill="url(#nyt)"/>
+                <path d="M26.5 13.2C26.3 12.4 25.7 11.8 24.9 11.5C23.4 11 18 11 18 11C18 11 12.6 11 11.1 11.5C10.3 11.8 9.7 12.4 9.5 13.2C9 14.7 9 18 9 18C9 18 9 21.3 9.5 22.8C9.7 23.6 10.3 24.2 11.1 24.5C12.6 25 18 25 18 25C18 25 23.4 25 24.9 24.5C25.7 24.2 26.3 23.6 26.5 22.8C27 21.3 27 18 27 18C27 18 27 14.7 26.5 13.2Z" fill="white"/>
+                <polygon points="15.5,15 15.5,21 21,18" fill="#cc0000"/>
+              </svg>
+            </a>
           </div>
-          <span className="font-inter text-xs font-semibold" style={{ color: "#FFFD82" }}>
+          <span className="font-inter text-xs font-semibold" style={{ color: "#FFE500" }}>
             PKR — Pakistan Rupee
           </span>
         </div>
@@ -152,7 +163,7 @@ export default function Navbar() {
         className={`max-w-none transition-all duration-300 ${
           isScrolled || mobileOpen ? "shadow-lg" : ""
         }`}
-        style={{ background: "linear-gradient(180deg,#ffffcc 0%,#FFFD82 45%,#f0eb60 100%)", borderBottom: "2px solid rgba(12,19,80,0.12)", boxShadow: "0 2px 12px rgba(255,253,130,0.4)" }}
+        style={{ background: "linear-gradient(180deg,#FFF5AA 0%,#FFE500 45%,#E8CE00 100%)", borderBottom: "2px solid rgba(12,19,80,0.12)", boxShadow: "0 2px 12px rgba(255,229,0,0.4)" }}
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -282,7 +293,7 @@ export default function Navbar() {
                 {mounted && wishlist.length > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
-                    style={{ borderRadius: "4px", backgroundColor: "#FFFD82", color: "#CC0000" }}
+                    style={{ borderRadius: "4px", backgroundColor: "#FFE500", color: "#CC0000" }}
                   >
                     {wishlist.length}
                   </span>
@@ -300,7 +311,7 @@ export default function Navbar() {
                 {mounted && itemCount > 0 && (
                   <span
                     className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
-                    style={{ borderRadius: "4px", backgroundColor: "#FFFD82", color: "#CC0000" }}
+                    style={{ borderRadius: "4px", backgroundColor: "#FFE500", color: "#CC0000" }}
                   >
                     {itemCount}
                   </span>

@@ -42,9 +42,11 @@ export default function ProductCardApi({ product }: Props) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 
+  const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1')
+    .replace(/\/api\/v1\/?$/, '').replace(/\/$/, '');
   const imageUrl =
     product.images[0]?.startsWith("/")
-      ? `${process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:8000'}${product.images[0]}`
+      ? `${baseUrl}${product.images[0]}`
       : product.images[0] || FALLBACK_IMAGE;
 
   const discount = product.discountPercentage ||
@@ -77,7 +79,7 @@ export default function ProductCardApi({ product }: Props) {
           {discount > 0 && (
             <span
               className="font-inter font-black uppercase leading-none px-3 py-1.5"
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000", fontSize: "13px", borderRadius: "6px" }}
+              style={{ backgroundColor: "#FFE500", color: "#CC0000", fontSize: "13px", borderRadius: "6px" }}
             >
               -{discount}%<br />
               <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
@@ -86,7 +88,7 @@ export default function ProductCardApi({ product }: Props) {
           {product.isNew && !discount && (
             <span
               className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000", borderRadius: "6px" }}
+              style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
             >
               New
             </span>
@@ -94,7 +96,7 @@ export default function ProductCardApi({ product }: Props) {
           {product.isBestSeller && !discount && !product.isNew && (
             <span
               className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000", borderRadius: "6px" }}
+              style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
             >
               Best Seller
             </span>
@@ -110,8 +112,18 @@ export default function ProductCardApi({ product }: Props) {
           <Heart size={14} fill={wishlisted ? "currentColor" : "none"} />
         </button>
 
-        {/* Hover actions */}
-        <div className={`absolute bottom-0 left-0 right-0 flex transition-all duration-300 ${hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
+        {/* Mobile-only: persistent Add to Cart button */}
+        <button
+          onClick={(e) => { e.stopPropagation(); addItem(cartProduct, "M", { name: "Default", hex: "#888888" }); }}
+          className="md:hidden absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center shadow-md transition-colors"
+          style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
+          aria-label="Add to cart"
+        >
+          <ShoppingBag size={15} />
+        </button>
+
+        {/* Desktop hover actions */}
+        <div className={`hidden md:flex absolute bottom-0 left-0 right-0 transition-all duration-300 ${hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
           <Link
             href={`/products/${product.slug}`}
             className="flex-1 bg-white/90 hover:bg-ivory text-charcoal py-3 text-xs font-inter font-medium
@@ -124,7 +136,7 @@ export default function ProductCardApi({ product }: Props) {
             onClick={() => addItem(cartProduct, "M", { name: "Default", hex: "#888888" })}
             className="flex-1 py-3 text-xs font-inter font-medium uppercase tracking-wide
                        flex items-center justify-center gap-1.5 transition-colors hover:opacity-90"
-            style={{ backgroundColor: "#FFFD82", color: "#CC0000" }}
+            style={{ backgroundColor: "#FFE500", color: "#CC0000" }}
           >
             <ShoppingBag size={13} />
             Add to Cart

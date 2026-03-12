@@ -33,7 +33,7 @@ const config: Config = {
           DEFAULT: "#0C1350",
           deep: "#070D38",
         },
-        brightGold: "#FFE600",
+        brightGold: "#FFE500",
         crimson: "#B71C1C",
         cream: "#FDFCF7",
         // Admin panel tokens

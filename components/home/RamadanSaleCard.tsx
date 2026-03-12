@@ -28,7 +28,7 @@ export default function RamadanSaleCard() {
         className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
           backgroundImage:
-            "repeating-linear-gradient(45deg, #FFFD82 0, #FFFD82 1px, transparent 0, transparent 50%)",
+            "repeating-linear-gradient(45deg, #FFE500 0, #FFE500 1px, transparent 0, transparent 50%)",
           backgroundSize: "18px 18px",
         }}
         aria-hidden
@@ -74,7 +74,7 @@ export default function RamadanSaleCard() {
           className="font-cormorant italic font-light leading-none mb-2"
           style={{
             fontSize: "clamp(3.5rem, 10vw, 8rem)",
-            color: "#FFFD82",
+            color: "#FFE500",
             background: "transparent",
             textShadow: "0 4px 24px rgba(0,0,0,0.4)",
           }}
@@ -106,7 +106,7 @@ export default function RamadanSaleCard() {
             className="font-cormorant font-semibold leading-none"
             style={{
               fontSize: "clamp(4rem, 14vw, 11rem)",
-              color: "#FFFD82",
+              color: "#FFE500",
               lineHeight: 1,
               textShadow: "0 8px 40px rgba(0,0,0,0.5)",
             }}
@@ -131,7 +131,7 @@ export default function RamadanSaleCard() {
             href="/collections/sale"
             className="inline-flex items-center gap-2 font-inter font-bold text-sm uppercase tracking-widest
                        px-10 py-4 transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{ backgroundColor: "#FFFD82", color: "#070D38" }}
+            style={{ backgroundColor: "#FFE500", color: "#070D38" }}
           >
             Shop the Sale
           </Link>

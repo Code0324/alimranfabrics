@@ -111,30 +111,30 @@ export default function HomePage() {
 
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-16 h-px" style={{ backgroundColor: "#FFFD82" }} />
-            <span className="font-inter text-xs uppercase tracking-[0.3em] font-bold" style={{ color: "#FFFD82" }}>
+            <span className="w-16 h-px" style={{ backgroundColor: "#FFE500" }} />
+            <span className="font-inter text-xs uppercase tracking-[0.3em] font-bold" style={{ color: "#FFE500" }}>
               Exclusive Offer
             </span>
-            <span className="w-16 h-px" style={{ backgroundColor: "#FFFD82" }} />
+            <span className="w-16 h-px" style={{ backgroundColor: "#FFE500" }} />
           </div>
           <h2
             className="font-playfair text-4xl md:text-6xl font-bold mb-4 bg-transparent leading-tight"
             style={{ color: "#ffffff" }}
           >
-            Free Shipping.<br />
-            <span style={{ color: "#FFFD82" }}>No Duty.</span> No Drama.
+            Worldwide<br />
+            <span style={{ color: "#FFE500" }}>Shipping</span>
           </h2>
-          <p className="font-inter text-lg mb-3 font-semibold" style={{ color: "#FFFD82" }}>
-            For All USA Orders
+          <p className="font-inter text-lg mb-3 font-semibold" style={{ color: "#FFE500" }}>
+            Delivered Globally
           </p>
           <p className="font-inter text-sm mb-8 max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.85)" }}>
-            We handle everything — customs, duties, and delivery. Your premium Pakistani clothing arrives at your door, worry-free.
+            We deliver premium Pakistani craftsmanship worldwide. Your order arrives safely at your door, wherever you are.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/collections/women"
               className="inline-block font-inter font-bold text-sm uppercase tracking-widest px-10 py-4 transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: "#FFFD82", color: "#0C1350" }}
+              style={{ backgroundColor: "#FFE500", color: "#0C1350" }}
             >
               Shop Women
             </Link>

@@ -29,7 +29,7 @@ export default function GlobalError({
             </p>
             <button
               onClick={reset}
-              style={{ backgroundColor: "#FFFD82", color: "#CC0000", border: "none", padding: "12px 24px", cursor: "pointer", fontWeight: "600", fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.05em" }}
+              style={{ backgroundColor: "#FFE500", color: "#CC0000", border: "none", padding: "12px 24px", cursor: "pointer", fontWeight: "600", fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.05em" }}
             >
               Try Again
             </button>
