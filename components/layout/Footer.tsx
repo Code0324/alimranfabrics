@@ -199,17 +199,13 @@ export default function Footer() {
             {/* Logo — transparent PNG, emboss filter on text only */}
             <div className="mb-5">
               <Link href="/">
-                <div className="relative w-24 h-16 inline-block">
+                <div className="relative w-40 h-24 inline-block">
                   <Image
                     src="/image/logo.png"
                     alt="Al Imran Fabrics"
                     fill
-                    sizes="96px"
+                    sizes="160px"
                     className="object-contain"
-                    style={{
-                      filter:
-                        "drop-shadow(1px 2px 3px rgba(0,0,0,0.32)) drop-shadow(-0.5px -0.5px 1px rgba(255,255,255,0.55))",
-                    }}
                     priority
                   />
                 </div>
