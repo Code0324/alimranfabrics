@@ -27,7 +27,11 @@ const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/
 function backendToProduct(bp: import("@/lib/api").BackendProduct): Product {
   const images =
     bp.images && bp.images.length > 0
-      ? bp.images.map((img) => (img.startsWith("/") ? `${API_BASE}${img}` : img))
+      ? bp.images.map((img) => {
+          if (!img.startsWith("/")) return img;
+          if (img.startsWith("/image/")) return img; // Next.js public asset
+          return `${API_BASE}${img}`;               // backend-served asset
+        })
       : [FALLBACK_IMAGE];
   return {
     id: bp.id,

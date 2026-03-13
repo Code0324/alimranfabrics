@@ -44,10 +44,19 @@ export default function ProductCardApi({ product }: Props) {
 
   const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1')
     .replace(/\/api\/v1\/?$/, '').replace(/\/$/, '');
-  const imageUrl =
-    product.images[0]?.startsWith("/")
-      ? `${baseUrl}${product.images[0]}`
-      : product.images[0] || FALLBACK_IMAGE;
+
+  function resolveImg(src: string | undefined): string | null {
+    if (!src) return null;
+    if (src.startsWith("http")) return src;
+    // Next.js public assets (e.g. /image/embroidered/...) — no backend prefix
+    if (src.startsWith("/image/")) return src;
+    // Backend-served relative paths
+    if (src.startsWith("/")) return `${baseUrl}${src}`;
+    return null;
+  }
+
+  const imageUrl = resolveImg(product.images[0]) ?? FALLBACK_IMAGE;
+  const hoverImageUrl = resolveImg(product.images[1]) ?? null;
 
   const discount = product.discountPercentage ||
     (product.originalPrice && product.originalPrice > product.price
@@ -64,13 +73,13 @@ export default function ProductCardApi({ product }: Props) {
       <div className="relative aspect-[3/4] overflow-hidden bg-ivory-dark">
         <Link href={`/products/${product.slug}`}>
           <Image
-            src={imageUrl}
+            src={hovered && hoverImageUrl ? hoverImageUrl : imageUrl}
             alt={product.name}
             fill
             className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
-            unoptimized={!imageUrl.includes("unsplash.com")}
+            unoptimized={!(hovered && hoverImageUrl ? hoverImageUrl : imageUrl).includes("unsplash.com")}
           />
         </Link>
 

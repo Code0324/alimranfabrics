@@ -39,7 +39,7 @@ export const categories: Category[] = [
     slug: "embroidered",
     image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600&q=80",
     productCount: 28,
-    description: "Artisan craftsmanship in every stitch",
+    description: "Stitched Embroiderd 2 pcs",
   },
   {
     id: "6",

@@ -137,29 +137,7 @@ export const unstitchedProducts: BackendProduct[] = [
 ];
 
 // ─── EMBROIDERED ─────────────────────────────────────────────────────────────
-
-export const embroideredProducts: BackendProduct[] = [
-  p("Khaadi Embroidered Chiffon Suit 2026","Khaadi","khaadi","embroidered","Women","Chiffon",145,wi(0),"Intricate hand-embroidered chiffon suit — signature Khaadi craftsmanship.",{isNew:true,isBestSeller:true}),
-  p("Khaadi Embroidered Lawn Kurta 2026","Khaadi","khaadi","embroidered","Women","Lawn",88,wi(1),"Floral embroidered lawn kurta with mirror-work collar detailing.",{isNew:true}),
-  p("J. Embroidered Net 3-Piece 2026","J. Junaid Jamshed","j-junaid-jamshed","embroidered","Women","Net",198,wi(2),"Heavily embroidered net 3-piece. Perfect for weddings and formal events.",{isNew:true,isBestSeller:true}),
-  p("J. Embroidered Khaddar Suit 2026","J. Junaid Jamshed","j-junaid-jamshed","embroidered","Women","Khaddar",112,wi(3),"Thread-embroidered khaddar suit with wool shawl for winter.",{isNew:true}),
-  p("Bin Saeed Embroidered Organza 2026","Bin Saeed","bin-saeed","embroidered","Women","Organza",225,wi(4),"Royal organza 3-piece with resham and zardozi embroidery.",{isNew:true,isBestSeller:true}),
-  p("Bin Saeed Embroidered Silk 2-Piece 2026","Bin Saeed","bin-saeed","embroidered","Women","Silk",185,wi(5),"Pure silk 2-piece with delicate embroidered borders.",{isNew:true}),
-  p("Tawakkal Embroidered Velvet Suit 2026","Tawakkal","tawakkal","embroidered","Women","Velvet",172,wi(6),"Luxurious velvet with heavy embroidery and sequin accents.",{isNew:true,isBestSeller:true}),
-  p("Tawakkal Embroidered Georgette 2026","Tawakkal","tawakkal","embroidered","Women","Georgette",138,wi(7),"Flowing georgette with fine embroidered neckline and cuffs.",{isNew:true}),
-  p("MTJ Embroidered Lawn 3-Piece 2026","MTJ","mtj","embroidered","Women","Lawn",95,wi(8),"Beautiful lawn 3-piece with contrast embroidered patch on kurta.",{isNew:true,isBestSeller:true}),
-  p("MTJ Embroidered Cotton Net 2026","MTJ","mtj","embroidered","Women","Cotton Net",158,wi(9),"Delicate cotton net with trellis embroidery from MTJ Luxury.",{isNew:true}),
-  p("Saya Embroidered Lawn Suit 2026","Saya","saya","embroidered","Women","Lawn",78,wi(10),"Contemporary floral embroidery on crisp lawn fabric.",{isNew:true}),
-  p("Saya Embroidered Jacquard 2-Piece 2026","Saya","saya","embroidered","Women","Jacquard",142,wi(11),"Jacquard 2-piece with resham embroidery on neckline and hem.",{isNew:true,isBestSeller:true}),
-  p("Nishat Embroidered Lawn 3-Piece 2026","Nishat","nishat","embroidered","Women","Lawn",105,wi(12),"Nishat's signature embroidered lawn — intricate threadwork throughout.",{isNew:true,isBestSeller:true}),
-  p("Nishat Embroidered Chiffon Suit 2026","Nishat","nishat","embroidered","Women","Chiffon",165,wi(13),"Semi-formal chiffon with embroidered motifs from Nishat Luxury.",{isNew:true}),
-  p("Salina Embroidered Net 3-Piece 2026","Salina","salina","embroidered","Women","Net",235,wi(14),"Grand embroidered net 3-piece from Salina Bridal Pret 2026.",{isNew:true,isBestSeller:true}),
-  p("Salina Embroidered Raw Silk 2026","Salina","salina","embroidered","Women","Raw Silk",195,wi(15),"Raw silk 2-piece with zardozi and dabka hand embroidery.",{isNew:true}),
-  p("Khaadi Embroidered Karandi Suit 2026","Khaadi","khaadi","embroidered","Women","Karandi",118,wi(16),"Winter karandi with bold embroidered yoke and hemline.",{isNew:true}),
-  p("J. Bridal Embroidered Suit 2026","J. Junaid Jamshed","j-junaid-jamshed","embroidered","Women","Raw Silk",285,wi(17),"Statement bridal embroidered 3-piece from J. Wedding Edit 2026.",{isNew:true,isBestSeller:true}),
-  p("Bin Saeed Embroidered Khaddar 2026","Bin Saeed","bin-saeed","embroidered","Women","Khaddar",108,wi(18),"Rich khaddar with hand-guided machine embroidery for winter.",{isNew:true}),
-  p("Tawakkal Embroidered Chiffon Lawn 2026","Tawakkal","tawakkal","embroidered","Women","Chiffon",148,wi(19),"Chiffon-on-lawn embroidered 3-piece for festive occasions.",{isNew:true,isBestSeller:true}),
-];
+// (Unsplash dummy data removed — real product images now in /image/embroiderd/)
 
 // ─── PRINTED ─────────────────────────────────────────────────────────────────
 
@@ -266,7 +244,7 @@ export const menProducts: BackendProduct[] = [
 export const womenProducts: BackendProduct[] = [
   ...stitchedProducts.slice(0,6),
   ...unstitchedProducts.slice(0,4),
-  ...embroideredProducts.slice(0,4),
+  ...formalProducts.slice(0,4),
   ...printedProducts.slice(0,4),
   ...formalProducts.slice(0,2),
 ];
@@ -321,12 +299,86 @@ export const khaddarProducts: BackendProduct[] = [
   p("Tawakkal Linen Khaddar 2026","Tawakkal","tawakkal","khaddar","Women","Linen",82,wi(5),"Soft linen-khaddar blend 3-piece. Autumn-winter ready.",{isNew:true,isBestSeller:true}),
 ];
 
+// ─── EMBROIDERED CATEGORY (local color variants, Rs. 3000, 2 pcs) ────────────
+// Images live in public/image/embroiderd/ (note: directory has a typo — no 'e')
+
+const EMB_BASE = "/image/embroiderd";
+
+function embProduct(
+  colorName: string,
+  slug: string,
+  brand: string,
+  // Optional: explicit [primaryFile, hoverFile] stems when they differ from slug
+  imgFiles?: [string, string],
+): BackendProduct {
+  const brandSlug = brand.toLowerCase().replace(/\s+/g, "-").replace(/\./g, "");
+  const displayName = colorName
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+  const [img1, img2] = imgFiles ?? [slug, `${slug}1`];
+  return {
+    id: `emb-${slug}`,
+    name: "Embroiderd Stitched 2 pcs",
+    slug,
+    description: "Stitched Embroiderd 2 pcs",
+    price: 3000,
+    originalPrice: null,
+    images: [`${EMB_BASE}/${img1}.jpg`, `${EMB_BASE}/${img2}.jpg`],
+    category: "Embroidered",
+    categorySlug: "embroidered",
+    brand,
+    brandSlug,
+    fabric: "Embroidery",
+    stock: 20,
+    stockStatus: "in_stock",
+    isFeatured: false,
+    isBestSeller: false,
+    isNew: true,
+    isLimitedEdition: false,
+    discountPercentage: 0,
+    tags: "embroidered,2pcs,stitched",
+  };
+}
+
+export const embroideredCategoryProducts: BackendProduct[] = [
+  // ── Products with real images in /public/image/embroiderd/ ──
+  embProduct("white",           "white",           "SanaSafinaz"),
+  embProduct("black",           "black",           "KHAADI"),
+  embProduct("yellow",          "yellow",          "KHAADI"),
+  embProduct("green",           "green",           "KHAADI"),
+  embProduct("brown",           "brown",           "Image Generation"),
+  embProduct("rust",            "rust",            "KHAADI"),
+  embProduct("sky-blue",        "sky-blue",        "KHAADI",           ["skyblue", "skyblue1"]),
+  embProduct("off-white",       "off-white",       "KHAADI",           ["offwhite", "offwhite1"]),
+  embProduct("light-maroon",    "light-maroon",    "KHAADI",           ["lightmaroon", "lightmaroon1"]),
+  embProduct("light-grey",      "light-grey",      "KHAADI",           ["lightgrey", "lightgrey1"]),
+  // seagreen applic: primary filename has a space → URL-encode it
+  embProduct("seagreen-applic", "seagreen-applic", "KHAADI",           ["seagreen%20applic", "seagreenapplic1"]),
+  // ── Remaining spec products (images to be added) ──
+  embProduct("red",             "red",             "KHAADI"),
+  embProduct("green-and-white", "green-and-white", "KHAADI"),
+  embProduct("yellow-and-white","yellow-and-white","Image Generation"),
+  embProduct("sea-green",       "sea-green",       "KHAADI"),
+  embProduct("peach",           "peach",           "KHAADI"),
+  embProduct("yellow-and-black","yellow-and-black","KHAADI"),
+  embProduct("pink",            "pink",            "KHAADI"),
+  embProduct("lemon",           "lemon",           "KHAADI"),
+  embProduct("maroon",          "maroon",          "KHAADI"),
+  embProduct("lilac",           "lilac",           "KHAADI"),
+  embProduct("grey",            "grey",            "KHAADI"),
+  embProduct("beige",           "baige",           "KHAADI"),
+  embProduct("rust-applic",     "rust-applic",     "KHAADI"),
+  embProduct("rust-white",      "rust-white",      "Image Generation"),
+  embProduct("coal",            "coal",            "Ethnic"),
+];
+
 // ─── Master lookup ────────────────────────────────────────────────────────────
 
 const catalogMap: Record<string, BackendProduct[]> = {
-  stitched:       stitchedProducts,
+  stitched:       [...stitchedProducts, ...embroideredCategoryProducts],
   unstitched:     unstitchedProducts,
-  embroidered:    embroideredProducts,
+  embroidered:    embroideredCategoryProducts,
   printed:        printedProducts,
   formal:         formalProducts,
   luxury:         formalProducts,
@@ -336,13 +388,13 @@ const catalogMap: Record<string, BackendProduct[]> = {
   kids:           kidsProducts,
   women:          womenProducts,
   // sub-category aliases
-  "ready-to-wear": stitchedProducts,
+  "ready-to-wear": [...stitchedProducts, ...embroideredCategoryProducts],
   jacquard:       formalProducts,
   bridal:         formalProducts,
   casual:         printedProducts,
   cotton:         printedProducts,
-  chiffon:        embroideredProducts,
-  chickenkar:     embroideredProducts,
+  chiffon:        embroideredCategoryProducts,
+  chickenkar:     embroideredCategoryProducts,
   "men-formal":   menProducts,
   "shalwar-kameez": menProducts,
   sherwani:       menProducts,
@@ -352,9 +404,9 @@ const catalogMap: Record<string, BackendProduct[]> = {
   // brand slugs
   mtj:            menProducts,
   "bin-saeed":    unstitchedProducts,
-  khaadi:         womenProducts,
+  khaadi:         [...womenProducts, ...embroideredCategoryProducts],
   salina:         lawnProducts,
-  nishat:         embroideredProducts,
+  nishat:         embroideredCategoryProducts,
   "j-junaid":     menProducts,
   sapphire:       womenProducts,
   tawakkal:       formalProducts,
