@@ -6,6 +6,7 @@ import AddToCart from "@/components/product/AddToCart";
 import ProductTabs from "@/components/product/ProductTabs";
 import ProductCard from "@/components/ui/ProductCard";
 import { getProductBySlug, getRelatedProducts } from "@/data/products";
+import { getLocalProductBySlug } from "@/data/collectionProducts";
 import { fetchProduct } from "@/lib/api";
 import { formatPrice, calculateDiscount } from "@/lib/utils";
 import type { Product } from "@/types";
@@ -23,39 +24,45 @@ const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/
   .replace(/\/api\/v1\/?$/, "")
   .replace(/\/$/, "");
 
+function backendToProduct(bp: import("@/lib/api").BackendProduct): Product {
+  const images =
+    bp.images && bp.images.length > 0
+      ? bp.images.map((img) => (img.startsWith("/") ? `${API_BASE}${img}` : img))
+      : [FALLBACK_IMAGE];
+  return {
+    id: bp.id,
+    name: bp.name,
+    slug: bp.slug,
+    price: bp.price,
+    originalPrice: bp.originalPrice ?? undefined,
+    images,
+    category: bp.category,
+    categorySlug: bp.categorySlug,
+    fabric: bp.fabric || "Premium",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: [{ name: "Default", hex: "#888888" }],
+    description: bp.description,
+    careInstructions: "Please handle with care.",
+    isNew: bp.isNew,
+    isBestSeller: bp.isBestSeller,
+    sku: bp.id,
+    collection: bp.brand,
+  };
+}
+
 async function resolveProduct(slug: string): Promise<Product | null> {
   // 1. Try static data first (instant, no network)
   const staticProduct = getProductBySlug(slug);
   if (staticProduct) return staticProduct;
 
-  // 2. Fall back to backend API
+  // 2. Try local collection fallback products (no network)
+  const localProduct = getLocalProductBySlug(slug);
+  if (localProduct) return backendToProduct(localProduct);
+
+  // 3. Fall back to backend API
   try {
     const bp = await fetchProduct(slug);
-
-    const images =
-      bp.images && bp.images.length > 0
-        ? bp.images.map((img) => (img.startsWith("/") ? `${API_BASE}${img}` : img))
-        : [FALLBACK_IMAGE];
-
-    return {
-      id: bp.id,
-      name: bp.name,
-      slug: bp.slug,
-      price: bp.price,
-      originalPrice: bp.originalPrice ?? undefined,
-      images,
-      category: bp.category,
-      categorySlug: bp.categorySlug,
-      fabric: bp.fabric || "Premium",
-      sizes: ["S", "M", "L", "XL", "XXL"],
-      colors: [{ name: "Default", hex: "#888888" }],
-      description: bp.description,
-      careInstructions: "Please handle with care.",
-      isNew: bp.isNew,
-      isBestSeller: bp.isBestSeller,
-      sku: bp.id,
-      collection: bp.brand,
-    };
+    return backendToProduct(bp);
   } catch {
     return null;
   }

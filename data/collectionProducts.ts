@@ -364,3 +364,12 @@ const catalogMap: Record<string, BackendProduct[]> = {
 export function getLocalProducts(slug: string): BackendProduct[] {
   return catalogMap[slug] ?? [];
 }
+
+/** Find a single local product by its slug across all categories. */
+export function getLocalProductBySlug(slug: string): BackendProduct | undefined {
+  for (const products of Object.values(catalogMap)) {
+    const found = products.find((p) => p.slug === slug);
+    if (found) return found;
+  }
+  return undefined;
+}
