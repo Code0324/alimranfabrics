@@ -184,29 +184,6 @@ function YouTubeIcon() {
   );
 }
 
-function WhatsAppIcon() {
-  return (
-    <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="wa-g" cx="35%" cy="20%" r="80%">
-          <stop offset="0%" stopColor="#6ee17f"/>
-          <stop offset="55%" stopColor="#25D366"/>
-          <stop offset="100%" stopColor="#128C7E"/>
-        </radialGradient>
-        <filter id="wa-f" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="4" stdDeviation="3" floodColor="#075E54" floodOpacity="0.65"/>
-          <feDropShadow dx="0" dy="-1" stdDeviation="1.5" floodColor="rgba(255,255,255,0.5)" floodOpacity="1"/>
-        </filter>
-      </defs>
-      <circle cx="18" cy="18" r="17" fill="url(#wa-g)" filter="url(#wa-f)"/>
-      {/* Shine highlight */}
-      <ellipse cx="14" cy="10" rx="8" ry="3" fill="rgba(255,255,255,0.22)"/>
-      {/* WhatsApp speech bubble + phone */}
-      <path d="M18 8.5C12.75 8.5 8.5 12.75 8.5 18C8.5 19.77 9.01 21.42 9.87 22.82L8.5 27.5L13.37 26.16C14.73 26.97 16.31 27.5 18 27.5C23.25 27.5 27.5 23.25 27.5 18C27.5 12.75 23.25 8.5 18 8.5Z" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.7)" strokeWidth="0.8"/>
-      <path d="M22.3 20.6C22.1 21.2 21.1 21.7 20.6 21.8C20.1 21.9 19.5 21.9 17.2 21C14.3 19.9 12.4 17 12.3 16.8C12.2 16.6 11.3 15.4 11.3 14.2C11.3 13 11.9 12.4 12.2 12.1C12.5 11.8 12.8 11.7 13 11.7H13.5C13.7 11.7 14 11.7 14.2 12.2C14.4 12.7 15 14 15.1 14.2C15.2 14.4 15.3 14.7 15.1 14.9C15 15.1 14.8 15.3 14.6 15.6C14.5 15.8 14.3 15.9 14.4 16.1C14.9 17 15.7 17.8 16.6 18.3C16.8 18.5 17.1 18.4 17.3 18.2C17.5 18 17.9 17.5 18.1 17.3C18.3 17.1 18.6 17.1 18.8 17.2C19 17.3 20.2 17.9 20.4 18C20.6 18.1 20.8 18.2 20.9 18.4C21.1 18.8 21.1 19.8 22.3 20.6Z" fill="white"/>
-    </svg>
-  );
-}
 
 export default function Footer() {
   return (
@@ -272,10 +249,6 @@ export default function Footer() {
               <a href="https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
                 className="transition-transform hover:scale-110 hover:-translate-y-1">
                 <YouTubeIcon />
-              </a>
-              <a href="https://wa.me/923145690329" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
-                className="transition-transform hover:scale-110 hover:-translate-y-1">
-                <WhatsAppIcon />
               </a>
             </div>
           </div>

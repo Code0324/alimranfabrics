@@ -142,17 +142,7 @@ export default function Navbar() {
                 <polygon points="15.5,15 15.5,21 21,18" fill="#cc0000"/>
               </svg>
             </a>
-            <a href="https://wa.me/923145690329" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="transition-transform hover:scale-110">
-              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="nwa" cx="35%" cy="20%" r="80%"><stop offset="0%" stopColor="#6ee17f"/><stop offset="55%" stopColor="#25D366"/><stop offset="100%" stopColor="#128C7E"/></radialGradient>
-                </defs>
-                <circle cx="18" cy="18" r="17" fill="url(#nwa)"/>
-                <ellipse cx="14" cy="10" rx="7" ry="2.5" fill="rgba(255,255,255,0.2)"/>
-                <path d="M18 8.5C12.75 8.5 8.5 12.75 8.5 18C8.5 19.77 9.01 21.42 9.87 22.82L8.5 27.5L13.37 26.16C14.73 26.97 16.31 27.5 18 27.5C23.25 27.5 27.5 23.25 27.5 18C27.5 12.75 23.25 8.5 18 8.5Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.7)" strokeWidth="0.8"/>
-                <path d="M22.3 20.6C22.1 21.2 21.1 21.7 20.6 21.8C20.1 21.9 19.5 21.9 17.2 21C14.3 19.9 12.4 17 12.3 16.8C12.2 16.6 11.3 15.4 11.3 14.2C11.3 13 11.9 12.4 12.2 12.1C12.5 11.8 12.8 11.7 13 11.7H13.5C13.7 11.7 14 11.7 14.2 12.2C14.4 12.7 15 14 15.1 14.2C15.2 14.4 15.3 14.7 15.1 14.9C15 15.1 14.8 15.3 14.6 15.6C14.5 15.8 14.3 15.9 14.4 16.1C14.9 17 15.7 17.8 16.6 18.3C16.8 18.5 17.1 18.4 17.3 18.2C17.5 18 17.9 17.5 18.1 17.3C18.3 17.1 18.6 17.1 18.8 17.2C19 17.3 20.2 17.9 20.4 18C20.6 18.1 20.8 18.2 20.9 18.4C21.1 18.8 21.1 19.8 22.3 20.6Z" fill="white"/>
-              </svg>
-            </a>
+
           </div>
         </div>
       </div>
@@ -166,7 +156,7 @@ export default function Navbar() {
         style={{ background: "linear-gradient(180deg,#FFF5AA 0%,#FFE500 45%,#E8CE00 100%)", borderBottom: "2px solid rgba(12,19,80,0.12)", boxShadow: "0 2px 12px rgba(255,229,0,0.4)" }}
       >
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-20 md:h-24">
             {/* Mobile menu toggle */}
             <button
               className="md:hidden p-1 transition-colors"
@@ -181,17 +171,13 @@ export default function Navbar() {
 
             {/* ── Logo ── */}
             <Link href="/" className="flex items-center group">
-              <div className="relative w-16 h-12 md:w-20 md:h-14 flex-shrink-0">
+              <div className="relative w-28 h-16 md:w-36 md:h-20 flex-shrink-0">
                 <Image
                   src="/image/logo.png"
                   alt="Al Imran Fabrics"
                   fill
-                  sizes="80px"
+                  sizes="144px"
                   className="object-contain"
-                  style={{
-                    filter:
-                      "drop-shadow(1px 2px 3px rgba(0,0,0,0.30)) drop-shadow(-0.5px -0.5px 1px rgba(255,255,255,0.55))",
-                  }}
                   priority
                 />
               </div>

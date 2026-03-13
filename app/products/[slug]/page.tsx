@@ -6,19 +6,66 @@ import AddToCart from "@/components/product/AddToCart";
 import ProductTabs from "@/components/product/ProductTabs";
 import ProductCard from "@/components/ui/ProductCard";
 import { getProductBySlug, getRelatedProducts, products } from "@/data/products";
+import { fetchProduct } from "@/lib/api";
 import { formatPrice, calculateDiscount } from "@/lib/utils";
+import type { Product } from "@/types";
 import { Truck, Shield, RotateCcw, Star } from "lucide-react";
 
 interface ProductPageProps {
   params: { slug: string };
 }
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600&q=80";
+
+async function resolveProduct(slug: string): Promise<Product | null> {
+  // Try static data first
+  const staticProduct = getProductBySlug(slug);
+  if (staticProduct) return staticProduct;
+
+  // Fall back to backend API
+  try {
+    const bp = await fetchProduct(slug);
+
+    // Resolve relative image paths to absolute URLs
+    const baseUrl = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1")
+      .replace(/\/api\/v1\/?$/, "")
+      .replace(/\/$/, "");
+    const images = bp.images.length > 0
+      ? bp.images.map((img) => (img.startsWith("/") ? `${baseUrl}${img}` : img))
+      : [FALLBACK_IMAGE];
+
+    return {
+      id: bp.id,
+      name: bp.name,
+      slug: bp.slug,
+      price: bp.price,
+      originalPrice: bp.originalPrice ?? undefined,
+      images,
+      category: bp.category,
+      categorySlug: bp.categorySlug,
+      fabric: bp.fabric,
+      sizes: ["S", "M", "L", "XL", "XXL"],
+      colors: [{ name: "Default", hex: "#888888" }],
+      description: bp.description,
+      careInstructions: "Please handle with care.",
+      isNew: bp.isNew,
+      isBestSeller: bp.isBestSeller,
+      sku: bp.id,
+      collection: bp.brand,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const product = getProductBySlug(params.slug);
+  const product = await resolveProduct(params.slug);
   if (!product) return { title: "Product Not Found" };
 
   return {
@@ -27,13 +74,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     openGraph: {
       title: product.name,
       description: product.description,
-      images: [{ url: product.images[0] }],
+      images: product.images[0] ? [{ url: product.images[0] }] : [],
     },
   };
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = getProductBySlug(params.slug);
+export default async function ProductPage({ params }: ProductPageProps) {
+  const product = await resolveProduct(params.slug);
   if (!product) notFound();
 
   const related = getRelatedProducts(product);
@@ -143,7 +190,6 @@ export default function ProductPage({ params }: ProductPageProps) {
         <ProductTabs product={product} />
 
         {/* Related products */}
-
         {related.length > 0 && (
           <div className="mt-20">
             <div className="text-center mb-12">
@@ -165,4 +211,3 @@ export default function ProductPage({ params }: ProductPageProps) {
     </div>
   );
 }
-

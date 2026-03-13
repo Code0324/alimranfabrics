@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { X, ShoppingBag, Truck } from "lucide-react";
+import { X, ShoppingBag } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import CartItem from "./CartItem";
 import { formatPrice } from "@/lib/utils";
@@ -79,13 +79,6 @@ export default function CartDrawer() {
           </button>
         </div>
 
-        {/* Free shipping banner */}
-        <div className="bg-navy/10 border-b border-navy/20 px-6 py-2.5 flex items-center gap-2">
-          <Truck size={14} className="text-gold flex-shrink-0" />
-          <p className="font-inter text-xs text-navy font-medium">
-            Free shipping on all USA orders
-          </p>
-        </div>
 
         {/* Cart items */}
         <div className="flex-1 overflow-y-auto px-6">

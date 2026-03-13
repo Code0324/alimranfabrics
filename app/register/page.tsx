@@ -27,7 +27,7 @@ function RegisterForm() {
     setLocalError("");
     if (!name.trim()) return setLocalError("Please enter your name.");
     if (!email.trim()) return setLocalError("Please enter your email.");
-    if (password.length < 6) return setLocalError("Password must be at least 6 characters.");
+    if (password.length < 8) return setLocalError("Password must be at least 8 characters.");
     try {
       await register(name.trim(), email.trim(), password);
       router.replace(redirect);
@@ -110,7 +110,7 @@ function RegisterForm() {
                 type={showPw ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Min. 6 characters"
+                placeholder="Min. 8 characters"
                 autoComplete="new-password"
                 className="w-full border border-[#E0D8CC] pl-10 pr-10 py-2.5 font-inter text-sm text-charcoal
                            focus:outline-none focus:border-[#CC0000] transition"
