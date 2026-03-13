@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Search, ShoppingBag, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlist } from "@/store/wishlistContext";
@@ -52,6 +53,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -318,20 +321,39 @@ export default function Navbar() {
               className="py-3 animate-fade-in"
               style={{ borderTop: "1px solid rgba(12,19,80,0.15)" }}
             >
-              <div className="relative max-w-md mx-auto">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "#0C1350" }} />
+              <form
+                className="relative max-w-md mx-auto"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const q = searchQuery.trim();
+                  if (!q) return;
+                  setSearchOpen(false);
+                  setSearchQuery("");
+                  router.push(`/search?q=${encodeURIComponent(q)}`);
+                }}
+              >
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#0C1350" }} />
                 <input
                   type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for kurtas, suits, sherwanis..."
                   autoFocus
-                  className="w-full pl-9 pr-4 py-2.5 text-sm font-inter focus:outline-none transition-colors"
+                  className="w-full pl-9 pr-12 py-2.5 text-sm font-inter focus:outline-none transition-colors"
                   style={{
                     backgroundColor: "#ffffff",
                     border: "2px solid #0C1350",
                     color: "#0C1350",
                   }}
                 />
-              </div>
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 font-inter text-xs font-bold uppercase tracking-wide px-1"
+                  style={{ color: "#CC0000" }}
+                >
+                  Go
+                </button>
+              </form>
             </div>
           )}
 
