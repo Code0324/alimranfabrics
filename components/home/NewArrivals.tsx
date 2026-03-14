@@ -1,22 +1,11 @@
 import Link from "next/link";
-import { fetchProducts } from "@/lib/api";
+import { embroideredCategoryProducts } from "@/data/collectionProducts";
 import ProductCardApi from "@/components/ui/ProductCardApi";
 
-export default async function NewArrivals() {
-  let products = [];
-  try {
-    products = await fetchProducts({ new_arrival: true, limit: 8 });
-    // Fallback: if no new_arrival products, fetch featured
-    if (products.length === 0) {
-      products = await fetchProducts({ limit: 8 });
-    }
-  } catch {
-    // Backend offline — render nothing gracefully
-    return null;
-  }
+// Show only the products that have real local images (first 8)
+const PRODUCTS_WITH_IMAGES = embroideredCategoryProducts.slice(0, 8);
 
-  if (products.length === 0) return null;
-
+export default function NewArrivals() {
   return (
     <section className="py-16 md:py-24 px-4 bg-ivory">
       <div className="max-w-7xl mx-auto">
@@ -29,13 +18,13 @@ export default async function NewArrivals() {
           </div>
           <h2 className="section-title mb-3 bg-transparent">New Arrivals</h2>
           <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm">
-            Fresh from our ateliers — discover the latest pieces that blend tradition with contemporary style.
+            Fresh stitched embroidered 2-piece collections — tradition meets contemporary style.
           </p>
         </div>
 
         {/* Product grid — 2 cols mobile, 4 cols desktop */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {products.map((product) => (
+          {PRODUCTS_WITH_IMAGES.map((product) => (
             <ProductCardApi key={product.id} product={product} />
           ))}
         </div>
