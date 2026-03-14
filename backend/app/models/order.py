@@ -54,8 +54,8 @@ class Order(Base):
     )
     customer_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     customer_phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    shipping_address: Mapped[str | None] = mapped_column(Text, nullable=True)
-    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+    shipping_address: Mapped[str | None] = mapped_column("customer_address", Text, nullable=True)
+    notes: Mapped[str | None] = mapped_column("customer_notes", Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )
