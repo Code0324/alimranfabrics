@@ -1,7 +1,8 @@
 """Authentication routes."""
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_session, get_current_user
@@ -13,55 +14,60 @@ from app.services.auth import AuthService
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-@router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register(
     user_create: UserCreate,
     session: Annotated[AsyncSession, Depends(get_session)],
-) -> User:
-    """
-    Register a new user.
+):
+    try:
+        user = await AuthService.register(user_create, session)
+        return {
+            "id": user.id,
+            "email": user.email,
+            "name": user.name,
+            "role": user.role,
+            "is_active": user.is_active,
+            "created_at": str(user.created_at),
+            "updated_at": str(user.updated_at),
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
 
-    **Request Body:**
-    - email: User email address
-    - password: User password (min 8 characters)
-    - name: User full name
-    - role: User role (admin or customer)
 
-    **Response:** Created user object
-    """
-    return await AuthService.register(user_create, session)
-
-
-@router.post("/login", response_model=TokenResponse)
+@router.post("/login")
 async def login(
     login_data: LoginRequest,
     session: Annotated[AsyncSession, Depends(get_session)],
-) -> TokenResponse:
-    """
-    Authenticate user and receive JWT token.
-
-    **Request Body:**
-    - email: User email address
-    - password: User password
-
-    **Response:** JWT access token
-    """
-    return await AuthService.login(login_data, session)
+):
+    try:
+        result = await AuthService.login(login_data, session)
+        return {"access_token": result.access_token, "token_type": result.token_type}
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
-@router.get("/me", response_model=UserResponse)
+@router.get("/me")
 async def get_current_user_profile(
     current_user: Annotated[User, Depends(get_current_user)],
-) -> User:
-    """
-    Get current user profile.
-
-    **Headers:**
-    - Authorization: Bearer {token}
-
-    **Response:** Current user object
-    """
-    return current_user
+):
+    try:
+        return {
+            "id": current_user.id,
+            "email": current_user.email,
+            "name": current_user.name,
+            "role": current_user.role,
+            "is_active": current_user.is_active,
+            "created_at": str(current_user.created_at),
+            "updated_at": str(current_user.updated_at),
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
 __all__ = ["router"]
