@@ -47,12 +47,8 @@ app.add_middleware(
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    """Catch-all exception handler to surface errors as JSON."""
-    import traceback
-    return JSONResponse(
-        status_code=500,
-        content={"detail": str(exc), "type": type(exc).__name__, "trace": traceback.format_exc()[-500:]},
-    )
+    """Catch-all handler — returns JSON so CORS headers are preserved on 500."""
+    return JSONResponse(status_code=500, content={"detail": str(exc)})
 
 
 # Include routers
