@@ -7,7 +7,6 @@ from sqlalchemy import (
     String,
     Integer,
     Numeric,
-    Enum,
     ForeignKey,
     Index,
     Text,
@@ -46,12 +45,8 @@ class Order(Base):
         String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     total_amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
-    status: Mapped[OrderStatus] = mapped_column(
-        Enum(OrderStatus), default=OrderStatus.PENDING, nullable=False
-    )
-    payment_method: Mapped[PaymentMethod] = mapped_column(
-        Enum(PaymentMethod), default=PaymentMethod.COD, nullable=False
-    )
+    status: Mapped[str] = mapped_column(String(20), default=OrderStatus.PENDING.value, nullable=False)
+    payment_method: Mapped[str] = mapped_column(String(20), default=PaymentMethod.COD.value, nullable=False)
     customer_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     customer_phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
     shipping_address: Mapped[str | None] = mapped_column("customer_address", Text, nullable=True)
