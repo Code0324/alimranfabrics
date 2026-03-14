@@ -376,6 +376,7 @@ export const embroideredCategoryProducts: BackendProduct[] = [
 // ─── Master lookup ────────────────────────────────────────────────────────────
 
 const catalogMap: Record<string, BackendProduct[]> = {
+  "new-arrivals": embroideredCategoryProducts,
   stitched:       [...stitchedProducts, ...embroideredCategoryProducts],
   unstitched:     unstitchedProducts,
   embroidered:    embroideredCategoryProducts,
