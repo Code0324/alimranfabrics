@@ -44,7 +44,7 @@ function NavItem({
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, logout, token } = useAuthStore();
+  const { user, logout, token, loadUser } = useAuthStore();
   const { sidebarOpen, toggleSidebar } = useAdminStore();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -56,10 +56,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!mounted) return;
     if (!isLoggedIn || !token) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
-    } else if (user?.role !== 'admin') {
+      return;
+    }
+    if (!user) {
+      loadUser();
+      return;
+    }
+    if (user.role !== 'admin') {
       router.replace('/');
     }
-  }, [isLoggedIn, token, user?.role, router, mounted, pathname]);
+  }, [isLoggedIn, token, user, router, mounted, pathname, loadUser]);
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
