@@ -57,8 +57,12 @@ function getBgImage(slug: string): string {
     "shalwar-kameez": "/image/categories/cat-men-stitched.jpg",
     "sherwani":       "/image/categories/cat-men-formal.jpg",
     "waistcoat":      "/image/categories/cat-men-stitched.jpg",
+    "event-ready":    "/image/categories/cat-embroidered.jpg",
+    "work-wear":      "/image/categories/cat-stitched.jpg",
+    "daily-wear":     "/image/categories/cat-stitched.jpg",
     "ready-to-wear":  "/image/categories/cat-stitched.jpg",
     // brand slugs
+    "al-karam":       "/image/categories/cat-printed.jpg",
     "mtj":            "/image/categories/cat-men-formal.jpg",
     "bin-saeed":      "/image/categories/cat-unstitched.jpg",
     "khaadi":         "/image/women-banner-new.webp",
@@ -74,6 +78,10 @@ function getBgImage(slug: string): string {
     "cotton":         "/image/categories/cat-unstitched.jpg",
     "chickenkar":     "/image/categories/chickenkar.jpg",
     "chiffon":        "/image/categories/chiffon.jpg",
+    // additional brand slugs
+    "sanasafinaz":    "/image/categories/cat-embroidered.jpg",
+    "ethnic":         "/image/categories/cat-embroidered.jpg",
+    "image-generation": "/image/categories/cat-embroidered.jpg",
   };
   return map[slug] ?? "/image/women-banner-silk.png";
 }
@@ -88,6 +96,9 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   try {
     if (slug === "new-arrivals") {
       collectionProducts = await fetchProducts({ new_arrival: true, limit: 50 });
+      // Exclude men's / kids' categories — New Arrivals shows women's only
+      const menSlugs = new Set(["men", "boys", "shalwar-kameez", "kurta-pajama", "sherwani", "waistcoat", "men-formal"]);
+      collectionProducts = collectionProducts.filter((p) => !menSlugs.has(p.categorySlug));
     } else if (slug === "sale") {
       // sale = products with discount
       collectionProducts = await fetchProducts({ limit: 50 });

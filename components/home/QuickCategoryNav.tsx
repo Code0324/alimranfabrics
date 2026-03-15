@@ -3,52 +3,24 @@ import Image from "next/image";
 
 const quickCategories = [
   {
-    label: "Lawn",
-    href: "/collections/lawn",
-    image: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=200&q=80",
-    emoji: "🌿",
-  },
-  {
-    label: "Festive",
-    href: "/collections/formal",
-    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=200&q=80",
-    emoji: "✨",
-  },
-  {
-    label: "Jacquard",
-    href: "/collections/jacquard",
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&q=80",
-    emoji: "🪡",
-  },
-  {
-    label: "Khaddar",
-    href: "/collections/khaddar",
-    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=200&q=80",
-    emoji: "🧶",
+    label: "Printed",
+    href: "/collections/printed",
+    image: "/image/categories/cat-printed.jpg",
   },
   {
     label: "Embroidered",
     href: "/collections/embroidered",
-    image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=200&q=80",
-    emoji: "🌸",
+    image: "/image/categories/cat-embroidered.jpg",
   },
   {
-    label: "Men",
-    href: "/collections/men",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
-    emoji: "👔",
+    label: "Jacquard",
+    href: "/collections/jacquard",
+    image: "/image/categories/cat-luxury.jpg",
   },
   {
-    label: "Kids",
-    href: "/collections/kids",
-    image: "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=200&q=80",
-    emoji: "🎀",
-  },
-  {
-    label: "Casual",
-    href: "/collections/casual",
-    image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=200&q=80",
-    emoji: "👗",
+    label: "Solid",
+    href: "/collections/solid",
+    image: "/image/categories/cat-stitched.jpg",
   },
 ];
 

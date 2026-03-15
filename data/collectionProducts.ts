@@ -7,39 +7,54 @@
 
 import type { BackendProduct } from "@/lib/api";
 
-// ─── Unsplash image pools ────────────────────────────────────────────────────
-
-const W = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=600&q=80`;
+// ─── Local image pools ────────────────────────────────────────────────────────
 
 // Women fashion
 const wImg = [
-  W("1490481651871-ab68de25d43d"), W("1567401893414-76b7b1e5a7a5"),
-  W("1583391733956-3750e0ff4e8b"), W("1509631179647-0177331693ae"),
-  W("1585771724684-38269d6639fd"), W("1594938298603-c8148c4b984b"),
-  W("1617019114583-affb34d1b3cd"), W("1602810318383-e386cc2a3ccf"),
-  W("1537832816519-689ad163239b"), W("1571609860754-b58e41c1cccb"),
-  W("1558171813-0ebd2dc6d440"),   W("1512235248509-d6b1f32e8e23"),
-  W("1551232864-3f0890e580d9"),   W("1485968579580-b6d095142e6e"),
-  W("1558769132-cb1aea458c5e"),   W("1519086519702-b26e15b60b50"),
-  W("1620122830785-8d731f77d965"), W("1532453288792-d49840d29b04"),
-  W("1621007947382-bb3c3994e3fb"), W("1539109136881-3be0616acf4b"),
+  "/image/categories/cat-embroidered.jpg",
+  "/image/categories/cat-stitched.jpg",
+  "/image/categories/cat-printed.jpg",
+  "/image/categories/cat-unstitched.jpg",
+  "/image/categories/cat-luxury.jpg",
+  "/image/categories/cat-lawn.jpg",
+  "/image/categories/cat-winter.jpg",
+  "/image/categories/cat-bridal.jpg",
+  "/image/categories/cat-embroidered.jpg",
+  "/image/categories/cat-stitched.jpg",
+  "/image/categories/cat-printed.jpg",
+  "/image/categories/cat-unstitched.jpg",
+  "/image/categories/cat-luxury.jpg",
+  "/image/categories/cat-lawn.jpg",
+  "/image/categories/cat-winter.jpg",
+  "/image/categories/cat-bridal.jpg",
+  "/image/categories/cat-embroidered.jpg",
+  "/image/categories/cat-stitched.jpg",
+  "/image/categories/cat-printed.jpg",
+  "/image/categories/cat-unstitched.jpg",
 ];
 
 // Men fashion
 const mImg = [
-  W("1507003211169-0a1dd7228f2d"), W("1519085360753-af0119f7cbe7"),
-  W("1512418490979-92798cec1380"), W("1506794778202-cad84cf45f1d"),
-  W("1500648767791-00dcc994a43e"), W("1552058544-f2b08422138a"),
-  W("1490481651871-ab68de25d43d"), W("1602810318383-e386cc2a3ccf"),
-  W("1617019114583-affb34d1b3cd"), W("1583391733956-3750e0ff4e8b"),
+  "/image/categories/cat-men-stitched.jpg",
+  "/image/categories/cat-men-formal.jpg",
+  "/image/categories/cat-men-kurta.jpg",
+  "/image/categories/cat-men-unstitched.jpg",
+  "/image/categories/cat-men-stitched.jpg",
+  "/image/categories/cat-men-formal.jpg",
+  "/image/categories/cat-men-kurta.jpg",
+  "/image/categories/cat-men-unstitched.jpg",
+  "/image/categories/cat-men-stitched.jpg",
+  "/image/categories/cat-men-formal.jpg",
 ];
 
 // Kids
 const kImg = [
-  W("1522771930-78848d9293e8"), W("1533483595632-c5f0e57a1936"),
-  W("1558769132-cb1aea458c5e"), W("1585771724684-38269d6639fd"),
-  W("1509631179647-0177331693ae"), W("1490481651871-ab68de25d43d"),
+  "/image/categories/cat-stitched.jpg",
+  "/image/categories/cat-printed.jpg",
+  "/image/categories/cat-embroidered.jpg",
+  "/image/categories/cat-luxury.jpg",
+  "/image/categories/cat-stitched.jpg",
+  "/image/categories/cat-printed.jpg",
 ];
 
 function wi(i: number) { return [wImg[i % wImg.length]]; }
@@ -373,14 +388,155 @@ export const embroideredCategoryProducts: BackendProduct[] = [
   embProduct("coal",            "coal",            "Ethnic"),
 ];
 
+// ─── PRINTED CATEGORY (local colour variants, Nishat Unstitched 3pc) ──────────
+// Images live in /public/image/printed/
+
+const PRINTED_BASE = "/image/printed";
+
+function printedProduct(
+  slug: string,
+  img1: string,
+  img2: string,
+): BackendProduct {
+  return {
+    id: `prt-${slug}`,
+    name: "Unstitched Printed 3 Pcs Suit",
+    slug,
+    description: "Unstitched Printed 3 Pcs Suit",
+    price: 2500,
+    originalPrice: null,
+    images: [`${PRINTED_BASE}/${img1}`, `${PRINTED_BASE}/${img2}`],
+    category: "Printed",
+    categorySlug: "printed",
+    brand: "Nishat",
+    brandSlug: "nishat",
+    fabric: "Lawn",
+    stock: 20,
+    stockStatus: "in_stock",
+    isFeatured: false,
+    isBestSeller: false,
+    isNew: true,
+    isLimitedEdition: false,
+    discountPercentage: 0,
+    tags: "printed,unstitched,nishat,2026",
+  };
+}
+
+export const printedCategoryProducts: BackendProduct[] = [
+  printedProduct("blackprinted",       "blackprinted.jpg",       "blackprinted1.jfif"),
+  printedProduct("bluegreenprinted",   "bluegreenprinted.jpg",   "bluegreenprinted1.jfif"),
+  printedProduct("blueprinted",        "blueprinted.jpg",        "blueprinted1.jfif"),
+  printedProduct("greenyellowprinted", "greenyellowprinted.jpg", "greenyellowprinted1.jfif"),
+  printedProduct("maroonwhiteprinted", "maroonwhiteprinted.jpg", "maroonwhiteprinted1.jfif"),
+  printedProduct("pinkprinted",        "pinkprinted.jpg",        "pinkprinted1.jfif"),
+  printedProduct("purpuleprinted",     "purpuleprinted.jpg",     "purpleprinted1.jfif"),
+  printedProduct("redprinted",         "redprinted.jpg",         "redprinted.jpg"),
+];
+
+// ─── MTJ PRINTED CATEGORY (local colour variants, MTJ Unstitched 3pc) ────────
+// Images live in /public/image/MTJ/
+
+const MTJ_BASE = "/image/MTJ";
+
+function mtjProduct(
+  slug: string,
+  img1: string,
+  img2: string,
+): BackendProduct {
+  return {
+    id: `mtj-${slug}`,
+    name: "MTJ Unstitched Printed 3 pcs",
+    slug,
+    description: "Unstitched Printed 3 pcs",
+    price: 2500,
+    originalPrice: null,
+    images: [`${MTJ_BASE}/${img1}`, `${MTJ_BASE}/${img2}`],
+    category: "Printed",
+    categorySlug: "printed",
+    brand: "MTJ",
+    brandSlug: "mtj",
+    fabric: "Lawn",
+    stock: 20,
+    stockStatus: "in_stock",
+    isFeatured: false,
+    isBestSeller: false,
+    isNew: true,
+    isLimitedEdition: false,
+    discountPercentage: 0,
+    tags: "printed,unstitched,mtj,2026",
+  };
+}
+
+export const mtjPrintedProducts: BackendProduct[] = [
+  mtjProduct("bottlegreen", "botlegreen.jpg",  "bottlegreen1.jpg"),
+  mtjProduct("greenblk",    "greenblk.jpg",    "greenblk1.jpg"),
+  mtjProduct("redbeg",      "redbeg.jpg",      "redbeg1.jpg"),
+  mtjProduct("beigeblc",    "beigeblc.jpg",    "beigeblc1.jpg"),
+  mtjProduct("blkchunri",   "blkchunri.jpg",   "blkchunri1.jpg"),
+];
+
+// ─── AL-KARAM PRINTED CATEGORY (local colour variants, Unstitched 3pc) ──────
+// Images live in /public/image/alkaram/ — NO hover images exist for this brand.
+
+const ALKARAM_BASE = "/image/alkaram";
+const AK_DETAIL =
+  "Printed Lawn Shirt 2.5 Meters\nPrinted Lawn Dupatta 2.5 Meters\nDyed Cambric Trouser 1.5 Meters";
+
+function alkaramProduct(slug: string, imgFile: string): BackendProduct {
+  return {
+    id: `ak-${slug}`,
+    name: "Unstitched Printed 3 Pcs Suit",
+    slug,
+    description: AK_DETAIL,
+    price: 2500,
+    originalPrice: null,
+    images: [`${ALKARAM_BASE}/${imgFile}`],
+    category: "Printed",
+    categorySlug: "printed",
+    brand: "Al-Karam",
+    brandSlug: "al-karam",
+    fabric: "Lawn",
+    stock: 20,
+    stockStatus: "in_stock",
+    isFeatured: false,
+    isBestSeller: false,
+    isNew: true,
+    isLimitedEdition: false,
+    discountPercentage: 0,
+    tags: "printed,unstitched,alkaram,2026",
+  };
+}
+
+export const alkaramProducts: BackendProduct[] = [
+  alkaramProduct("03offwhite",    "03offwhite.png"),
+  alkaramProduct("05black",       "05black.png"),
+  alkaramProduct("06offwhite",    "06offwhite.png"),
+  alkaramProduct("10brown",       "10brown.png"),
+  alkaramProduct("16musterd",     "16 musterd.png"),
+  alkaramProduct("18musterd",     "18musterd.png"),
+  alkaramProduct("19cream",       "19cream.png"),
+  alkaramProduct("42white",       "42white.png"),
+  alkaramProduct("43beige",       "43beige.png"),
+  alkaramProduct("52blue",        "52blue.png"),
+  alkaramProduct("54pink",        "54pink.png"),
+  alkaramProduct("66olivegreen",  "66olivegreen.png"),
+  alkaramProduct("71pink",        "71pink.png"),
+  alkaramProduct("73darkblue",    "73darkblue.png"),
+  alkaramProduct("102black",      "102black.png"),
+  alkaramProduct("162olivegreen", "162olivegreen.png"),
+  alkaramProduct("green103",      "green103.png"),
+  alkaramProduct("50green",       "50green.png"),
+];
+
 // ─── Master lookup ────────────────────────────────────────────────────────────
 
 const catalogMap: Record<string, BackendProduct[]> = {
-  "new-arrivals": embroideredCategoryProducts,
+  // new-arrivals = real-image products only (embroidered + printed brands)
+  "new-arrivals": [...embroideredCategoryProducts, ...printedCategoryProducts, ...mtjPrintedProducts, ...alkaramProducts],
   stitched:       [...stitchedProducts, ...embroideredCategoryProducts],
-  unstitched:     unstitchedProducts,
+  unstitched:     [...printedCategoryProducts, ...mtjPrintedProducts, ...alkaramProducts],
   embroidered:    embroideredCategoryProducts,
-  printed:        printedProducts,
+  printed:        [...printedCategoryProducts, ...mtjPrintedProducts, ...alkaramProducts],
   formal:         formalProducts,
   luxury:         formalProducts,
   lawn:           lawnProducts,
@@ -389,6 +545,9 @@ const catalogMap: Record<string, BackendProduct[]> = {
   kids:           kidsProducts,
   women:          womenProducts,
   // sub-category aliases
+  "event-ready":   embroideredCategoryProducts,
+  "work-wear":     embroideredCategoryProducts,
+  "daily-wear":    embroideredCategoryProducts,
   "ready-to-wear": [...stitchedProducts, ...embroideredCategoryProducts],
   jacquard:       formalProducts,
   bridal:         formalProducts,
@@ -403,14 +562,28 @@ const catalogMap: Record<string, BackendProduct[]> = {
   girls:          kidsProducts,
   boys:           kidsProducts,
   // brand slugs
-  mtj:            menProducts,
+  "al-karam":     alkaramProducts,
+  mtj:            mtjPrintedProducts,
   "bin-saeed":    unstitchedProducts,
   khaadi:         [...womenProducts, ...embroideredCategoryProducts],
   salina:         lawnProducts,
-  nishat:         embroideredCategoryProducts,
+  // Nishat: all 8 local-image printed products + generic Nishat products across collections
+  nishat: [
+    ...printedCategoryProducts,
+    ...printedProducts.filter(p => p.brandSlug === "nishat"),
+    ...unstitchedProducts.filter(p => p.brandSlug === "nishat"),
+    ...stitchedProducts.filter(p => p.brandSlug === "nishat"),
+    ...formalProducts.filter(p => p.brandSlug === "nishat"),
+    ...lawnProducts.filter(p => p.brandSlug === "nishat"),
+    ...khaddarProducts.filter(p => p.brandSlug === "nishat"),
+  ],
   "j-junaid":     menProducts,
   sapphire:       womenProducts,
   tawakkal:       formalProducts,
+  // additional brand slugs derived from embroideredCategoryProducts
+  sanasafinaz:    embroideredCategoryProducts.filter(p => p.brandSlug === "sanasafinaz"),
+  ethnic:         embroideredCategoryProducts.filter(p => p.brandSlug === "ethnic"),
+  "image-generation": embroideredCategoryProducts.filter(p => p.brandSlug === "image-generation"),
 };
 
 /** Return local products for a slug, or [] if slug not covered. */

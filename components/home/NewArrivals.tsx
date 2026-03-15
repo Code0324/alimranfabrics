@@ -1,9 +1,14 @@
 import Link from "next/link";
-import { embroideredCategoryProducts } from "@/data/collectionProducts";
+import { embroideredCategoryProducts, printedCategoryProducts, mtjPrintedProducts, alkaramProducts } from "@/data/collectionProducts";
 import ProductCardApi from "@/components/ui/ProductCardApi";
 
-// Show only the products that have real local images (first 8)
-const PRODUCTS_WITH_IMAGES = embroideredCategoryProducts.slice(0, 8);
+// Real-image products: Nishat printed + MTJ + Al-Karam + first 8 embroidered
+const PRODUCTS_WITH_IMAGES = [
+  ...printedCategoryProducts,
+  ...mtjPrintedProducts,
+  ...alkaramProducts,
+  ...embroideredCategoryProducts.slice(0, 8),
+];
 
 export default function NewArrivals() {
   return (
@@ -18,7 +23,7 @@ export default function NewArrivals() {
           </div>
           <h2 className="section-title mb-3 bg-transparent">New Arrivals</h2>
           <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm">
-            Fresh stitched embroidered 2-piece collections — tradition meets contemporary style.
+            Fresh printed unstitched & embroidered 2-piece collections — tradition meets contemporary style.
           </p>
         </div>
 

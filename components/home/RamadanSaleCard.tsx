@@ -7,7 +7,7 @@ export default function RamadanSaleCard() {
 
       {/* ── Background image ── */}
       <Image
-        src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=1600&q=90"
+        src="/image/categories/cat-embroidered.jpg"
         alt="Ramadan Festive Sale"
         fill
         className="object-cover object-center"
@@ -150,7 +150,7 @@ export default function RamadanSaleCard() {
           className="mt-10 font-inter text-xs uppercase tracking-[0.25em]"
           style={{ color: "rgba(255,255,255,0.35)" }}
         >
-          Free shipping to USA &nbsp;·&nbsp; No duties &nbsp;·&nbsp; Authentic Pakistani fashion
+          Worldwide Shipping &nbsp;·&nbsp; Authentic Pakistani fashion
         </p>
       </div>
     </section>

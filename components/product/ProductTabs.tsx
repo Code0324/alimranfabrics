@@ -31,7 +31,7 @@ export default function ProductTabs({ product }: { product: Product }) {
       <div className="py-8">
         {activeTab === "Description" && (
           <div className="max-w-2xl">
-            <p className="font-inter text-sm text-charcoal/70 leading-relaxed">{product.description}</p>
+            <p className="font-inter text-sm text-charcoal/70 leading-relaxed whitespace-pre-line">{product.description}</p>
             <div className="mt-6 grid sm:grid-cols-2 gap-4">
               {[
                 { label: "Category", value: product.category },
@@ -75,13 +75,13 @@ export default function ProductTabs({ product }: { product: Product }) {
           <div className="max-w-2xl space-y-5">
             {[
               {
-                title: "USA Orders",
-                desc: "Free standard shipping (7–12 business days). No duties, no customs fees — we handle everything.",
+                title: "Worldwide Shipping",
+                desc: "We ship globally. Delivery in 7–18 business days depending on location.",
                 highlight: true,
               },
               {
-                title: "Canada & International",
-                desc: "Flat rate shipping available. Delivery in 10–18 business days. Duties may apply.",
+                title: "International Orders",
+                desc: "Flat rate shipping available worldwide. Delivery in 10–18 business days. Duties may apply.",
                 highlight: false,
               },
               {

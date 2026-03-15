@@ -10,39 +10,36 @@ import { useWishlist } from "@/store/wishlistContext";
 
 const navItems = [
   {
-    label: "Ready to Wear",
-    href: "/collections/ready-to-wear",
+    label: "Stitched",
+    href: "/collections/stitched",
     children: [
-      { label: "Women's Formal", href: "/collections/formal", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Women's Casual", href: "/collections/casual", img: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Embroidered", href: "/collections/embroidered", img: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Jacquard", href: "/collections/jacquard", img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Event Ready", href: "/collections/event-ready", img: "/image/categories/cat-luxury.jpg" },
+      { label: "Work Wear", href: "/collections/work-wear", img: "/image/categories/cat-stitched.jpg" },
+      { label: "Daily Wear", href: "/collections/daily-wear", img: "/image/categories/cat-printed.jpg" },
     ],
   },
   {
     label: "Unstitched",
     href: "/collections/unstitched",
     children: [
-      { label: "Lawn", href: "/collections/lawn", img: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Khaddar", href: "/collections/khaddar", img: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Cotton", href: "/collections/cotton", img: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Embroidered", href: "/collections/embroidered", img: "/image/categories/cat-embroidered.jpg" },
+      { label: "Printed", href: "/collections/printed", img: "/image/categories/cat-printed.jpg" },
     ],
   },
   {
     label: "Men",
     href: "/collections/men",
     children: [
-      { label: "Shalwar Kameez", href: "/collections/shalwar-kameez", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Sherwani", href: "/collections/sherwani", img: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Waistcoat Sets", href: "/collections/waistcoat", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Shalwar Kameez", href: "/collections/shalwar-kameez", img: "/image/categories/cat-men-stitched.jpg" },
+      { label: "Kurta Pajama", href: "/collections/kurta-pajama", img: "/image/categories/cat-men-kurta.jpg" },
     ],
   },
   {
     label: "Kids",
     href: "/collections/kids",
     children: [
-      { label: "Girls", href: "/collections/girls", img: "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=200&q=65&fm=webp&auto=compress" },
-      { label: "Boys", href: "/collections/boys", img: "https://images.unsplash.com/photo-1533483595632-c5f0e57a1936?w=200&q=65&fm=webp&auto=compress" },
+      { label: "Girls", href: "/collections/girls", img: "/image/categories/cat-stitched.jpg" },
+      { label: "Boys", href: "/collections/boys", img: "/image/categories/cat-men-kurta.jpg" },
     ],
   },
 ];
@@ -337,7 +334,7 @@ export default function Navbar() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for kurtas, suits, sherwanis..."
+                  placeholder="Search for kurtas, suits, embroidered sets..."
                   autoFocus
                   className="w-full pl-9 pr-12 py-2.5 text-sm font-inter focus:outline-none transition-colors"
                   style={{

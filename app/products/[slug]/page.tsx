@@ -19,7 +19,7 @@ interface ProductPageProps {
   params: { slug: string };
 }
 
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600&q=80";
+const FALLBACK_IMAGE = "/image/categories/cat-embroidered.jpg";
 const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/v1")
   .replace(/\/api\/v1\/?$/, "")
   .replace(/\/$/, "");

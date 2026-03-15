@@ -6,7 +6,7 @@ import { CartItem as CartItemType } from "@/types";
 import { useCartStore } from "@/store/cartStore";
 import { formatPrice } from "@/lib/utils";
 
-const FALLBACK_IMG = "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=300&q=80";
+const FALLBACK_IMG = "/image/categories/cat-embroidered.jpg";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace("/api/v1", "") || "";
 
 function resolveImage(src: string | undefined): string {

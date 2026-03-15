@@ -51,9 +51,9 @@ const brands = [
 
 const milestones = [
   { year: "2010", title: "Founded in Lahore", desc: "Al Imran Fabrics opens its first multi-brand store in Lahore, carrying collections from Pakistan's top designers." },
-  { year: "2015", title: "First International Orders", desc: "We began shipping to the Pakistani diaspora in the United States, UK, and Canada." },
+  { year: "2015", title: "First International Orders", desc: "We began shipping to the Pakistani diaspora in the UK, Canada, and beyond." },
   { year: "2019", title: "Online Store Launch", desc: "Launched our e-commerce platform to serve customers across 20+ countries worldwide." },
-  { year: "2022", title: "Free Shipping — USA", desc: "Introduced free shipping on all orders to the United States." },
+  { year: "2022", title: "Worldwide Shipping Launch", desc: "Expanded our delivery network to serve customers across 50+ countries worldwide." },
   { year: "2025", title: "15,000+ Happy Customers", desc: "Proud to serve a growing family of fashion lovers across 3 continents." },
 ];
 
@@ -90,7 +90,7 @@ export default function AboutPage() {
                 we have it all. Our team carefully curates each season&apos;s launches so you never miss the hottest drops.
               </p>
               <p>
-                With customers across Pakistan, the USA, UK, Canada, and beyond, we make it easy to shop your favourite
+                With customers across Pakistan, the UK, Canada, UAE, and beyond, we make it easy to shop your favourite
                 Pakistani brands no matter where you live — with fast delivery, easy returns, and dedicated support.
               </p>
             </div>
@@ -98,10 +98,10 @@ export default function AboutPage() {
           <div className="relative">
             <div className="grid grid-cols-2 gap-3">
               <div className="relative h-64 overflow-hidden">
-                <Image src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80" alt="Pakistani fashion" fill className="object-cover" />
+                <Image src="/image/categories/cat-stitched.jpg" alt="Pakistani fashion" fill className="object-cover" />
               </div>
               <div className="relative h-64 mt-6 overflow-hidden">
-                <Image src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=80" alt="Pakistani fabric" fill className="object-cover" />
+                <Image src="/image/categories/cat-embroidered.jpg" alt="Pakistani fabric" fill className="object-cover" />
               </div>
             </div>
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-6 py-3 font-playfair font-bold text-center text-sm whitespace-nowrap"

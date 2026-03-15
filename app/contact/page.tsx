@@ -31,7 +31,7 @@ export default function ContactPage() {
               <div className="space-y-5">
                 {[
                   { icon: Mail, label: "Email", value: "support@alimranfabrics.com", href: "mailto:support@alimranfabrics.com" },
-                  { icon: Phone, label: "USA Phone", value: "+1 (555) 000-0000", href: "tel:+15550000000" },
+                  { icon: Phone, label: "Phone", value: "+92 314 5690329", href: "tel:+923145690329" },
                   { icon: MapPin, label: "Address", value: "Model Town, Lahore, Pakistan", href: null },
                   { icon: Clock, label: "Hours", value: "Mon–Sat: 9 AM – 8 PM PKT", href: null },
                 ].map((item) => (

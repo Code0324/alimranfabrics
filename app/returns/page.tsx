@@ -24,7 +24,7 @@ export default function ReturnsPage() {
         <div className="grid sm:grid-cols-3 gap-6">
           {[
             { icon: Clock, title: "30-Day Window", desc: "You have 30 days from delivery to initiate a return or exchange." },
-            { icon: RotateCcw, title: "Easy Process", desc: "Simply contact us and we'll arrange the return pickup at no extra cost for USA." },
+            { icon: RotateCcw, title: "Easy Process", desc: "Simply contact us and we'll guide you through the return process step by step." },
             { icon: CheckCircle, title: "Quick Refunds", desc: "Refunds are processed within 5–7 business days of receiving your return." },
           ].map((item) => (
             <div key={item.title} className="bg-white p-6 shadow-card text-center">
@@ -80,7 +80,7 @@ export default function ReturnsPage() {
             {[
               { step: "01", title: "Contact Us", desc: "Email support@alimranfabrics.com or WhatsApp us with your order number and reason for return." },
               { step: "02", title: "Get Approval", desc: "We'll review your request and respond within 24 hours with approval and instructions." },
-              { step: "03", title: "Ship It Back", desc: "Pack the item securely in its original packaging. We'll arrange pickup for USA customers." },
+              { step: "03", title: "Ship It Back", desc: "Pack the item securely in its original packaging. Contact us to arrange the return shipment." },
               { step: "04", title: "Refund or Exchange", desc: "Once received and inspected, your refund will be processed or your exchange shipped within 5–7 days." },
             ].map((s) => (
               <div key={s.step} className="flex gap-5">

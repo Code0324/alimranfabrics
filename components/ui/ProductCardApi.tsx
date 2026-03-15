@@ -9,7 +9,7 @@ import { useCartStore } from "@/store/cartStore";
 import { useWishlist } from "@/store/wishlistContext";
 import { formatPrice } from "@/lib/utils";
 
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=600&q=80";
+const FALLBACK_IMAGE = "/image/categories/cat-embroidered.jpg";
 
 interface Props {
   product: BackendProduct;
@@ -79,7 +79,7 @@ export default function ProductCardApi({ product }: Props) {
             className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
-            unoptimized={!(hovered && hoverImageUrl ? hoverImageUrl : imageUrl).includes("unsplash.com")}
+            unoptimized={false}
           />
         </Link>
 

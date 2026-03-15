@@ -64,7 +64,7 @@ export default function CartPageContent() {
             <div className="bg-navy/10 border border-navy/20 flex items-center gap-3 px-5 py-3 mb-6">
               <Truck size={16} className="text-gold flex-shrink-0" />
               <p className="font-inter text-sm text-navy">
-                <span className="font-semibold">Free shipping</span> on all USA orders — no duty, no extra charges.
+                <span className="font-semibold">Worldwide Shipping</span> — premium Pakistani craftsmanship delivered to your door.
               </p>
             </div>
 

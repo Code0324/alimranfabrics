@@ -5,7 +5,7 @@ import PageHero from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "Shipping Info",
-  description: "Learn about Al Imran Fabrics shipping rates, delivery times, and our free USA shipping policy.",
+  description: "Learn about Al Imran Fabrics shipping rates, delivery times, and our worldwide shipping policy.",
 };
 
 const shippingZones = [
@@ -45,7 +45,7 @@ export default function ShippingPage() {
       <PageHero
         eyebrow="Delivery"
         title="Shipping Information"
-        description="We ship worldwide. USA orders are always free — no hidden duties, no surprises."
+        description="We ship worldwide — premium Pakistani craftsmanship delivered to your door, wherever you are."
         backgroundImage="/image/women-banner-silk.png"
         breadcrumbItems={[{ label: "Shipping" }]}
       />
@@ -54,7 +54,7 @@ export default function ShippingPage() {
         {/* Highlights */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { icon: Truck, title: "Free USA Shipping", desc: "No minimum order required. Always free to the USA." },
+            { icon: Truck, title: "Worldwide Shipping", desc: "We ship to 50+ countries worldwide. No minimum order required." },
             { icon: Clock, title: "Processing Time", desc: "Orders are processed within 1–3 business days." },
             { icon: Globe, title: "Ships Worldwide", desc: "We deliver to 50+ countries across 5 continents." },
             { icon: Shield, title: "Fully Tracked", desc: "Every order ships with real-time tracking updates." },
@@ -116,11 +116,11 @@ export default function ShippingPage() {
             </ul>
           </div>
           <div className="bg-white p-8 shadow-card">
-            <h3 className="font-playfair text-xl font-bold text-charcoal mb-4">USA Duty-Free Promise</h3>
+            <h3 className="font-playfair text-xl font-bold text-charcoal mb-4">Our Shipping Promise</h3>
             <ul className="space-y-3 font-inter text-sm text-charcoal/70">
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> We cover all US customs duties and import taxes.</li>
               <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> What you see at checkout is the final price — no surprises.</li>
               <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Packages are shipped via DHL Express or FedEx.</li>
+              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Every order ships with full tracking information.</li>
               <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Signature required for orders over $300.</li>
             </ul>
           </div>

@@ -10,20 +10,21 @@ import CategoryCard from "@/components/ui/CategoryCard";
 import { Truck, Shield, RefreshCw, Star } from "lucide-react";
 
 const brands = [
-  { id: "mtj",       name: "MTJ",       slug: "mtj",       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Men's traditional wear" },
-  { id: "bin-saeed", name: "Bin Saeed", slug: "bin-saeed", image: "https://images.unsplash.com/photo-1558171813-0ebd2dc6d440?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Premium unstitched fabric" },
-  { id: "khaadi",    name: "Khaadi",    slug: "khaadi",    image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Women's fashion" },
-  { id: "salina",    name: "Salina",    slug: "salina",    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Lawn collection" },
-  { id: "nishat",    name: "Nishat",    slug: "nishat",    image: "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Embroidered designs" },
-  { id: "j-junaid",  name: "J.",        slug: "j-junaid",  image: "https://images.unsplash.com/photo-1512418490979-92798cec1380?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "J. Junaid Jamshed" },
-  { id: "sapphire",  name: "Sapphire",  slug: "sapphire",  image: "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Women's fashion" },
-  { id: "tawakkal",  name: "Tawakkal",  slug: "tawakkal",  image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=75&fm=webp&auto=compress",  productCount: 20, description: "Formal wear" },
+  { id: "al-karam",  name: "Al-Karam",  slug: "al-karam",  image: "/image/alkaram/03offwhite.png",                   productCount: 18, description: "Printed unstitched lawn" },
+  { id: "mtj",       name: "MTJ",       slug: "mtj",       image: "/image/brands/mtj.jpg",                           productCount: 20, description: "Printed unstitched lawn" },
+  { id: "bin-saeed", name: "Bin Saeed", slug: "bin-saeed", image: "/image/categories/cat-unstitched.jpg",            productCount: 20, description: "Premium unstitched fabric" },
+  { id: "khaadi",    name: "Khaadi",    slug: "khaadi",    image: "/image/brands/khaadi.png",                        productCount: 20, description: "Women's fashion" },
+  { id: "salina",    name: "Salina",    slug: "salina",    image: "/image/categories/cat-lawn.jpg",                  productCount: 20, description: "Lawn collection" },
+  { id: "nishat",    name: "Nishat",    slug: "nishat",    image: "/image/categories/cat-embroidered.jpg",           productCount: 20, description: "Embroidered designs" },
+  { id: "j-junaid",  name: "J.",        slug: "j-junaid",  image: "/image/brands/j..PNG",                           productCount: 20, description: "J. Junaid Jamshed" },
+  { id: "sapphire",  name: "Sapphire",  slug: "sapphire",  image: "/image/categories/cat-stitched.jpg",             productCount: 20, description: "Women's fashion" },
+  { id: "tawakkal",  name: "Tawakkal",  slug: "tawakkal",  image: "/image/categories/cat-luxury.jpg",               productCount: 20, description: "Formal wear" },
 ];
 
 export const metadata: Metadata = {
   title: "Al Imran Fabrics — Timeless Elegance, Global Reach",
   description:
-    "Discover premium Pakistani clothing — embroidered suits, khaddar collections, men's formal wear, and kids' apparel. Free shipping to USA.",
+    "Discover premium Pakistani clothing — embroidered suits, khaddar collections, men's traditional wear, and kids' apparel. Worldwide shipping available.",
 };
 
 const trustFeatures = [
@@ -158,7 +159,7 @@ export default function HomePage() {
           <div className="relative">
             <div className="relative h-80 md:h-[500px] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=700&q=85"
+                src="/image/categories/cat-embroidered.jpg"
                 alt="Al Imran Fabrics craftsmanship"
                 fill
                 className="object-cover"

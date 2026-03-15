@@ -14,7 +14,7 @@ import {
 
 type PaymentMethod = "cod" | "jazzcash" | "easypaisa";
 
-const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=300&q=80";
+const FALLBACK_IMAGE = "/image/categories/cat-embroidered.jpg";
 
 function generateTrackingNumber(): string {
   const year = new Date().getFullYear();

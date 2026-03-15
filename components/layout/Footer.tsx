@@ -12,11 +12,11 @@ const footerLinks = {
   ],
   Collections: [
     { label: "Embroidered", href: "/collections/embroidered" },
-    { label: "Jacquard", href: "/collections/jacquard" },
     { label: "Printed", href: "/collections/printed" },
-    { label: "Khaddar", href: "/collections/khaddar" },
-    { label: "Lawn", href: "/collections/lawn" },
-    { label: "Bridal", href: "/collections/bridal" },
+    { label: "Jacquard", href: "/collections/jacquard" },
+    { label: "Solid", href: "/collections/solid" },
+    { label: "Event Ready", href: "/collections/event-ready" },
+    { label: "Work Wear", href: "/collections/work-wear" },
   ],
   "Customer Care": [
     { label: "About Us", href: "/about" },

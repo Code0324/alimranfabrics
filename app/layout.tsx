@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Al Imran Fabrics",
   },
   description:
-    "Premium Pakistani clothing brand offering Men's, Women's, and Kids' apparel. Exquisite embroidery, fine fabrics, and free shipping to USA.",
+    "Premium Pakistani clothing brand offering Men's, Women's, and Kids' apparel. Exquisite embroidery, fine fabrics, worldwide shipping available.",
   keywords: ["Pakistani clothing", "shalwar kameez", "embroidered suits", "lawn collection", "Al Imran Fabrics"],
   openGraph: {
     siteName: "Al Imran Fabrics",
