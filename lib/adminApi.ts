@@ -62,18 +62,29 @@ export const productsAPI = {
 // ─── Orders ───────────────────────────────────────────────────────────────────
 
 export const ordersAPI = {
-  listAll: async (params: { limit?: number; status?: string } = {}) => {
+  listAll: async (params: {
+    limit?: number;
+    page?: number;
+    status?: string;
+    payment_status?: string;
+  } = {}) => {
     const qs = new URLSearchParams();
-    if (params.limit) qs.set('limit', String(params.limit));
-    if (params.status) qs.set('status', params.status);
-    const data = await adminFetch(`/orders/admin?${qs}`);
-    return { data };
+    if (params.limit)          qs.set('limit',          String(params.limit));
+    if (params.page)           qs.set('page',           String(params.page));
+    if (params.status)         qs.set('status',         params.status);
+    if (params.payment_status) qs.set('payment_status', params.payment_status);
+    const raw = await adminFetch<unknown>(`/orders?${qs}`);
+    // Normalise: backend may return a plain array or a paginated { items, total, pages } object
+    if (Array.isArray(raw)) {
+      return { data: { items: raw, total: (raw as unknown[]).length, pages: 1 } };
+    }
+    return { data: raw };
   },
   get: (id: string) => adminFetch(`/orders/${id}`),
   updateStatus: (id: string, status: string) =>
-    adminFetch(`/orders/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
+    adminFetch(`/orders/${id}`, { method: 'PUT', body: JSON.stringify({ status }) }),
   verifyPayment: (id: string, payment_status: 'Paid' | 'Rejected') =>
-    adminFetch(`/orders/${id}/verify`, { method: 'PUT', body: JSON.stringify({ payment_status }) }),
+    adminFetch(`/orders/${id}`, { method: 'PUT', body: JSON.stringify({ payment_status }) }),
 };
 
 // ─── Users ────────────────────────────────────────────────────────────────────
