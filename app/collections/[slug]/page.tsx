@@ -95,18 +95,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   let collectionProducts: import("@/lib/api").BackendProduct[] = [];
   try {
     if (slug === "new-arrivals") {
-      collectionProducts = await fetchProducts({ new_arrival: true, limit: 50 });
-      // Keep only women's products — filter by both category name and slug
-      collectionProducts = collectionProducts.filter((p) => {
-        const cat  = (p.category     || "").toLowerCase();
-        const slug = (p.categorySlug || "").toLowerCase();
-        const isMaleOrKids =
-          cat.includes("men") || cat === "kids" || cat === "boys" ||
-          slug.includes("men") || slug === "kids" || slug === "boys" ||
-          slug === "shalwar-kameez" || slug === "kurta-pajama" ||
-          slug === "sherwani" || slug === "waistcoat" || slug === "men-formal";
-        return !isMaleOrKids;
-      });
+      // Always show real-image local products (MTJ, Al-Karam, Nishat Printed, Embroidered)
+      collectionProducts = getLocalProducts("new-arrivals");
     } else if (slug === "sale") {
       // sale = products with discount
       collectionProducts = await fetchProducts({ limit: 50 });
