@@ -71,7 +71,7 @@ export default function ProductCardApi({ product }: Props) {
     >
       {/* Image */}
       <div className="relative aspect-[3/4] overflow-hidden bg-white">
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/products/${product.slug}`} className="absolute inset-0 block">
           <Image
             src={hovered && hoverImageUrl ? hoverImageUrl : imageUrl}
             alt={product.name}

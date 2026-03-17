@@ -74,7 +74,7 @@ function getBgImage(slug: string): string {
     "jacquard":       "/image/categories/cat-luxury.jpg",
     "casual":         "/image/categories/cat-printed.jpg",
     "girls":          "/image/categories/cat-stitched.jpg",
-    "boys":           "/image/categories/cat-men-kurta.jpg",
+    "boys":           "/image/categories/cat-men-stitched.jpg",
     "cotton":         "/image/categories/cat-unstitched.jpg",
     "chickenkar":     "/image/categories/chickenkar.jpg",
     "chiffon":        "/image/categories/chiffon.jpg",
@@ -96,9 +96,17 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   try {
     if (slug === "new-arrivals") {
       collectionProducts = await fetchProducts({ new_arrival: true, limit: 50 });
-      // Exclude men's / kids' categories — New Arrivals shows women's only
-      const menSlugs = new Set(["men", "boys", "shalwar-kameez", "kurta-pajama", "sherwani", "waistcoat", "men-formal"]);
-      collectionProducts = collectionProducts.filter((p) => !menSlugs.has(p.categorySlug));
+      // Keep only women's products — filter by both category name and slug
+      collectionProducts = collectionProducts.filter((p) => {
+        const cat  = (p.category     || "").toLowerCase();
+        const slug = (p.categorySlug || "").toLowerCase();
+        const isMaleOrKids =
+          cat.includes("men") || cat === "kids" || cat === "boys" ||
+          slug.includes("men") || slug === "kids" || slug === "boys" ||
+          slug === "shalwar-kameez" || slug === "kurta-pajama" ||
+          slug === "sherwani" || slug === "waistcoat" || slug === "men-formal";
+        return !isMaleOrKids;
+      });
     } else if (slug === "sale") {
       // sale = products with discount
       collectionProducts = await fetchProducts({ limit: 50 });

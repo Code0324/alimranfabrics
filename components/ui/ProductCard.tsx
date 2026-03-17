@@ -45,7 +45,7 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
     >
       {/* Image container */}
       <div className="relative aspect-[3/4] overflow-hidden bg-white">
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/products/${product.slug}`} className="absolute inset-0 block">
           <Image
             src={product.images[imageIndex]}
             alt={product.name}
