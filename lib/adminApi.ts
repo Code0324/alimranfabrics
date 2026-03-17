@@ -45,10 +45,13 @@ async function adminFetch<T>(path: string, options?: RequestInit): Promise<T> {
 export const productsAPI = {
   getAll: async (limit = 200) => {
     const data = await adminFetch<{ items?: unknown[]; [k: string]: unknown }>(
-      `/products/?skip=0&limit=${limit}`
+      `/products/?skip=0&limit=${limit}&active_only=false`
     );
-    const items = (data as { items?: unknown[] }).items ?? data;
-    return Array.isArray(items) ? items : [];
+    const items = ((data as { items?: unknown[] }).items ?? data) as any[];
+    // Normalise image field: deployed backend returns `image`, new backend returns `image_url`
+    return Array.isArray(items)
+      ? items.map((p: any) => ({ ...p, image_url: p.image_url ?? p.image }))
+      : [];
   },
   get: (id: string) => adminFetch(`/products/${id}`),
   create: (data: Record<string, unknown>) =>

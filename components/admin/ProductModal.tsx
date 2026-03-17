@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { X, Package, Loader2, ImageIcon } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { X, Package, Loader2, Upload, Trash2, RefreshCw } from 'lucide-react';
 import type { AdminProduct as Product } from '@/lib/adminTypes';
 import { generateSKU } from '@/lib/adminUtils';
+import { uploadImageToCloudinary } from '@/lib/uploadImage';
 
 interface ProductModalProps {
   open: boolean;
@@ -59,8 +60,25 @@ const DEFAULT_FORM: FormState = {
 export default function ProductModal({ open, product, onClose, onSave }: ProductModalProps) {
   const [form, setForm] = useState<FormState>(DEFAULT_FORM);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+
+  // Image state
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const isEdit = !!product;
+
+  // Revoke blob URL when preview changes or component unmounts
+  useEffect(() => {
+    return () => {
+      if (imagePreview.startsWith('blob:')) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
 
   useEffect(() => {
     if (product) {
@@ -79,15 +97,32 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
         is_new_arrival: product.is_new_arrival ?? false,
         is_active: product.is_active ?? true,
       });
+      setImagePreview(product.image_url ?? '');
     } else {
       setForm({ ...DEFAULT_FORM, sku: generateSKU() });
+      setImagePreview('');
     }
+    setImageFile(null);
     setErrors({});
   }, [product, open]);
 
   const set = (field: keyof FormState, value: any) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: '' }));
+  };
+
+  const handleFileSelect = useCallback((file: File) => {
+    if (!file.type.startsWith('image/')) return;
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+    setErrors((prev) => ({ ...prev, image_url: '' }));
+  }, []);
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImagePreview('');
+    set('image_url', '');
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   const validate = (): boolean => {
@@ -100,6 +135,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
       errs.compare_price = 'Compare price must be a positive number';
     if (form.stock !== '' && (isNaN(Number(form.stock)) || Number(form.stock) < 0))
       errs.stock = 'Stock must be 0 or more';
+    if (!imagePreview) errs.image_url = 'Product image is required';
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -110,6 +146,12 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
 
     setSaving(true);
     try {
+      let imageUrl = form.image_url;
+      if (imageFile) {
+        setUploading(true);
+        imageUrl = await uploadImageToCloudinary(imageFile);
+        setUploading(false);
+      }
       await onSave({
         name: form.name.trim(),
         sku: form.sku.trim(),
@@ -119,7 +161,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
         price: Number(form.price),
         compare_price: form.compare_price ? Number(form.compare_price) : undefined,
         stock: Number(form.stock || 0),
-        image_url: form.image_url.trim() || undefined,
+        image_url: imageUrl || undefined,
         is_featured: form.is_featured,
         is_bestseller: form.is_bestseller,
         is_new_arrival: form.is_new_arrival,
@@ -128,6 +170,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
       onClose();
     } finally {
       setSaving(false);
+      setUploading(false);
     }
   };
 
@@ -153,21 +196,87 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          {/* Image preview */}
-          {form.image_url && (
-            <div className="flex justify-center">
-              <div className="relative w-32 h-32 rounded-lg border border-border overflow-hidden bg-ivory">
-                <img
-                  src={form.image_url}
-                  alt="Product preview"
-                  className="w-full h-full object-cover"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                />
-              </div>
-            </div>
-          )}
 
-          {/* Basic Info */}
+          {/* ── Image Upload ─────────────────────────────────────────────── */}
+          <div className="space-y-2">
+            <h3 className="text-sm font-semibold text-muted uppercase tracking-wider">Product Image</h3>
+
+            {imagePreview ? (
+              // Preview
+              <div className="relative w-full h-48 rounded-lg overflow-hidden border border-border bg-ivory group">
+                <img
+                  src={imagePreview}
+                  alt="Product preview"
+                  className="w-full h-full object-contain"
+                />
+                {/* Hover actions */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100">
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-white/90 text-gray-800 rounded-lg hover:bg-white transition"
+                  >
+                    <RefreshCw className="w-3 h-3" />
+                    Replace
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleRemoveImage}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ) : (
+              // Drop zone
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                onDragLeave={() => setIsDragging(false)}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  setIsDragging(false);
+                  const file = e.dataTransfer.files[0];
+                  if (file) handleFileSelect(file);
+                }}
+                className={`flex flex-col items-center justify-center gap-3 w-full h-40 rounded-lg border-2 border-dashed cursor-pointer transition select-none ${
+                  isDragging
+                    ? 'border-gold bg-gold/5 scale-[0.99]'
+                    : errors.image_url
+                    ? 'border-red-400 bg-red-500/5'
+                    : 'border-border hover:border-gold/60 hover:bg-ivory/40'
+                }`}
+              >
+                <Upload className={`w-7 h-7 ${isDragging ? 'text-gold' : 'text-muted'}`} />
+                <div className="text-center">
+                  <p className="text-sm text-muted">
+                    Drag & drop or{' '}
+                    <span className="text-gold font-medium">browse</span>
+                  </p>
+                  <p className="text-xs text-muted/60 mt-0.5">PNG, JPG, WEBP — max 5 MB</p>
+                </div>
+              </div>
+            )}
+
+            {errors.image_url && (
+              <p className="text-red-500 text-xs mt-1">{errors.image_url}</p>
+            )}
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) handleFileSelect(file);
+              }}
+            />
+          </div>
+
+          {/* ── Basic Info ──────────────────────────────────────────────── */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wider">Basic Information</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -213,25 +322,6 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
                 </select>
               </Field>
 
-              <Field label="Image URL">
-                <div className="flex gap-2">
-                  <input
-                    type="url"
-                    value={form.image_url}
-                    onChange={(e) => set('image_url', e.target.value)}
-                    placeholder="https://example.com/image.jpg"
-                    className={`flex-1 ${inputCls(false)}`}
-                  />
-                  <div className="flex-shrink-0 w-10 h-10 border border-border rounded-lg flex items-center justify-center bg-ivory overflow-hidden">
-                    {form.image_url ? (
-                      <img src={form.image_url} alt="" className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
-                    ) : (
-                      <ImageIcon className="w-4 h-4 text-muted" />
-                    )}
-                  </div>
-                </div>
-              </Field>
-
               <Field label="Description">
                 <textarea
                   value={form.description}
@@ -244,7 +334,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
             </div>
           </div>
 
-          {/* Pricing & Stock */}
+          {/* ── Pricing & Stock ─────────────────────────────────────────── */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wider">Pricing & Inventory</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -292,7 +382,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
             </div>
           </div>
 
-          {/* Flags */}
+          {/* ── Flags ───────────────────────────────────────────────────── */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-muted uppercase tracking-wider">Product Flags</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -313,7 +403,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
                   >
                     {form[field] && (
                       <svg className="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 12 12">
-                        <path d="M10 3L5 8L2 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                        <path d="M10 3L5 8L2 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                       </svg>
                     )}
                   </div>
@@ -323,7 +413,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
             </div>
           </div>
 
-          {/* Actions */}
+          {/* ── Actions ─────────────────────────────────────────────────── */}
           <div className="flex justify-end gap-3 pt-2 border-t border-border">
             <button
               type="button"
@@ -339,7 +429,7 @@ export default function ProductModal({ open, product, onClose, onSave }: Product
               className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold bg-gold text-white rounded-lg hover:bg-gold-dark transition disabled:opacity-50"
             >
               {saving && <Loader2 className="w-4 h-4 animate-spin" />}
-              {isEdit ? 'Save Changes' : 'Create Product'}
+              {uploading ? 'Uploading...' : saving ? 'Saving...' : isEdit ? 'Save Changes' : 'Create Product'}
             </button>
           </div>
         </form>

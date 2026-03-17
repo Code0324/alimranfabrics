@@ -56,17 +56,28 @@ export const useAuthStore = create<AuthState>()(
 
       logout: () => set({ token: null, user: null, error: null }),
 
+      // ✅ FIXED: set isLoading true/false so layout knows when fetch is in progress
+      // ✅ FIXED: on network/500 errors, do NOT wipe token — only wipe on real 401/403
       loadUser: async () => {
         const token = get().token;
         if (!token) return;
+        set({ isLoading: true }); // ✅ signal that fetch is in progress
         try {
           const user = await fetchMe(token);
-          set({ user });
+          set({ user, isLoading: false }); // ✅ store user, stop loading
         } catch (e) {
           const msg = (e as Error).message ?? '';
-          // Only log out on a real auth failure — not on 500 or network errors
-          if (msg.includes('401') || msg.includes('403') || msg.toLowerCase().includes('unauthorized')) {
-            set({ token: null, user: null });
+          if (
+            msg.includes('401') ||
+            msg.includes('403') ||
+            msg.toLowerCase().includes('unauthorized')
+          ) {
+            // Real auth failure → clear session
+            set({ token: null, user: null, isLoading: false });
+          } else {
+            // Network error / Railway 500 / CORS → keep token, just stop loading
+            // This prevents wrongly logging out the admin on a flaky connection
+            set({ isLoading: false });
           }
         }
       },

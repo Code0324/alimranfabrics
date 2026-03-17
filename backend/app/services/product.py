@@ -36,8 +36,10 @@ class ProductService:
             price=product_create.price,
             compare_price=product_create.compare_price,
             stock=product_create.stock,
-            image=product_create.image,
+            image_url=product_create.image_url,
             is_featured=product_create.is_featured,
+            is_bestseller=product_create.is_bestseller,
+            is_new_arrival=product_create.is_new_arrival,
             is_active=product_create.is_active,
         )
 
@@ -74,7 +76,7 @@ class ProductService:
 
     @staticmethod
     async def list_products(
-        session: AsyncSession, skip: int = 0, limit: int = 20
+        session: AsyncSession, skip: int = 0, limit: int = 20, active_only: bool = True
     ) -> list[Product]:
         """
         List products with pagination.
@@ -83,13 +85,15 @@ class ProductService:
             session: Database session
             skip: Number of records to skip
             limit: Maximum records to return
+            active_only: If True, only return active products
 
         Returns:
             List of products
         """
-        result = await session.execute(
-            select(Product).where(Product.is_active == True).offset(skip).limit(limit)
-        )
+        query = select(Product)
+        if active_only:
+            query = query.where(Product.is_active == True)
+        result = await session.execute(query.offset(skip).limit(limit))
         return result.scalars().all()
 
     @staticmethod

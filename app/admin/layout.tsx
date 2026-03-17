@@ -48,28 +48,40 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const { sidebarOpen, toggleSidebar } = useAdminStore();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false); // ✅ NEW: wait for full auth check
 
   useEffect(() => { setMounted(true); }, []);
 
-  // Wait for both DOM mount AND Zustand localStorage hydration before redirecting.
-  // Without this check, token appears null during the hydration gap and causes a
-  // redirect-loop: /admin → /login → /admin → ... → /
   const isReady = mounted && _hasHydrated;
 
   useEffect(() => {
     if (!isReady) return;
+
+    // No token → go to login
     if (!token) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
       return;
     }
+
+    // Token exists but user not loaded yet → fetch user FIRST, then check role
     if (!user) {
-      loadUser();
+      loadUser().then(() => {
+        // After loadUser(), the store will update `user`.
+        // The next render will re-run this effect with user populated.
+        // We do NOT setAuthChecked here — let the next effect run handle it.
+      });
       return;
     }
+
+    // User is loaded → check role
     if (user.role !== 'admin') {
       router.replace('/');
+      return;
     }
-  }, [isReady, token, user, router, pathname, loadUser]);
+
+    // ✅ All checks passed — safe to show admin panel
+    setAuthChecked(true);
+  }, [isReady, token, user]); // ✅ removed router/pathname/loadUser to avoid loops
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
@@ -79,7 +91,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return () => window.removeEventListener('resize', handler);
   }, []);
 
-  if (!isReady || !token || user?.role !== 'admin') {
+  // ✅ FIXED: Show spinner until authChecked is true (not just until user is non-null)
+  // This prevents the flash-redirect while loadUser() is still fetching from Railway
+  if (!isReady || !token || !authChecked) {
     return (
       <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">

@@ -63,18 +63,20 @@ async def get_product(
 async def list_products(
     skip: int = 0,
     limit: int = 20,
+    active_only: bool = True,
     session: Annotated[AsyncSession, Depends(get_session)] = None,
 ) -> list[Product]:
     """
-    List all active products.
+    List products with pagination.
 
     **Query Parameters:**
     - skip: Number of products to skip
     - limit: Maximum products to return
+    - active_only: Set to false to include inactive products (admin use)
 
     **Response:** List of products
     """
-    return await ProductService.list_products(session, skip, limit)
+    return await ProductService.list_products(session, skip, limit, active_only)
 
 
 @router.put("/{product_id}", response_model=ProductResponse)

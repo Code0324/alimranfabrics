@@ -20,8 +20,10 @@ class OrderStatus(str, PyEnum):
     """Order status enum."""
 
     PENDING = "pending"
+    CONFIRMED = "confirmed"
     PAID = "paid"
     SHIPPED = "shipped"
+    DELIVERED = "delivered"
     COMPLETED = "completed"
     CANCELLED = "cancelled"
 
@@ -49,8 +51,11 @@ class Order(Base):
     payment_method: Mapped[str] = mapped_column(String(20), default=PaymentMethod.COD.value, nullable=False)
     customer_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     customer_phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    shipping_address: Mapped[str | None] = mapped_column("customer_address", Text, nullable=True)
-    notes: Mapped[str | None] = mapped_column("customer_notes", Text, nullable=True)
+    customer_address: Mapped[str | None] = mapped_column(Text, nullable=True)
+    customer_city: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    customer_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+    payment_status: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    payment_screenshot: Mapped[str | None] = mapped_column(String(500), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )

@@ -5,22 +5,22 @@ const quickCategories = [
   {
     label: "Printed",
     href: "/collections/printed",
-    image: "/image/categories/cat-printed.jpg",
+    image: "/image/categories/printed.jpg",
   },
   {
     label: "Embroidered",
     href: "/collections/embroidered",
-    image: "/image/categories/cat-embroidered.jpg",
+    image: "/image/categories/embroiderd.jpg",
   },
   {
     label: "Jacquard",
     href: "/collections/jacquard",
-    image: "/image/categories/cat-luxury.jpg",
+    image: "/image/categories/luxury.jpg",
   },
   {
     label: "Solid",
     href: "/collections/solid",
-    image: "/image/categories/cat-stitched.jpg",
+    image: "/image/categories/stitched.jpg",
   },
 ];
 

@@ -53,7 +53,7 @@ export const categories: Category[] = [
     id: "7",
     name: "Kurta Pajama",
     slug: "kurta-pajama",
-    image: "/image/categories/cat-men-kurta.jpg",
+    image: "/image/categories/cat-men-stitched.jpg",
     productCount: 15,
     description: "Refined style for the modern man",
   },

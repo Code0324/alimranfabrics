@@ -167,7 +167,7 @@ export const products: Product[] = [
     price: 285,
     originalPrice: 350,
     images: [
-      "/image/categories/cat-men-kurta.jpg",
+      "/image/categories/cat-men-stitched.jpg",
       "/image/categories/cat-men-formal.jpg",
     ],
     category: "Men",
@@ -272,7 +272,7 @@ export const products: Product[] = [
     price: 58,
     images: [
       "/image/categories/cat-men-stitched.jpg",
-      "/image/categories/cat-men-kurta.jpg",
+      "/image/categories/cat-men-stitched.jpg",
     ],
     category: "Men",
     categorySlug: "men",
@@ -324,7 +324,7 @@ export const products: Product[] = [
     slug: "boys-shalwar-kameez-set",
     price: 52,
     images: [
-      "/image/categories/cat-men-kurta.jpg",
+      "/image/categories/cat-men-stitched.jpg",
       "/image/categories/cat-stitched.jpg",
     ],
     category: "Kids",
@@ -375,7 +375,7 @@ export const products: Product[] = [
     slug: "mens-kurta-pajama-set",
     price: 98,
     images: [
-      "/image/categories/cat-men-kurta.jpg",
+      "/image/categories/cat-men-stitched.jpg",
       "/image/categories/cat-men-stitched.jpg",
     ],
     category: "Men",

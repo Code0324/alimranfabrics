@@ -74,9 +74,11 @@ class OrderService:
             total_amount=total_amount,
             customer_name=order_create.customer_name or user.name,
             customer_phone=order_create.customer_phone,
-            shipping_address=order_create.shipping_address,
+            customer_address=order_create.customer_address,
+            customer_city=order_create.customer_city,
+            customer_notes=order_create.customer_notes,
             payment_method=order_create.payment_method,
-            notes=order_create.notes,
+            payment_screenshot=order_create.payment_screenshot,
         )
 
         # Add items to order

@@ -18,22 +18,22 @@ class OrderCreate(BaseModel):
     """Order creation schema."""
 
     items: list[OrderItemRequest] = Field(..., description="Order items")
-    customer_name: Optional[str] = Field(None, description="Customer name")
-    customer_phone: Optional[str] = Field(None, description="Customer phone")
-    shipping_address: Optional[str] = Field(None, description="Shipping address")
-    payment_method: PaymentMethod = Field(
-        default=PaymentMethod.COD, description="Payment method"
-    )
-    notes: Optional[str] = Field(None, description="Order notes")
+    customer_name: Optional[str] = Field(None)
+    customer_phone: Optional[str] = Field(None)
+    customer_address: Optional[str] = Field(None)
+    customer_city: Optional[str] = Field(None)
+    customer_notes: Optional[str] = Field(None)
+    payment_method: PaymentMethod = Field(default=PaymentMethod.COD)
+    payment_screenshot: Optional[str] = Field(None)
 
 
 class OrderItemResponse(BaseModel):
     """Order item response schema."""
 
-    id: str = Field(..., description="Order item ID")
-    product_id: str = Field(..., description="Product ID")
-    quantity: int = Field(..., description="Item quantity")
-    price: float = Field(..., description="Item price")
+    id: str
+    product_id: str
+    quantity: int
+    price: float
 
     class Config:
         from_attributes = True
@@ -42,18 +42,21 @@ class OrderItemResponse(BaseModel):
 class OrderResponse(BaseModel):
     """Order response schema."""
 
-    id: str = Field(..., description="Order ID")
-    user_id: str = Field(..., description="User ID")
-    total_amount: float = Field(..., description="Total amount")
-    status: OrderStatus = Field(..., description="Order status")
-    payment_method: PaymentMethod = Field(..., description="Payment method")
-    customer_name: Optional[str] = Field(None, description="Customer name")
-    customer_phone: Optional[str] = Field(None, description="Customer phone")
-    shipping_address: Optional[str] = Field(None, description="Shipping address")
-    notes: Optional[str] = Field(None, description="Order notes")
-    items: list[OrderItemResponse] = Field(..., description="Order items")
-    created_at: datetime = Field(..., description="Creation timestamp")
-    updated_at: datetime = Field(..., description="Last update timestamp")
+    id: str
+    user_id: str
+    total_amount: float
+    status: str
+    payment_method: str
+    payment_status: Optional[str] = None
+    payment_screenshot: Optional[str] = None
+    customer_name: Optional[str] = None
+    customer_phone: Optional[str] = None
+    customer_address: Optional[str] = None
+    customer_city: Optional[str] = None
+    customer_notes: Optional[str] = None
+    items: list[OrderItemResponse] = []
+    created_at: datetime
+    updated_at: datetime
 
     class Config:
         from_attributes = True

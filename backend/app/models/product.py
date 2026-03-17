@@ -21,8 +21,10 @@ class Product(Base):
     price: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False)
     compare_price: Mapped[float | None] = mapped_column(Numeric(10, 2), nullable=True)
     stock: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
-    image: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    image_url: Mapped[str | None] = mapped_column("image", String(500), nullable=True)
     is_featured: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_bestseller: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    is_new_arrival: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)

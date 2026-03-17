@@ -31,7 +31,7 @@ const navItems = [
     href: "/collections/men",
     children: [
       { label: "Shalwar Kameez", href: "/collections/shalwar-kameez", img: "/image/categories/cat-men-stitched.jpg" },
-      { label: "Kurta Pajama", href: "/collections/kurta-pajama", img: "/image/categories/cat-men-kurta.jpg" },
+      { label: "Kurta Pajama", href: "/collections/kurta-pajama", img: "/image/categories/cat-men-stitched.jpg" },
     ],
   },
   {
@@ -39,7 +39,7 @@ const navItems = [
     href: "/collections/kids",
     children: [
       { label: "Girls", href: "/collections/girls", img: "/image/categories/cat-stitched.jpg" },
-      { label: "Boys", href: "/collections/boys", img: "/image/categories/cat-men-kurta.jpg" },
+      { label: "Boys", href: "/collections/boys", img: "/image/categories/cat-men-stitched.jpg" },
     ],
   },
 ];
@@ -111,8 +111,12 @@ export default function Navbar() {
         style={{ backgroundColor: "#CC0000", borderColor: "rgba(255,0,0,0.3)" }}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
+
+          {/* ── Social icons ── */}
           <div className="flex items-center gap-2.5">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-transform hover:scale-110">
+
+            {/* Facebook ✅ URL fixed */}
+            <a href="https://www.facebook.com/alimranfabricsonline" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-transform hover:scale-110">
               <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient id="nfb" cx="38%" cy="18%" r="80%"><stop offset="0%" stopColor="#60a8f7"/><stop offset="100%" stopColor="#0866ff"/></radialGradient>
@@ -121,6 +125,8 @@ export default function Navbar() {
                 <path d="M19.5 12.5H21.5V9.5H19.5C17.567 9.5 16 11.067 16 13V14.5H14V17.5H16V26.5H19V17.5H21.5L22 14.5H19V13C19 12.776 19.224 12.5 19.5 12.5Z" fill="white"/>
               </svg>
             </a>
+
+            {/* Instagram ✅ unchanged */}
             <a href="https://www.instagram.com/alimranfabricsonline/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
               <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -132,6 +138,8 @@ export default function Navbar() {
                 <circle cx="24.5" cy="11.5" r="1.3" fill="white"/>
               </svg>
             </a>
+
+            {/* YouTube ✅ unchanged */}
             <a href="https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-transform hover:scale-110">
               <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
