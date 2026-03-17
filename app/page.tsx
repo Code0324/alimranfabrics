@@ -30,7 +30,8 @@ export const metadata: Metadata = {
 const trustFeatures = [
   {
     icon: Truck,
-    title: "World wide Shipping",
+    title: "Worldwide Shipping",
+    desc: "We deliver to your doorstep, wherever you are in the world",
   },
   {
     icon: Shield,
@@ -159,10 +160,10 @@ export default function HomePage() {
           <div className="relative">
             <div className="relative h-80 md:h-[500px] overflow-hidden">
               <Image
-                src="/image/categories/cat-embroidered.jpg"
-                alt="Al Imran Fabrics craftsmanship"
+                src="/image/store.png"
+                alt="Al Imran Fabrics store"
                 fill
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border-4 border-gold hidden md:block" />
@@ -185,6 +186,48 @@ export default function HomePage() {
             <Link href="/about" className="btn-outline">
               Discover Our Story
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us — after Who We Are, before Newsletter */}
+      <section className="py-16 md:py-24 px-4" style={{ backgroundColor: "#0C1350" }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-4 mb-3">
+              <span className="w-12 h-px" style={{ backgroundColor: "#FFE500" }} />
+              <span className="font-inter text-xs uppercase tracking-[0.3em] font-semibold" style={{ color: "#FFE500" }}>
+                Why Choose Us
+              </span>
+              <span className="w-12 h-px" style={{ backgroundColor: "#FFE500" }} />
+            </div>
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-ivory bg-transparent">
+              Shopping Made Better
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {trustFeatures.map((f) => (
+              <div
+                key={f.title}
+                className="flex flex-col items-center text-center gap-4 px-4"
+              >
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: "#FFE500" }}
+                >
+                  <f.icon size={28} style={{ color: "#CC0000" }} />
+                </div>
+                <div>
+                  <h3 className="font-playfair text-lg font-semibold text-ivory mb-2">
+                    {f.title}
+                  </h3>
+                  <p className="font-inter text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.60)" }}>
+                    {f.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
