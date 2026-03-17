@@ -59,23 +59,6 @@ export default function HomePage() {
       {/* Quick Category Navigation — Saya-style circular icons */}
       <QuickCategoryNav />
 
-      {/* Trust strip */}
-      <div className="bg-white border-y border-ivory-dark py-6 px-4">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-          {trustFeatures.map((f) => (
-            <div key={f.title} className="flex items-start gap-3">
-              <f.icon size={20} className="flex-shrink-0 mt-0.5" style={{ color: "#CC0000" }} />
-              <div>
-                <p className="font-inter text-xs font-semibold text-charcoal uppercase tracking-wide">
-                  {f.title}
-                </p>
-                <p className="font-inter text-xs text-charcoal/50 mt-0.5">{f.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Popular Brands */}
       <section className="py-16 md:py-20 bg-ivory overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
