@@ -6,10 +6,16 @@ import AddToCart from "@/components/product/AddToCart";
 import ProductTabs from "@/components/product/ProductTabs";
 import ProductCard from "@/components/ui/ProductCard";
 import { getProductBySlug, getRelatedProducts } from "@/data/products";
-import { getLocalProductBySlug } from "@/data/collectionProducts";
+import {
+  getLocalProductBySlug,
+  mtjPrintedProducts,
+  printedCategoryProducts,
+  alkaramProducts,
+  embroideredCategoryProducts,
+} from "@/data/collectionProducts";
 import { fetchProduct } from "@/lib/api";
 import { formatPrice, calculateDiscount } from "@/lib/utils";
-import type { Product } from "@/types";
+import type { Product, ProductColor } from "@/types";
 import { Truck, Shield, RotateCcw, Star } from "lucide-react";
 
 // Always server-render — never statically pre-build
@@ -24,15 +30,101 @@ const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api/
   .replace(/\/api\/v1\/?$/, "")
   .replace(/\/$/, "");
 
+// ── Slug → actual fabric/dress colour ────────────────────────────────────────
+const SLUG_COLORS: Record<string, ProductColor> = {
+  // MTJ
+  bluelight:          { name: "Blue",         hex: "#89B4CC" },
+  bottlegreen:        { name: "Bottle Green", hex: "#1B5E3B" },
+  greenblk:           { name: "Green",        hex: "#2E5B3C" },
+  redbeg:             { name: "Red",          hex: "#C0392B" },
+  beigeblc:           { name: "Beige",        hex: "#D4B483" },
+  blkchunri:          { name: "Black",        hex: "#1A1A1A" },
+  blkprinted:         { name: "Black",        hex: "#1A1A1A" },
+  blkcircle:          { name: "Black",        hex: "#1A1A1A" },
+  // Nishat printed
+  blackprinted:       { name: "Black",        hex: "#1A1A1A" },
+  bluegreenprinted:   { name: "Blue Green",   hex: "#2E8B57" },
+  blueprinted:        { name: "Blue",         hex: "#4169E1" },
+  greenyellowprinted: { name: "Green Yellow", hex: "#9ACD32" },
+  maroonwhiteprinted: { name: "Maroon",       hex: "#800000" },
+  pinkprinted:        { name: "Pink",         hex: "#E91E8C" },
+  purpuleprinted:     { name: "Purple",       hex: "#7B1FA2" },
+  redprinted:         { name: "Red",          hex: "#CC0000" },
+  // Al-Karam
+  "03offwhite":       { name: "Off White",    hex: "#F5F0E8" },
+  "05black":          { name: "Black",        hex: "#1A1A1A" },
+  "06offwhite":       { name: "Off White",    hex: "#F5F0E8" },
+  "10brown":          { name: "Brown",        hex: "#8B4513" },
+  "16musterd":        { name: "Mustard",      hex: "#D4A017" },
+  "18musterd":        { name: "Mustard",      hex: "#C49A00" },
+  "19cream":          { name: "Cream",        hex: "#FFFDD0" },
+  "42white":          { name: "White",        hex: "#F8F8F8" },
+  "43beige":          { name: "Beige",        hex: "#F5F5DC" },
+  "52blue":           { name: "Blue",         hex: "#4169E1" },
+  "54pink":           { name: "Pink",         hex: "#E91E8C" },
+  "66olivegreen":     { name: "Olive Green",  hex: "#6B8E23" },
+  "71pink":           { name: "Pink",         hex: "#FF69B4" },
+  "73darkblue":       { name: "Dark Blue",    hex: "#00008B" },
+  "102black":         { name: "Black",        hex: "#1A1A1A" },
+  "162olivegreen":    { name: "Olive Green",  hex: "#556B2F" },
+  green103:           { name: "Green",        hex: "#228B22" },
+  "50green":          { name: "Green",        hex: "#2E7D32" },
+  // Embroidered
+  white:              { name: "White",        hex: "#F8F8F8" },
+  black:              { name: "Black",        hex: "#1A1A1A" },
+  yellow:             { name: "Yellow",       hex: "#FFD700" },
+  green:              { name: "Green",        hex: "#228B22" },
+  brown:              { name: "Brown",        hex: "#8B4513" },
+  rust:               { name: "Rust",         hex: "#B7410E" },
+  "sky-blue":         { name: "Sky Blue",     hex: "#87CEEB" },
+  "off-white":        { name: "Off White",    hex: "#F5F0E8" },
+  "light-maroon":     { name: "Light Maroon", hex: "#C0706A" },
+  "light-grey":       { name: "Light Grey",   hex: "#D3D3D3" },
+  "seagreen-applic":  { name: "Sea Green",    hex: "#2E8B57" },
+  red:                { name: "Red",          hex: "#CC0000" },
+  "green-and-white":  { name: "Green White",  hex: "#2E8B57" },
+  "yellow-and-white": { name: "Yellow White", hex: "#FFD700" },
+  "sea-green":        { name: "Sea Green",    hex: "#20B2AA" },
+  peach:              { name: "Peach",        hex: "#FFCBA4" },
+  "yellow-and-black": { name: "Yellow Black", hex: "#FFD700" },
+  pink:               { name: "Pink",         hex: "#E91E8C" },
+  lemon:              { name: "Lemon",        hex: "#FFF44F" },
+  maroon:             { name: "Maroon",       hex: "#800000" },
+  lilac:              { name: "Lilac",        hex: "#C8A2C8" },
+  grey:               { name: "Grey",         hex: "#808080" },
+  beige:              { name: "Beige",        hex: "#F5F5DC" },
+  "rust-applic":      { name: "Rust",         hex: "#B7410E" },
+  "rust-white":       { name: "Rust White",   hex: "#B7410E" },
+  coal:               { name: "Coal",         hex: "#2C2C2C" },
+};
+
+function deriveColor(slug: string): ProductColor {
+  return SLUG_COLORS[slug] ?? { name: "Default", hex: "#888888" };
+}
+
+// ── Variant lookup by product ID prefix ──────────────────────────────────────
+export type ColorVariant = { slug: string; color: ProductColor };
+
+function getColorVariants(productId: string): ColorVariant[] | null {
+  let pool: import("@/lib/api").BackendProduct[] | null = null;
+  if (productId.startsWith("mtj-"))  pool = mtjPrintedProducts;
+  if (productId.startsWith("prt-"))  pool = printedCategoryProducts;
+  if (productId.startsWith("ak-"))   pool = alkaramProducts;
+  if (productId.startsWith("emb-"))  pool = embroideredCategoryProducts;
+  if (!pool) return null;
+  return pool.map((p) => ({ slug: p.slug, color: deriveColor(p.slug) }));
+}
+
 function backendToProduct(bp: import("@/lib/api").BackendProduct): Product {
   const images =
     bp.images && bp.images.length > 0
       ? bp.images.map((img) => {
           if (!img.startsWith("/")) return img;
-          if (img.startsWith("/image/")) return img; // Next.js public asset
-          return `${API_BASE}${img}`;               // backend-served asset
+          if (img.startsWith("/image/")) return img;
+          return `${API_BASE}${img}`;
         })
       : [FALLBACK_IMAGE];
+  const isUnstitched = bp.name.toLowerCase().includes("unstitched");
   return {
     id: bp.id,
     name: bp.name,
@@ -43,8 +135,8 @@ function backendToProduct(bp: import("@/lib/api").BackendProduct): Product {
     category: bp.category,
     categorySlug: bp.categorySlug,
     fabric: bp.fabric || "Premium",
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    colors: [{ name: "Default", hex: "#888888" }],
+    sizes: isUnstitched ? ["Unstitched"] : ["S", "M", "L", "XL", "XXL"],
+    colors: [deriveColor(bp.slug)],
     description: bp.description,
     careInstructions: "Please handle with care.",
     isNew: bp.isNew,
@@ -94,6 +186,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const discount = product.originalPrice
     ? calculateDiscount(product.originalPrice, product.price)
     : 0;
+  const colorVariants = getColorVariants(product.id);
 
   return (
     <div className="pt-28 md:pt-32 bg-ivory min-h-screen">
@@ -166,7 +259,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               )}
             </div>
 
-            <AddToCart product={product} />
+            <AddToCart product={product} colorVariants={colorVariants ?? undefined} />
 
             <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-ivory-dark">
               {[
