@@ -37,6 +37,20 @@ function getEyebrow(slug: string): string {
   return "Al Imran Fabrics";
 }
 
+/** Returns a local transparent logo for brand pages, null for category pages */
+function getBrandLogo(slug: string): string | null {
+  const map: Record<string, string> = {
+    "khaadi":      "/image/brands/khaadi.png",
+    "j-junaid":    "/image/brands/j..PNG",
+    "sanasafinaz": "/image/brands/Sana_Safinaz_logo.png",
+    "al-karam":    "/image/brands/alkaram.png",
+    "mtj":         "/image/brands/MTJ.png",
+    "sapphire":    "/image/brands/sapphire.png",
+    "zellbury":    "/image/brands/zellbury.png",
+  };
+  return map[slug] ?? null;
+}
+
 function getBgImage(slug: string): string {
   const map: Record<string, string> = {
     "women":          "/image/women-banner-new.webp",
@@ -89,7 +103,8 @@ function getBgImage(slug: string): string {
 export default async function CollectionPage({ params }: CollectionPageProps) {
   const { slug } = params;
   const title = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  const eyebrow = getEyebrow(slug);
+  const eyebrow    = getEyebrow(slug);
+  const brandLogo  = getBrandLogo(slug);
 
   // Fetch products from backend
   let collectionProducts: import("@/lib/api").BackendProduct[] = [];
@@ -126,6 +141,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         title={title}
         description={description}
         backgroundImage={getBgImage(slug)}
+        brandLogo={brandLogo ?? undefined}
+        brandName={title}
         breadcrumbItems={[
           { label: "Collections", href: "/collections" },
           { label: title },
