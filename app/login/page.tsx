@@ -11,7 +11,7 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/";
 
-  const { login, isLoading, error, token, _hasHydrated } = useAuthStore();
+  const { login, isLoading, error, token, user, _hasHydrated } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
@@ -29,7 +29,10 @@ function LoginForm() {
     if (!password) return setLocalError("Please enter your password.");
     try {
       await login(email.trim(), password);
-      router.replace(redirect);
+      // After login user is loaded in the store — send admins to /admin
+      const freshUser = useAuthStore.getState().user;
+      const destination = redirect !== "/" ? redirect : freshUser?.role === "admin" ? "/admin" : "/";
+      router.replace(destination);
     } catch {
       // error is set in authStore
     }
