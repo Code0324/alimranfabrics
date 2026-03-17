@@ -34,7 +34,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://alimranfabricsonline-hazel.vercel.app",
+        "https://alimranfabricsonline.vercel.app",       # production
+        "https://alimranfabricsonline-hazel.vercel.app", # old alias (keep for safety)
         "https://alimranfabrics.vercel.app",
         "http://localhost:3000",
         "http://localhost:3001",
