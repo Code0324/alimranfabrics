@@ -11,16 +11,16 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") ?? "/";
 
-  const { login, isLoading, error, token } = useAuthStore();
+  const { login, isLoading, error, token, _hasHydrated } = useAuthStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [localError, setLocalError] = useState("");
 
-  // Already logged in → redirect
+  // Wait for hydration before redirecting — avoids firing with stale token=null
   useEffect(() => {
-    if (token) router.replace(redirect);
-  }, [token, router, redirect]);
+    if (_hasHydrated && token) router.replace(redirect);
+  }, [_hasHydrated, token, router, redirect]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

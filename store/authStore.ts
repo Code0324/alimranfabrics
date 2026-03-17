@@ -9,6 +9,8 @@ interface AuthState {
   user: UserProfile | null;
   isLoading: boolean;
   error: string | null;
+  _hasHydrated: boolean;
+  setHasHydrated: (v: boolean) => void;
   login: (email: string, password: string) => Promise<void>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -22,6 +24,8 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       isLoading: false,
       error: null,
+      _hasHydrated: false,
+      setHasHydrated: (v) => set({ _hasHydrated: v }),
 
       login: async (email, password) => {
         set({ isLoading: true, error: null });
@@ -58,11 +62,21 @@ export const useAuthStore = create<AuthState>()(
         try {
           const user = await fetchMe(token);
           set({ user });
-        } catch {
-          set({ token: null, user: null });
+        } catch (e) {
+          const msg = (e as Error).message ?? '';
+          // Only log out on a real auth failure — not on 500 or network errors
+          if (msg.includes('401') || msg.includes('403') || msg.toLowerCase().includes('unauthorized')) {
+            set({ token: null, user: null });
+          }
         }
       },
     }),
-    { name: "al-imran-auth", partialize: (s) => ({ token: s.token }) }
+    {
+      name: "al-imran-auth",
+      partialize: (s) => ({ token: s.token, user: s.user }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
+    }
   )
 );

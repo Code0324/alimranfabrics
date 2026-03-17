@@ -44,17 +44,21 @@ function NavItem({
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, logout, token, loadUser } = useAuthStore();
+  const { user, logout, token, loadUser, _hasHydrated } = useAuthStore();
   const { sidebarOpen, toggleSidebar } = useAdminStore();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isLoggedIn = !!token;
 
   useEffect(() => { setMounted(true); }, []);
 
+  // Wait for both DOM mount AND Zustand localStorage hydration before redirecting.
+  // Without this check, token appears null during the hydration gap and causes a
+  // redirect-loop: /admin → /login → /admin → ... → /
+  const isReady = mounted && _hasHydrated;
+
   useEffect(() => {
-    if (!mounted) return;
-    if (!isLoggedIn || !token) {
+    if (!isReady) return;
+    if (!token) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
       return;
     }
@@ -65,7 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (user.role !== 'admin') {
       router.replace('/');
     }
-  }, [isLoggedIn, token, user, router, mounted, pathname, loadUser]);
+  }, [isReady, token, user, router, pathname, loadUser]);
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
@@ -75,7 +79,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return () => window.removeEventListener('resize', handler);
   }, []);
 
-  if (!mounted || !isLoggedIn || !token || user?.role !== 'admin') {
+  if (!isReady || !token || user?.role !== 'admin') {
     return (
       <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
