@@ -48,6 +48,8 @@ function getBrandLogo(slug: string): string | null {
     "sapphire":    "/image/brands/sapphire.png",
     "zellbury":    "/image/brands/zellbury.png",
     "bin-saeed":   "/image/brands/binsaeed.png",
+    "nishat":      "https://nishat.net/images/sampledata/site-logo.png",
+    "gul-ahmed":   "https://www.gulahmedshop.com/cdn/shop/files/logo_150x.svg?v=1758024576",
   };
   return map[slug] ?? null;
 }

@@ -37,13 +37,12 @@ export default function PageHero({
         <div className="py-10 md:py-14 px-4 flex flex-col items-center text-center">
 
           {/* Brand logo */}
-          <div className="relative mb-5" style={{ width: "220px", height: "90px" }}>
-            <Image
+          <div className="mb-5" style={{ width: "220px", height: "90px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={brandLogo}
               alt={brandName ?? String(title)}
-              fill
-              className="object-contain"
-              priority
+              style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
             />
           </div>
 
