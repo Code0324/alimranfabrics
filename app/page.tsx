@@ -5,20 +5,8 @@ import HeroCarousel from "@/components/home/HeroCarousel";
 import LovedCollections from "@/components/home/LovedCollections";
 import NewArrivals from "@/components/home/NewArrivals";
 import CustomerReviews from "@/components/home/CustomerReviews";
-import CategoryCard from "@/components/ui/CategoryCard";
+import BrandLogosSlider from "@/components/home/BrandLogosSlider";
 import { Truck, Shield, RefreshCw, Star } from "lucide-react";
-
-const brands = [
-  { id: "al-karam",  name: "Al-Karam",  slug: "al-karam",  image: "/image/alkaram/03offwhite.png",                   productCount: 18, description: "Printed unstitched lawn" },
-  { id: "mtj",       name: "MTJ",       slug: "mtj",       image: "/image/brands/mtj.jpg",                           productCount: 20, description: "Printed unstitched lawn" },
-  { id: "bin-saeed", name: "Bin Saeed", slug: "bin-saeed", image: "/image/categories/cat-unstitched.jpg",            productCount: 20, description: "Premium unstitched fabric" },
-  { id: "khaadi",    name: "Khaadi",    slug: "khaadi",    image: "/image/brands/khaadi.png",                        productCount: 20, description: "Women's fashion" },
-  { id: "salina",    name: "Salina",    slug: "salina",    image: "/image/categories/cat-lawn.jpg",                  productCount: 20, description: "Lawn collection" },
-  { id: "nishat",    name: "Nishat",    slug: "nishat",    image: "/image/categories/cat-embroidered.jpg",           productCount: 20, description: "Embroidered designs" },
-  { id: "j-junaid",  name: "J.",        slug: "j-junaid",  image: "/image/brands/j..PNG",                           productCount: 20, description: "J. Junaid Jamshed" },
-  { id: "sapphire",  name: "Sapphire",  slug: "sapphire",  image: "/image/categories/cat-stitched.jpg",             productCount: 20, description: "Women's fashion" },
-  { id: "tawakkal",  name: "Tawakkal",  slug: "tawakkal",  image: "/image/categories/cat-luxury.jpg",               productCount: 20, description: "Formal wear" },
-];
 
 export const metadata: Metadata = {
   title: "Al Imran Fabrics — Timeless Elegance, Global Reach",
@@ -58,25 +46,8 @@ export default function HomePage() {
       {/* Loved Collections — replaces quick category nav */}
       <LovedCollections />
 
-      {/* Popular Brands */}
-      <section className="py-16 md:py-20 bg-ivory overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Shop by Brand</span>
-              <span className="w-12 h-px bg-gold" />
-            </div>
-            <h2 className="section-title bg-transparent">Popular Brands</h2>
-          </div>
-
-          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4">
-            {brands.map((brand) => (
-              <CategoryCard key={brand.id} category={brand} />
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Popular Brands — 3D logo slider */}
+      <BrandLogosSlider />
 
       {/* New Arrivals */}
       <NewArrivals />
