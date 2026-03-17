@@ -37,11 +37,11 @@ const wImg = [
 const mImg = [
   "/image/categories/cat-men-stitched.jpg",
   "/image/categories/cat-men-formal.jpg",
-  "/image/categories/cat-men-kurta.jpg",
+  "/image/categories/cat-men-stitched.jpg",
   "/image/categories/cat-men-unstitched.jpg",
   "/image/categories/cat-men-stitched.jpg",
   "/image/categories/cat-men-formal.jpg",
-  "/image/categories/cat-men-kurta.jpg",
+  "/image/categories/cat-men-stitched.jpg",
   "/image/categories/cat-men-unstitched.jpg",
   "/image/categories/cat-men-stitched.jpg",
   "/image/categories/cat-men-formal.jpg",
@@ -445,9 +445,9 @@ function mtjProduct(
 ): BackendProduct {
   return {
     id: `mtj-${slug}`,
-    name: "MTJ Unstitched Printed 3 pcs",
+    name: "Unstitched Printed Lawn Suit",
     slug,
-    description: "Unstitched Printed 3 pcs",
+    description: "Unstitched Printed Lawn Suit",
     price: 2500,
     originalPrice: null,
     images: [`${MTJ_BASE}/${img1}`, `${MTJ_BASE}/${img2}`],
@@ -468,6 +468,7 @@ function mtjProduct(
 }
 
 export const mtjPrintedProducts: BackendProduct[] = [
+  mtjProduct("bluelight",   "bluelight.jpg",   "bluelight1.jpg"),
   mtjProduct("bottlegreen", "botlegreen.jpg",  "bottlegreen1.jpg"),
   mtjProduct("greenblk",    "greenblk.jpg",    "greenblk1.jpg"),
   mtjProduct("redbeg",      "redbeg.jpg",      "redbeg1.jpg"),

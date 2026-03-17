@@ -44,13 +44,13 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
       }}
     >
       {/* Image container */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-ivory-dark">
+      <div className="relative aspect-[3/4] overflow-hidden bg-white">
         <Link href={`/products/${product.slug}`}>
           <Image
             src={product.images[imageIndex]}
             alt={product.name}
             fill
-            className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
+            className="object-contain transition-all duration-300 ease-in-out group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
         </Link>
@@ -98,9 +98,19 @@ export default function ProductCard({ product, className = "" }: ProductCardProp
           <Heart size={14} fill={wishlisted ? "currentColor" : "none"} />
         </button>
 
-        {/* Hover actions */}
+        {/* Mobile: persistent Add to Cart button */}
+        <button
+          onClick={(e) => { e.stopPropagation(); handleQuickAdd(e); }}
+          className="md:hidden absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center shadow-md transition-colors"
+          style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
+          aria-label="Add to cart"
+        >
+          <ShoppingBag size={15} />
+        </button>
+
+        {/* Desktop hover actions */}
         <div
-          className={`absolute bottom-0 left-0 right-0 flex transition-all duration-300 ${
+          className={`hidden md:flex absolute bottom-0 left-0 right-0 transition-all duration-300 ${
             isHovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
           }`}
         >

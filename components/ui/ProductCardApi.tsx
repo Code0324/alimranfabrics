@@ -70,13 +70,13 @@ export default function ProductCardApi({ product }: Props) {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-ivory-dark">
+      <div className="relative aspect-[3/4] overflow-hidden bg-white">
         <Link href={`/products/${product.slug}`}>
           <Image
             src={hovered && hoverImageUrl ? hoverImageUrl : imageUrl}
             alt={product.name}
             fill
-            className="object-cover transition-all duration-700 ease-in-out group-hover:scale-105"
+            className="object-contain transition-all duration-300 ease-in-out group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
             unoptimized={false}
@@ -156,7 +156,7 @@ export default function ProductCardApi({ product }: Props) {
       {/* Info */}
       <div className="p-4">
         <p className="text-xs font-inter text-charcoal/40 uppercase tracking-wider mb-1">
-          {product.fabric || product.brand}
+          {product.fabric || "Lawn"}
         </p>
         <Link href={`/products/${product.slug}`}>
           <h3 className="font-playfair text-base font-semibold text-charcoal hover:text-[#CC0000] transition-colors leading-snug mb-2 line-clamp-2">
