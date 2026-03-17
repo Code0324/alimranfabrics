@@ -100,7 +100,7 @@ const brands: Brand[] = [
     id: "bin-saeed",
     name: "Bin Saeed",
     slug: "bin-saeed",
-    logoUrl: null,
+    logoUrl: "/image/brands/binsaeed.png",
     initials: "BS",
     g1: "#166534",
     g2: "#052E16",

@@ -47,6 +47,7 @@ function getBrandLogo(slug: string): string | null {
     "mtj":         "/image/brands/MTJ.png",
     "sapphire":    "/image/brands/sapphire.png",
     "zellbury":    "/image/brands/zellbury.png",
+    "bin-saeed":   "/image/brands/binsaeed.png",
   };
   return map[slug] ?? null;
 }
