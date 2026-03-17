@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import HeroCarousel from "@/components/home/HeroCarousel";
-import QuickCategoryNav from "@/components/home/QuickCategoryNav";
-import NewArrivals from "@/components/home/NewArrivals";
 import LovedCollections from "@/components/home/LovedCollections";
-import NewsletterBanner from "@/components/home/NewsletterBanner";
+import NewArrivals from "@/components/home/NewArrivals";
+import CustomerReviews from "@/components/home/CustomerReviews";
 import CategoryCard from "@/components/ui/CategoryCard";
 import { Truck, Shield, RefreshCw, Star } from "lucide-react";
 
@@ -56,8 +55,8 @@ export default function HomePage() {
       {/* Hero */}
       <HeroCarousel />
 
-      {/* Quick Category Navigation — Saya-style circular icons */}
-      <QuickCategoryNav />
+      {/* Loved Collections — replaces quick category nav */}
+      <LovedCollections />
 
       {/* Popular Brands */}
       <section className="py-16 md:py-20 bg-ivory overflow-hidden">
@@ -82,60 +81,8 @@ export default function HomePage() {
       {/* New Arrivals */}
       <NewArrivals />
 
-      {/* Promotional Banner — Red high-conversion section */}
-      <section className="relative py-20 px-4 overflow-hidden" style={{ backgroundColor: "#CC0000" }}>
-        {/* Subtle dot pattern */}
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage: `radial-gradient(circle, #ffffff 1px, transparent 1px)`,
-            backgroundSize: "24px 24px",
-          }}
-          aria-hidden
-        />
-
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-16 h-px" style={{ backgroundColor: "#FFE500" }} />
-            <span className="font-inter text-xs uppercase tracking-[0.3em] font-bold" style={{ color: "#FFE500" }}>
-              Exclusive Offer
-            </span>
-            <span className="w-16 h-px" style={{ backgroundColor: "#FFE500" }} />
-          </div>
-          <h2
-            className="font-playfair text-4xl md:text-6xl font-bold mb-4 bg-transparent leading-tight"
-            style={{ color: "#ffffff" }}
-          >
-            Worldwide<br />
-            <span style={{ color: "#FFE500" }}>Shipping</span>
-          </h2>
-          <p className="font-inter text-lg mb-3 font-semibold" style={{ color: "#FFE500" }}>
-            Delivered Globally
-          </p>
-          <p className="font-inter text-sm mb-8 max-w-lg mx-auto" style={{ color: "rgba(255,255,255,0.85)" }}>
-            We deliver premium Pakistani craftsmanship worldwide. Your order arrives safely at your door, wherever you are.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/collections/women"
-              className="inline-block font-inter font-bold text-sm uppercase tracking-widest px-10 py-4 transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: "#FFE500", color: "#0C1350" }}
-            >
-              Shop Women
-            </Link>
-            <Link
-              href="/collections/men"
-              className="inline-flex items-center gap-2 font-inter text-sm font-bold uppercase tracking-wide px-8 py-4 border-2 transition-all duration-300 hover:bg-white/10"
-              style={{ borderColor: "#ffffff", color: "#ffffff" }}
-            >
-              Shop Men
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Loved Collections */}
-      <LovedCollections />
+      {/* Customer Reviews */}
+      <CustomerReviews />
 
       {/* Brand Story Snippet */}
       <section className="py-16 md:py-24 px-4 bg-ivory">
@@ -173,18 +120,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us — after Who We Are, before Newsletter */}
-      <section className="py-16 md:py-24 px-4" style={{ backgroundColor: "#0C1350" }}>
+      {/* Why Choose Us — clean light design */}
+      <section className="py-16 md:py-24 px-4 bg-white border-t border-ivory-dark">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
             <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px" style={{ backgroundColor: "#FFE500" }} />
-              <span className="font-inter text-xs uppercase tracking-[0.3em] font-semibold" style={{ color: "#FFE500" }}>
-                Why Choose Us
-              </span>
-              <span className="w-12 h-px" style={{ backgroundColor: "#FFE500" }} />
+              <span className="w-12 h-px bg-gold" />
+              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Why Choose Us</span>
+              <span className="w-12 h-px bg-gold" />
             </div>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-ivory bg-transparent">
+            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal bg-transparent">
               Shopping Made Better
             </h2>
           </div>
@@ -193,19 +138,16 @@ export default function HomePage() {
             {trustFeatures.map((f) => (
               <div
                 key={f.title}
-                className="flex flex-col items-center text-center gap-4 px-4"
+                className="flex flex-col items-center text-center gap-4 px-4 py-8 border border-ivory-dark hover:border-gold transition-colors duration-300"
               >
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: "#FFE500" }}
-                >
-                  <f.icon size={28} style={{ color: "#CC0000" }} />
+                <div className="w-14 h-14 rounded-full border-2 border-gold flex items-center justify-center flex-shrink-0">
+                  <f.icon size={22} className="text-gold" />
                 </div>
                 <div>
-                  <h3 className="font-playfair text-lg font-semibold text-ivory mb-2">
+                  <h3 className="font-playfair text-base font-semibold text-charcoal mb-2">
                     {f.title}
                   </h3>
-                  <p className="font-inter text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.60)" }}>
+                  <p className="font-inter text-sm text-charcoal/50 leading-relaxed">
                     {f.desc}
                   </p>
                 </div>
@@ -214,9 +156,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Newsletter */}
-      <NewsletterBanner />
 
       {/* WhatsApp floating button */}
       <div className="fixed bottom-6 right-6 z-30">
