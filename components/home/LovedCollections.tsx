@@ -4,33 +4,21 @@ import { collections } from "@/data/collections";
 
 export default function LovedCollections() {
   return (
-    <section
-      className="py-16 md:py-24"
-      style={{ backgroundColor: "#FFE500" }}
-    >
+    <section className="py-16 md:py-24 bg-ivory">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-4 mb-3">
-            <span className="w-12 h-px" style={{ backgroundColor: "#B71C1C" }} />
-            <span
-              className="font-inter text-xs uppercase tracking-[0.3em] font-semibold"
-              style={{ color: "#B71C1C" }}
-            >
+            <span className="w-12 h-px bg-gold" />
+            <span className="font-inter text-gold text-xs uppercase tracking-[0.3em] font-semibold">
               Curated for You
             </span>
-            <span className="w-12 h-px" style={{ backgroundColor: "#B71C1C" }} />
+            <span className="w-12 h-px bg-gold" />
           </div>
-          <h2
-            className="font-playfair text-3xl md:text-4xl font-bold mb-3 bg-transparent"
-            style={{ color: "#000080" }}
-          >
+          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-3 bg-transparent">
             Loved Collections
           </h2>
-          <p
-            className="font-inter max-w-md mx-auto text-sm leading-relaxed"
-            style={{ color: "#0C1350" }}
-          >
+          <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm leading-relaxed">
             Thoughtfully curated categories that celebrate the richness of Pakistani textile heritage.
           </p>
         </div>
