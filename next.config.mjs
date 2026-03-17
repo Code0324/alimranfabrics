@@ -23,6 +23,12 @@ const nextConfig = {
         port: "8000",
         pathname: "/**",
       },
+      {
+        // Cloudinary — admin-uploaded product images
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
     ],
     minimumCacheTTL: 86400,
   },
