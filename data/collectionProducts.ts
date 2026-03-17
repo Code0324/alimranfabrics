@@ -423,13 +423,13 @@ function printedProduct(
 }
 
 export const printedCategoryProducts: BackendProduct[] = [
-  printedProduct("blackprinted",       "blackprinted.jpg",       "blackprinted1.jfif"),
-  printedProduct("bluegreenprinted",   "bluegreenprinted.jpg",   "bluegreenprinted1.jfif"),
-  printedProduct("blueprinted",        "blueprinted.jpg",        "blueprinted1.jfif"),
-  printedProduct("greenyellowprinted", "greenyellowprinted.jpg", "greenyellowprinted1.jfif"),
-  printedProduct("maroonwhiteprinted", "maroonwhiteprinted.jpg", "maroonwhiteprinted1.jfif"),
-  printedProduct("pinkprinted",        "pinkprinted.jpg",        "pinkprinted1.jfif"),
-  printedProduct("purpuleprinted",     "purpuleprinted.jpg",     "purpleprinted1.jfif"),
+  printedProduct("blackprinted",       "blackprinted.jpg",       "blackprinted1.jpg"),
+  printedProduct("bluegreenprinted",   "bluegreenprinted.jpg",   "bluegreenprinted1.jpg"),
+  printedProduct("blueprinted",        "blueprinted.jpg",        "blueprinted1.jpg"),
+  printedProduct("greenyellowprinted", "greenyellowprinted.jpg", "greenyellowprinted1.jpg"),
+  printedProduct("maroonwhiteprinted", "maroonwhiteprinted.jpg", "maroonwhiteprinted1.jpg"),
+  printedProduct("pinkprinted",        "pinkprinted.jpg",        "pinkprinted1.jpg"),
+  printedProduct("purpuleprinted",     "purpuleprinted.jpg",     "purpleprinted1.jpg"),
   printedProduct("redprinted",         "redprinted.jpg",         "redprinted.jpg"),
 ];
 
