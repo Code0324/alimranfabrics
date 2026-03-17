@@ -120,34 +120,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us — clean light design */}
-      <section className="py-16 md:py-24 px-4 bg-white border-t border-ivory-dark">
+      {/* Why Choose Us — slim cream bar */}
+      <section style={{ backgroundColor: "#f5f3eb" }} className="py-10 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <div className="flex items-center justify-center gap-4 mb-3">
-              <span className="w-12 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">Why Choose Us</span>
-              <span className="w-12 h-px bg-gold" />
-            </div>
-            <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal bg-transparent">
-              Shopping Made Better
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
             {trustFeatures.map((f) => (
-              <div
-                key={f.title}
-                className="flex flex-col items-center text-center gap-4 px-4 py-8 border border-ivory-dark hover:border-gold transition-colors duration-300"
-              >
-                <div className="w-14 h-14 rounded-full border-2 border-gold flex items-center justify-center flex-shrink-0">
-                  <f.icon size={22} className="text-gold" />
-                </div>
+              <div key={f.title} className="flex flex-col items-center text-center gap-2.5">
+                <f.icon size={20} strokeWidth={1.5} className="text-charcoal/50" />
                 <div>
-                  <h3 className="font-playfair text-base font-semibold text-charcoal mb-2">
+                  <p className="font-inter text-[11px] font-semibold text-charcoal uppercase tracking-wider mb-0.5">
                     {f.title}
-                  </h3>
-                  <p className="font-inter text-sm text-charcoal/50 leading-relaxed">
+                  </p>
+                  <p className="font-inter text-[10px] text-charcoal/45 leading-snug max-w-[140px] mx-auto">
                     {f.desc}
                   </p>
                 </div>
