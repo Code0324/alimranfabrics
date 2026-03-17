@@ -1,6 +1,8 @@
 """Database session factory and utilities."""
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import NullPool
 
 from app.core.config import settings
 
@@ -25,6 +27,7 @@ engine = create_async_engine(
     echo=settings.DEBUG,
     future=True,
     connect_args={"ssl": "require"},
+    poolclass=NullPool,
 )
 
 # Create async session factory
@@ -40,11 +43,20 @@ async def get_session() -> AsyncSession:
 
 
 async def init_db() -> None:
-    """Initialize database (create tables)."""
+    """Initialize database (create tables and apply missing column migrations)."""
     from app.db.base import Base
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all, checkfirst=True)
+
+        # Safe incremental migrations — ADD COLUMN IF NOT EXISTS is idempotent
+        missing_columns = [
+            "ALTER TABLE products ADD COLUMN IF NOT EXISTS brand VARCHAR(100) NOT NULL DEFAULT 'Al Imran Fabrics'",
+            "ALTER TABLE products ADD COLUMN IF NOT EXISTS is_bestseller BOOLEAN NOT NULL DEFAULT FALSE",
+            "ALTER TABLE products ADD COLUMN IF NOT EXISTS is_new_arrival BOOLEAN NOT NULL DEFAULT FALSE",
+        ]
+        for sql in missing_columns:
+            await conn.execute(text(sql))
 
 
 async def close_db() -> None:
