@@ -1,13 +1,13 @@
 """Order routes."""
-from typing import Annotated
+from typing import Annotated, Optional
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_session, get_current_user, get_admin_user
 from app.models.order import Order
 from app.models.user import User
-from app.schemas.order import OrderCreate, OrderResponse
+from app.schemas.order import OrderCreate, OrderUpdate, OrderResponse
 from app.services.order import OrderService
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
@@ -19,22 +19,7 @@ async def create_order(
     current_user: Annotated[User, Depends(get_current_user)],
     session: Annotated[AsyncSession, Depends(get_session)],
 ) -> Order:
-    """
-    Create a new order.
-
-    **Request Body:**
-    - items: List of order items (product_id and quantity)
-    - customer_name: Customer name (optional)
-    - customer_phone: Customer phone (optional)
-    - shipping_address: Shipping address (optional)
-    - payment_method: Payment method (cod, jazzcash, easypaisa, stripe)
-    - notes: Order notes (optional)
-
-    **Headers:**
-    - Authorization: Bearer {token}
-
-    **Response:** Created order
-    """
+    """Create a new order (authenticated users only)."""
     return await OrderService.create_order(current_user, order_create, session)
 
 
@@ -44,20 +29,9 @@ async def get_order(
     current_user: Annotated[User, Depends(get_current_user)],
     session: Annotated[AsyncSession, Depends(get_session)],
 ) -> Order:
-    """
-    Get order by ID (user can only see their own orders, admins see all).
-
-    **Path Parameters:**
-    - order_id: Order ID
-
-    **Headers:**
-    - Authorization: Bearer {token}
-
-    **Response:** Order object
-    """
+    """Get order by ID (users see only their own; admins see all)."""
     order = await OrderService.get_order_by_id(order_id, session)
 
-    # Check permission: user can only see their own orders
     if (
         current_user.role.value != "admin"
         and order.user_id != current_user.id
@@ -70,33 +44,42 @@ async def get_order(
 
 @router.get("", response_model=list[OrderResponse])
 async def list_orders(
-    skip: int = 0,
-    limit: int = 20,
+    skip: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=500),
+    order_status: Optional[str] = Query(None, alias="status"),
+    payment_status: Optional[str] = Query(None),
     current_user: Annotated[User, Depends(get_current_user)] = None,
-    admin: Annotated[User, Depends(get_admin_user)] = None,
     session: Annotated[AsyncSession, Depends(get_session)] = None,
 ) -> list[Order]:
     """
     List orders.
-
-    For regular users: returns their own orders
-    For admins: returns all orders
-
-    **Query Parameters:**
-    - skip: Number of orders to skip
-    - limit: Maximum orders to return
-
-    **Headers:**
-    - Authorization: Bearer {token}
-
-    **Response:** List of orders
+    - Admin: returns all orders (with optional status/payment_status filters).
+    - Regular user: returns only their own orders.
     """
-    # If user is admin, list all orders
-    if admin:
-        return await OrderService.list_all_orders(session, skip, limit)
-
-    # Otherwise list user's orders
+    if current_user.role.value == "admin":
+        return await OrderService.list_all_orders(
+            session, skip, limit,
+            status=order_status,
+            payment_status=payment_status,
+        )
     return await OrderService.list_user_orders(current_user, session, skip, limit)
+
+
+@router.put("/{order_id}", response_model=OrderResponse)
+async def update_order(
+    order_id: str,
+    order_update: OrderUpdate,
+    admin: Annotated[User, Depends(get_admin_user)],
+    session: Annotated[AsyncSession, Depends(get_session)],
+) -> Order:
+    """
+    Update order status and/or payment_status (admin only).
+
+    Body fields (all optional):
+    - **status**: pending | confirmed | shipped | delivered | cancelled
+    - **payment_status**: Pending | Pending Verification | Paid | Rejected
+    """
+    return await OrderService.update_order(order_id, order_update, session)
 
 
 __all__ = ["router"]

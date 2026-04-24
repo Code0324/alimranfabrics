@@ -62,4 +62,11 @@ class OrderResponse(BaseModel):
         from_attributes = True
 
 
-__all__ = ["OrderCreate", "OrderResponse", "OrderItemResponse", "OrderItemRequest"]
+class OrderUpdate(BaseModel):
+    """Order update schema (admin only) — status and/or payment_status."""
+
+    status: Optional[str] = Field(None, description="New order status")
+    payment_status: Optional[str] = Field(None, description="New payment status (Paid | Rejected)")
+
+
+__all__ = ["OrderCreate", "OrderUpdate", "OrderResponse", "OrderItemResponse", "OrderItemRequest"]
