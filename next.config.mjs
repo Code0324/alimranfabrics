@@ -11,9 +11,9 @@ const nextConfig = {
         pathname: "/**",
       },
       {
-        // Railway backend — allow product images served from backend
+        // Render backend — allow product images served from backend
         protocol: "https",
-        hostname: "*.up.railway.app",
+        hostname: "alimranfabrics.onrender.com",
         pathname: "/**",
       },
       {
