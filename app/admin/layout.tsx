@@ -48,40 +48,36 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const { sidebarOpen, toggleSidebar } = useAdminStore();
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [authChecked, setAuthChecked] = useState(false); // ✅ NEW: wait for full auth check
+  const [authChecked, setAuthChecked] = useState(false);
+  const [roleFetched, setRoleFetched] = useState(false);
 
   useEffect(() => { setMounted(true); }, []);
 
   const isReady = mounted && _hasHydrated;
 
+  // Effect 1: token guard + always fetch fresh user from server
+  // Never trust the cached localStorage user role — always verify with server first.
   useEffect(() => {
     if (!isReady) return;
-
-    // No token → go to login
     if (!token) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
       return;
     }
+    setRoleFetched(false);
+    setAuthChecked(false);
+    loadUser().then(() => setRoleFetched(true));
+  }, [isReady, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Token exists but user not loaded yet → fetch user FIRST, then check role
-    if (!user) {
-      loadUser().then(() => {
-        // After loadUser(), the store will update `user`.
-        // The next render will re-run this effect with user populated.
-        // We do NOT setAuthChecked here — let the next effect run handle it.
-      });
-      return;
-    }
-
-    // User is loaded → check role
+  // Effect 2: role check — runs only after server has responded
+  useEffect(() => {
+    if (!roleFetched) return;
+    if (!user) return; // network error — stay on spinner, do not redirect
     if (user.role !== 'admin') {
       router.replace('/');
       return;
     }
-
-    // ✅ All checks passed — safe to show admin panel
     setAuthChecked(true);
-  }, [isReady, token, user]); // ✅ removed router/pathname/loadUser to avoid loops
+  }, [roleFetched, user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
