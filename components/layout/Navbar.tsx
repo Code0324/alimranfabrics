@@ -126,8 +126,8 @@ export default function Navbar() {
               </svg>
             </a>
 
-            {/* Instagram ✅ unchanged */}
-            <a href="https://www.instagram.com/alimranfabricsonline/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
+            {/* Instagram */}
+            <a href="https://www.instagram.com/invites/contact/?igsh=k3pgbig93ea2&utm_content=typ780n" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
               <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient id="nig" cx="30%" cy="105%" r="130%"><stop offset="0%" stopColor="#fdf497"/><stop offset="35%" stopColor="#fd5949"/><stop offset="55%" stopColor="#d6249f"/><stop offset="100%" stopColor="#285AEB"/></radialGradient>
@@ -139,8 +139,8 @@ export default function Navbar() {
               </svg>
             </a>
 
-            {/* YouTube ✅ unchanged */}
-            <a href="https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-transform hover:scale-110">
+            {/* YouTube */}
+            <a href="https://youtube.com/@alimranfabrics?si=KWZm342myl_oCMNy" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-transform hover:scale-110">
               <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="nyt" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#ff5a5a"/><stop offset="100%" stopColor="#cc0000"/></linearGradient>

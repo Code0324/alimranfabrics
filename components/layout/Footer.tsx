@@ -184,6 +184,68 @@ function YouTubeIcon() {
   );
 }
 
+function TikTokIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tt-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#111111" />
+          <stop offset="100%" stopColor="#000000" />
+        </linearGradient>
+        <filter id="tt-drop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#000000" floodOpacity="0.55" />
+          <feDropShadow dx="0" dy="-1" stdDeviation="1" floodColor="rgba(255,255,255,0.4)" floodOpacity="1" />
+        </filter>
+      </defs>
+      <rect x="1" y="1" width="34" height="34" rx="9" fill="url(#tt-grad)" filter="url(#tt-drop)" />
+      <ellipse cx="18" cy="6" rx="10" ry="3" fill="rgba(255,255,255,0.1)" />
+      {/* TikTok musical note icon */}
+      <path d="M22 9h-2.5a4.5 4.5 0 01-4.5 4.5V16a7 7 0 004 .65V21a4 4 0 01-4 4 4 4 0 01-4-4 4 4 0 014-4v-2.5a6.5 6.5 0 00-6.5 6.5A6.5 6.5 0 0015 27a6.5 6.5 0 006.5-6.5V14a7 7 0 004.5 1.65V13.1A4.5 4.5 0 0122 9z" fill="white" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="wa-grad" cx="35%" cy="25%" r="75%">
+          <stop offset="0%" stopColor="#4fce6e" />
+          <stop offset="100%" stopColor="#128C7E" />
+        </radialGradient>
+        <filter id="wa-drop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#075E54" floodOpacity="0.55" />
+          <feDropShadow dx="0" dy="-1" stdDeviation="1" floodColor="rgba(255,255,255,0.4)" floodOpacity="1" />
+        </filter>
+      </defs>
+      <rect x="1" y="1" width="34" height="34" rx="9" fill="url(#wa-grad)" filter="url(#wa-drop)" />
+      <ellipse cx="18" cy="6" rx="10" ry="3" fill="rgba(255,255,255,0.18)" />
+      <path d="M25 11.1A9.8 9.8 0 0018 8a9.9 9.9 0 00-8.6 14.8L8 28l5.4-1.4A9.9 9.9 0 0018 27.9a9.9 9.9 0 009.9-9.9 9.8 9.8 0 00-2.9-6.9zm-7 15.2a8.2 8.2 0 01-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 019.8 18 8.2 8.2 0 0118 9.8a8.2 8.2 0 018.2 8.2 8.2 8.2 0 01-8.2 8.3zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.3-.7-.7-1.2-1.5-1.4-1.7-.1-.3 0-.4.1-.5l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.4.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.5-.3z" fill="white" />
+    </svg>
+  );
+}
+
+function GoogleMapsIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="gm2-grad" cx="35%" cy="22%" r="72%">
+          <stop offset="0%" stopColor="#34A853" />
+          <stop offset="100%" stopColor="#1E7E34" />
+        </radialGradient>
+        <filter id="gm2-drop" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#0a4d1a" floodOpacity="0.55" />
+          <feDropShadow dx="0" dy="-1" stdDeviation="1" floodColor="rgba(255,255,255,0.4)" floodOpacity="1" />
+        </filter>
+      </defs>
+      <rect x="1" y="1" width="34" height="34" rx="9" fill="url(#gm2-grad)" filter="url(#gm2-drop)" />
+      <ellipse cx="18" cy="6" rx="10" ry="3" fill="rgba(255,255,255,0.18)" />
+      {/* Map pin */}
+      <path d="M18 8a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" fill="white" />
+    </svg>
+  );
+}
+
 
 export default function Footer() {
   return (
@@ -238,15 +300,40 @@ export default function Footer() {
                 className="transition-transform hover:scale-110 hover:-translate-y-1">
                 <FacebookIcon />
               </a>
-              <a href="https://www.instagram.com/alimranfabricsonline/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+              <a href="https://www.instagram.com/invites/contact/?igsh=k3pgbig93ea2&utm_content=typ780n" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                 className="transition-transform hover:scale-110 hover:-translate-y-1">
                 <InstagramIcon />
               </a>
-              <a href="https://youtube.com/@alimranfabrics?si=FUF3Zw6Sqob4LX34" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+              <a href="https://youtube.com/@alimranfabrics?si=KWZm342myl_oCMNy" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
                 className="transition-transform hover:scale-110 hover:-translate-y-1">
                 <YouTubeIcon />
               </a>
+              <a href="https://www.tiktok.com/@alimranfabrics_imr?_t=8pbttWG627z&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"
+                className="transition-transform hover:scale-110 hover:-translate-y-1">
+                <TikTokIcon />
+              </a>
+              <a href="https://wa.me/c/923145690329" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Catalogue"
+                className="transition-transform hover:scale-110 hover:-translate-y-1">
+                <WhatsAppIcon />
+              </a>
+              <a href="https://maps.app.goo.gl/NdQqREdtZzHKUMq49" target="_blank" rel="noopener noreferrer" aria-label="Shop Location on Google Maps"
+                className="transition-transform hover:scale-110 hover:-translate-y-1">
+                <GoogleMapsIcon />
+              </a>
             </div>
+            {/* WhatsApp Channel */}
+            <a
+              href="https://whatsapp.com/channel/0029VaBgCb0Chq6Q7iQRfU1A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-3 font-inter text-xs font-medium"
+              style={{ color: BLUE, ...embossText }}
+            >
+              <svg viewBox="0 0 24 24" fill="#25D366" width="14" height="14">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Follow Our Channel for More New Updates
+            </a>
           </div>
 
           {/* ── Link columns ── */}

@@ -71,7 +71,7 @@ export default function ContactPage() {
                 Get instant answers about orders, sizing, and custom requests.
               </p>
               <a
-                href="https://wa.me/15550000000"
+                href="https://wa.me/c/923145690329"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 font-inter text-sm font-medium hover:bg-[#20bf5b] transition-colors"
@@ -88,9 +88,9 @@ export default function ContactPage() {
               <h3 className="font-playfair font-semibold text-charcoal mb-4">Follow Us</h3>
               <div className="flex gap-3">
                 {[
-                  { icon: Facebook, label: "Facebook", href: "https://facebook.com" },
-                  { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
-                  { icon: Youtube, label: "YouTube", href: "https://youtube.com" },
+                  { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/alimranfabricsonline" },
+                  { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/invites/contact/?igsh=k3pgbig93ea2&utm_content=typ780n" },
+                  { icon: Youtube, label: "YouTube", href: "https://youtube.com/@alimranfabrics?si=KWZm342myl_oCMNy" },
                 ].map((s) => (
                   <a
                     key={s.label}
