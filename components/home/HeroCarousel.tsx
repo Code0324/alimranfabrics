@@ -33,7 +33,7 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: 1,
-    image: "/image/men-banner-new.png",
+    image: "/hero/cat-printed.jpg",
     alt: "Men's Collection",
     position: "bottom-left",
     overlay: "left",
@@ -46,7 +46,7 @@ const SLIDES: Slide[] = [
   },
   {
     id: 2,
-    image: "/image/categories/cat-embroidered.jpg",
+    image: "/hero/chickenkar.jpg",
     alt: "Modest Wear",
     position: "bottom-right",
     overlay: "right",
@@ -60,7 +60,7 @@ const SLIDES: Slide[] = [
   },
   {
     id: 3,
-    image: "/image/women-banner-new.webp",
+    image: "/hero/printed.jpg",
     alt: "Kaftaan RTW Collection",
     position: "bottom-left",
     overlay: "left",
@@ -73,7 +73,7 @@ const SLIDES: Slide[] = [
   },
   {
     id: 4,
-    image: "/image/summer.png",
+    image: "/hero/3_pices.jpg",
     alt: "Premium Cotton Linen",
     position: "bottom-left",
     overlay: "left",
@@ -86,7 +86,7 @@ const SLIDES: Slide[] = [
   },
   {
     id: 5,
-    image: "/image/categories/cat-bridal.jpg",
+    image: "/hero/cat-printed.jpg",
     alt: "Sale — Flat 40% Off",
     position: "center-left",
     overlay: "left",
@@ -101,7 +101,7 @@ const SLIDES: Slide[] = [
   },
   {
     id: 6,
-    image: "/image/categories/cat-lawn.jpg",
+    image: "/hero/khaadi_9.jpg",
     alt: "Kidswear Collection",
     position: "center-left",
     overlay: "left",
@@ -203,11 +203,11 @@ export default function HeroCarousel() {
           key={s.id}
           className={`absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${i === current ? "opacity-100" : "opacity-0"}`}
         >
-          <Image src={s.image} alt={s.alt} fill priority={i === 0} className="object-cover object-center" sizes="100vw" />
+          <Image src={s.image} alt={s.alt} fill priority={i === 0} className="object-cover" style={{ objectPosition: "center top" }} sizes="100vw" />
+          <div className="absolute inset-0 bg-black/30" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/5" />
           {s.overlay === "left"  && <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />}
           {s.overlay === "right" && <div className="absolute inset-0 bg-gradient-to-l from-black/55 via-black/15 to-transparent" />}
-          {s.overlay === "both"  && <div className="absolute inset-0 bg-black/30" />}
         </div>
       ))}
 
