@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Truck, Clock, Globe, Shield } from "lucide-react";
-import PageHero from "@/components/ui/PageHero";
+import Breadcrumb from "@/components/ui/Breadcrumb";
 
 export const metadata: Metadata = {
   title: "Shipping Info",
@@ -9,94 +8,68 @@ export const metadata: Metadata = {
 };
 
 const shippingZones = [
-  {
-    region: "United States",
-    standard: "Free",
-    express: "$25",
-    delivery: "7–14 business days (standard) / 3–5 days (express)",
-    note: "No customs duties. We handle everything.",
-  },
-  {
-    region: "Canada",
-    standard: "$15",
-    express: "$35",
-    delivery: "10–18 business days (standard) / 5–7 days (express)",
-    note: "Import duties may apply and are the buyer's responsibility.",
-  },
-  {
-    region: "United Kingdom",
-    standard: "$20",
-    express: "$40",
-    delivery: "10–18 business days (standard) / 5–7 days (express)",
-    note: "Import duties may apply and are the buyer's responsibility.",
-  },
-  {
-    region: "Rest of World",
-    standard: "$25",
-    express: "$50",
-    delivery: "14–21 business days (standard) / 7–10 days (express)",
-    note: "Import duties vary by country and are the buyer's responsibility.",
-  },
+  { region: "United States",  standard: "Free",  express: "$25",  delivery: "7–14 business days",  note: "No customs duties handled" },
+  { region: "Canada",         standard: "$15",   express: "$35",  delivery: "10–18 business days", note: "Import duties may apply" },
+  { region: "United Kingdom", standard: "$20",   express: "$40",  delivery: "10–18 business days", note: "Import duties may apply" },
+  { region: "Rest of World",  standard: "$25",   express: "$50",  delivery: "14–21 business days", note: "Duties vary by country" },
 ];
 
 export default function ShippingPage() {
   return (
-    <div className="min-h-screen bg-ivory">
-      <PageHero
-        eyebrow="Delivery"
-        title="Shipping Information"
-        description="We ship worldwide — premium Pakistani craftsmanship delivered to your door, wherever you are."
-        backgroundImage="/image/women-banner-silk.png"
-        breadcrumbItems={[{ label: "Shipping" }]}
-      />
+    <div className="bg-cream min-h-screen pt-28 md:pt-36">
+      <div className="max-w-3xl mx-auto px-4 md:px-6 pb-20">
 
-      <div className="max-w-5xl mx-auto px-4 py-16 space-y-14">
-        {/* Highlights */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* ── Breadcrumb + Header ── */}
+        <div className="mb-10">
+          <div className="mb-6">
+            <Breadcrumb items={[{ label: "Shipping" }]} />
+          </div>
+          <p className="font-dm-sans text-[11px] uppercase tracking-[0.22em] text-charcoal/40 mb-3">Delivery</p>
+          <h1 className="font-cormorant text-[36px] md:text-[48px] font-normal text-charcoal mb-4">
+            Shipping Information
+          </h1>
+          <p className="font-dm-sans text-[14px] text-charcoal/55 leading-relaxed">
+            We ship worldwide — premium Pakistani craftsmanship delivered to your door, wherever you are.
+          </p>
+        </div>
+
+        {/* ── Key facts ── */}
+        <div className="grid grid-cols-2 gap-px bg-[#E8E4DE] mb-12">
           {[
-            { icon: Truck, title: "Worldwide Shipping", desc: "We ship to 50+ countries worldwide. No minimum order required." },
-            { icon: Clock, title: "Processing Time", desc: "Orders are processed within 1–3 business days." },
-            { icon: Globe, title: "Ships Worldwide", desc: "We deliver to 50+ countries across 5 continents." },
-            { icon: Shield, title: "Fully Tracked", desc: "Every order ships with real-time tracking updates." },
-          ].map((item) => (
-            <div key={item.title} className="bg-white p-6 shadow-card text-center">
-              <div
-                className="w-12 h-12 mx-auto mb-4 flex items-center justify-center"
-                style={{ backgroundColor: "rgba(12,19,80,0.08)" }}
-              >
-                <item.icon size={22} style={{ color: "#C9A84C" }} />
-              </div>
-              <h3 className="font-playfair font-semibold text-charcoal mb-2">{item.title}</h3>
-              <p className="font-inter text-xs text-charcoal/60">{item.desc}</p>
+            { label: "Processing Time", value: "1–3 business days" },
+            { label: "Shipping Partners", value: "DHL Express · FedEx" },
+            { label: "Order Tracking", value: "Full tracking on every order" },
+            { label: "Countries Served", value: "50+ worldwide" },
+          ].map((f) => (
+            <div key={f.label} className="bg-white p-6">
+              <p className="font-dm-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/35 mb-1.5">{f.label}</p>
+              <p className="font-dm-sans text-[13px] text-charcoal font-medium">{f.value}</p>
             </div>
           ))}
         </div>
 
-        {/* Rates table */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-px bg-gold" />
-            <h2 className="font-playfair text-2xl font-bold text-charcoal">Shipping Rates</h2>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm font-inter">
+        {/* ── Rates table ── */}
+        <div className="mb-12">
+          <p className="font-dm-sans text-[11px] uppercase tracking-[0.22em] text-charcoal/40 mb-4">Shipping Rates</p>
+          <div className="overflow-x-auto border border-[#E8E4DE]">
+            <table className="w-full">
               <thead>
-                <tr style={{ backgroundColor: "#070D38", color: "#FAF7F2" }}>
+                <tr className="bg-[#F5F2ED]">
                   {["Region", "Standard", "Express", "Delivery Time", "Notes"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left font-medium uppercase tracking-wide text-xs">{h}</th>
+                    <th key={h} className="px-4 py-3 text-left font-dm-sans text-[10px] uppercase tracking-[0.15em] text-charcoal/50">
+                      {h}
+                    </th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                {shippingZones.map((row, i) => (
-                  <tr key={row.region} style={{ backgroundColor: i % 2 === 0 ? "#FAF7F2" : "#FFFFFF" }}>
-                    <td className="px-4 py-3 font-semibold text-charcoal">{row.region}</td>
-                    <td className="px-4 py-3 font-semibold" style={{ color: row.standard === "Free" ? "#C9A84C" : "#2C2C2C" }}>
-                      {row.standard}
-                    </td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.express}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.delivery}</td>
-                    <td className="px-4 py-3 text-charcoal/50 text-xs">{row.note}</td>
+              <tbody className="divide-y divide-[#E8E4DE]">
+                {shippingZones.map((row) => (
+                  <tr key={row.region} className="bg-white">
+                    <td className="px-4 py-3 font-dm-sans text-[13px] font-medium text-charcoal">{row.region}</td>
+                    <td className="px-4 py-3 font-dm-sans text-[13px] text-charcoal">{row.standard}</td>
+                    <td className="px-4 py-3 font-dm-sans text-[13px] text-charcoal/60">{row.express}</td>
+                    <td className="px-4 py-3 font-dm-sans text-[13px] text-charcoal/60">{row.delivery}</td>
+                    <td className="px-4 py-3 font-dm-sans text-[11px] text-charcoal/40">{row.note}</td>
                   </tr>
                 ))}
               </tbody>
@@ -104,32 +77,34 @@ export default function ShippingPage() {
           </div>
         </div>
 
-        {/* Additional info */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-8 shadow-card">
-            <h3 className="font-playfair text-xl font-bold text-charcoal mb-4">Order Processing</h3>
-            <ul className="space-y-3 font-inter text-sm text-charcoal/70">
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Orders placed before 2 PM PKT ship the same day.</li>
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Custom or embroidered pieces may take 5–7 extra days.</li>
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> You will receive an email with tracking details once shipped.</li>
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> We do not ship on Pakistani public holidays.</li>
-            </ul>
-          </div>
-          <div className="bg-white p-8 shadow-card">
-            <h3 className="font-playfair text-xl font-bold text-charcoal mb-4">Our Shipping Promise</h3>
-            <ul className="space-y-3 font-inter text-sm text-charcoal/70">
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> What you see at checkout is the final price — no surprises.</li>
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Packages are shipped via DHL Express or FedEx.</li>
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Every order ships with full tracking information.</li>
-              <li className="flex gap-2"><span className="text-gold font-bold mt-0.5">•</span> Signature required for orders over $300.</li>
-            </ul>
-          </div>
+        {/* ── Order processing ── */}
+        <div className="mb-12 border-t border-[#E8E4DE] pt-10">
+          <p className="font-dm-sans text-[11px] uppercase tracking-[0.22em] text-charcoal/40 mb-4">Order Processing</p>
+          <ul className="space-y-3">
+            {[
+              "Orders placed before 2 PM PKT ship the same day.",
+              "Custom or embroidered pieces may take 5–7 extra days.",
+              "You will receive an email with tracking details once shipped.",
+              "We do not ship on Pakistani public holidays.",
+              "Signature required for orders over $300.",
+            ].map((item) => (
+              <li key={item} className="flex gap-3 font-dm-sans text-[13px] text-charcoal/60">
+                <span className="text-charcoal/25 flex-shrink-0 mt-0.5">—</span>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
-          <p className="font-inter text-sm text-charcoal/60 mb-4">Have a question about your shipment?</p>
-          <Link href="/contact" className="btn-gold px-8 py-3">
+        {/* ── CTA ── */}
+        <div className="border-t border-[#E8E4DE] pt-10">
+          <p className="font-dm-sans text-[13px] text-charcoal/50 mb-4">
+            Have a question about your shipment?
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block font-dm-sans text-[12px] uppercase tracking-[0.2em] border border-[#1A1A1A] text-charcoal px-7 py-3.5 hover:bg-charcoal hover:text-white transition-colors"
+          >
             Contact Support
           </Link>
         </div>

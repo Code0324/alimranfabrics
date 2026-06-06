@@ -1,237 +1,250 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
-type Slide = {
-  id: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  cta: string;
-  ctaHref: string;
-  secondaryCta: string;
-  secondaryHref: string;
-  image: string;
-  position: "left" | "right" | "center";
-  accent: string;
-};
+// ── Types ──────────────────────────────────────────────────────────────────────
 
-const slides: Slide[] = [
+type LineKind = "text" | "premium-drop" | "sale-pill";
+
+interface SlideLine {
+  kind:   LineKind;
+  text?:  string;
+  cls?:   string;
+  style?: React.CSSProperties;
+}
+
+type TextPosition = "bottom-left" | "bottom-right" | "center-left";
+
+interface Slide {
+  id:       number;
+  image:    string;
+  alt:      string;
+  position: TextPosition;
+  overlay:  "left" | "right" | "both";
+  lines:    SlideLine[];
+  link:     string;
+}
+
+// ── Slides data ────────────────────────────────────────────────────────────────
+
+const SLIDES: Slide[] = [
   {
     id: 1,
-    title: "Timeless Elegance",
-    subtitle: "New Embroidered Collection 2026",
-    description: "Handcrafted with centuries of artisanship, every stitch tells a story of Pakistani heritage.",
-    cta: "Shop Embroidered",
-    ctaHref: "/collections/embroidered",
-    secondaryCta: "Explore Collection",
-    secondaryHref: "/collections/stitched",
+    image: "/image/men-banner-new.png",
+    alt: "Men's Collection",
+    position: "bottom-left",
+    overlay: "left",
+    link: "/collections/men",
+    lines: [
+      { kind: "text", text: "The Final",     cls: "font-cormorant italic text-[38px] md:text-[52px] font-normal text-white" },
+      { kind: "text", text: "Statement",     cls: "font-cormorant text-[64px] md:text-[88px] font-semibold text-white leading-none" },
+      { kind: "text", text: "Collection'26", cls: "font-dm-sans text-[14px] md:text-[18px] tracking-[0.2em] text-white/80 mt-2" },
+    ],
+  },
+  {
+    id: 2,
     image: "/image/categories/cat-embroidered.jpg",
-    position: "left",
-    accent: "Embroidered Collection",
+    alt: "Modest Wear",
+    position: "bottom-right",
+    overlay: "right",
+    link: "/collections/modest-wear",
+    lines: [
+      { kind: "text", text: "NOIR ESSENCE", cls: "font-dm-sans text-[11px] md:text-[13px] uppercase tracking-[0.3em] text-white/70 mb-2" },
+      { kind: "text", text: "Modest",       cls: "font-cormorant text-[65px] md:text-[90px] font-normal text-white leading-none" },
+      { kind: "text", text: "WEAR",         cls: "font-dm-sans text-[22px] md:text-[28px] tracking-[0.5em] text-white/90 mt-1" },
+      { kind: "text", text: "New Arrival",  cls: "font-cormorant italic text-[18px] md:text-[22px] text-white/80 mt-3" },
+    ],
   },
   {
     id: 3,
-    title: "Summer Luxe",
-    subtitle: "Printed Lawn Collection 2026",
-    description: "Light, breezy, and beautifully printed — our summer lawn collection is here to define your season.",
-    cta: "Shop Now",
-    ctaHref: "/collections/printed",
-    secondaryCta: "View Collection",
-    secondaryHref: "/collections/new-arrivals",
-    image: "/image/summer.png",
-    position: "right",
-    accent: "Summer Collection",
+    image: "/image/women-banner-new.webp",
+    alt: "Kaftaan RTW Collection",
+    position: "bottom-left",
+    overlay: "left",
+    link: "/collections/kaftaan-collection",
+    lines: [
+      { kind: "text", text: "rtw collection",         cls: "font-cormorant italic text-[18px] md:text-[22px] text-white/80" },
+      { kind: "text", text: "Kaftaan",                cls: "font-cormorant text-[65px] md:text-[90px] font-semibold text-white leading-none" },
+      { kind: "text", text: "SOFT, STYLISH, TIMELESS", cls: "font-dm-sans text-[11px] md:text-[13px] uppercase tracking-[0.3em] text-white/80 mt-3" },
+    ],
   },
   {
     id: 4,
-    title: "Men's Collection",
-    subtitle: "Shalwar Kameez & Kurta Pajama",
-    description: "From boardrooms to wedding halls — impeccably tailored men's traditional wear for every occasion.",
-    cta: "Shop Men's",
-    ctaHref: "/collections/men",
-    secondaryCta: "View Men's",
-    secondaryHref: "/collections/shalwar-kameez",
-    image: "/image/categories/cat-men-formal.jpg",
-    position: "left",
-    accent: "Men's Collection",
+    image: "/image/summer.png",
+    alt: "Premium Cotton Linen",
+    position: "bottom-left",
+    overlay: "left",
+    link: "/collections/cotton-linen",
+    lines: [
+      { kind: "text", text: "COTTON LINEN", cls: "font-dm-sans text-[11px] md:text-[13px] uppercase tracking-[0.4em] text-white/80" },
+      { kind: "premium-drop" },
+      { kind: "text", text: "Ready to Wear", cls: "font-cormorant italic text-[24px] md:text-[32px] text-white/90 mt-2" },
+    ],
   },
   {
     id: 5,
-    title: "Festive Celebrations",
-    subtitle: "Eid & Wedding Collections",
-    description: "Light up every celebration with our exclusively crafted festive ensembles.",
-    cta: "Shop Festive",
-    ctaHref: "/collections/event-ready",
-    secondaryCta: "Explore All",
-    secondaryHref: "/collections/stitched",
     image: "/image/categories/cat-bridal.jpg",
-    position: "center",
-    accent: "Festive Collection",
+    alt: "Sale — Flat 40% Off",
+    position: "center-left",
+    overlay: "left",
+    link: "/collections/sale",
+    lines: [
+      { kind: "text", text: "SALE",         cls: "font-dm-sans text-[72px] md:text-[100px] font-black text-white leading-none tracking-tight" },
+      { kind: "text", text: "FLAT 40% OFF", cls: "font-dm-sans text-[30px] md:text-[42px] font-black leading-tight", style: { color: "#C9A96E" } },
+      { kind: "text", text: "ENTIRE STOCK", cls: "font-dm-sans text-[12px] md:text-[16px] uppercase tracking-[0.4em] text-white/90 mt-2" },
+      { kind: "sale-pill", text: "Flat $35 Shipping on $99+ Orders" },
+      { kind: "text", text: "No Extra Duty Charges at Delivery", cls: "font-dm-sans text-[12px] md:text-[14px] font-semibold text-white mt-2" },
+    ],
+  },
+  {
+    id: 6,
+    image: "/image/categories/cat-lawn.jpg",
+    alt: "Kidswear Collection",
+    position: "center-left",
+    overlay: "left",
+    link: "/collections/kids",
+    lines: [
+      { kind: "text", text: "kidswear",    cls: "font-dm-sans text-[55px] md:text-[80px] font-black text-white leading-none" },
+      { kind: "text", text: "COLLECTION",  cls: "font-dm-sans text-[55px] md:text-[80px] font-black text-white leading-tight" },
+      { kind: "text", text: "Little Adventures are live now", cls: "text-[22px] md:text-[28px] text-white/90 mt-3", style: { fontFamily: "'Dancing Script', cursive" } },
+    ],
   },
 ];
 
+// ── Framer Motion variants ─────────────────────────────────────────────────────
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.08 } },
+  exit:    { opacity: 0, transition: { duration: 0.25 } },
+};
+
+const lineVariants = {
+  hidden:  { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+};
+
+// ── Individual line renderer ────────────────────────────────────────────────────
+
+function SlideLineEl({ line }: { line: SlideLine }) {
+  if (line.kind === "premium-drop") {
+    return (
+      <div className="flex items-end leading-none">
+        <span className="font-cormorant text-[88px] md:text-[130px] font-bold text-white leading-none">P</span>
+        <span className="font-cormorant text-[54px] md:text-[78px] font-bold text-white leading-none pb-2 md:pb-4">REMIUM</span>
+      </div>
+    );
+  }
+  if (line.kind === "sale-pill") {
+    return (
+      <div className="mt-4">
+        <span className="inline-block bg-white text-[#1A1A1A] font-dm-sans text-[12px] md:text-[14px] font-medium px-5 md:px-6 py-2">
+          {line.text}
+        </span>
+      </div>
+    );
+  }
+  return <div className={line.cls} style={line.style}>{line.text}</div>;
+}
+
+// ── Position class map ─────────────────────────────────────────────────────────
+
+const POSITION_CLS: Record<TextPosition, string> = {
+  "bottom-left":  "absolute bottom-0 left-0 pb-14 md:pb-20 pl-8 md:pl-16 max-w-[90vw] md:max-w-2xl",
+  "bottom-right": "absolute bottom-0 right-0 pb-14 md:pb-20 pr-8 md:pr-16 text-right max-w-[90vw] md:max-w-2xl",
+  "center-left":  "absolute inset-y-0 left-0 flex flex-col justify-center pl-8 md:pl-16 max-w-[90vw] md:max-w-2xl",
+};
+
+// ── Main component ─────────────────────────────────────────────────────────────
+
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [paused,  setPaused]  = useState(false);
+  const router  = useRouter();
+  const isDrag  = useRef(false);
+  const startX  = useRef(0);
 
-  const goTo = useCallback((index: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrent(index);
-    setTimeout(() => setIsAnimating(false), 700);
-  }, [isAnimating]);
-
-  const prev = () => goTo((current - 1 + slides.length) % slides.length);
-  const next = useCallback(() => goTo((current + 1) % slides.length), [current, goTo]);
+  const goTo = useCallback((i: number) => setCurrent(i), []);
+  const next = useCallback(() => setCurrent((p) => (p + 1) % SLIDES.length), []);
 
   useEffect(() => {
-    const interval = setInterval(next, 5500);
-    return () => clearInterval(interval);
-  }, [next]);
+    if (paused) return;
+    const id = setInterval(next, 5000);
+    return () => clearInterval(id);
+  }, [next, paused]);
 
-  const slide = slides[current];
+  // ── Drag / click detection ─────────────────────────────────────────────────
+  const onStart = (x: number) => { startX.current = x; isDrag.current = false; };
+  const onMove  = (x: number) => { if (Math.abs(x - startX.current) > 10) isDrag.current = true; };
+  const onSlideClick = () => {
+    if (isDrag.current) { isDrag.current = false; return; }
+    router.push(SLIDES[current].link);
+  };
+
+  const slide = SLIDES[current];
 
   return (
-    <section className="relative h-screen min-h-[600px] max-h-[900px] overflow-hidden">
-
-      {/* ── Background images ── */}
-      {slides.map((s, i) => (
+    <section
+      className="relative h-[50vh] md:h-[70vh] overflow-hidden bg-black cursor-pointer select-none"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onMouseDown={(e)  => onStart(e.clientX)}
+      onMouseMove={(e)  => onMove(e.clientX)}
+      onClick={onSlideClick}
+      onTouchStart={(e) => onStart(e.touches[0].clientX)}
+      onTouchMove={(e)  => onMove(e.touches[0].clientX)}
+    >
+      {/* ── Background images — opacity crossfade ── */}
+      {SLIDES.map((s, i) => (
         <div
           key={s.id}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            i === current ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${i === current ? "opacity-100" : "opacity-0"}`}
         >
-          <Image
-            src={s.image}
-            alt={s.title}
-            fill
-            priority={i === 0}
-            className="object-cover object-top"
-            sizes="100vw"
-          />
-
-          {/* Overlay */}
-          <div
-            className={`absolute inset-0 ${
-              s.position === "right"
-                ? "bg-gradient-to-l from-charcoal/70 via-charcoal/40 to-transparent"
-                : s.position === "center"
-                ? "bg-charcoal/50"
-                : "bg-gradient-to-r from-charcoal/70 via-charcoal/40 to-transparent"
-            }`}
-          />
+          <Image src={s.image} alt={s.alt} fill priority={i === 0} className="object-cover object-center" sizes="100vw" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/5" />
+          {s.overlay === "left"  && <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />}
+          {s.overlay === "right" && <div className="absolute inset-0 bg-gradient-to-l from-black/55 via-black/15 to-transparent" />}
+          {s.overlay === "both"  && <div className="absolute inset-0 bg-black/30" />}
         </div>
       ))}
 
-      {/* ── Content ── */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-6 w-full">
-
-          {/* ── Standard slide layout ── */}
-          <div
-            className={`max-w-xl ${slide.position === "right" ? "ml-auto text-right" : ""} ${
-              slide.position === "center" ? "mx-auto text-center" : ""
-            }`}
+      {/* ── Text overlay ── */}
+      <div className="relative z-10 h-full pointer-events-none">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            className={POSITION_CLS[slide.position]}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
-            {/* Accent label */}
-            <div
-              className={`flex items-center gap-3 mb-4 ${
-                slide.position === "right" ? "justify-end" : ""
-              } ${slide.position === "center" ? "justify-center" : ""}`}
-            >
-              <span className="w-8 h-px bg-gold" />
-              <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">
-                {slide.accent}
-              </span>
-              <span className="w-8 h-px bg-gold" />
-            </div>
-
-            <p
-              key={`subtitle-${current}`}
-              className="font-inter text-ivory/80 text-sm uppercase tracking-widest mb-3 animate-slide-up"
-            >
-              {slide.subtitle}
-            </p>
-
-            <h1
-              key={`title-${current}`}
-              className="font-playfair text-ivory text-5xl md:text-7xl font-bold leading-tight mb-5 animate-slide-up"
-            >
-              {slide.title}
-            </h1>
-
-            <p
-              key={`desc-${current}`}
-              className="font-inter text-ivory/70 text-base md:text-lg leading-relaxed mb-8 animate-slide-up"
-            >
-              {slide.description}
-            </p>
-
-            <div
-              className={`flex gap-4 ${slide.position === "right" ? "justify-end" : ""} ${
-                slide.position === "center" ? "justify-center" : ""
-              } flex-wrap`}
-            >
-              <Link href={slide.ctaHref} className="btn-gold">
-                {slide.cta}
-              </Link>
-              <Link
-                href={slide.secondaryHref}
-                className="inline-flex items-center gap-2 font-inter text-sm font-medium uppercase tracking-wide
-                           text-ivory border border-ivory/50 px-6 py-3 hover:border-gold hover:text-gold transition-all duration-300"
-              >
-                {slide.secondaryCta}
-              </Link>
-            </div>
-          </div>
-        </div>
+            {slide.lines.map((line, i) => (
+              <motion.div key={i} variants={lineVariants}>
+                <SlideLineEl line={line} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
-      {/* ── Navigation arrows ── */}
-      <button
-        onClick={prev}
-        aria-label="Previous slide"
-        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20
-                   w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm
-                   flex items-center justify-center text-ivory transition-all duration-200 border border-white/20"
-      >
-        <ChevronLeft size={20} />
-      </button>
-      <button
-        onClick={next}
-        aria-label="Next slide"
-        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20
-                   w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm
-                   flex items-center justify-center text-ivory transition-all duration-200 border border-white/20"
-      >
-        <ChevronRight size={20} />
-      </button>
-
-      {/* ── Dots ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {slides.map((_, i) => (
+      {/* ── Dot indicators — stopPropagation so dots don't trigger slide navigation ── */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        {SLIDES.map((_, i) => (
           <button
             key={i}
-            onClick={() => goTo(i)}
+            onClick={(e) => { e.stopPropagation(); goTo(i); }}
             aria-label={`Go to slide ${i + 1}`}
-            className={`transition-all duration-300 ${
+            className={`rounded-full transition-all duration-300 ${
               i === current
-                ? "w-8 h-1.5 bg-gold"
-                : "w-1.5 h-1.5 bg-ivory/40 hover:bg-ivory/70 rounded-full"
+                ? "w-3 h-3 bg-white"
+                : "w-2.5 h-2.5 bg-white/40 border border-white/60 hover:bg-white/70"
             }`}
           />
         ))}
-      </div>
-
-      {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-8 right-8 z-20 hidden md:flex flex-col items-center gap-2 text-ivory/50">
-        <span className="font-inter text-[10px] uppercase tracking-widest rotate-90 origin-center">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-ivory/50 to-transparent" />
       </div>
     </section>
   );

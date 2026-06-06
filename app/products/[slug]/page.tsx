@@ -189,10 +189,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const colorVariants = getColorVariants(product.id);
 
   return (
-    <div className="pt-28 md:pt-32 bg-ivory min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <div className="mb-8">
+    <div className="pt-28 md:pt-36 bg-cream min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+
+        {/* ── Breadcrumb ── */}
+        <div className="mb-6">
           <Breadcrumb
             items={[
               { label: "Collections", href: "/collections/women" },
@@ -202,74 +203,82 @@ export default async function ProductPage({ params }: ProductPageProps) {
           />
         </div>
 
-        {/* Product layout */}
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 mb-20">
+        {/* ── Two-column product layout (55 / 45) ── */}
+        <div className="grid md:grid-cols-[55%_1fr] gap-10 lg:gap-16 mb-20 items-start">
           <ImageGallery images={product.images} productName={product.name} />
 
-          <div className="sticky top-28 h-fit">
-            {/* Badges */}
-            <div className="flex gap-2 mb-3">
-              {product.isNew && (
-                <span className="bg-navy text-ivory text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
-                  New
-                </span>
-              )}
-              {product.isBestSeller && (
-                <span className="bg-gold text-charcoal text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
-                  Best Seller
-                </span>
-              )}
-              {discount > 0 && (
-                <span className="bg-red-600 text-white text-[10px] font-inter font-semibold px-2 py-0.5 uppercase tracking-wide">
-                  Save {discount}%
-                </span>
-              )}
-            </div>
+          <div className="md:sticky md:top-32 h-fit">
 
-            <p className="font-inter text-xs text-charcoal/50 uppercase tracking-wider mb-2">
-              {product.fabric} • SKU: {product.sku}
+            {/* Badges */}
+            {(product.isNew || product.isBestSeller || discount > 0) && (
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {product.isNew && (
+                  <span className="bg-[#111111] text-white text-[10px] font-dm-sans px-2.5 py-1 uppercase tracking-[0.15em]">
+                    New In
+                  </span>
+                )}
+                {product.isBestSeller && (
+                  <span className="bg-[#111111] text-white text-[10px] font-dm-sans px-2.5 py-1 uppercase tracking-[0.15em]">
+                    Best Seller
+                  </span>
+                )}
+                {discount > 0 && (
+                  <span className="bg-[#111111] text-white text-[10px] font-dm-sans px-2.5 py-1 uppercase tracking-[0.15em]">
+                    Save {discount}%
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Meta */}
+            <p className="font-dm-sans text-[11px] text-charcoal/40 uppercase tracking-[0.18em] mb-3">
+              {product.fabric} · {product.category}
             </p>
 
-            <h1 className="font-playfair text-2xl md:text-3xl font-bold text-charcoal mb-3">
+            {/* Product name */}
+            <h1 className="font-cormorant text-[28px] md:text-[36px] font-normal text-charcoal leading-tight mb-4">
               {product.name}
             </h1>
 
-            <div className="flex items-center gap-2 mb-4">
+            {/* Stars */}
+            <div className="flex items-center gap-2 mb-5">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} size={14} className="text-gold fill-gold" />
+                  <Star key={s} size={13} className="fill-[#F5A623] text-[#F5A623]" />
                 ))}
               </div>
-              <span className="font-inter text-xs text-charcoal/50">(47 reviews)</span>
+              <span className="font-dm-sans text-[11px] text-charcoal/40">(47 reviews)</span>
             </div>
 
-            <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-ivory-dark">
-              <span className="font-playfair text-3xl font-bold text-navy">
+            {/* Price */}
+            <div className="flex items-baseline gap-3 mb-6 pb-6 border-b border-[#E8E4DE]">
+              <span className="font-dm-sans text-[22px] font-medium text-charcoal">
                 {formatPrice(product.price)}
               </span>
               {product.originalPrice && (
-                <span className="font-inter text-lg text-charcoal/40 line-through">
+                <span className="font-dm-sans text-[15px] text-charcoal/35 line-through">
                   {formatPrice(product.originalPrice)}
                 </span>
               )}
               {discount > 0 && (
-                <span className="font-inter text-sm font-semibold text-red-600">
-                  {discount}% OFF
+                <span className="font-dm-sans text-[12px] text-charcoal/50 uppercase tracking-[0.1em]">
+                  {discount}% off
                 </span>
               )}
             </div>
 
             <AddToCart product={product} colorVariants={colorVariants ?? undefined} />
 
-            <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-ivory-dark">
+            {/* Trust badges */}
+            <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-[#E8E4DE]">
               {[
-                { icon: Truck, text: "Worldwide Shipping" },
-                { icon: Shield, text: "Secure Payment" },
+                { icon: Truck,      text: "Worldwide Shipping" },
+                { icon: Shield,     text: "Secure Payment" },
                 { icon: RotateCcw, text: "30-Day Returns" },
               ].map((badge) => (
                 <div key={badge.text} className="flex flex-col items-center gap-1.5 text-center">
-                  <badge.icon size={18} style={{ color: "#C9A84C" }} />
-                  <span className="font-inter text-[10px] text-charcoal/50 uppercase tracking-wide">
+                  <badge.icon size={16} className="text-charcoal/40" strokeWidth={1.5} />
+                  <span className="font-dm-sans text-[10px] text-charcoal/40 uppercase tracking-[0.12em] leading-snug">
                     {badge.text}
                   </span>
                 </div>
@@ -278,19 +287,25 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </div>
 
-        <ProductTabs product={product} />
+        {/* ── Accordion tabs ── */}
+        <div className="max-w-3xl mb-20">
+          <ProductTabs product={product} />
+        </div>
 
+        {/* ── You May Also Like ── */}
         {related.length > 0 && (
-          <div className="mt-20">
-            <div className="text-center mb-12">
-              <div className="flex items-center justify-center gap-4 mb-3">
-                <span className="w-12 h-px bg-gold" />
-                <span className="font-inter text-gold text-xs uppercase tracking-[0.3em]">You May Also Love</span>
-                <span className="w-12 h-px bg-gold" />
+          <div className="mb-20">
+            <div className="flex items-end justify-between mb-6 border-b border-[#E8E4DE] pb-4">
+              <div>
+                <p className="font-dm-sans text-[11px] uppercase tracking-[0.22em] text-charcoal/40 mb-1">
+                  Explore More
+                </p>
+                <h2 className="font-cormorant text-[26px] font-normal text-charcoal">
+                  You May Also Like
+                </h2>
               </div>
-              <h2 className="section-title">Related Products</h2>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#E8E4DE]">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

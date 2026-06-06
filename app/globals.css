@@ -2,180 +2,126 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font CSS variables — fonts loaded via Google Fonts in layout.tsx <head> */
+/* ── Font CSS variables ── */
 :root {
-  --font-playfair: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-cormorant: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
-  --font-tenor: 'Tenor Sans', 'Gill Sans', system-ui, sans-serif;
+  --font-playfair:  'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-cormorant: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  --font-dm-sans:   'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-inter:     'DM Sans', system-ui, sans-serif; /* alias — keeps legacy refs working */
+  --font-tenor:     'Tenor Sans', 'Gill Sans', system-ui, sans-serif;
 }
 
+/* ── Design tokens ── */
 :root {
-  /* Legacy tokens */
-  --color-emerald: #1B4D3E;
-  --color-gold: #C9A84C;
-  --color-ivory: #FAF7F2;
-  --color-charcoal: #2C2C2C;
-  /* Al Imran Design System */
-  --color-navy: #0C1350;
-  --color-navy-deep: #070D38;
-  --color-bright-gold: #FFE500;
-  --color-crimson: #B71C1C;
-  --color-cream: #FDFCF7;
+  --color-cream:    #FAF7F2;
+  --color-cream-dk: #F5F2ED;
+  --color-charcoal: #1A1A1A;
+  --color-gray:     #666666;
+  --color-dark:     #111111;
+  --color-gold:     #F5A623;
+  --color-border:   #E8E4DC;
 }
 
+/* ── Base layer ── */
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-ivory text-charcoal font-inter antialiased;
+    @apply bg-cream text-charcoal font-dm-sans antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-playfair;
-  }
-
-  h1 {
-    color: #0C1350;
-  }
-
-  h2 {
-    color: #B71C1C;
+    font-family: var(--font-cormorant);
+    color: #1A1A1A;
     background: transparent;
   }
 }
 
+/* ── Components ── */
 @layer components {
-  /* ── Glossy rounded buttons ── */
+
+  /* ── Primary CTA: solid dark fill, white text ── */
   .btn-primary {
-    @apply px-7 py-3 font-inter font-semibold tracking-wide
-           transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-offset-2;
-    background: linear-gradient(160deg, #FFF5AA 0%, #FFE500 40%, #E8CE00 100%);
-    color: #CC0000;
-    border-radius: 8px;
-    box-shadow:
-      0 2px 14px rgba(255,229,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.80),
-      inset 0 -1px 0 rgba(0,0,0,0.12);
-    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    @apply inline-block px-7 py-3 font-dm-sans font-medium tracking-[0.08em]
+           text-sm uppercase transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-charcoal;
+    background: #111111;
+    color: #ffffff;
   }
-  .btn-primary:hover {
-    background: linear-gradient(160deg, #FFFACC 0%, #FFE500 30%, #D4BC00 100%);
-    box-shadow:
-      0 4px 22px rgba(255,229,0,0.65),
-      inset 0 1px 0 rgba(255,255,255,0.90),
-      inset 0 -1px 0 rgba(0,0,0,0.12);
-    transform: translateY(-1px);
-  }
-  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:hover { background: #2a2a2a; }
+  .btn-primary:active { background: #000000; }
 
+  /* kept alias — any code using btn-gold still works */
   .btn-gold {
-    @apply px-7 py-3 font-inter font-semibold tracking-wide
-           transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-offset-2;
-    background: linear-gradient(160deg, #FFF5AA 0%, #FFE500 40%, #E8CE00 100%);
-    color: #CC0000;
-    border-radius: 8px;
-    box-shadow:
-      0 2px 14px rgba(255,229,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.80),
-      inset 0 -1px 0 rgba(0,0,0,0.12);
-    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    @apply inline-block px-7 py-3 font-dm-sans font-medium tracking-[0.08em]
+           text-sm uppercase transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-charcoal;
+    background: #111111;
+    color: #ffffff;
   }
-  .btn-gold:hover {
-    background: linear-gradient(160deg, #FFFACC 0%, #FFE500 30%, #D4BC00 100%);
-    box-shadow:
-      0 4px 22px rgba(255,229,0,0.65),
-      inset 0 1px 0 rgba(255,255,255,0.90),
-      inset 0 -1px 0 rgba(0,0,0,0.12);
-    transform: translateY(-1px);
-  }
-  .btn-gold:active { transform: translateY(0); }
+  .btn-gold:hover { background: #2a2a2a; }
 
+  /* ── Outline CTA ── */
   .btn-outline {
-    @apply border-2 px-7 py-3 font-inter font-medium tracking-wide
-           transition-all duration-300 uppercase text-sm inline-block
-           focus:outline-none focus:ring-2 focus:ring-offset-2;
-    border-color: #D4B800;
-    color: #CC0000;
-    background: linear-gradient(160deg, #FFF5AA 0%, #FFE500 40%, #E8CE00 100%);
-    border-radius: 8px;
-    box-shadow:
-      0 2px 14px rgba(255,229,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.80),
-      inset 0 -1px 0 rgba(0,0,0,0.12);
-    text-shadow: 0 1px 0 rgba(255,255,255,0.55);
+    @apply inline-block border px-7 py-3 font-dm-sans font-medium tracking-[0.08em]
+           text-sm uppercase transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-charcoal;
+    border-color: #1A1A1A;
+    color: #1A1A1A;
+    background: transparent;
   }
   .btn-outline:hover {
-    background: linear-gradient(160deg, #FFFACC 0%, #FFE500 30%, #D4BC00 100%);
-    border-color: #B89A00;
-    color: #AA0000;
-    box-shadow:
-      0 4px 22px rgba(255,229,0,0.65),
-      inset 0 1px 0 rgba(255,255,255,0.90),
-      inset 0 -1px 0 rgba(0,0,0,0.12);
-    transform: translateY(-1px);
+    background: #1A1A1A;
+    color: #ffffff;
   }
-  .btn-outline:active { transform: translateY(0); }
 
+  /* ── Section title ── */
   .section-title {
-    @apply font-playfair text-3xl md:text-4xl font-bold text-charcoal;
+    font-family: var(--font-cormorant);
+    @apply text-3xl md:text-4xl font-semibold text-charcoal;
   }
 
+  /* ── Section label (small uppercase gray) ── */
+  .section-label {
+    @apply font-dm-sans text-xs uppercase tracking-[0.22em] text-charcoal/40 font-medium;
+  }
+
+  /* ── Product card ── */
   .product-card {
     @apply bg-white overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500;
   }
 
+  /* ── Nav link ── */
   .nav-link {
-    @apply font-inter transition-colors duration-200 text-sm tracking-wide uppercase font-semibold;
-    color: #CC0000;
-    /* Embossed — raised text on yellow navbar */
-    text-shadow: -1px -1px 0px rgba(255,255,255,0.75), 1px 1px 0px rgba(0,0,0,0.12);
-  }
-  .nav-link:hover {
-    color: #000080;
-    text-shadow: -1px -1px 0px rgba(255,255,255,0.8), 1px 1px 1px rgba(0,0,60,0.18);
-  }
-
-  .linen-card {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23FFFFFF'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23f0ece2' opacity='0.5'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23f0ece2' opacity='0.5'/%3E%3C/svg%3E");
+    @apply font-dm-sans text-sm tracking-[0.06em] uppercase font-medium
+           text-charcoal/70 hover:text-charcoal transition-colors duration-200;
   }
 }
 
+/* ── Utilities ── */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
 
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
 }
 
+/* ── Ornamental divider ── */
 .ornamental-border {
   background-image: repeating-linear-gradient(
     90deg,
-    #C9A84C 0px,
-    #C9A84C 4px,
-    transparent 4px,
-    transparent 8px
+    #E8E4DC 0px, #E8E4DC 4px,
+    transparent 4px, transparent 8px
   );
-  height: 2px;
+  height: 1px;
 }
 
-/* ── Infinite marquee shared keyframe ──────────────────────────────────────── */
+/* ── Infinite marquee ── */
 @keyframes marquee-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -195,17 +141,33 @@
 }
 .review-marquee:hover { animation-play-state: paused; }
 
-/* ── 3-D tilt card base ─────────────────────────────────────────────────────── */
+/* ── 3D tilt card base ── */
 .brand-card {
   transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
   transform: perspective(700px) rotateX(0deg) rotateY(0deg) scale(1);
   will-change: transform;
 }
 
+/* ── Slide-up animation ── */
 @keyframes animate-slide-up {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-slide-up {
   animation: animate-slide-up 0.55s ease forwards;
+}
+
+/* ── Size guide modal entrance ── */
+@keyframes sizeModalIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Collection hero banner text entrance ── */
+@keyframes heroBannerLine {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-hero-line {
+  animation: heroBannerLine 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

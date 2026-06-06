@@ -84,29 +84,19 @@ export default function ProductCardApi({ product }: Props) {
         </Link>
 
         {/* Badges — top left */}
-        <div className="absolute top-0 left-0 flex flex-col gap-1">
+        <div className="absolute top-2 left-2 flex flex-col gap-1">
           {discount > 0 && (
-            <span
-              className="font-inter font-black uppercase leading-none px-3 py-1.5"
-              style={{ backgroundColor: "#FFE500", color: "#CC0000", fontSize: "13px", borderRadius: "6px" }}
-            >
-              -{discount}%<br />
-              <span style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em" }}>SALE</span>
+            <span className="font-dm-sans font-medium text-[10px] px-2 py-0.5 uppercase tracking-[0.08em] bg-charcoal text-white">
+              -{discount}% Sale
             </span>
           )}
           {product.isNew && !discount && (
-            <span
-              className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
-            >
+            <span className="font-dm-sans font-medium text-[10px] px-2 py-0.5 uppercase tracking-[0.08em] bg-charcoal text-white">
               New
             </span>
           )}
           {product.isBestSeller && !discount && !product.isNew && (
-            <span
-              className="font-inter font-semibold text-[10px] px-2 py-0.5 uppercase tracking-wide"
-              style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
-            >
+            <span className="font-dm-sans font-medium text-[10px] px-2 py-0.5 uppercase tracking-[0.08em] bg-charcoal text-white">
               Best Seller
             </span>
           )}
@@ -115,8 +105,8 @@ export default function ProductCardApi({ product }: Props) {
         {/* Wishlist */}
         <button
           onClick={(e) => { e.preventDefault(); toggleWishlist(product.id); }}
-          className={`absolute top-3 right-3 w-8 h-8 flex items-center justify-center transition-all duration-200
-            ${wishlisted ? "bg-[#CC0000] text-white" : "bg-white/80 text-charcoal hover:bg-[#CC0000] hover:text-white"}`}
+          className={`absolute top-2 right-2 w-8 h-8 flex items-center justify-center transition-all duration-200
+            ${wishlisted ? "bg-charcoal text-white" : "bg-white/80 text-charcoal hover:bg-charcoal hover:text-white"}`}
         >
           <Heart size={14} fill={wishlisted ? "currentColor" : "none"} />
         </button>
@@ -124,8 +114,8 @@ export default function ProductCardApi({ product }: Props) {
         {/* Mobile-only: persistent Add to Cart button */}
         <button
           onClick={(e) => { e.stopPropagation(); addItem(cartProduct, "M", { name: "Default", hex: "#888888" }); }}
-          className="md:hidden absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center shadow-md transition-colors"
-          style={{ backgroundColor: "#FFE500", color: "#CC0000", borderRadius: "6px" }}
+          className="md:hidden absolute bottom-2 right-2 w-9 h-9 flex items-center justify-center
+                     bg-charcoal text-white transition-colors hover:bg-charcoal/80"
           aria-label="Add to cart"
         >
           <ShoppingBag size={15} />
@@ -135,17 +125,18 @@ export default function ProductCardApi({ product }: Props) {
         <div className={`hidden md:flex absolute bottom-0 left-0 right-0 transition-all duration-300 ${hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
           <Link
             href={`/products/${product.slug}`}
-            className="flex-1 bg-white/90 hover:bg-ivory text-charcoal py-3 text-xs font-inter font-medium
-                       uppercase tracking-wide flex items-center justify-center gap-1.5 transition-colors border-r border-ivory"
+            className="flex-1 bg-white/95 text-charcoal py-3 text-[11px] font-dm-sans font-medium
+                       uppercase tracking-[0.08em] flex items-center justify-center gap-1.5
+                       transition-colors hover:bg-white border-r border-[#E8E4DC]"
           >
             <Eye size={13} />
             Quick View
           </Link>
           <button
             onClick={() => addItem(cartProduct, "M", { name: "Default", hex: "#888888" })}
-            className="flex-1 py-3 text-xs font-inter font-medium uppercase tracking-wide
-                       flex items-center justify-center gap-1.5 transition-colors hover:opacity-90"
-            style={{ backgroundColor: "#FFE500", color: "#CC0000" }}
+            className="flex-1 py-3 text-[11px] font-dm-sans font-medium uppercase tracking-[0.08em]
+                       flex items-center justify-center gap-1.5 bg-charcoal text-white
+                       transition-colors hover:bg-charcoal/85"
           >
             <ShoppingBag size={13} />
             Add to Cart
@@ -154,21 +145,21 @@ export default function ProductCardApi({ product }: Props) {
       </div>
 
       {/* Info */}
-      <div className="p-4">
-        <p className="text-xs font-inter text-charcoal/40 uppercase tracking-wider mb-1">
+      <div className="p-3.5 pt-3">
+        <p className="font-dm-sans text-[10px] text-charcoal/40 uppercase tracking-[0.12em] mb-1">
           {product.fabric || "Lawn"}
         </p>
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-playfair text-base font-semibold text-charcoal hover:text-[#CC0000] transition-colors leading-snug mb-2 line-clamp-2">
+          <h3 className="font-dm-sans text-sm text-charcoal hover:text-charcoal/60 transition-colors leading-snug mb-2 line-clamp-2">
             {product.name}
           </h3>
         </Link>
         <div className="flex items-center gap-2">
-          <span className="font-inter font-semibold text-base" style={{ color: "#CC0000" }}>
+          <span className="font-dm-sans font-medium text-sm text-charcoal">
             {formatPrice(product.price)}
           </span>
           {product.originalPrice && product.originalPrice > product.price && (
-            <span className="font-inter text-sm text-charcoal/40 line-through">
+            <span className="font-dm-sans text-xs text-charcoal/35 line-through">
               {formatPrice(product.originalPrice)}
             </span>
           )}

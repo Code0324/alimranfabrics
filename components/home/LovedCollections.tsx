@@ -4,71 +4,58 @@ import { collections } from "@/data/collections";
 
 export default function LovedCollections() {
   return (
-    <section className="py-16 md:py-24 bg-ivory">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Header */}
+    <section className="py-16 md:py-24 bg-cream">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+
+        {/* ── Section header ── */}
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <span className="w-12 h-px bg-gold" />
-            <span className="font-inter text-gold text-xs uppercase tracking-[0.3em] font-semibold">
-              Curated for You
-            </span>
-            <span className="w-12 h-px bg-gold" />
-          </div>
-          <h2 className="font-playfair text-3xl md:text-4xl font-bold text-charcoal mb-3 bg-transparent">
+          <p className="section-label mb-3">Curated for You</p>
+          <h2 className="font-cormorant text-3xl md:text-4xl font-semibold text-charcoal mb-4">
             Loved Collections
           </h2>
-          <p className="font-inter text-charcoal/60 max-w-md mx-auto text-sm leading-relaxed">
+          <p className="font-dm-sans text-charcoal/55 text-sm leading-relaxed max-w-[480px] mx-auto">
             Thoughtfully curated categories that celebrate the richness of Pakistani textile heritage.
           </p>
         </div>
 
-        {/* Collections grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {collections.map((collection, index) => (
+        {/* ── 4-card grid ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          {collections.map((collection) => (
             <Link
               key={collection.id}
               href={`/collections/${collection.slug}`}
-              className="group relative overflow-hidden block"
+              className="group relative overflow-hidden block bg-[#F0EBE1]"
             >
-              <div className={`relative ${index === 0 ? "aspect-[3/4]" : "aspect-[3/4]"} overflow-hidden`}>
+              {/* Image */}
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <Image
                   src={collection.image}
                   alt={collection.name}
                   fill
-                  priority={index < 2}
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 768px) 50vw, 25vw"
                 />
-                {/* Dark overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
 
-                {/* Gold border on hover */}
-                <div className="absolute inset-0 border border-transparent group-hover:border-[#FFD700] transition-all duration-500" />
+                {/* Permanent dark gradient at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
 
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <span
-                    className="font-inter text-xs uppercase tracking-[0.2em] block mb-1 font-semibold"
-                    style={{ color: "#FFD700" }}
-                  >
-                    {collection.productCount} Pieces
-                  </span>
-                  <h3
-                    className="font-playfair text-xl font-bold mb-2 transition-colors duration-300"
-                    style={{ color: "#ffffff" }}
-                  >
+                {/* Hover dark overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-500" />
+
+                {/* Category name — always visible at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 flex flex-col items-center text-center">
+                  <h3 className="font-cormorant text-white text-xl md:text-2xl font-semibold tracking-wide mb-3">
                     {collection.name}
                   </h3>
-                  <p className="font-inter text-xs leading-relaxed line-clamp-2 mb-3" style={{ color: "rgba(255,255,255,0.6)" }}>
-                    {collection.description}
-                  </p>
+
+                  {/* "SHOP NOW" button — visible on hover */}
                   <span
-                    className="inline-flex items-center gap-1 font-inter text-xs uppercase tracking-wide
-                                 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-y-1 group-hover:translate-y-0"
-                    style={{ color: "#FFD700" }}
+                    className="inline-block border border-white text-white font-dm-sans text-[11px]
+                               uppercase tracking-[0.15em] px-4 py-1.5
+                               opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
+                               transition-all duration-400"
                   >
-                    Explore →
+                    Shop Now
                   </span>
                 </div>
               </div>

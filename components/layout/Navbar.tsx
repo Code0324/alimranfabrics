@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Search, ShoppingBag, Heart, Menu, X, ChevronDown } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlist } from "@/store/wishlistContext";
@@ -13,9 +13,9 @@ const navItems = [
     label: "Stitched",
     href: "/collections/stitched",
     children: [
-      { label: "Event Ready", href: "/collections/event-ready", img: "/image/categories/cat-luxury.jpg" },
-      { label: "Work Wear", href: "/collections/work-wear", img: "/image/categories/cat-stitched.jpg" },
-      { label: "Daily Wear", href: "/collections/daily-wear", img: "/image/categories/cat-printed.jpg" },
+      { label: "Event Ready", href: "/collections/event-ready",  img: "/image/categories/cat-luxury.jpg" },
+      { label: "Work Wear",   href: "/collections/work-wear",    img: "/image/categories/cat-stitched.jpg" },
+      { label: "Daily Wear",  href: "/collections/daily-wear",   img: "/image/categories/cat-printed.jpg" },
     ],
   },
   {
@@ -23,7 +23,7 @@ const navItems = [
     href: "/collections/unstitched",
     children: [
       { label: "Embroidered", href: "/collections/embroidered", img: "/image/categories/cat-embroidered.jpg" },
-      { label: "Printed", href: "/collections/printed", img: "/image/categories/cat-printed.jpg" },
+      { label: "Printed",     href: "/collections/printed",     img: "/image/categories/cat-printed.jpg" },
     ],
   },
   {
@@ -31,7 +31,7 @@ const navItems = [
     href: "/collections/men",
     children: [
       { label: "Shalwar Kameez", href: "/collections/shalwar-kameez", img: "/image/categories/cat-men-stitched.jpg" },
-      { label: "Kurta Pajama", href: "/collections/kurta-pajama", img: "/image/categories/cat-men-stitched.jpg" },
+      { label: "Kurta Pajama",   href: "/collections/kurta-pajama",   img: "/image/categories/cat-men-stitched.jpg" },
     ],
   },
   {
@@ -39,386 +39,351 @@ const navItems = [
     href: "/collections/kids",
     children: [
       { label: "Girls", href: "/collections/girls", img: "/image/categories/cat-stitched.jpg" },
-      { label: "Boys", href: "/collections/boys", img: "/image/categories/cat-men-stitched.jpg" },
+      { label: "Boys",  href: "/collections/boys",  img: "/image/categories/cat-men-stitched.jpg" },
     ],
   },
 ];
 
-
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [isScrolled,  setIsScrolled]  = useState(false);
+  const [mobileOpen,  setMobileOpen]  = useState(false);
+  const [activeMenu,  setActiveMenu]  = useState<string | null>(null);
+  const [searchOpen,  setSearchOpen]  = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const [mounted,     setMounted]     = useState(false);
+  const router   = useRouter();
+  const pathname = usePathname();
+  const menuRef  = useRef<HTMLDivElement>(null);
 
   const itemCount = useCartStore((s) => s.getItemCount());
-  const openCart = useCartStore((s) => s.openCart);
+  const openCart  = useCartStore((s) => s.openCart);
   const { wishlist } = useWishlist();
 
   useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+    const onClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node))
         setActiveMenu(null);
-      }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
   }, []);
+
+  // ── Hero/transparent mode: homepage only, before scroll ──
+  const isHero = pathname === "/" && !isScrolled;
+
+  const headerBg = isScrolled
+    ? "bg-white shadow-[0_1px_20px_rgba(0,0,0,0.08)]"
+    : isHero
+      ? "bg-transparent"
+      : "bg-white";
+
+  const borderCls  = isHero ? "border-white/15" : "border-[#E8E4DC]";
+  const iconCls    = isHero ? "text-white/75 hover:text-white" : "text-charcoal/70 hover:text-charcoal";
+  const socialCls  = isHero ? "text-white/60 hover:text-white" : "text-charcoal/40 hover:text-charcoal";
+  const navBg      = isHero ? "bg-transparent" : "bg-white";
+  const navBorder  = isHero ? "border-white/15" : "border-[#E8E4DC]";
+  const navLinkCls = isHero
+    ? "font-dm-sans text-[13px] tracking-[0.06em] uppercase font-medium transition-colors duration-200 text-white/80 hover:text-white"
+    : "font-dm-sans text-[13px] tracking-[0.06em] uppercase font-medium transition-colors duration-200 text-charcoal/70 hover:text-charcoal";
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
       style={{ top: "var(--promo-height, 0)" }}
     >
-      {/* ── Announcement ticker ── */}
-      <div className="overflow-hidden py-1.5" style={{ backgroundColor: "#CC0000" }}>
-        <div
-          className="flex whitespace-nowrap animate-ticker"
-          aria-label="Announcements"
-        >
-          {[0, 1].map((i) => (
-            <span key={i} aria-hidden={i === 1 || undefined}
-              className="font-inter text-xs font-semibold tracking-wide px-4"
-              style={{ color: "#FFE500", textShadow: "-1px -1px 0px rgba(160,0,0,0.5), 1px 1px 0px rgba(255,255,200,0.18)" }}>
-              <span>Worldwide Shipping</span>
-              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
-              <span style={{ color: "rgba(255,229,0,0.9)" }}>New Ramadan Collection Out Now</span>
-              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
-              <span>50% OFF Selected Pieces</span>
-              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
-              <span style={{ color: "rgba(255,229,0,0.9)" }}>Global Delivery Available</span>
-              <span style={{ color: "#ffffff", margin: "0 6px" }}>✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* ── Upper bar: social | logo | icons ── */}
+      <div className={`border-b ${borderCls}`}>
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex items-center justify-between h-16 md:h-20">
 
-      {/* ── Top utility bar ── */}
-      <div
-        className="hidden md:block border-b transition-all duration-300"
-        style={{ backgroundColor: "#CC0000", borderColor: "rgba(255,0,0,0.3)" }}
-      >
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2">
+            {/* Left: burger (mobile) / social icons (desktop) */}
+            <div className="flex items-center gap-3">
+              <button
+                className={`md:hidden p-1 transition-colors ${iconCls}`}
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
 
-          {/* ── Social icons ── */}
-          <div className="flex items-center gap-2.5">
+              <div className="hidden md:flex items-center gap-2.5">
+                {/* Facebook */}
+                <a href="https://www.facebook.com/alimranfabricsonline" target="_blank" rel="noopener noreferrer"
+                  aria-label="Facebook" className={`transition-colors ${socialCls}`}>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                  </svg>
+                </a>
+                {/* Instagram */}
+                <a href="https://www.instagram.com/invites/contact/?igsh=k3pgbig93ea2&utm_content=typ780n" target="_blank" rel="noopener noreferrer"
+                  aria-label="Instagram" className={`transition-colors ${socialCls}`}>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                {/* YouTube */}
+                <a href="https://youtube.com/@alimranfabrics?si=KWZm342myl_oCMNy" target="_blank" rel="noopener noreferrer"
+                  aria-label="YouTube" className={`transition-colors ${socialCls}`}>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                    <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+                    <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="white"/>
+                  </svg>
+                </a>
+                {/* TikTok */}
+                <a href="https://www.tiktok.com/@alimranfabrics_imr?_t=8pbttWG627z&_r=1" target="_blank" rel="noopener noreferrer"
+                  aria-label="TikTok" className={`transition-colors ${socialCls}`}>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.28 6.28 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.84 4.84 0 01-1.02-.08z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
 
-            {/* Facebook ✅ URL fixed */}
-            <a href="https://www.facebook.com/alimranfabricsonline" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="transition-transform hover:scale-110">
-              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="nfb" cx="38%" cy="18%" r="80%"><stop offset="0%" stopColor="#60a8f7"/><stop offset="100%" stopColor="#0866ff"/></radialGradient>
-                </defs>
-                <circle cx="18" cy="18" r="17" fill="url(#nfb)"/>
-                <path d="M19.5 12.5H21.5V9.5H19.5C17.567 9.5 16 11.067 16 13V14.5H14V17.5H16V26.5H19V17.5H21.5L22 14.5H19V13C19 12.776 19.224 12.5 19.5 12.5Z" fill="white"/>
-              </svg>
-            </a>
-
-            {/* Instagram */}
-            <a href="https://www.instagram.com/invites/contact/?igsh=k3pgbig93ea2&utm_content=typ780n" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="transition-transform hover:scale-110">
-              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="nig" cx="30%" cy="105%" r="130%"><stop offset="0%" stopColor="#fdf497"/><stop offset="35%" stopColor="#fd5949"/><stop offset="55%" stopColor="#d6249f"/><stop offset="100%" stopColor="#285AEB"/></radialGradient>
-                </defs>
-                <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#nig)"/>
-                <rect x="10" y="10" width="16" height="16" rx="5" fill="none" stroke="white" strokeWidth="1.8"/>
-                <circle cx="18" cy="18" r="4" fill="none" stroke="white" strokeWidth="1.8"/>
-                <circle cx="24.5" cy="11.5" r="1.3" fill="white"/>
-              </svg>
-            </a>
-
-            {/* YouTube */}
-            <a href="https://youtube.com/@alimranfabrics?si=KWZm342myl_oCMNy" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="transition-transform hover:scale-110">
-              <svg width="22" height="22" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="nyt" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#ff5a5a"/><stop offset="100%" stopColor="#cc0000"/></linearGradient>
-                </defs>
-                <rect x="1" y="1" width="34" height="34" rx="9" fill="url(#nyt)"/>
-                <path d="M26.5 13.2C26.3 12.4 25.7 11.8 24.9 11.5C23.4 11 18 11 18 11C18 11 12.6 11 11.1 11.5C10.3 11.8 9.7 12.4 9.5 13.2C9 14.7 9 18 9 18C9 18 9 21.3 9.5 22.8C9.7 23.6 10.3 24.2 11.1 24.5C12.6 25 18 25 18 25C18 25 23.4 25 24.9 24.5C25.7 24.2 26.3 23.6 26.5 22.8C27 21.3 27 18 27 18C27 18 27 14.7 26.5 13.2Z" fill="white"/>
-                <polygon points="15.5,15 15.5,21 21,18" fill="#cc0000"/>
-              </svg>
-            </a>
-
-          </div>
-        </div>
-      </div>
-
-      {/* ── Main navbar ── */}
-      <nav
-        ref={menuRef}
-        className={`max-w-none transition-all duration-300 ${
-          isScrolled || mobileOpen ? "shadow-lg" : ""
-        }`}
-        style={{ background: "linear-gradient(180deg,#FFF5AA 0%,#FFE500 45%,#E8CE00 100%)", borderBottom: "2px solid rgba(12,19,80,0.12)", boxShadow: "0 2px 12px rgba(255,229,0,0.4)" }}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-20 md:h-24">
-            {/* Mobile menu toggle */}
-            <button
-              className="md:hidden p-1 transition-colors"
-              style={{ color: "#0C1350" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-
-            {/* ── Logo ── */}
-            <Link href="/" className="flex items-center group">
-              <div className="relative w-28 h-16 md:w-36 md:h-20 flex-shrink-0">
+            {/* Center: Logo */}
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2">
+              <div className="relative w-24 h-14 md:w-32 md:h-16 flex-shrink-0">
                 <Image
                   src="/image/logo.png"
                   alt="Al Imran Fabrics"
                   fill
-                  sizes="144px"
+                  sizes="128px"
                   className="object-contain"
                   priority
+                  style={isHero ? { filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(0) invert(1)" } : undefined}
                 />
               </div>
             </Link>
 
-            {/* ── Desktop nav links ── */}
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <div key={item.label} className="relative">
-                  <button
-                    className="nav-link flex items-center gap-1 py-6"
-                    onMouseEnter={() => setActiveMenu(item.label)}
-                    onMouseLeave={() => setActiveMenu(null)}
-                    onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
-                  >
-                    {item.label}
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-200 ${
-                        activeMenu === item.label ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-
-                  {/* Mega Menu */}
-                  {activeMenu === item.label && (
-                    <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-xl z-50 min-w-[560px] p-6 animate-fade-in"
-                      style={{ borderTop: "3px solid #CC0000" }}
-                      onMouseEnter={() => setActiveMenu(item.label)}
-                      onMouseLeave={() => setActiveMenu(null)}
-                    >
-                      <div className="grid grid-cols-3 gap-4">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.label}
-                            href={child.href}
-                            onClick={() => setActiveMenu(null)}
-                            className="group flex flex-col gap-2"
-                          >
-                            <div className="relative h-32 overflow-hidden bg-cream">
-                              <Image
-                                src={child.img}
-                                alt={child.label}
-                                fill
-                                loading="lazy"
-                                sizes="180px"
-                                quality={75}
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                            <span
-                              className="text-xs font-inter font-medium uppercase tracking-wide transition-colors"
-                              style={{ color: "#2C2C2C" }}
-                            >
-                              {child.label}
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                      <div
-                        className="mt-4 pt-4 flex items-center justify-between"
-                        style={{ borderTop: "1px solid #F0EBE1" }}
-                      >
-                        <span className="text-xs font-inter" style={{ color: "rgba(44,44,44,0.5)" }}>
-                          View all {item.label}
-                        </span>
-                        <Link
-                          href={item.href}
-                          onClick={() => setActiveMenu(null)}
-                          className="text-xs font-semibold uppercase tracking-wide transition-colors hover:text-[#C9A84C]"
-                          style={{ color: "#0C1350" }}
-                        >
-                          Shop All →
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-              <Link href="/collections/new-arrivals" className="nav-link">
-                <span style={{ color: "#CC0000" }} className="font-bold">New Arrivals ✦</span>
-              </Link>
-            </div>
-
-            {/* ── Icon actions ── */}
-            <div className="flex items-center gap-3 md:gap-4">
+            {/* Right: action icons */}
+            <div className="flex items-center gap-1 md:gap-2">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-1 transition-colors"
-                style={{ color: "#0C1350" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
+                className={`p-2 transition-colors ${iconCls}`}
                 aria-label="Search"
               >
-                <Search size={20} />
+                <Search size={18} strokeWidth={1.75} />
               </button>
+
               <Link
                 href="/wishlist"
-                className="relative p-1 transition-colors"
-                style={{ color: "#0C1350" }}
+                className={`relative p-2 transition-colors ${iconCls}`}
                 aria-label="Wishlist"
               >
-                <Heart size={20} />
+                <Heart size={18} strokeWidth={1.75} />
                 {mounted && wishlist.length > 0 && (
-                  <span
-                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
-                    style={{ borderRadius: "4px", backgroundColor: "#FFE500", color: "#CC0000" }}
-                  >
+                  <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-charcoal text-white
+                                   text-[9px] font-medium flex items-center justify-center rounded-full">
                     {wishlist.length}
                   </span>
                 )}
               </Link>
+
               <button
                 onClick={openCart}
-                className="relative p-1 transition-colors"
-                style={{ color: "#0C1350" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
+                className={`relative p-2 transition-colors ${iconCls}`}
                 aria-label="Shopping cart"
               >
-                <ShoppingBag size={20} />
+                <ShoppingBag size={18} strokeWidth={1.75} />
                 {mounted && itemCount > 0 && (
-                  <span
-                    className="absolute -top-1 -right-1 text-[10px] font-bold w-4 h-4 flex items-center justify-center"
-                    style={{ borderRadius: "4px", backgroundColor: "#FFE500", color: "#CC0000" }}
-                  >
+                  <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-charcoal text-white
+                                   text-[9px] font-medium flex items-center justify-center rounded-full">
                     {itemCount}
                   </span>
                 )}
               </button>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* ── Search bar ── */}
-          {searchOpen && (
-            <div
-              className="py-3 animate-fade-in"
-              style={{ borderTop: "1px solid rgba(12,19,80,0.15)" }}
-            >
-              <form
-                className="relative max-w-md mx-auto"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const q = searchQuery.trim();
-                  if (!q) return;
-                  setSearchOpen(false);
-                  setSearchQuery("");
-                  router.push(`/search?q=${encodeURIComponent(q)}`);
-                }}
-              >
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" style={{ color: "#0C1350" }} />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for kurtas, suits, embroidered sets..."
-                  autoFocus
-                  className="w-full pl-9 pr-12 py-2.5 text-sm font-inter focus:outline-none transition-colors"
-                  style={{
-                    backgroundColor: "#ffffff",
-                    border: "2px solid #0C1350",
-                    color: "#0C1350",
-                  }}
-                />
+      {/* ── Lower bar: horizontal nav links (desktop) ── */}
+      <nav ref={menuRef} className={`hidden md:block border-b ${navBorder} ${navBg} transition-all duration-300`}>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-center gap-8 h-10">
+            {navItems.map((item) => (
+              <div key={item.label} className="relative">
                 <button
-                  type="submit"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 font-inter text-xs font-bold uppercase tracking-wide px-1"
-                  style={{ color: "#CC0000" }}
+                  className={`${navLinkCls} flex items-center gap-1 h-10`}
+                  onMouseEnter={() => setActiveMenu(item.label)}
+                  onMouseLeave={() => setActiveMenu(null)}
                 >
-                  Go
+                  {item.label}
+                  <ChevronDown
+                    size={12}
+                    className={`transition-transform duration-200 ${isHero ? "text-white/50" : "text-charcoal/40"} ${activeMenu === item.label ? "rotate-180" : ""}`}
+                  />
                 </button>
-              </form>
-            </div>
-          )}
 
-          {/* ── Mobile menu ── */}
-          {mobileOpen && (
-            <div
-              className="md:hidden pb-4 animate-fade-in"
-              style={{ borderTop: "2px solid rgba(12,19,80,0.2)" }}
-            >
-              {navItems.map((item) => (
-                <div key={item.label}>
-                  <button
-                    className="w-full flex items-center justify-between py-3 text-sm font-inter font-bold uppercase tracking-wide"
-                    style={{
-                      color: "#0C1350",
-                      borderBottom: "1px solid rgba(12,19,80,0.12)",
-                    }}
-                    onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
+                {/* Mega menu — always white */}
+                {activeMenu === item.label && (
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.1)] z-50 min-w-[520px] p-6 animate-fade-in border-t-2 border-charcoal"
+                    onMouseEnter={() => setActiveMenu(item.label)}
+                    onMouseLeave={() => setActiveMenu(null)}
                   >
-                    {item.label}
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform ${activeMenu === item.label ? "rotate-180" : ""}`}
-                      style={{ color: "#CC0000" }}
-                    />
-                  </button>
-                  {activeMenu === item.label && (
-                    <div style={{ backgroundColor: "rgba(255,255,255,0.6)" }} className="pl-4">
+                    <div className="grid grid-cols-3 gap-5">
                       {item.children.map((child) => (
                         <Link
                           key={child.label}
                           href={child.href}
-                          onClick={() => { setActiveMenu(null); setMobileOpen(false); }}
-                          className="block py-2.5 text-sm font-inter font-medium transition-colors"
-                          style={{
-                            color: "#0C1350",
-                            borderBottom: "1px solid rgba(12,19,80,0.08)",
-                          }}
-                          onMouseEnter={e => (e.currentTarget.style.color = "#CC0000")}
-                          onMouseLeave={e => (e.currentTarget.style.color = "#0C1350")}
+                          onClick={() => setActiveMenu(null)}
+                          className="group flex flex-col gap-2"
                         >
-                          {child.label}
+                          <div className="relative h-32 overflow-hidden bg-cream">
+                            <Image
+                              src={child.img}
+                              alt={child.label}
+                              fill
+                              loading="lazy"
+                              sizes="160px"
+                              quality={75}
+                              className="object-cover group-hover:scale-105 transition-transform duration-400"
+                            />
+                          </div>
+                          <span className="font-dm-sans text-xs font-medium uppercase tracking-wide text-charcoal/70 group-hover:text-charcoal transition-colors">
+                            {child.label}
+                          </span>
                         </Link>
                       ))}
                     </div>
-                  )}
-                </div>
-              ))}
-              <Link
-                href="/collections/new-arrivals"
-                onClick={() => setMobileOpen(false)}
-                className="block py-3 text-sm font-bold uppercase tracking-wide"
-                style={{ color: "#CC0000" }}
-              >
-                New Arrivals ✦
-              </Link>
-            </div>
-          )}
+                    <div className="mt-4 pt-4 border-t border-[#E8E4DC] flex items-center justify-end">
+                      <Link
+                        href={item.href}
+                        onClick={() => setActiveMenu(null)}
+                        className="font-dm-sans text-xs font-medium uppercase tracking-wide text-charcoal hover:underline underline-offset-4"
+                      >
+                        Shop All {item.label} →
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+
+            <Link
+              href="/collections/new-arrivals"
+              className={`${navLinkCls} ${isHero ? "text-white font-semibold" : "text-charcoal font-semibold"}`}
+            >
+              New Arrivals ✦
+            </Link>
+          </div>
         </div>
       </nav>
+
+      {/* ── Search bar ── */}
+      {searchOpen && (
+        <div className="bg-white border-b border-[#E8E4DC] animate-fade-in">
+          <div className="max-w-7xl mx-auto px-6 py-3">
+            <form
+              className="relative max-w-lg mx-auto"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = searchQuery.trim();
+                if (!q) return;
+                setSearchOpen(false);
+                setSearchQuery("");
+                router.push(`/search?q=${encodeURIComponent(q)}`);
+              }}
+            >
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-charcoal/40 pointer-events-none" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search for kurtas, suits, embroidered sets…"
+                autoFocus
+                className="w-full pl-9 pr-20 py-2.5 text-sm font-dm-sans bg-[#F5F2ED]
+                           border border-[#E8E4DC] focus:outline-none focus:border-charcoal
+                           text-charcoal placeholder:text-charcoal/35 transition-colors"
+              />
+              <button
+                type="submit"
+                className="absolute right-3 top-1/2 -translate-y-1/2 font-dm-sans text-xs font-semibold
+                           uppercase tracking-wide text-charcoal hover:underline"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ── Mobile menu ── */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-b border-[#E8E4DC] animate-fade-in">
+          <div className="max-w-7xl mx-auto px-4 pb-4">
+            {navItems.map((item) => (
+              <div key={item.label}>
+                <button
+                  className="w-full flex items-center justify-between py-3.5 text-sm font-dm-sans
+                             font-medium uppercase tracking-wide text-charcoal border-b border-[#E8E4DC]"
+                  onClick={() => setActiveMenu(activeMenu === item.label ? null : item.label)}
+                >
+                  {item.label}
+                  <ChevronDown size={14} className={`transition-transform text-charcoal/40 ${activeMenu === item.label ? "rotate-180" : ""}`} />
+                </button>
+                {activeMenu === item.label && (
+                  <div className="bg-cream pl-4">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.label}
+                        href={child.href}
+                        onClick={() => { setActiveMenu(null); setMobileOpen(false); }}
+                        className="block py-3 text-sm font-dm-sans text-charcoal/60 hover:text-charcoal
+                                   border-b border-[#E8E4DC] transition-colors"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            <Link
+              href="/collections/new-arrivals"
+              onClick={() => setMobileOpen(false)}
+              className="block py-3.5 text-sm font-dm-sans font-semibold uppercase tracking-wide text-charcoal"
+            >
+              New Arrivals ✦
+            </Link>
+
+            {/* Mobile social icons */}
+            <div className="flex items-center gap-4 pt-4 mt-2 border-t border-[#E8E4DC]">
+              <a href="https://www.facebook.com/alimranfabricsonline" target="_blank" rel="noopener noreferrer"
+                aria-label="Facebook" className="text-charcoal/40 hover:text-charcoal">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/invites/contact/?igsh=k3pgbig93ea2&utm_content=typ780n" target="_blank" rel="noopener noreferrer"
+                aria-label="Instagram" className="text-charcoal/40 hover:text-charcoal">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="https://youtube.com/@alimranfabrics?si=KWZm342myl_oCMNy" target="_blank" rel="noopener noreferrer"
+                aria-label="YouTube" className="text-charcoal/40 hover:text-charcoal">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/>
+                  <polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="white"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

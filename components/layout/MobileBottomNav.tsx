@@ -22,11 +22,10 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t"
-      style={{ backgroundColor: "#ffffff", borderColor: "#e5e7eb" }}
+      className="fixed bottom-0 left-0 right-0 z-50 md:hidden border-t border-[#E8E4DC] bg-white"
       aria-label="Mobile navigation"
     >
-      <div className="grid grid-cols-4 h-16">
+      <div className="grid grid-cols-4 h-14">
         {navItems.map(({ label, href, Icon, isCart }) => {
           const isActive = !isCart && pathname === href;
 
@@ -39,23 +38,15 @@ export default function MobileBottomNav() {
                 aria-label="Open cart"
               >
                 <div className="relative">
-                  <ShoppingBag
-                    size={22}
-                    style={{ color: "#CC0000" }}
-                  />
+                  <ShoppingBag size={20} className={isActive ? "text-charcoal" : "text-charcoal/40"} />
                   {mounted && itemCount > 0 && (
-                    <span
-                      className="absolute -top-1.5 -right-1.5 text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-full"
-                      style={{ backgroundColor: "#FFE500", color: "#CC0000" }}
-                    >
+                    <span className="absolute -top-1.5 -right-1.5 text-[9px] font-medium w-3.5 h-3.5
+                                     flex items-center justify-center rounded-full bg-charcoal text-white">
                       {itemCount}
                     </span>
                   )}
                 </div>
-                <span
-                  className="font-inter text-[10px] font-semibold uppercase tracking-wide"
-                  style={{ color: "#CC0000" }}
-                >
+                <span className="font-dm-sans text-[9px] font-medium uppercase tracking-wide text-charcoal/40">
                   {label}
                 </span>
               </button>
@@ -68,14 +59,9 @@ export default function MobileBottomNav() {
               href={href}
               className="flex flex-col items-center justify-center gap-1 transition-colors"
             >
-              <Icon
-                size={22}
-                style={{ color: isActive ? "#CC0000" : "#6b7280" }}
-              />
-              <span
-                className="font-inter text-[10px] font-semibold uppercase tracking-wide"
-                style={{ color: isActive ? "#CC0000" : "#6b7280" }}
-              >
+              <Icon size={20} className={isActive ? "text-charcoal" : "text-charcoal/40"} />
+              <span className={`font-dm-sans text-[9px] font-medium uppercase tracking-wide
+                ${isActive ? "text-charcoal" : "text-charcoal/40"}`}>
                 {label}
               </span>
             </Link>

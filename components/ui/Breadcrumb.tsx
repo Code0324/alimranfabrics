@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, Home } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 interface BreadcrumbItem {
   label: string;
@@ -12,20 +12,18 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1 font-inter text-xs text-charcoal/50">
-      <Link href="/" className="hover:text-gold transition-colors flex items-center gap-1">
-        <Home size={12} />
-        <span className="hidden sm:inline">Home</span>
-      </Link>
+    <nav aria-label="Breadcrumb"
+      className="flex items-center gap-1.5 flex-wrap font-dm-sans text-[11px] text-charcoal/40 uppercase tracking-[0.1em]">
+      <Link href="/" className="hover:text-charcoal transition-colors">Home</Link>
       {items.map((item, i) => (
-        <span key={i} className="flex items-center gap-1">
-          <ChevronRight size={12} className="text-charcoal/30" />
+        <span key={i} className="flex items-center gap-1.5">
+          <ChevronRight size={11} className="text-charcoal/25" />
           {item.href && i < items.length - 1 ? (
-            <Link href={item.href} className="hover:text-gold transition-colors">
+            <Link href={item.href} className="hover:text-charcoal transition-colors">
               {item.label}
             </Link>
           ) : (
-            <span className="text-charcoal font-medium">{item.label}</span>
+            <span className="text-charcoal/70">{item.label}</span>
           )}
         </span>
       ))}

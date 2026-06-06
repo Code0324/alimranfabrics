@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function CartPage() {
   return (
-    <div className="pt-28 md:pt-32 min-h-screen bg-ivory">
+    <div className="pt-28 md:pt-36 min-h-screen bg-cream">
       <CartPageContent />
     </div>
   );

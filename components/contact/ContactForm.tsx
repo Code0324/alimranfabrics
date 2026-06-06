@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Send } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -23,14 +22,11 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="text-center py-12">
-        <div className="w-16 h-16 bg-navy/10 flex items-center justify-center mx-auto mb-4">
-          <Send size={24} style={{ color: "#C9A84C" }} />
-        </div>
-        <h3 className="font-playfair text-xl font-semibold text-charcoal mb-2">
-          Message Sent!
+      <div className="py-12">
+        <h3 className="font-cormorant text-[24px] font-normal text-charcoal mb-3">
+          Message Sent
         </h3>
-        <p className="font-inter text-sm text-charcoal/60 mb-6">
+        <p className="font-dm-sans text-[13px] text-charcoal/55 mb-6 leading-relaxed">
           Thank you for reaching out. We&apos;ll get back to you within 24 hours.
         </p>
         <button
@@ -38,7 +34,7 @@ export default function ContactForm() {
             setSubmitted(false);
             setFormData({ name: "", email: "", orderNumber: "", message: "" });
           }}
-          className="btn-outline"
+          className="font-dm-sans text-[12px] uppercase tracking-[0.15em] border border-[#E8E4DE] text-charcoal/60 px-6 py-3 hover:border-charcoal hover:text-charcoal transition-colors"
         >
           Send Another Message
         </button>
@@ -47,10 +43,10 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid sm:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid sm:grid-cols-2 gap-6">
         <div>
-          <label className="block font-inter text-xs font-medium text-charcoal uppercase tracking-wide mb-2">
+          <label className="block font-dm-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/40 mb-2">
             Your Name *
           </label>
           <input
@@ -60,11 +56,11 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             placeholder="Fatima Malik"
-            className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory"
+            className="w-full pb-2.5 border-b border-[#E8E4DE] bg-transparent font-dm-sans text-[13px] text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-charcoal/50 transition-colors"
           />
         </div>
         <div>
-          <label className="block font-inter text-xs font-medium text-charcoal uppercase tracking-wide mb-2">
+          <label className="block font-dm-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/40 mb-2">
             Email Address *
           </label>
           <input
@@ -74,15 +70,14 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             placeholder="fatima@example.com"
-            className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory"
+            className="w-full pb-2.5 border-b border-[#E8E4DE] bg-transparent font-dm-sans text-[13px] text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-charcoal/50 transition-colors"
           />
         </div>
       </div>
 
       <div>
-        <label className="block font-inter text-xs font-medium text-charcoal uppercase tracking-wide mb-2">
-          Order Number{" "}
-          <span className="text-charcoal/40 normal-case tracking-normal font-normal">(optional)</span>
+        <label className="block font-dm-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/40 mb-2">
+          Order Number <span className="normal-case tracking-normal text-charcoal/25">(optional)</span>
         </label>
         <input
           type="text"
@@ -90,12 +85,12 @@ export default function ContactForm() {
           value={formData.orderNumber}
           onChange={handleChange}
           placeholder="AIF-2025-XXXXX"
-          className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory"
+          className="w-full pb-2.5 border-b border-[#E8E4DE] bg-transparent font-dm-sans text-[13px] text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-charcoal/50 transition-colors"
         />
       </div>
 
       <div>
-        <label className="block font-inter text-xs font-medium text-charcoal uppercase tracking-wide mb-2">
+        <label className="block font-dm-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/40 mb-2">
           Message *
         </label>
         <textarea
@@ -105,18 +100,21 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us how we can help you..."
-          className="w-full px-4 py-3 border border-charcoal/20 font-inter text-sm focus:outline-none focus:border-gold transition-colors bg-ivory resize-none"
+          className="w-full pb-2.5 border-b border-[#E8E4DE] bg-transparent font-dm-sans text-[13px] text-charcoal placeholder:text-charcoal/25 focus:outline-none focus:border-charcoal/50 transition-colors resize-none"
         />
       </div>
 
-      <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
-        <Send size={16} />
-        Send Message
-      </button>
-
-      <p className="font-inter text-xs text-charcoal/40 text-center">
-        We typically respond within 24 hours during business days.
-      </p>
+      <div className="flex items-center justify-between pt-1">
+        <button
+          type="submit"
+          className="font-dm-sans text-[12px] uppercase tracking-[0.2em] bg-[#111111] text-white px-8 py-4 hover:bg-[#2a2a2a] transition-colors"
+        >
+          Send Message
+        </button>
+        <p className="font-dm-sans text-[11px] text-charcoal/35">
+          Reply within 24 hours
+        </p>
+      </div>
     </form>
   );
 }

@@ -1,134 +1,119 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/ui/PageHero";
+import Breadcrumb from "@/components/ui/Breadcrumb";
+import SizeGuideTabs from "@/components/ui/SizeGuideTabs";
 
 export const metadata: Metadata = {
   title: "Size Guide",
   description: "Find your perfect fit with Al Imran Fabrics size charts for women, men, and kids.",
 };
 
-const womenSizes = [
-  { size: "XS", chest: "32\"", waist: "26\"", hips: "35\"", length: "50\"" },
-  { size: "S",  chest: "34\"", waist: "28\"", hips: "37\"", length: "51\"" },
-  { size: "M",  chest: "36\"", waist: "30\"", hips: "39\"", length: "52\"" },
-  { size: "L",  chest: "38\"", waist: "32\"", hips: "41\"", length: "53\"" },
-  { size: "XL", chest: "40\"", waist: "34\"", hips: "43\"", length: "54\"" },
-  { size: "2XL",chest: "42\"", waist: "36\"", hips: "45\"", length: "55\"" },
-];
-
-const menSizes = [
-  { size: "S",  chest: "36\"", waist: "30\"", shoulder: "16.5\"", length: "42\"" },
-  { size: "M",  chest: "38\"", waist: "32\"", shoulder: "17\"",   length: "43\"" },
-  { size: "L",  chest: "40\"", waist: "34\"", shoulder: "17.5\"", length: "44\"" },
-  { size: "XL", chest: "42\"", waist: "36\"", shoulder: "18\"",   length: "45\"" },
-  { size: "2XL",chest: "44\"", waist: "38\"", shoulder: "18.5\"", length: "46\"" },
-  { size: "3XL",chest: "46\"", waist: "40\"", shoulder: "19\"",   length: "47\"" },
-];
-
 export default function SizeGuidePage() {
   return (
-    <div className="min-h-screen bg-ivory">
-      <PageHero
-        eyebrow="Fit & Measurements"
-        title="Size Guide"
-        description="All measurements are in inches. For the best fit, measure yourself and compare with the charts below."
-        backgroundImage="/image/women-banner-silk.png"
-        breadcrumbItems={[{ label: "Size Guide" }]}
-      />
+    <div className="bg-cream min-h-screen pt-28 md:pt-36">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 pb-20">
 
-      <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
-        {/* How to measure */}
-        <div className="bg-white p-8 shadow-card">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="w-6 h-px bg-gold" />
-            <h2 className="font-playfair text-xl font-bold text-charcoal">How to Measure</h2>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-6 font-inter text-sm text-charcoal/70">
-            <div>
-              <p className="font-semibold text-charcoal mb-1">Chest / Bust</p>
-              <p>Measure around the fullest part of your chest, keeping the tape parallel to the floor.</p>
-            </div>
-            <div>
-              <p className="font-semibold text-charcoal mb-1">Waist</p>
-              <p>Measure around your natural waistline, the narrowest part of your torso.</p>
-            </div>
-            <div>
-              <p className="font-semibold text-charcoal mb-1">Hips</p>
-              <p>Measure around the fullest part of your hips, about 8 inches below your waistline.</p>
-            </div>
-          </div>
+        {/* ── Breadcrumb ── */}
+        <div className="mb-8">
+          <Breadcrumb items={[{ label: "Size Guide" }]} />
         </div>
 
-        {/* Women's table */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-px bg-gold" />
-            <h2 className="font-playfair text-2xl font-bold text-charcoal">Women&apos;s Sizes</h2>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm font-inter">
-              <thead>
-                <tr style={{ backgroundColor: "#070D38", color: "#FAF7F2" }}>
-                  {["Size", "Chest", "Waist", "Hips", "Kameez Length"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left font-medium uppercase tracking-wide text-xs">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {womenSizes.map((row, i) => (
-                  <tr key={row.size} style={{ backgroundColor: i % 2 === 0 ? "#FAF7F2" : "#FFFFFF" }}>
-                    <td className="px-4 py-3 font-semibold text-charcoal">{row.size}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.chest}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.waist}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.hips}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.length}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* Men's table */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-px bg-gold" />
-            <h2 className="font-playfair text-2xl font-bold text-charcoal">Men&apos;s Sizes</h2>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm font-inter">
-              <thead>
-                <tr style={{ backgroundColor: "#070D38", color: "#FAF7F2" }}>
-                  {["Size", "Chest", "Waist", "Shoulder", "Kameez Length"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left font-medium uppercase tracking-wide text-xs">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {menSizes.map((row, i) => (
-                  <tr key={row.size} style={{ backgroundColor: i % 2 === 0 ? "#FAF7F2" : "#FFFFFF" }}>
-                    <td className="px-4 py-3 font-semibold text-charcoal">{row.size}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.chest}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.waist}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.shoulder}</td>
-                    <td className="px-4 py-3 text-charcoal/70">{row.length}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center bg-white p-10 shadow-card">
-          <h3 className="font-playfair text-2xl font-bold text-charcoal mb-3">Still unsure about sizing?</h3>
-          <p className="font-inter text-sm text-charcoal/60 mb-6 max-w-sm mx-auto">
-            Our team is happy to help you find the perfect fit. Reach out via WhatsApp or email.
+        {/* ── Header ── */}
+        <div className="text-center mb-12">
+          <h1 className="font-cormorant text-4xl font-normal text-charcoal mb-4">
+            Size Guide
+          </h1>
+          <p className="font-dm-sans text-sm text-[#666]">
+            Find your perfect fit
           </p>
-          <Link href="/contact" className="btn-gold px-8 py-3">
+        </div>
+
+        {/* ── How to Measure ── */}
+        <div className="mb-12">
+          <p className="font-dm-sans text-[11px] uppercase tracking-widest text-charcoal/40 text-center mb-8">
+            How to Measure
+          </p>
+          <div className="grid grid-cols-3 gap-8 text-center">
+            {[
+              {
+                label: "Bust",
+                desc: "Measure around the fullest part of your chest, keeping the tape parallel to the ground.",
+                svg: (
+                  <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10 mx-auto" stroke="#1A1A1A" strokeWidth="1.5">
+                    <circle cx="24" cy="24" r="20" strokeDasharray="4 3" />
+                    <line x1="4" y1="24" x2="8" y2="24" />
+                    <line x1="40" y1="24" x2="44" y2="24" />
+                  </svg>
+                ),
+              },
+              {
+                label: "Waist",
+                desc: "Measure around your natural waistline, above your belly button.",
+                svg: (
+                  <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10 mx-auto" stroke="#1A1A1A" strokeWidth="1.5">
+                    <path d="M8 24 Q24 16 40 24" />
+                    <path d="M8 24 Q24 32 40 24" />
+                    <line x1="4" y1="24" x2="8" y2="24" />
+                    <line x1="40" y1="24" x2="44" y2="24" />
+                  </svg>
+                ),
+              },
+              {
+                label: "Hips",
+                desc: "Measure around the fullest part of your hips, about 20cm below your waist.",
+                svg: (
+                  <svg viewBox="0 0 48 48" fill="none" className="w-10 h-10 mx-auto" stroke="#1A1A1A" strokeWidth="1.5">
+                    <ellipse cx="24" cy="28" rx="18" ry="12" />
+                    <line x1="6" y1="28" x2="2" y2="28" />
+                    <line x1="42" y1="28" x2="46" y2="28" />
+                  </svg>
+                ),
+              },
+            ].map((item) => (
+              <div key={item.label}>
+                {item.svg}
+                <p className="font-dm-sans text-[11px] uppercase tracking-widest font-medium mt-3 text-charcoal mb-2">
+                  {item.label}
+                </p>
+                <p className="font-dm-sans text-[13px] text-[#666] leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <hr className="border-[#E8E4DE] mb-10" />
+
+        {/* ── Tabs + Tables ── */}
+        <SizeGuideTabs />
+
+        {/* ── Bottom note ── */}
+        <p className="font-dm-sans text-[12px] text-[#999] mt-10 text-center italic leading-relaxed">
+          All measurements are in inches. If you are between sizes, we recommend sizing up.{" "}
+          For further assistance contact us on{" "}
+          <a href="https://wa.me/923145690329" target="_blank" rel="noopener noreferrer" className="underline hover:text-charcoal">
+            WhatsApp
+          </a>{" "}
+          or email at{" "}
+          <a href="mailto:alimranfabrics786@gmail.com" className="underline hover:text-charcoal">
+            alimranfabrics786@gmail.com
+          </a>
+        </p>
+
+        {/* ── CTA ── */}
+        <div className="text-center mt-10 border-t border-[#E8E4DE] pt-10">
+          <p className="font-dm-sans text-[13px] text-charcoal/50 mb-4">
+            Still unsure? Our team is happy to help you find the perfect fit.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block font-dm-sans text-[12px] uppercase tracking-[0.2em] border border-[#1A1A1A] text-charcoal px-7 py-3.5 hover:bg-charcoal hover:text-white transition-colors"
+          >
             Contact Us
           </Link>
         </div>
+
       </div>
     </div>
   );

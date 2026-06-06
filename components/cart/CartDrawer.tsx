@@ -58,14 +58,14 @@ export default function CartDrawer() {
                     ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-ivory-dark">
-          <div className="flex items-center gap-3">
-            <ShoppingBag size={20} style={{ color: "#C9A84C" }} />
-            <h2 className="font-playfair text-lg font-semibold text-charcoal">
-              Your Cart
+        <div className="flex items-center justify-between px-6 py-5 border-b border-[#E8E4DE]">
+          <div className="flex items-center gap-2.5">
+            <ShoppingBag size={17} className="text-charcoal/50" strokeWidth={1.5} />
+            <h2 className="font-dm-sans text-[13px] uppercase tracking-[0.15em] text-charcoal">
+              Your Bag
               {count > 0 && (
-                <span className="font-inter text-sm text-charcoal/50 ml-2 font-normal">
-                  ({count} {count === 1 ? "item" : "items"})
+                <span className="text-charcoal/40 ml-2 font-normal">
+                  ({count})
                 </span>
               )}
             </h2>
@@ -73,37 +73,36 @@ export default function CartDrawer() {
           <button
             onClick={closeCart}
             aria-label="Close cart"
-            className="p-2 hover:bg-ivory-dark rounded-full transition-colors text-charcoal/60 hover:text-charcoal"
+            className="p-1 text-charcoal/40 hover:text-charcoal transition-colors"
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         </div>
-
 
         {/* Cart items */}
         <div className="flex-1 overflow-y-auto px-6">
           {!mounted || items.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full gap-4 py-12">
-              <div className="w-20 h-20 bg-ivory-dark rounded-full flex items-center justify-center">
-                <ShoppingBag size={32} className="text-charcoal/30" />
+            <div className="flex flex-col items-center justify-center h-full gap-4 py-12 text-center">
+              <div className="w-16 h-16 bg-[#F5F2ED] flex items-center justify-center">
+                <ShoppingBag size={24} className="text-charcoal/25" strokeWidth={1.5} />
               </div>
-              <div className="text-center">
-                <h3 className="font-playfair text-lg font-semibold text-charcoal mb-1">
-                  Your cart is empty
-                </h3>
-                <p className="font-inter text-sm text-charcoal/50">
-                  Discover our beautiful collections and add your favorites.
+              <div>
+                <p className="font-cormorant text-[20px] font-normal text-charcoal mb-1.5">
+                  Your bag is empty
+                </p>
+                <p className="font-dm-sans text-[12px] text-charcoal/45 leading-relaxed">
+                  Discover our beautiful collections and add your favourites.
                 </p>
               </div>
               <button
                 onClick={closeCart}
-                className="btn-primary mt-2"
+                className="font-dm-sans text-[11px] uppercase tracking-[0.15em] border border-[#E8E4DE] text-charcoal/60 px-6 py-3 hover:border-charcoal hover:text-charcoal transition-colors mt-1"
               >
                 Continue Shopping
               </button>
             </div>
           ) : (
-            <div className="divide-y divide-ivory-dark">
+            <div>
               {items.map((item) => (
                 <CartItem
                   key={`${item.product.id}-${item.selectedSize}-${item.selectedColor.name}`}
@@ -116,43 +115,41 @@ export default function CartDrawer() {
 
         {/* Footer / Summary */}
         {mounted && items.length > 0 && (
-          <div className="border-t border-ivory-dark px-6 py-5 space-y-4">
-            {/* Subtotal */}
-            <div className="space-y-2">
-              <div className="flex justify-between font-inter text-sm">
-                <span className="text-charcoal/60">Subtotal</span>
-                <span className="font-medium">{formatPrice(total)}</span>
+          <div className="border-t border-[#E8E4DE] px-6 py-5 space-y-4">
+            <div className="space-y-2 font-dm-sans text-[13px]">
+              <div className="flex justify-between">
+                <span className="text-charcoal/55">Subtotal</span>
+                <span className="text-charcoal font-medium">{formatPrice(total)}</span>
               </div>
-              <div className="flex justify-between font-inter text-sm">
-                <span className="text-charcoal/60">Shipping</span>
-                <span className="font-medium text-navy">Free</span>
+              <div className="flex justify-between">
+                <span className="text-charcoal/55">Shipping</span>
+                <span className="text-charcoal">Complimentary</span>
               </div>
-              <div className="flex justify-between font-inter font-bold text-base pt-2 border-t border-ivory-dark">
-                <span>Total</span>
-                <span style={{ color: "#C9A84C" }}>{formatPrice(total)}</span>
+              <div className="flex justify-between pt-3 border-t border-[#E8E4DE]">
+                <span className="text-[11px] uppercase tracking-[0.1em] text-charcoal/55">Total</span>
+                <span className="text-[15px] font-medium text-charcoal">{formatPrice(total)}</span>
               </div>
             </div>
 
-            {/* CTAs */}
             <div className="space-y-2">
               <Link
                 href="/cart"
                 onClick={closeCart}
-                className="btn-primary w-full text-center block"
+                className="font-dm-sans text-[12px] uppercase tracking-[0.2em] bg-[#111111] text-white py-3.5 w-full text-center block hover:bg-[#2a2a2a] transition-colors"
               >
-                View Full Cart
+                View Full Bag
               </Link>
               <Link
                 href="/checkout"
                 onClick={closeCart}
-                className="btn-gold w-full text-center block"
+                className="font-dm-sans text-[12px] uppercase tracking-[0.2em] border border-[#E8E4DE] text-charcoal/60 py-3.5 w-full text-center block hover:border-charcoal hover:text-charcoal transition-colors"
               >
                 Checkout
               </Link>
             </div>
 
-            <p className="text-center font-inter text-xs text-charcoal/40">
-              Secure checkout • SSL encrypted
+            <p className="text-center font-dm-sans text-[11px] text-charcoal/30">
+              SSL encrypted · Secure checkout
             </p>
           </div>
         )}
